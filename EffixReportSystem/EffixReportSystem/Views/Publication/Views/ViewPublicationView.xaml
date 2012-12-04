@@ -48,7 +48,7 @@
         </DockPanel>
         <telerik:RadTreeView  Grid.Row="1" 
                               Name="ProjectsTreeView" 
-                              ItemsSource="{Binding Dept, Mode=OneTime}" 
+                              ItemsSource="{Binding AllDepartments, Mode=TwoWay}" 
                               IsRootLinesEnabled="True" 
                               IsLineEnabled="True" 
                               IsVirtualizing="True"
