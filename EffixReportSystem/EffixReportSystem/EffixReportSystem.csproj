@@ -76,6 +76,7 @@
     <Compile Include="Helper\Classes\Converters\PathConvertor.cs" />
     <Compile Include="Helper\Classes\DataHelper.cs" />
     <Compile Include="Helper\Classes\Enums\ViewMode.cs" />
+    <Compile Include="Helper\Interfaces\IName.cs" />
     <Compile Include="Helper\Classes\ObservableObject.cs" />
     <Compile Include="Helper\Classes\Partial\PartialClasses.cs" />
     <Compile Include="Helper\Interfaces\IPageViewModel.cs" />

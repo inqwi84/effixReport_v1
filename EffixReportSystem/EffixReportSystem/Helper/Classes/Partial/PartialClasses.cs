@@ -4,64 +4,68 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using EffixReportSystem.Helper.Interfaces;
 
 namespace EffixReportSystem	
 {
-    public partial class EF_Project 
+    public partial class EF_Project : IName
     {
-
-        private ObservableCollection<EF_SMI_Type> _smiTypeList;
-        public virtual ObservableCollection<EF_SMI_Type> SmiTypeList
+        private ObservableCollection<EF_SMI_Type> _children;
+        public virtual ObservableCollection<EF_SMI_Type> Children
 		{
 		   get
 		   {
-               return _smiTypeList;
+               return _children;
 		   }
 		   set
 		   {
-               if (SmiTypeList == value)
+               if (Children == value)
 		  return;
 
-               _smiTypeList = value;
-               OnPropertyChanged("SmiTypeList");
+               _children = value;
+               OnPropertyChanged("Children");
 		   }
 		}
+
+        public string Name { get;  set; }
     }
-    public partial class EF_SMI_Type
+    public partial class EF_SMI_Type : IName
     {
-        private ObservableCollection<Year> _yearList;
-        public virtual ObservableCollection<Year> YearList
+        private ObservableCollection<Year> _children;
+        public virtual ObservableCollection<Year> Children
         {
             get
             {
-                return _yearList;
+                return _children;
             }
             set
             {
-                if (YearList == value)
+                if (Children == value)
                     return;
 
-                _yearList = value;
-                OnPropertyChanged("YearList");
+                _children = value;
+                OnPropertyChanged("Children");
             }
         }
+
+        public string Name { get;  set; }
     }
-    public class Year : INotifyPropertyChanged
+    public class Year : INotifyPropertyChanged, IName
     {
-        private ObservableCollection<Month> _monthList;
-        public virtual ObservableCollection<Month> MonthList
+        private ObservableCollection<Month> _children;
+        public virtual ObservableCollection<Month> Children
         {
             get
             {
-                return _monthList;
+                return _children;
             }
             set
             {
-                if (MonthList == value)
+                if (Children == value)
                     return;
 
-                _monthList = value;
-                OnPropertyChanged("MonthList");
+                _children = value;
+                OnPropertyChanged("Children");
             }
         }
 
@@ -71,23 +75,25 @@ namespace EffixReportSystem
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
         }
+
+        public string Name { get; set; }
     }
-    public class Month : INotifyPropertyChanged
+    public class Month : INotifyPropertyChanged,IName
     {
-        private ObservableCollection<Day> _dayList;
-        public virtual ObservableCollection<Day> DayList
+        private ObservableCollection<Day> _children;
+        public virtual ObservableCollection<Day> Children
         {
             get
             {
-                return _dayList;
+                return _children;
             }
             set
             {
-                if (DayList == value)
+                if (Children == value)
                     return;
 
-                _dayList = value;
-                OnPropertyChanged("DayList");
+                _children = value;
+                OnPropertyChanged("Children");
             }
         }
 
@@ -97,23 +103,25 @@ namespace EffixReportSystem
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
         }
+
+        public string Name { get;  set; }
     }
-    public class Day : INotifyPropertyChanged
+    public class Day : INotifyPropertyChanged, IName
     {
-        private ObservableCollection<EF_Publication> _publicationList;
-        public virtual ObservableCollection<EF_Publication> PublicationList
+        private ObservableCollection<EF_Publication> _children;
+        public virtual ObservableCollection<EF_Publication> Children
         {
             get
             {
-                return _publicationList;
+                return _children;
             }
             set
             {
-                if (PublicationList == value)
+                if (Children == value)
                     return;
 
-                _publicationList = value;
-                OnPropertyChanged("PublicationList");
+                _children = value;
+                OnPropertyChanged("Children");
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -122,5 +130,7 @@ namespace EffixReportSystem
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
         }
+
+        public string Name { get;  set; }
     }
 }

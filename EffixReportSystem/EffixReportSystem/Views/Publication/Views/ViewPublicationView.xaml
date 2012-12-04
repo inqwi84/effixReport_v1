@@ -47,7 +47,7 @@
 								</TextBlock.Effect></TextBlock>
         </DockPanel>
         <telerik:RadTreeView  Grid.Row="1" 
-                              Name="DepartmentsTreeView" 
+                              Name="ProjectsTreeView" 
                               ItemsSource="{Binding Dept, Mode=OneTime}" 
                               IsRootLinesEnabled="True" 
                               IsLineEnabled="True" 

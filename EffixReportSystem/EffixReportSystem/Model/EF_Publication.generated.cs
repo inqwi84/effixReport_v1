@@ -312,8 +312,8 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("Project_name");
 		   }
 		}
-		private int? _p_Year;
-		public virtual int? P_year
+		private string _p_Year;
+		public virtual string P_year
 		{
 		   get
 		   {
@@ -328,8 +328,8 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("P_year");
 		   }
 		}
-		private int? _p_Month;
-		public virtual int? P_month
+		private string _p_Month;
+		public virtual string P_month
 		{
 		   get
 		   {
@@ -344,8 +344,8 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("P_month");
 		   }
 		}
-		private int? _p_Day;
-		public virtual int? P_day
+		private string _p_Day;
+		public virtual string P_day
 		{
 		   get
 		   {

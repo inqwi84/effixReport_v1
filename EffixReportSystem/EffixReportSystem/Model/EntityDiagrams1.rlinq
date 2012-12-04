@@ -207,16 +207,16 @@
           <orm:column name="image_count" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         </orm:field>
         <orm:field name="_project_Name" property="Project_name" behavior="readwrite" uniqueId="de0c4eb6-6c8a-454d-9bea-77e51ec48bde" type="System.String">
-          <orm:column nullable="true" length="0" name="project_name" scale="0" sql-type="nvarchar(max)" ado-type="LongVarchar" />
+          <orm:column name="project_name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="LongVarchar" />
         </orm:field>
-        <orm:field name="_p_Year" property="P_year" behavior="readwrite" uniqueId="4dff8c42-9dd4-46a6-8640-2931e1df47a8" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column nullable="true" length="0" name="p_year" scale="0" sql-type="int" ado-type="Int32" />
+        <orm:field name="_p_Year" property="P_year" behavior="readwrite" uniqueId="4dff8c42-9dd4-46a6-8640-2931e1df47a8" type="System.String">
+          <orm:column name="p_year" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="Varchar" />
         </orm:field>
-        <orm:field name="_p_Month" property="P_month" behavior="readwrite" uniqueId="1f02b5cb-2b85-4600-bfc6-3b7142c52958" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column nullable="true" length="0" name="p_month" scale="0" sql-type="int" ado-type="Int32" />
+        <orm:field name="_p_Month" property="P_month" behavior="readwrite" uniqueId="1f02b5cb-2b85-4600-bfc6-3b7142c52958" type="System.String">
+          <orm:column name="p_month" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="Varchar" />
         </orm:field>
-        <orm:field name="_p_Day" property="P_day" behavior="readwrite" uniqueId="487d3285-fa3b-4675-9185-fabd1e124115" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column nullable="true" length="0" name="p_day" scale="0" sql-type="int" ado-type="Int32" />
+        <orm:field name="_p_Day" property="P_day" behavior="readwrite" uniqueId="487d3285-fa3b-4675-9185-fabd1e124115" type="System.String">
+          <orm:column name="p_day" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="Varchar" />
         </orm:field>
       </orm:class>
       <orm:class name="EF_Project" behavior="readwrite" uniqueId="8e6da97e-c774-4dc8-aa34-2459839a73d9">
@@ -337,10 +337,10 @@
         <orm:column name="user_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
         <orm:column name="blob_path" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="LongVarchar" />
         <orm:column name="image_count" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
-        <orm:column nullable="true" length="0" name="project_name" scale="0" sql-type="nvarchar(max)" ado-type="LongVarchar" />
-        <orm:column nullable="true" length="0" name="p_year" scale="0" sql-type="int" ado-type="Int32" />
-        <orm:column nullable="true" length="0" name="p_month" scale="0" sql-type="int" ado-type="Int32" />
-        <orm:column nullable="true" length="0" name="p_day" scale="0" sql-type="int" ado-type="Int32" />
+        <orm:column name="project_name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="LongVarchar" />
+        <orm:column name="p_year" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="Varchar" />
+        <orm:column name="p_month" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="Varchar" />
+        <orm:column name="p_day" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="Varchar" />
       </orm:table>
       <orm:table name="EF_Project">
         <orm:column name="project_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
@@ -453,9 +453,9 @@
       <Property Id="ad9d3424-e7ec-403e-b0b9-83afb061ef56" name="Url_path" label="Url_path : String" kind="Persistent" fieldName="_url_Path" />
       <Property Id="b77d2b79-2f7d-4e3d-b672-171bf586d962" name="User_id" type="Int64" label="User_id : Int64" nullable="true" kind="Persistent" fieldName="_user_Id" />
       <Property Id="de0c4eb6-6c8a-454d-9bea-77e51ec48bde" name="Project_name" label="Project_name : String" kind="Persistent" fieldName="_project_Name" />
-      <Property Id="4dff8c42-9dd4-46a6-8640-2931e1df47a8" name="P_year" type="Int32" label="P_year : Int32" nullable="true" kind="Persistent" fieldName="_p_Year" />
-      <Property Id="1f02b5cb-2b85-4600-bfc6-3b7142c52958" name="P_month" type="Int32" label="P_month : Int32" nullable="true" kind="Persistent" fieldName="_p_Month" />
-      <Property Id="487d3285-fa3b-4675-9185-fabd1e124115" name="P_day" type="Int32" label="P_day : Int32" nullable="true" kind="Persistent" fieldName="_p_Day" />
+      <Property Id="4dff8c42-9dd4-46a6-8640-2931e1df47a8" name="P_year" label="P_year : String" nullable="true" kind="Persistent" fieldName="_p_Year" />
+      <Property Id="1f02b5cb-2b85-4600-bfc6-3b7142c52958" name="P_month" label="P_month : String" nullable="true" kind="Persistent" fieldName="_p_Month" />
+      <Property Id="487d3285-fa3b-4675-9185-fabd1e124115" name="P_day" label="P_day : String" nullable="true" kind="Persistent" fieldName="_p_Day" />
     </DomainClass>
     <DomainClass Id="8e6da97e-c774-4dc8-aa34-2459839a73d9" name="EF_Project" namespace="EffixReportSystem" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
       <Property Id="d6147fe7-cea1-4360-a56e-aa33bc939076" name="Project_id" type="Int64" label="Project_id : Int64" kind="Persistent" identity="true" fieldName="_project_Id" />
