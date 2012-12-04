@@ -77,6 +77,7 @@
     <Compile Include="Helper\Classes\DataHelper.cs" />
     <Compile Include="Helper\Classes\Enums\ViewMode.cs" />
     <Compile Include="Helper\Classes\ObservableObject.cs" />
+    <Compile Include="Helper\Classes\Partial\PartialClasses.cs" />
     <Compile Include="Helper\Interfaces\IPageViewModel.cs" />
     <Compile Include="Model\EF_Dictionary.generated.cs">
       <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
