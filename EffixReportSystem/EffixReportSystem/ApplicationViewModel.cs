@@ -16,7 +16,6 @@ namespace EffixReportSystem
     {
         private IPageViewModel _currentPageViewModel;
         private List<IPageViewModel> _pageViewModels;
-
         public List<IPageViewModel> PageViewModels
         {
             get
