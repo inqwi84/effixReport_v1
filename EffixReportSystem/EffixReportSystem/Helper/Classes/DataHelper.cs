@@ -8,11 +8,68 @@ using System.Reflection;
 using System.Resources;
 using System.Text;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace EffixReportSystem.Helper.Classes
 {
+
     public static class DataHelper
     {
+        public static Visual FindAncestor(Visual child, Type typeAncestor)
+        {
+            DependencyObject parent = VisualTreeHelper.GetParent(child);
+            while (parent != null && !typeAncestor.IsInstanceOfType(parent))
+            {
+                parent =VisualTreeHelper.GetParent(parent);
+            }
+            return (parent as Visual);
+        }
+
+
+        public class ImageTile:ObservableObject
+        {
+            private string _imageName;
+            private string _imagePath;
+            private BitmapImage _image;
+            public string ImageName
+            {
+                get { return this._imageName; }
+                set
+                {
+                    if (ImageName == value)
+                        return;
+
+                    _imageName = value;
+                    this.OnPropertyChanged("ImageName");
+                }
+            }
+            public string ImagePath
+            {
+                get { return this._imagePath; }
+                set
+                {
+                    if (ImagePath == value)
+                        return;
+
+                    _imagePath = value;
+                    this.OnPropertyChanged("ImagePath");
+                }
+            }
+            public BitmapImage Image
+            {
+                get { return this._image; }
+                set
+                {
+                    if (Image == value)
+                        return;
+
+                    _image = value;
+                    this.OnPropertyChanged("Image");
+                }
+            }
+
+        }
         private static List<UnmanagedMemoryStream> GetResourceNames(System.Globalization.CultureInfo culture)
         {
             Assembly asm = Assembly.GetExecutingAssembly();

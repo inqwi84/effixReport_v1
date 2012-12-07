@@ -10,6 +10,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
 {
     internal class ViewPublicationViewModel : ObservableObject, IPageViewModel
     {
+
         public PublicationHelper PublicationHelper;
         public string Name { get; set; }
 
@@ -56,6 +57,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
             }
         }
 
+        public IPageViewModel ParentViewModel;
         private void GetAllDepartments()
         {
             using (var model = new EntitiesModel())
@@ -110,8 +112,9 @@ namespace EffixReportSystem.Views.Publication.ViewModels
             }
         }
 
-        public ViewPublicationViewModel()
+        public ViewPublicationViewModel(IPageViewModel parentViewModel)
         {
+            ParentViewModel = parentViewModel;
             GetAllDepartments();
             GetAllPublications();
             AllDepartments = _allDepartments;

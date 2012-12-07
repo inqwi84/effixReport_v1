@@ -11,6 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EffixReportSystem.Helper.Classes;
+using EffixReportSystem.Views.Publication.ViewModels;
+using Telerik.Windows.Controls;
 
 namespace EffixReportSystem.Views.Publication.Views
 {
@@ -22,6 +25,30 @@ namespace EffixReportSystem.Views.Publication.Views
         public EditPublicationView()
         {
             InitializeComponent();
+        }
+
+        private void DoneButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Image_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var ctx = DataContext as EditPublicationViewModel;
+            var parent = DataHelper.FindAncestor(sender as Image,typeof(RadTileViewItem));
+            var parentCtx = (parent as RadTileViewItem).DataContext as DataHelper.ImageTile;
+            ctx.OpenInPaint(parentCtx);
+        }
+
+        private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var tile = DataHelper.FindAncestor(sender as Image, typeof(RadTileViewItem));
+            (tile as RadTileViewItem).TileState=TileViewItemState.Maximized;
         }
     }
 }

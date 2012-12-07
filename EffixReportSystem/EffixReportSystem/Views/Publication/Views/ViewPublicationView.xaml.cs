@@ -41,29 +41,24 @@ namespace EffixReportSystem.Views.Publication.Views
         private void PublicationListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var ctx = DataContext as ViewPublicationViewModel;
-            ctx.CurrentPublication = (sender as RadListBox).SelectedItem as EF_Publication;
+            if (ctx != null) ctx.CurrentPublication = (sender as RadListBox).SelectedItem as EF_Publication;
         }
 
-        private void DoneButton_Click(object sender, RoutedEventArgs e)
+
+        private void EditPublicationButton_Click(object sender, RoutedEventArgs e)
         {
-      
+            var ctx = DataContext as ViewPublicationViewModel;
+            var parent = this.GetVisualParent<PublicationView>();
+            (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
+                (ctx.ParentViewModel as PublicationViewModel).PageViewModels[1];
+            //parent.Content= (ctx.ParentViewModel as PublicationViewModel).PageViewModels[]
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-          
-        }
-
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-   
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void NewPublicationButton_Click(object sender, RoutedEventArgs e)
         {
        }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void RemovePublicationButton_Click(object sender, RoutedEventArgs e)
         {
 
         }

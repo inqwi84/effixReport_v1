@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
-    <system:String x:Uid="SubstitutionViewCtrl1" x:Key="SubstitutionViewCtrl1">Списки замещения</system:String>
+    <system:String x:Uid="SnapShotsLabelCtrl" x:Key="SnapShotsLabelCtrl">Скриншоты</system:String>
    <system:String x:Uid="SubstitutionViewCtrl2" x:Key="SubstitutionViewCtrl2">Должности</system:String>
    <system:String  x:Uid="SubstitutionViewCtrl3" x:Key="SubstitutionViewCtrl3">Замещающие лица</system:String>
    <system:String x:Uid="SubstitutionViewCtrl4" x:Key="SubstitutionViewCtrl4">Информация о должности</system:String>
