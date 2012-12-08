@@ -5,7 +5,299 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:Classes="clr-namespace:EffixReportSystem.Helper.Classes"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" mc:Ignorable="d">
-    <UserControl.Resources>
+        <UserControl.Resources>
+            <DataTemplate x:Key="headerTemplate">
+                <TextBlock Text="{Binding ImageName}"></TextBlock>
+            </DataTemplate>
+            <DataTemplate x:Key="contentTemplate">
+                <Image Source="{Binding Image}" MouseRightButtonUp="Image_MouseRightButtonUp" MouseLeftButtonUp="Image_MouseLeftButtonUp"></Image>
+            </DataTemplate>
+            <Style x:Key="togglelessRadTileViewItem" TargetType="{x:Type telerik:RadTileViewItem}">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                <Setter Property="Background" Value="#E9E8E9" />
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <LinearGradientBrush EndPoint="0.971000015735626,0.5" StartPoint="0.0399999991059303,0.5">
+                            <GradientStop Color="#B2B2B9" Offset="0" />
+                            <GradientStop Color="#B5C9DB" Offset="0.5" />
+                            <GradientStop Color="#B2B2B9" Offset="1" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Padding" Value="7" />
+                <Setter Property="Foreground" Value="#FFDDDDDD" />
+                <Setter Property="TileState" Value="Restored" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type telerik:RadTileViewItem}">
+                            <Grid SnapsToDevicePixels="True">
+                                <Border BorderBrush="{TemplateBinding BorderBrush}"
+										BorderThickness="{TemplateBinding BorderThickness}"
+										Background="{TemplateBinding Background}" CornerRadius="3"
+										Margin="{TemplateBinding Padding}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <ContentPresenter x:Name="ContentElement"
+												ContentTemplate="{TemplateBinding ContentTemplate}"
+												Content="{TemplateBinding Content}"
+												HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+												Grid.Row="1"
+												VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                        <Grid x:Name="ContentCacheHost" Grid.Row="1" />
+                                        <Border BorderThickness="0,0,0,1" Background="#888E97" CornerRadius="2"
+												Padding="10,0,7,0">
+                                            <Border.BorderBrush>
+                                                <LinearGradientBrush EndPoint="0.971000015735626,0.5"
+														StartPoint="0.0399999991059303,0.5">
+                                                    <GradientStop Color="#FF707070" Offset="0" />
+                                                    <GradientStop Color="#FFA3A3A3" Offset="0.5" />
+                                                    <GradientStop Color="#FF707070" Offset="1" />
+                                                </LinearGradientBrush>
+                                            </Border.BorderBrush>
+                                            <Grid MinHeight="28">
+                                                <Border x:Name="GripBarElement" Background="Transparent" >
+                                                    <ContentPresenter x:Name="HeaderElement"
+															ContentTemplate="{TemplateBinding HeaderTemplate}"
+															Content="{TemplateBinding Content}"
+															HorizontalAlignment="Left" Margin="0,0,10,0"
+															VerticalAlignment="Center" />
+                                                </Border>
+                                                <!--<ToggleButton x:Name="MaximizeToggleButton" HorizontalAlignment="Right"
+														Height="17" VerticalAlignment="Center" Width="17">
+													<ToggleButton.Template>
+														<ControlTemplate TargetType="{x:Type ToggleButton}">
+															<Grid SnapsToDevicePixels="True">
+																<Grid x:Name="Restore" Background="Transparent"
+																		Height="14" Width="14">
+																	<Grid.ToolTip>
+																		<ToolTip Content="Maximize"
+																				telerik:LocalizationManager.ResourceKey="TileViewItemMaximizeText" />
+																	</Grid.ToolTip>
+																	<Rectangle x:Name="RestoreIcon" Fill="#FF575859"
+																			Height="10" StrokeThickness="1" Width="10">
+																		<Rectangle.Stroke>
+																			<LinearGradientBrush
+																					EndPoint="0.971000015735626,0.5"
+																					StartPoint="0.0399999991059303,0.5">
+																				<GradientStop Color="#FF707070"
+																						Offset="0" />
+																				<GradientStop Color="#FFA3A3A3"
+																						Offset="0.5" />
+																				<GradientStop Color="#FF707070"
+																						Offset="1" />
+																			</LinearGradientBrush>
+																		</Rectangle.Stroke>
+																	</Rectangle>
+																	<Rectangle x:Name="RestoreIcon1" Fill="#FF575859"
+																			Height="10" Margin="0,4,4,0"
+																			StrokeThickness="1" Width="10">
+																		<Rectangle.Stroke>
+																			<LinearGradientBrush
+																					EndPoint="0.971000015735626,0.5"
+																					StartPoint="0.0399999991059303,0.5">
+																				<GradientStop Color="#FF707070"
+																						Offset="0" />
+																				<GradientStop Color="#FFA3A3A3"
+																						Offset="0.5" />
+																				<GradientStop Color="#FF707070"
+																						Offset="1" />
+																			</LinearGradientBrush>
+																		</Rectangle.Stroke>
+																	</Rectangle>
+																</Grid>
+																<Grid x:Name="Collapse" Background="Transparent"
+																		Height="5" Visibility="Collapsed" Width="12">
+																	<Grid.ToolTip>
+																		<ToolTip Content="Minimize"
+																				telerik:LocalizationManager.ResourceKey="TileViewItemMinimizeText" />
+																	</Grid.ToolTip>
+																	<Rectangle x:Name="CollapseIcon" Fill="#FF575859"
+																			StrokeThickness="1">
+																		<Rectangle.Stroke>
+																			<LinearGradientBrush
+																					EndPoint="0.971000015735626,0.5"
+																					StartPoint="0.0399999991059303,0.5">
+																				<GradientStop Color="#FF707070"
+																						Offset="0" />
+																				<GradientStop Color="#FFA3A3A3"
+																						Offset="0.5" />
+																				<GradientStop Color="#FF707070"
+																						Offset="1" />
+																			</LinearGradientBrush>
+																		</Rectangle.Stroke>
+																	</Rectangle>
+																</Grid>
+															</Grid>
+															<ControlTemplate.Triggers>
+																<Trigger Property="IsMouseOver" Value="True">
+																	<Setter Property="Fill" TargetName="RestoreIcon"
+																			Value="#FF878787" />
+																	<Setter Property="Stroke" TargetName="RestoreIcon">
+																		<Setter.Value>
+																			<LinearGradientBrush
+																					EndPoint="0.971000015735626,0.5"
+																					StartPoint="0.0399999991059303,0.5">
+																				<GradientStop Color="#FFB0B0B0"
+																						Offset="0" />
+																				<GradientStop Color="#FFB0B0B0"
+																						Offset="1" />
+																				<GradientStop Color="#FFE0E1E2"
+																						Offset="0.5" />
+																			</LinearGradientBrush>
+																		</Setter.Value>
+																	</Setter>
+																	<Setter Property="Fill" TargetName="RestoreIcon1"
+																			Value="#FF878787" />
+																	<Setter Property="Stroke" TargetName="RestoreIcon1">
+																		<Setter.Value>
+																			<LinearGradientBrush
+																					EndPoint="0.971000015735626,0.5"
+																					StartPoint="0.0399999991059303,0.5">
+																				<GradientStop Color="#FFB0B0B0"
+																						Offset="0" />
+																				<GradientStop Color="#FFB0B0B0"
+																						Offset="1" />
+																				<GradientStop Color="#FFE0E1E2"
+																						Offset="0.5" />
+																			</LinearGradientBrush>
+																		</Setter.Value>
+																	</Setter>
+																	<Setter Property="Fill" TargetName="CollapseIcon"
+																			Value="#FF878787" />
+																	<Setter Property="Stroke" TargetName="CollapseIcon">
+																		<Setter.Value>
+																			<LinearGradientBrush
+																					EndPoint="0.971000015735626,0.5"
+																					StartPoint="0.0399999991059303,0.5">
+																				<GradientStop Color="#FFB0B0B0"
+																						Offset="0" />
+																				<GradientStop Color="#FFB0B0B0"
+																						Offset="1" />
+																				<GradientStop Color="#FFE0E1E2"
+																						Offset="0.5" />
+																			</LinearGradientBrush>
+																		</Setter.Value>
+																	</Setter>
+																</Trigger>
+																<Trigger Property="IsPressed" Value="True">
+																	<Setter Property="Fill" TargetName="RestoreIcon">
+																		<Setter.Value>
+																			<LinearGradientBrush EndPoint="0.5,1"
+																					StartPoint="0.5,0">
+																				<GradientStop Color="#FF2E2D2D"
+																						Offset="0" />
+																				<GradientStop Color="#FF424242"
+																						Offset="1" />
+																				<GradientStop Color="#FF424242"
+																						Offset="0.14" />
+																			</LinearGradientBrush>
+																		</Setter.Value>
+																	</Setter>
+																	<Setter Property="Stroke" TargetName="RestoreIcon"
+																			Value="#FF1A1A1A" />
+																	<Setter Property="Fill" TargetName="RestoreIcon1">
+																		<Setter.Value>
+																			<LinearGradientBrush EndPoint="0.5,1"
+																					StartPoint="0.5,0">
+																				<GradientStop Color="#FF2E2D2D"
+																						Offset="0" />
+																				<GradientStop Color="#FF424242"
+																						Offset="1" />
+																				<GradientStop Color="#FF424242"
+																						Offset="0.14" />
+																			</LinearGradientBrush>
+																		</Setter.Value>
+																	</Setter>
+																	<Setter Property="Stroke" TargetName="RestoreIcon1"
+																			Value="#FF1A1A1A" />
+																	<Setter Property="Fill" TargetName="CollapseIcon">
+																		<Setter.Value>
+																			<LinearGradientBrush EndPoint="0.5,1"
+																					StartPoint="0.5,0">
+																				<GradientStop Color="#FF2E2D2D"
+																						Offset="0" />
+																				<GradientStop Color="#FF424242"
+																						Offset="1" />
+																				<GradientStop Color="#FF424242"
+																						Offset="0.14" />
+																			</LinearGradientBrush>
+																		</Setter.Value>
+																	</Setter>
+																	<Setter Property="Stroke" TargetName="CollapseIcon"
+																			Value="#FF1A1A1A" />
+																</Trigger>
+																<Trigger Property="IsChecked" Value="True">
+																	<Trigger.EnterActions>
+																		<BeginStoryboard>
+																			<Storyboard>
+																				<ObjectAnimationUsingKeyFrames
+																						Storyboard.TargetProperty="Visibility"
+																						Storyboard.TargetName="Restore">
+																					<DiscreteObjectKeyFrame KeyTime="0">
+																						<DiscreteObjectKeyFrame.Value>
+																							<Visibility>Collapsed</Visibility>
+																						</DiscreteObjectKeyFrame.Value>
+																					</DiscreteObjectKeyFrame>
+																				</ObjectAnimationUsingKeyFrames>
+																				<ObjectAnimationUsingKeyFrames
+																						Storyboard.TargetProperty="Visibility"
+																						Storyboard.TargetName="Collapse">
+																					<DiscreteObjectKeyFrame KeyTime="0">
+																						<DiscreteObjectKeyFrame.Value>
+																							<Visibility>Visible</Visibility>
+																						</DiscreteObjectKeyFrame.Value>
+																					</DiscreteObjectKeyFrame>
+																				</ObjectAnimationUsingKeyFrames>
+																			</Storyboard>
+																		</BeginStoryboard>
+																	</Trigger.EnterActions>
+																	<Trigger.ExitActions>
+																		<BeginStoryboard>
+																			<Storyboard>
+																				<ObjectAnimationUsingKeyFrames
+																						Storyboard.TargetProperty="Visibility"
+																						Storyboard.TargetName="Restore">
+																					<DiscreteObjectKeyFrame KeyTime="0">
+																						<DiscreteObjectKeyFrame.Value>
+																							<Visibility>Visible</Visibility>
+																						</DiscreteObjectKeyFrame.Value>
+																					</DiscreteObjectKeyFrame>
+																				</ObjectAnimationUsingKeyFrames>
+																				<ObjectAnimationUsingKeyFrames
+																						Storyboard.TargetProperty="Visibility"
+																						Storyboard.TargetName="Collapse">
+																					<DiscreteObjectKeyFrame KeyTime="0">
+																						<DiscreteObjectKeyFrame.Value>
+																							<Visibility>Collapsed</Visibility>
+																						</DiscreteObjectKeyFrame.Value>
+																					</DiscreteObjectKeyFrame>
+																				</ObjectAnimationUsingKeyFrames>
+																			</Storyboard>
+																		</BeginStoryboard>
+																	</Trigger.ExitActions>
+																</Trigger>
+																<Trigger Property="IsEnabled" Value="False" />
+															</ControlTemplate.Triggers>
+														</ControlTemplate>
+													</ToggleButton.Template>
+												</ToggleButton>-->
+                                            </Grid>
+                                        </Border>
+                                        <Rectangle x:Name="DisabledVisual" Fill="#99FFFFFF" RadiusY="4" RadiusX="4"
+												Grid.RowSpan="2" Visibility="Collapsed" />
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
         <Style TargetType="{x:Type Classes:DockPanelSplitter}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -47,8 +339,8 @@
                 Height="22" 
                 Width="309"
                 ButtonBase.Click="ClearSearchTextBox"></TextBox>
-            <Button Style="{StaticResource stlAddListBoxButton}" VerticalAlignment="Center" Margin="0,0,10,0"></Button>
-            <Button Style="{StaticResource stlDelListBoxButton}"  VerticalAlignment="Center"></Button>
+            <Button Style="{StaticResource stlAddListBoxButton}" VerticalAlignment="Center" Margin="0,0,10,0" Click="AddSplitterButton_Click"></Button>
+            <Button Style="{StaticResource stlDelListBoxButton}"  VerticalAlignment="Center" Click="RemoveSplitterButton_Click"></Button>
         </DockPanel>
         <DockPanel LastChildFill="False" Margin="0,0,4,0" Grid.Column="2">
             <TextBlock   Text="{DynamicResource PublicationInfoCtrl}"  DockPanel.Dock="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="{DynamicResource ffAlternativeFontMedium}" FontSize="16" Foreground="#FFEBECED"><TextBlock.Effect>
@@ -108,7 +400,11 @@
             </ScrollViewer>
         </DockPanel>
         <Grid x:Name="ViewDetails"  Grid.Column="2" Grid.Row="1">
-            <StackPanel DataContext="{Binding}">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+                <StackPanel>
                 <DockPanel x:Name="SMIName" LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наименование издания</TextBlock>
                     <ComboBox SelectedValue="{Binding CurrentPublication.Smi, Mode=TwoWay}" ItemsSource="{Binding Smi}" DisplayMemberPath="Smi_name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
@@ -142,6 +438,15 @@
                     <ComboBox SelectedValue="{Binding CurrentPublication.Priority}" ItemsSource="{Binding Priorities}" DisplayMemberPath="Priority_name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
                 </DockPanel>
             </StackPanel>
+            <ScrollViewer Grid.Row="1">
+                <telerik:RadTileView x:Name="myTileView" telerik:StyleManager.Theme="Metro"  ItemsSource="{Binding ImageTileList}" 
+                             SelectionMode="Single"
+                             TileStateChangeTrigger="SingleClick"
+				ItemContainerStyle="{StaticResource togglelessRadTileViewItem}"
+				ItemTemplate="{StaticResource headerTemplate}" ContentTemplate="{StaticResource contentTemplate}">
+                </telerik:RadTileView>
+            </ScrollViewer>
+
         </Grid>
         <StackPanel Orientation="Horizontal" Grid.Column="2"  Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Button Name="DoneButton" Style="{DynamicResource stlButton}" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="DoneButton_Click" Margin="0,0,10,0"   Content="{DynamicResource DoneButtonCtrl}" ></Button>

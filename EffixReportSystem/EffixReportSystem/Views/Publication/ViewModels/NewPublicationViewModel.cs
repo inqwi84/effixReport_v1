@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -83,12 +84,38 @@ namespace EffixReportSystem.Views.Publication.ViewModels
             }
         }
 
+        private DataHelper.ImageTile _currentImageTile;
+        public DataHelper.ImageTile CurrentImageTile
+        {
+            get { return _currentImageTile; }
+            set
+            {
+                if (CurrentImageTile == value)
+                    return;
+
+                _currentImageTile = value;
+                this.OnPropertyChanged("CurrentImageTile");
+            }
+        }
+
+        public void OpenInPaint(DataHelper.ImageTile tile)
+        {
+            CurrentImageTile = tile;
+            Process.Start("mspaint", CurrentImageTile.ImagePath);
+        }
 
         public IPageViewModel ParentViewModel;
         public NewPublicationViewModel(IPageViewModel parentViewModel)
         {
             ParentViewModel = parentViewModel;
             CurrentUrl = String.Empty;
+            ImageTileList = new ObservableCollection<DataHelper.ImageTile>();
+                              //{
+                              //    new DataHelper.ImageTile() {ImageName = "1",Image = new BitmapImage(new Uri("c:\\1.png")),ImagePath ="c:\\1.png" },
+                              //    new DataHelper.ImageTile() {ImageName = "2",Image = new BitmapImage(new Uri("c:\\2.png")),ImagePath ="c:\\2.png" },
+                              //    new DataHelper.ImageTile() {ImageName = "3",Image = new BitmapImage(new Uri("c:\\3.png")),ImagePath ="c:\\3.png" },
+                              //    new DataHelper.ImageTile() {ImageName = "4",Image = new BitmapImage(new Uri("c:\\4.png")),ImagePath ="c:\\4.png" },
+                              //};
         }
     }
 }
