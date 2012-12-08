@@ -48,14 +48,17 @@ namespace EffixReportSystem.Views.Publication.Views
         private void EditPublicationButton_Click(object sender, RoutedEventArgs e)
         {
             var ctx = DataContext as ViewPublicationViewModel;
-            var parent = this.GetVisualParent<PublicationView>();
-            (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
-                (ctx.ParentViewModel as PublicationViewModel).PageViewModels[1];
-            //parent.Content= (ctx.ParentViewModel as PublicationViewModel).PageViewModels[]
+            (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[1];
+            ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as EditPublicationViewModel).
+                CurrentPublication = ctx.CurrentPublication;
         }
 
         private void NewPublicationButton_Click(object sender, RoutedEventArgs e)
         {
+            var ctx = DataContext as ViewPublicationViewModel;
+            (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[2];
+            ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as NewPublicationViewModel).
+                CurrentPublication = new EF_Publication();
        }
 
         private void RemovePublicationButton_Click(object sender, RoutedEventArgs e)

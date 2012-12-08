@@ -34,7 +34,10 @@ namespace EffixReportSystem.Views.Publication.Views
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var ctx = DataContext as EditPublicationViewModel;
+            (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
+            ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel).
+                CurrentPublication = ctx.CurrentPublication;
         }
 
         private void Image_MouseRightButtonUp(object sender, MouseButtonEventArgs e)

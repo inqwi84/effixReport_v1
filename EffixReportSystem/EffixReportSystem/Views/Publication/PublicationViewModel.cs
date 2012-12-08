@@ -42,8 +42,8 @@ namespace EffixReportSystem.Views.Publication
         public PublicationViewModel()
         {
             PageViewModels.Add(new ViewModels.ViewPublicationViewModel(this));//0
-            PageViewModels.Add(new ViewModels.EditPublicationViewModel());//1
-            PageViewModels.Add(new ViewModels.NewPublicationViewModel());//2
+            PageViewModels.Add(new ViewModels.EditPublicationViewModel(this));//1
+            PageViewModels.Add(new ViewModels.NewPublicationViewModel(this));//2
             CurrentPageViewModel = PageViewModels[0];
         }
     }

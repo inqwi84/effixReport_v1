@@ -10,6 +10,8 @@ namespace EffixReportSystem.Views.Publication.ViewModels
 {
     internal class ViewPublicationViewModel : ObservableObject, IPageViewModel
     {
+        private bool _canEdit;
+
 
         public PublicationHelper PublicationHelper;
         public string Name { get; set; }
@@ -19,16 +21,39 @@ namespace EffixReportSystem.Views.Publication.ViewModels
         private ObservableCollection<EF_Publication>_publicationList;
         private EF_Publication _currentPublication;
 
+        public bool CanEdit
+        {
+            get { return this._canEdit; }
+            set
+            {
+                if (CanEdit == value)
+                    return;
+
+                _canEdit = value;
+                this.OnPropertyChanged("CanEdit");
+            }
+        }
+
         public EF_Publication CurrentPublication
         {
             get { return this._currentPublication; }
             set
             {
-                if (CurrentPublication == value)
-                    return;
+                if (value==null)
+                {
+                    CanEdit = false;
+                    _currentPublication = null;
+                    this.OnPropertyChanged("CurrentPublication");
+                }
+                else
+                {
+                    if (CurrentPublication == value)
+                        return;
+                    CanEdit = true;
+                    _currentPublication = value;
+                    this.OnPropertyChanged("CurrentPublication");
+                }
 
-                _currentPublication = value;
-                this.OnPropertyChanged("CurrentPublication");
             }
         }
         public ObservableCollection<EF_Publication> PublicationList
