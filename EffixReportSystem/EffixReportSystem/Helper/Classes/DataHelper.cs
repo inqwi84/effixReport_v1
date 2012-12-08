@@ -2,18 +2,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
+using System.Windows.Forms;
+using Application = System.Windows.Application;
+using Point = System.Drawing.Point;
+using Size = System.Drawing.Size;
 
 namespace EffixReportSystem.Helper.Classes
 {
-
     public static class DataHelper
     {
         public static Visual FindAncestor(Visual child, Type typeAncestor)
@@ -108,7 +116,6 @@ namespace EffixReportSystem.Helper.Classes
         }
     }
 
-
     public class PublicationHelper
     {
         private static PublicationHelper _instance;
@@ -143,12 +150,223 @@ namespace EffixReportSystem.Helper.Classes
             get { return _instance ?? (_instance = new PublicationHelper()); }
         }
     }
-    //public static class PublicationHelper
-    //{
-    //    private ObservableCollection<EF_Tonality> _tonalities=new ObservableCollection<EF_Tonality>();
-    //    public static EF_Tonality GetTonalityByID(long id)
-    //    {
-            
-    //    }
-    //}
+
+    public class HtmlCapture
+    {
+        private WebBrowser web;
+        private Timer tready;
+        private Rectangle screen;
+        private Size? imgsize = null;
+
+        //an event that triggers when the html document is captured
+        public delegate void HtmlCaptureEvent(object sender,
+                             Uri url, Bitmap image);
+        public event HtmlCaptureEvent HtmlImageCapture;
+
+        //class constructor
+        public HtmlCapture()
+        {
+            //initialise the webbrowser and the timer
+            web = new WebBrowser();
+            tready = new Timer();
+            tready.Interval = 2000;
+            screen = Screen.PrimaryScreen.Bounds;
+            //set the webbrowser width and hight
+            web.Width = screen.Width;
+            web.Height = screen.Height;
+            //suppress script errors and hide scroll bars
+            web.ScriptErrorsSuppressed = true;
+            web.ScrollBarsEnabled = false;
+            //attached events
+            web.Navigating +=
+              new WebBrowserNavigatingEventHandler(web_Navigating);
+            web.DocumentCompleted += new
+              WebBrowserDocumentCompletedEventHandler(tready_Tick);
+            tready.Tick += new EventHandler(tready_Tick);
+        }
+
+        #region Public methods
+        public void Create(string url)
+        {
+            imgsize = null;
+            web.Navigate(url);
+        }
+
+        public void Create(string url, Size imgsz)
+        {
+            this.imgsize = imgsz;
+            web.Navigate(url);
+        }
+        #endregion
+
+        #region Events
+        void web_DocumentCompleted(object sender,
+                 WebBrowserDocumentCompletedEventArgs e)
+        {
+            //start the timer
+            tready.Start();
+        }
+
+        void web_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            //stop the timer   
+            tready.Stop();
+        }
+
+        void tready_Tick(object sender, EventArgs e)
+        {
+            //stop the timer
+            tready.Stop();
+            //get the size of the document's body
+            Rectangle body = web.Document.Body.ScrollRectangle;
+
+            //check if the document width/height is greater than screen width/height
+            Rectangle docRectangle = new Rectangle()
+            {
+                Location = new Point(0, 0),
+                Size = new Size(body.Width > screen.Width ? body.Width : screen.Width,
+                 body.Height > screen.Height ? body.Height : screen.Height)
+            };
+            //set the width and height of the WebBrowser object
+            web.Width = docRectangle.Width;
+            web.Height = docRectangle.Height;
+
+            //if the imgsize is null, the size of the image will 
+            //be the same as the size of webbrowser object
+            //otherwise  set the image size to imgsize
+            Rectangle imgRectangle;
+            if (imgsize == null)
+                imgRectangle = docRectangle;
+            else
+                imgRectangle = new Rectangle()
+                {
+                    Location = new Point(0, 0),
+                    Size = imgsize.Value
+                };
+            //create a bitmap object 
+            Bitmap bitmap = new Bitmap(imgRectangle.Width, imgRectangle.Height);
+            //get the viewobject of the WebBrowser
+            IViewObject ivo = web.Document.DomDocument as IViewObject;
+
+            using (Graphics g = Graphics.FromImage(bitmap))
+            {
+                //get the handle to the device context and draw
+                IntPtr hdc = g.GetHdc();
+                ivo.Draw(1, -1, IntPtr.Zero, IntPtr.Zero,
+                         IntPtr.Zero, hdc, ref imgRectangle,
+                         ref docRectangle, IntPtr.Zero, 0);
+                g.ReleaseHdc(hdc);
+            }
+            //invoke the HtmlImageCapture event
+            HtmlImageCapture(this, web.Url, bitmap);
+        }
+        #endregion
+    }
+    [ComVisible(true), ComImport()]
+    [Guid("0000010d-0000-0000-C000-000000000046")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface IViewObject
+    {
+        [return: MarshalAs(UnmanagedType.I4)]
+        [PreserveSig]
+        int Draw([MarshalAs(UnmanagedType.U4)] uint dwDrawAspect, int lindex, IntPtr pvAspect, [In] IntPtr ptd, IntPtr hdcTargetDev, IntPtr hdcDraw, [MarshalAs(UnmanagedType.Struct)] ref Rectangle lprcBounds, [MarshalAs(UnmanagedType.Struct)] ref Rectangle lprcWBounds, IntPtr pfnContinue, [MarshalAs(UnmanagedType.U4)] uint dwContinue);
+        [PreserveSig]
+        int GetColorSet([In, MarshalAs(UnmanagedType.U4)] int dwDrawAspect,
+           int lindex, IntPtr pvAspect, [In] IntPtr ptd,
+            IntPtr hicTargetDev, [Out] IntPtr ppColorSet);
+        [PreserveSig]
+        int Freeze([In, MarshalAs(UnmanagedType.U4)] int dwDrawAspect,
+                        int lindex, IntPtr pvAspect, [Out] IntPtr pdwFreeze);
+        [PreserveSig]
+        int Unfreeze([In, MarshalAs(UnmanagedType.U4)] int dwFreeze);
+        void SetAdvise([In, MarshalAs(UnmanagedType.U4)] int aspects,
+          [In, MarshalAs(UnmanagedType.U4)] int advf,
+          [In, MarshalAs(UnmanagedType.Interface)] IAdviseSink pAdvSink);
+        void GetAdvise([In, Out, MarshalAs(UnmanagedType.LPArray)] int[] paspects,
+          [In, Out, MarshalAs(UnmanagedType.LPArray)] int[] advf,
+          [In, Out, MarshalAs(UnmanagedType.LPArray)] IAdviseSink[] pAdvSink);
+    }
+
+    public static class RHelper
+    {
+
+        public static BitmapImage Bitmap2BitmapImage(Bitmap bitmap)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bitmap.Save(ms, ImageFormat.Png);
+                ms.Position = 0;
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.StreamSource = ms;
+                bi.EndInit();
+                return bi;
+            }
+        }
+        public static BitmapImage MemoryStreamToBitmapImage(MemoryStream memoStream)
+        {
+            var bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.StreamSource = memoStream;
+            bitmap.CacheOption = BitmapCacheOption.OnLoad;
+            bitmap.EndInit();
+            bitmap.Freeze();
+            return bitmap;
+        }
+    }
+
+    public static class Imaging
+    {
+        public static BitmapSource CreateBitmapSourceFromBitmap(Bitmap bitmap)
+        {
+            if (bitmap == null)
+                throw new ArgumentNullException("bitmap");
+
+            if (Application.Current.Dispatcher == null)
+                return null; // Is it possible?
+
+            try
+            {
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    // You need to specify the image format to fill the stream. 
+                    // I'm assuming it is PNG
+                    bitmap.Save(memoryStream, ImageFormat.Png);
+                    memoryStream.Seek(0, SeekOrigin.Begin);
+
+                    // Make sure to create the bitmap in the UI thread
+                    if (InvokeRequired)
+                        return (BitmapSource)Application.Current.Dispatcher.Invoke(
+                            new Func<Stream, BitmapSource>(CreateBitmapSourceFromBitmap),
+                            DispatcherPriority.Normal,
+                            memoryStream);
+
+                    return CreateBitmapSourceFromBitmap(memoryStream);
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        private static bool InvokeRequired
+        {
+            get { return Dispatcher.CurrentDispatcher != Application.Current.Dispatcher; }
+        }
+
+        private static BitmapSource CreateBitmapSourceFromBitmap(Stream stream)
+        {
+            BitmapDecoder bitmapDecoder = BitmapDecoder.Create(
+                stream,
+                BitmapCreateOptions.PreservePixelFormat,
+                BitmapCacheOption.OnLoad);
+
+            // This will disconnect the stream from the image completely...
+            WriteableBitmap writable = new WriteableBitmap(bitmapDecoder.Frames.Single());
+            writable.Freeze();
+
+            return writable;
+        }
+    } 
 }

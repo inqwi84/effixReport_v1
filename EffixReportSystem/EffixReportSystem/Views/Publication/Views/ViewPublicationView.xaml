@@ -89,7 +89,7 @@
 
         </telerik:RadListBox>
         <!--<NotificationSystemMVVM:PersonDetailsViewControl2 x:Name="ViewDetails"  Grid.Column="4" Grid.Row="1"></NotificationSystemMVVM:PersonDetailsViewControl2>-->
-        <Grid x:Name="ViewDetails"  Grid.Column="4" Grid.Row="1">
+        <Grid x:Name="ViewDetails"  Grid.Column="4" Grid.Row="1" Margin="10">
                     <StackPanel DataContext="{Binding}">
                         <DockPanel x:Name="SMIName" LastChildFill="False" Margin="0,5,0,5">
                             <TextBlock HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наименование издания</TextBlock>

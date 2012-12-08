@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Media.Imaging;
 using EffixReportSystem.Helper.Classes;
 using EffixReportSystem.Helper.Interfaces;
 
@@ -37,6 +41,20 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                 this.OnPropertyChanged("CurrentPublication");
             }
         }
+
+        private BitmapImage _publicationBitmapImage;
+        public BitmapImage PublicationBitmapImage
+        {
+            get { return _publicationBitmapImage; }
+            set
+            {
+                if (Equals(PublicationBitmapImage, value))
+                    return;
+
+                _publicationBitmapImage = value;
+                this.OnPropertyChanged("PublicationBitmapImage");
+            } 
+        }
         private ObservableCollection<DataHelper.ImageTile> _imageTileList;
         public ObservableCollection<DataHelper.ImageTile> ImageTileList
         {
@@ -50,10 +68,27 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                 this.OnPropertyChanged("ImageTileList");
             }
         }
+
+        private string _currentUrl;
+        public string CurrentUrl
+        {
+            get { return this._currentUrl; }
+            set
+            {
+                if (CurrentUrl == value)
+                    return;
+
+                _currentUrl = value;
+                this.OnPropertyChanged("CurrentUrl");
+            }
+        }
+
+
         public IPageViewModel ParentViewModel;
         public NewPublicationViewModel(IPageViewModel parentViewModel)
         {
             ParentViewModel = parentViewModel;
+            CurrentUrl = String.Empty;
         }
     }
 }

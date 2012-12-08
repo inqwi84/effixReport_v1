@@ -218,6 +218,45 @@
         </Setter>
     </Style>
 
+    <Style x:Key="stlUrlTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="AllowDrop" Value="True"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Grid>
+                        <Border x:Name="InputBorder" BorderThickness="1" CornerRadius="3" BorderBrush="#FF6C737B" Background="White">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="1" x:Name="Placeholder" Text="" Margin="4,0,4,2" VerticalAlignment="Center" FontStyle="Italic" Foreground="#FFB4B7BC" Visibility="Visible"/>
+                                <ScrollViewer Grid.Column="1" x:Name="PART_ContentHost" Foreground="#FF7F848A" FontFamily="{DynamicResource ffBaseFont}" VerticalAlignment="Center" Visibility="Visible" Background="Transparent" />
+                                <Image x:Name="SearchIcon" Grid.Column="0" Source="/Skins/Images/search.png" Stretch="Fill" Width="16" Height="16" Margin="4,0" Visibility="Visible" />
+                                <Button x:Name="DelButton" Style="{DynamicResource stlSearchBoxDelButton}" Grid.Column="2" Visibility="Visible"  VerticalAlignment="Center" Margin="4,3,4,0">
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="Placeholder" Property="Text" Value="Введите адрес"/>
+                            <Setter TargetName="DelButton" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <EventTrigger RoutedEvent="Button.Click">
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
     <Style x:Key="stlRadListBox" TargetType="{x:Type telerik:RadListBox}">
         <Setter Property="Padding" Value="1"/>
         <Setter Property="MinHeight" Value="40"/>
@@ -2158,6 +2197,131 @@
                         <Trigger Property="Selector.IsSelected" Value="True">
                             <Setter Property="Visibility" TargetName="SelectedVisual" Value="Visible"/>
                             <Setter Property="Foreground" Value="#FF295A7A"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="stlDelListBoxButton" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="18" Height="18" SnapsToDevicePixels="True" Background="#00000000" Cursor="Hand">
+                        <Grid x:Name="grid">
+                            <Ellipse Stroke="White" Height="14" Width="14" VerticalAlignment="Top">
+                                <Ellipse.Effect>
+                                    <DropShadowEffect BlurRadius="3" Direction="270" Color="#FF2E3134" ShadowDepth="2" Opacity="0.3"/>
+                                </Ellipse.Effect>
+                                <Ellipse.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFE57F7F" Offset="0"/>
+                                        <GradientStop Color="#FFF90000" Offset="1"/>
+                                        <GradientStop Color="#FFED4444" Offset="0.5"/>
+                                    </LinearGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Rectangle Margin="3,6" Stroke="{x:Null}" Fill="White" Width="6" Height="2" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                <Rectangle.Effect>
+                                    <DropShadowEffect BlurRadius="1" Direction="90" ShadowDepth="1" Color="#FFFF0B0B"/>
+                                </Rectangle.Effect>
+                            </Rectangle>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Margin" TargetName="grid" Value="0,1,0,0"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="stlAddListBoxButton" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="18" Height="18" SnapsToDevicePixels="True" Background="#00000000" Cursor="Hand">
+                        <Grid x:Name="grid">
+                            <Ellipse Stroke="White" Height="14" Width="14" VerticalAlignment="Top">
+                                <Ellipse.Effect>
+                                    <DropShadowEffect BlurRadius="3" Direction="270" Color="#FF2E3134" ShadowDepth="2" Opacity="0.3"/>
+                                </Ellipse.Effect>
+                                <Ellipse.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF7FCC7F" Offset="0"/>
+                                        <GradientStop Color="#FF81C848" Offset="1"/>
+                                        <GradientStop Color="#FF88C600" Offset="0.5"/>
+                                    </LinearGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Path Data="M2,0 L4,0 4,2 6,2 6,4 4,4 4,6 2,6 2,4 0,4 0,2 2,2 z" Fill="White" HorizontalAlignment="Stretch" Height="6" Margin="0,0,0,4" Stretch="Fill" Stroke="{x:Null}" VerticalAlignment="Stretch" Width="6" >
+                                <Path.Effect>
+                                    <DropShadowEffect BlurRadius="1" Direction="90" ShadowDepth="1" Color="#FF2DC10D"/>
+                                </Path.Effect>
+                            </Path>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Margin" TargetName="grid" Value="0,1,0,0"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Лист итем для добавления чего-либо-->
+    <Style x:Key="stlInsertSomething" TargetType="{x:Type telerik:RadListBoxItem}">
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type telerik:RadListBoxItem}">
+                    <Grid Height="58" SnapsToDevicePixels="True" Margin="0,2,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="38"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="OuterLine" VerticalAlignment="Top" BorderBrush="#FFD9DBDD" BorderThickness="0,0,0,1" Height="58" Grid.Column="1">
+                            <Border x:Name="InnerBorder" CornerRadius="4" BorderThickness="1" Background="#00000000" BorderBrush="#00000000" Cursor="Hand" VerticalAlignment="Top" Height="55" >
+                                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{TemplateBinding Property=Content}" Margin="20,0" Foreground="{DynamicResource cListBoxContent}" VerticalAlignment="Center" FontFamily="{DynamicResource ffAlternativeFontMedium}" FontSize="16"/>
+                            </Border>
+                        </Border>
+                        <Button x:Name="addButton" Content="Button" Grid.Column="0" Style="{DynamicResource stlAddListBoxButton}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="InnerBorder" Value="{DynamicResource cRadListBoxItemBackOver}"/>
+                            <Setter Property="BorderBrush" TargetName="InnerBorder" Value="{DynamicResource cRadListBoxBorderOver}"/>
+                            <Setter Property="Foreground" TargetName="textBlock" Value="{DynamicResource cListBoxContentOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter Property="Background" TargetName="InnerBorder" Value="{DynamicResource cRadListBoxBackActive}"/>
+                            <Setter Property="BorderBrush" TargetName="InnerBorder" Value="{DynamicResource cRadListBoxBorderActive}"/>
+                            <Setter Property="Foreground" TargetName="textBlock" Value="{DynamicResource cListBoxContentActive}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
