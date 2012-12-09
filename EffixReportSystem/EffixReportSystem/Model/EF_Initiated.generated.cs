@@ -23,70 +23,38 @@ using EffixReportSystem;
 
 namespace EffixReportSystem	
 {
-	public partial class EF_Project : INotifyPropertyChanged
+	public partial class EF_Initiated : INotifyPropertyChanged
 	{
-		private long _project_Id;
-		public virtual long Project_id
+		private string _isInitiated;
+		public virtual string IsInitiated
 		{
 		   get
 		   {
-		       return this._project_Id;
+		       return this._isInitiated;
 		   }
 		   set
 		   {
-		       if( Project_id == value )
+		       if( IsInitiated == value )
 		  return;
 		 
-		  _project_Id = value;
-		  this.OnPropertyChanged("Project_id");
+		  _isInitiated = value;
+		  this.OnPropertyChanged("IsInitiated");
 		   }
 		}
-		private string _project_Name;
-		public virtual string Project_name
+		private int _iD;
+		public virtual int ID
 		{
 		   get
 		   {
-		       return this._project_Name;
+		       return this._iD;
 		   }
 		   set
 		   {
-		       if( Project_name == value )
+		       if( ID == value )
 		  return;
 		 
-		  _project_Name = value;
-		  this.OnPropertyChanged("Project_name");
-		   }
-		}
-		private long? _user_Id;
-		public virtual long? User_id
-		{
-		   get
-		   {
-		       return this._user_Id;
-		   }
-		   set
-		   {
-		       if( User_id == value )
-		  return;
-		 
-		  _user_Id = value;
-		  this.OnPropertyChanged("User_id");
-		   }
-		}
-		private string _project_Descr;
-		public virtual string Project_descr
-		{
-		   get
-		   {
-		       return this._project_Descr;
-		   }
-		   set
-		   {
-		       if( Project_descr == value )
-		  return;
-		 
-		  _project_Descr = value;
-		  this.OnPropertyChanged("Project_descr");
+		  _iD = value;
+		  this.OnPropertyChanged("ID");
 		   }
 		}
 		private IList<EF_Publication> _eF_Publications = new List<EF_Publication>();

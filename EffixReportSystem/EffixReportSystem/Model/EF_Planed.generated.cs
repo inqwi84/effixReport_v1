@@ -18,74 +18,51 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using System.ComponentModel;
+using EffixReportSystem;
 
 
 namespace EffixReportSystem	
 {
-	public partial class EF_Dictionary : INotifyPropertyChanged
+	public partial class EF_Planed : INotifyPropertyChanged
 	{
-		private long _id;
-		public virtual long Id
+		private string _isPlaned;
+		public virtual string IsPlaned
 		{
 		   get
 		   {
-		       return this._id;
+		       return this._isPlaned;
 		   }
 		   set
 		   {
-		       if( Id == value )
+		       if( IsPlaned == value )
 		  return;
 		 
-		  _id = value;
-		  this.OnPropertyChanged("Id");
+		  _isPlaned = value;
+		  this.OnPropertyChanged("IsPlaned");
 		   }
 		}
-		private string _name;
-		public virtual string Name
+		private int _iD;
+		public virtual int ID
 		{
 		   get
 		   {
-		       return this._name;
+		       return this._iD;
 		   }
 		   set
 		   {
-		       if( Name == value )
+		       if( ID == value )
 		  return;
 		 
-		  _name = value;
-		  this.OnPropertyChanged("Name");
+		  _iD = value;
+		  this.OnPropertyChanged("ID");
 		   }
 		}
-		private string _type_Name;
-		public virtual string Type_name
+		private IList<EF_Publication> _eF_Publications = new List<EF_Publication>();
+		public virtual IList<EF_Publication> EF_Publications
 		{
 		   get
 		   {
-		       return this._type_Name;
-		   }
-		   set
-		   {
-		       if( Type_name == value )
-		  return;
-		 
-		  _type_Name = value;
-		  this.OnPropertyChanged("Type_name");
-		   }
-		}
-		private bool? _value;
-		public virtual bool? Value
-		{
-		   get
-		   {
-		       return this._value;
-		   }
-		   set
-		   {
-		       if( Value == value )
-		  return;
-		 
-		  _value = value;
-		  this.OnPropertyChanged("Value");
+		       return this._eF_Publications;
 		   }
 		}
 		public event PropertyChangedEventHandler PropertyChanged;

@@ -18,6 +18,7 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using System.ComponentModel;
+using EffixReportSystem;
 
 
 namespace EffixReportSystem	
@@ -54,6 +55,14 @@ namespace EffixReportSystem
 		 
 		  _priority_Name = value;
 		  this.OnPropertyChanged("Priority_name");
+		   }
+		}
+		private IList<EF_Publication> _eF_Publications = new List<EF_Publication>();
+		public virtual IList<EF_Publication> EF_Publications
+		{
+		   get
+		   {
+		       return this._eF_Publications;
 		   }
 		}
 		public event PropertyChangedEventHandler PropertyChanged;

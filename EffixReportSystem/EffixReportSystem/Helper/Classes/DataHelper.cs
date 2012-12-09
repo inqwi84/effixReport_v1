@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -16,6 +17,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Windows.Forms;
+using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.StorageClient;
 using Application = System.Windows.Application;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
@@ -29,17 +32,18 @@ namespace EffixReportSystem.Helper.Classes
             DependencyObject parent = VisualTreeHelper.GetParent(child);
             while (parent != null && !typeAncestor.IsInstanceOfType(parent))
             {
-                parent =VisualTreeHelper.GetParent(parent);
+                parent = VisualTreeHelper.GetParent(parent);
             }
             return (parent as Visual);
         }
 
 
-        public class ImageTile:ObservableObject
+        public class ImageTile : ObservableObject
         {
             private string _imageName;
             private string _imagePath;
             private BitmapImage _image;
+
             public string ImageName
             {
                 get { return this._imageName; }
@@ -52,6 +56,7 @@ namespace EffixReportSystem.Helper.Classes
                     this.OnPropertyChanged("ImageName");
                 }
             }
+
             public string ImagePath
             {
                 get { return this._imagePath; }
@@ -64,6 +69,7 @@ namespace EffixReportSystem.Helper.Classes
                     this.OnPropertyChanged("ImagePath");
                 }
             }
+
             public BitmapImage Image
             {
                 get { return this._image; }
@@ -78,7 +84,8 @@ namespace EffixReportSystem.Helper.Classes
             }
 
         }
-        private static List<UnmanagedMemoryStream> GetResourceNames(System.Globalization.CultureInfo culture)
+
+        private static List<UnmanagedMemoryStream> GetResourceNames(CultureInfo culture)
         {
             Assembly asm = Assembly.GetExecutingAssembly();
             Stream s = asm.GetManifestResourceStream("StringDictionary");
@@ -114,35 +121,66 @@ namespace EffixReportSystem.Helper.Classes
             }
 
         }
+
+        public static void SaveFilesInAzureStorage(string filePath)
+        {
+            var nameArray = filePath.Split(Convert.ToChar("\\"));
+            var projectNameContainer = nameArray[2];
+            var fileName = filePath.Replace("c:\\storage\\" + projectNameContainer, String.Empty);
+            try
+            {
+                var cloudStorageAccount = CloudStorageAccount.Parse(
+                    "DefaultEndpointsProtocol=http;AccountName=ctx;AccountKey=rCaek5ugmLbIaL2mXk3gaqMF4mzqPrUu6CXBUsXn1yrTdWBBTBsQpA2bDuyDC6BQx1NCeUhEl6p0vWT69ZNF+Q==");
+                var blobClient = cloudStorageAccount.CreateCloudBlobClient();
+                var blobContainer = blobClient.GetContainerReference(projectNameContainer);
+                var blob = blobContainer.GetBlobReference(fileName);
+                var fileStream = File.OpenRead(filePath);
+
+                var byteArray = new byte[fileStream.Length];
+                fileStream.Read(byteArray, 0, byteArray.Length);
+                blob.UploadByteArray(byteArray);
+                fileStream.Close();
+            }
+            catch (StorageClientException e)
+            {
+            }
+            catch (Exception e)
+            {
+            }
+        }
     }
 
     public class PublicationHelper
     {
         private static PublicationHelper _instance;
         public ObservableCollection<EF_SMI> Smi;
-        public  ObservableCollection<EF_Tonality> Tonalities;
+        public ObservableCollection<EF_Tonality> Tonalities;
         public ObservableCollection<EF_SMI_Type> SmiTypes;
         public ObservableCollection<EF_Exclusivity> Exclusivities;
         public ObservableCollection<EF_SMI_priority> Priorities;
-        public ObservableCollection<EF_Dictionary> Initiated;
-        public ObservableCollection<EF_Dictionary> Planed;
-        public ObservableCollection<EF_Dictionary> Photo;
+        public ObservableCollection<EF_Initiated> Initiated;
+        public ObservableCollection<EF_Planed> Planed;
+        public ObservableCollection<EF_Photo> Photo;
+
         private PublicationHelper()
         {
-            using(var model= new EntitiesModel())
+            using (var model = new EntitiesModel())
             {
-                Smi= new ObservableCollection<EF_SMI>(model.EF_SMIs);
-               Tonalities=new ObservableCollection<EF_Tonality>(model.EF_Tonalities);
-                SmiTypes= new ObservableCollection<EF_SMI_Type>(model.EF_SMI_Types);
-                Exclusivities=new ObservableCollection<EF_Exclusivity>(model.EF_Exclusivities);
-                Priorities=new ObservableCollection<EF_SMI_priority>(model.EF_SMI_priorities);
-                Initiated = new ObservableCollection<EF_Dictionary>(model.EF_Dictionaries.Where(item => item.Type_name == "initiated"));
+                Smi = new ObservableCollection<EF_SMI>(model.EF_SMIs);
+                Tonalities = new ObservableCollection<EF_Tonality>(model.EF_Tonalities);
+                SmiTypes = new ObservableCollection<EF_SMI_Type>(model.EF_SMI_Types);
+                Exclusivities = new ObservableCollection<EF_Exclusivity>(model.EF_Exclusivities);
+                Priorities = new ObservableCollection<EF_SMI_priority>(model.EF_SMI_priorities);
+                Initiated =
+                    new ObservableCollection<EF_Initiated>(model.EF_Initiateds);
                 Planed =
-                    new ObservableCollection<EF_Dictionary>(
-                        model.EF_Dictionaries.Where(item => item.Type_name == "planed"));
-                Photo = new ObservableCollection<EF_Dictionary>(model.EF_Dictionaries.Where(item => item.Type_name == "photo"));
+                    new ObservableCollection<EF_Planed>(
+                        model.EF_Planeds);
+                Photo =
+                    new ObservableCollection<EF_Photo>(
+                        model.EF_Photos);
             }
-            
+
         }
 
         public static PublicationHelper Instance
@@ -160,7 +198,8 @@ namespace EffixReportSystem.Helper.Classes
 
         //an event that triggers when the html document is captured
         public delegate void HtmlCaptureEvent(object sender,
-                             Uri url, Bitmap image);
+                                              Uri url, Bitmap image);
+
         public event HtmlCaptureEvent HtmlImageCapture;
 
         //class constructor
@@ -179,13 +218,14 @@ namespace EffixReportSystem.Helper.Classes
             web.ScrollBarsEnabled = false;
             //attached events
             web.Navigating +=
-              new WebBrowserNavigatingEventHandler(web_Navigating);
+                new WebBrowserNavigatingEventHandler(web_Navigating);
             web.DocumentCompleted += new
-              WebBrowserDocumentCompletedEventHandler(tready_Tick);
+                WebBrowserDocumentCompletedEventHandler(tready_Tick);
             tready.Tick += new EventHandler(tready_Tick);
         }
 
         #region Public methods
+
         public void Create(string url)
         {
             imgsize = null;
@@ -197,23 +237,25 @@ namespace EffixReportSystem.Helper.Classes
             this.imgsize = imgsz;
             web.Navigate(url);
         }
+
         #endregion
 
         #region Events
-        void web_DocumentCompleted(object sender,
-                 WebBrowserDocumentCompletedEventArgs e)
+
+        private void web_DocumentCompleted(object sender,
+                                           WebBrowserDocumentCompletedEventArgs e)
         {
             //start the timer
             tready.Start();
         }
 
-        void web_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        private void web_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             //stop the timer   
             tready.Stop();
         }
 
-        void tready_Tick(object sender, EventArgs e)
+        private void tready_Tick(object sender, EventArgs e)
         {
             //stop the timer
             tready.Stop();
@@ -222,11 +264,11 @@ namespace EffixReportSystem.Helper.Classes
 
             //check if the document width/height is greater than screen width/height
             Rectangle docRectangle = new Rectangle()
-            {
-                Location = new Point(0, 0),
-                Size = new Size(body.Width > screen.Width ? body.Width : screen.Width,
-                 body.Height > screen.Height ? body.Height : screen.Height)
-            };
+                                         {
+                                             Location = new Point(0, 0),
+                                             Size = new Size(body.Width > screen.Width ? body.Width : screen.Width,
+                                                             body.Height > screen.Height ? body.Height : screen.Height)
+                                         };
             //set the width and height of the WebBrowser object
             web.Width = docRectangle.Width;
             web.Height = docRectangle.Height;
@@ -239,10 +281,10 @@ namespace EffixReportSystem.Helper.Classes
                 imgRectangle = docRectangle;
             else
                 imgRectangle = new Rectangle()
-                {
-                    Location = new Point(0, 0),
-                    Size = imgsize.Value
-                };
+                                   {
+                                       Location = new Point(0, 0),
+                                       Size = imgsize.Value
+                                   };
             //create a bitmap object 
             Bitmap bitmap = new Bitmap(imgRectangle.Width, imgRectangle.Height);
             //get the viewobject of the WebBrowser
@@ -260,8 +302,10 @@ namespace EffixReportSystem.Helper.Classes
             //invoke the HtmlImageCapture event
             HtmlImageCapture(this, web.Url, bitmap);
         }
+
         #endregion
     }
+
     [ComVisible(true), ComImport()]
     [Guid("0000010d-0000-0000-C000-000000000046")]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
@@ -269,22 +313,30 @@ namespace EffixReportSystem.Helper.Classes
     {
         [return: MarshalAs(UnmanagedType.I4)]
         [PreserveSig]
-        int Draw([MarshalAs(UnmanagedType.U4)] uint dwDrawAspect, int lindex, IntPtr pvAspect, [In] IntPtr ptd, IntPtr hdcTargetDev, IntPtr hdcDraw, [MarshalAs(UnmanagedType.Struct)] ref Rectangle lprcBounds, [MarshalAs(UnmanagedType.Struct)] ref Rectangle lprcWBounds, IntPtr pfnContinue, [MarshalAs(UnmanagedType.U4)] uint dwContinue);
+        int Draw([MarshalAs(UnmanagedType.U4)] uint dwDrawAspect, int lindex, IntPtr pvAspect, [In] IntPtr ptd,
+                 IntPtr hdcTargetDev, IntPtr hdcDraw, [MarshalAs(UnmanagedType.Struct)] ref Rectangle lprcBounds,
+                 [MarshalAs(UnmanagedType.Struct)] ref Rectangle lprcWBounds, IntPtr pfnContinue,
+                 [MarshalAs(UnmanagedType.U4)] uint dwContinue);
+
         [PreserveSig]
         int GetColorSet([In, MarshalAs(UnmanagedType.U4)] int dwDrawAspect,
-           int lindex, IntPtr pvAspect, [In] IntPtr ptd,
-            IntPtr hicTargetDev, [Out] IntPtr ppColorSet);
+                        int lindex, IntPtr pvAspect, [In] IntPtr ptd,
+                        IntPtr hicTargetDev, [Out] IntPtr ppColorSet);
+
         [PreserveSig]
         int Freeze([In, MarshalAs(UnmanagedType.U4)] int dwDrawAspect,
-                        int lindex, IntPtr pvAspect, [Out] IntPtr pdwFreeze);
+                   int lindex, IntPtr pvAspect, [Out] IntPtr pdwFreeze);
+
         [PreserveSig]
         int Unfreeze([In, MarshalAs(UnmanagedType.U4)] int dwFreeze);
+
         void SetAdvise([In, MarshalAs(UnmanagedType.U4)] int aspects,
-          [In, MarshalAs(UnmanagedType.U4)] int advf,
-          [In, MarshalAs(UnmanagedType.Interface)] IAdviseSink pAdvSink);
+                       [In, MarshalAs(UnmanagedType.U4)] int advf,
+                       [In, MarshalAs(UnmanagedType.Interface)] IAdviseSink pAdvSink);
+
         void GetAdvise([In, Out, MarshalAs(UnmanagedType.LPArray)] int[] paspects,
-          [In, Out, MarshalAs(UnmanagedType.LPArray)] int[] advf,
-          [In, Out, MarshalAs(UnmanagedType.LPArray)] IAdviseSink[] pAdvSink);
+                       [In, Out, MarshalAs(UnmanagedType.LPArray)] int[] advf,
+                       [In, Out, MarshalAs(UnmanagedType.LPArray)] IAdviseSink[] pAdvSink);
     }
 
     public static class RHelper
@@ -303,6 +355,7 @@ namespace EffixReportSystem.Helper.Classes
                 return bi;
             }
         }
+
         public static BitmapImage MemoryStreamToBitmapImage(MemoryStream memoStream)
         {
             var bitmap = new BitmapImage();
@@ -336,7 +389,7 @@ namespace EffixReportSystem.Helper.Classes
 
                     // Make sure to create the bitmap in the UI thread
                     if (InvokeRequired)
-                        return (BitmapSource)Application.Current.Dispatcher.Invoke(
+                        return (BitmapSource) Application.Current.Dispatcher.Invoke(
                             new Func<Stream, BitmapSource>(CreateBitmapSourceFromBitmap),
                             DispatcherPriority.Normal,
                             memoryStream);
@@ -368,5 +421,29 @@ namespace EffixReportSystem.Helper.Classes
 
             return writable;
         }
-    } 
+
+        public static byte[] FileToByteArray(string fileName)
+        {
+            byte[] buffer = null;
+            try
+            {
+                // Open file for reading
+                var fileStream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                // attach filestream to binary reader
+                var binaryReader = new BinaryReader(fileStream);
+                // get total byte length of the file
+                long totalBytes = new FileInfo(fileName).Length;
+                // read entire file into buffer
+                buffer = binaryReader.ReadBytes((Int32) totalBytes);
+                // close file reader
+                fileStream.Close();
+                fileStream.Dispose();
+                binaryReader.Close();
+            }
+            catch (Exception exception)
+            {
+            }
+            return buffer;
+        }
+    }
 }

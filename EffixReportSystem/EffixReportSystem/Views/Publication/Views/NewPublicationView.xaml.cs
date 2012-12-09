@@ -19,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using EffixReportSystem.Helper.Classes;
 using EffixReportSystem.Views.Publication.ViewModels;
+using Telerik.OpenAccess;
 using Telerik.Windows.Controls;
 using Brushes = System.Windows.Media.Brushes;
 using Image = System.Windows.Controls.Image;
@@ -32,10 +33,13 @@ namespace EffixReportSystem.Views.Publication.Views
     public partial class NewPublicationView : UserControl
     {
         private string _tempDirectory=String.Empty;
+        private string _baseDirectory = String.Empty;
         public NewPublicationView()
         {
             InitializeComponent();
             _tempDirectory = "c:\\storage\\temp";
+            _baseDirectory = "c:\\storage";
+
         }
 
         private void ClearSearchTextBox(object sender, RoutedEventArgs e)
@@ -54,8 +58,8 @@ namespace EffixReportSystem.Views.Publication.Views
         }
         private void MakeSnaphotsButton_Click(object sender, RoutedEventArgs e)
         {
-            ClearDirectory(_tempDirectory);
-          var PointsList = new ObservableCollection<Point>();
+          ClearDirectory(_tempDirectory);
+          var pointsList = new ObservableCollection<Point>();
             var tmp =
                                this.ChildrenOfType<DockPanelSplitter>().First(item => Equals(item.Background, Brushes.Black));
             foreach (
@@ -64,18 +68,18 @@ namespace EffixReportSystem.Views.Publication.Views
                         dock => Equals(dock.Background, Brushes.Black))
                 )
             {
-                PointsList.Add(child.TransformToVisual(this.qw1).Transform(new Point(0, 0)));
+                pointsList.Add(child.TransformToVisual(this.qw1).Transform(new Point(0, 0)));
             }
 
             var image = BitmapImage2Bitmap((BitmapImage) img.Source);
-            for (int i = 0; i < PointsList.Count - 1; i++)
+            for (int i = 0; i < pointsList.Count - 1; i++)
             {
                 CropImage(image,
                           new System.Drawing.Rectangle(
-                              (int)PointsList[i].X,
-                              (int)PointsList[i].Y,
+                              (int)pointsList[i].X,
+                              (int)pointsList[i].Y,
                               (int)tmp.ActualWidth,
-                              (int)(PointsList[i + 1].Y - PointsList[i].Y)), i.ToString(CultureInfo.InvariantCulture), _tempDirectory);
+                              (int)(pointsList[i + 1].Y - pointsList[i].Y)), i.ToString(CultureInfo.InvariantCulture), _tempDirectory);
             }
         }
 
@@ -140,7 +144,26 @@ namespace EffixReportSystem.Views.Publication.Views
 
         private void DoneButton_Click(object sender, RoutedEventArgs e)
         {
+            var ctx = DataContext as NewPublicationViewModel;
+            var date = ctx.CurrentPublication.Publication_date.Value;
+            var sourceDirectory = new DirectoryInfo(_tempDirectory);
+            var destinationDirectory =
+                new DirectoryInfo(_baseDirectory + "\\" + ctx.CurrentProjectName + "\\" + date.Year + "\\" + date.Month +
+                                  "\\" + date.Day);
+            var files = sourceDirectory.GetFiles("*.*");
 
+            foreach (var fileInfo in files)
+            {
+                if(!destinationDirectory.Exists)
+                {
+                  destinationDirectory.Create();  
+                }
+              fileInfo.MoveTo(destinationDirectory+"\\"+ctx.CurrentPublication.Name+fileInfo.Name);
+              DataHelper.SaveFilesInAzureStorage(destinationDirectory + "\\" + ctx.CurrentPublication.Name + fileInfo.Name);
+            }
+            ctx.SaveCurrentPublication();
+
+            (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
         }
 
         private void UrlTextBox_TextChanged(object sender, TextChangedEventArgs e)

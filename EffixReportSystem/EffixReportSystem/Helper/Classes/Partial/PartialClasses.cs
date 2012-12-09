@@ -35,120 +35,114 @@ namespace EffixReportSystem
     {
         public string Name { get; set; }
 
-        private EF_SMI _smi;
-        private EF_Tonality _tonality;
-        private EF_Dictionary _photo;
-        private EF_Exclusivity _exclusivity;
-        private EF_Dictionary _initiated;
-        private EF_Dictionary _planed;
-        private EF_SMI_priority _priority;
-        //Tonality
-        public virtual EF_Tonality Tonality
-        {
-            get
-            {
-                _tonality = PublicationHelper.Instance.Tonalities.FirstOrDefault(item => item.Tonality_id == Tonality_id);
-                return _tonality;
-            }
-            set
-            {
-                if (Tonality == value)
-                    return;
-                _tonality = value;
-                OnPropertyChanged("Tonality");
-            }
-        }
-        public virtual EF_SMI Smi
-        {
-            get
-            {
-                _smi = PublicationHelper.Instance.Smi.FirstOrDefault(item => item.Smi_id == Smi_id);
-                return _smi;
-            }
-            set
-            {
-                if (Smi == value)
-                    return;
-                _smi = value;
-                OnPropertyChanged("Smi");
-            }
-        }
-        public virtual EF_Dictionary Photo
-        {
-            get
-            {
-                _photo = PublicationHelper.Instance.Photo.FirstOrDefault(item => item.Value == Has_photo);
-                return _photo;
-            }
-            set
-            {
-                if (Photo == value)
-                    return;
-                _photo = value;
-                OnPropertyChanged("Photo");
-            }
-        }
-        public virtual EF_Exclusivity Exclusivity
-        {
-            get
-            {
-                _exclusivity = PublicationHelper.Instance.Exclusivities.FirstOrDefault(item => item.Exclusivity_id == Exclusivity_id);
-                return _exclusivity;
-            }
-            set
-            {
-                if (Exclusivity == value)
-                    return;
-                _exclusivity = value;
-                OnPropertyChanged("Exclusivity");
-            }
-        }
-        public virtual EF_Dictionary Initiated
-        {
-            get
-            {
-                _initiated = PublicationHelper.Instance.Initiated.FirstOrDefault(item => item.Value == Is_initiated);
-                return _initiated;
-            }
-            set
-            {
-                if (Initiated == value)
-                    return;
-                _initiated = value;
-                OnPropertyChanged("Initiated");
-            }
-        }
-        public virtual EF_Dictionary Planed
-        {
-            get
-            {
-                _planed = PublicationHelper.Instance.Planed.FirstOrDefault(item => item.Value == Is_planed);
-                return _planed;
-            }
-            set
-            {
-                if (Planed == value)
-                    return;
-                _planed = value;
-                OnPropertyChanged("Planed");
-            }
-        }
+        //private EF_SMI _smi;
+        //private EF_Tonality _tonality;
+        //private EF_Photo _photo;
+        //private EF_Exclusivity _exclusivity;
+        //private EF_Initiated _initiated;
+        //private EF_Planed _planed;
+        //private EF_SMI_priority _priority;
+        ////Tonality
+        //public virtual EF_Tonality Tonality
+        //{
+        //    get
+        //    {
+        //        return _tonality;
+        //    }
+        //    set
+        //    {
+        //        if (value != null)
+        //        {
+        //            _tonality = value;
+        //            OnPropertyChanged("Tonality");
+        //        }
+        //    }
+        //}
+        //public virtual EF_SMI Smi
+        //{
+        //    get
+        //    {
+        //        return _smi;
+        //    }
+        //    set
+        //    {
+        //        if (Smi == value)
+        //            return;
+        //        _smi = value;
+        //        OnPropertyChanged("Smi");
+        //    }
+        //}
+        //public virtual EF_Photo Photo
+        //{
+        //    get
+        //    {
+        //        return _photo;
+        //    }
+        //    set
+        //    {
+        //        if (Photo == value)
+        //            return;
+        //        _photo = value;
+        //        OnPropertyChanged("Photo");
+        //    }
+        //}
+        //public virtual EF_Exclusivity Exclusivity
+        //{
+        //    get
+        //    {
+        //        return _exclusivity;
+        //    }
+        //    set
+        //    {
+        //        if (Exclusivity == value)
+        //            return;
+        //        _exclusivity = value;
+        //        OnPropertyChanged("Exclusivity");
+        //    }
+        //}
+        //public virtual EF_Initiated Initiated
+        //{
+        //    get
+        //    {
+        //        return _initiated;
+        //    }
+        //    set
+        //    {
+        //        if (Initiated == value)
+        //            return;
+        //        _initiated = value;
+        //        OnPropertyChanged("Initiated");
+        //    }
+        //}
+        //public virtual EF_Planed Planed
+        //{
+        //    get
+        //    {
+        //        return _planed;
+        //    }
+        //    set
+        //    {
+        //        if (Planed == value)
+        //            return;
+        //        _planed = value;
+        //        OnPropertyChanged("Planed");
+        //    }
+        //}
 
-        public virtual EF_SMI_priority Priority
-        {
-            get
-            {
-                _priority = PublicationHelper.Instance.Priorities.FirstOrDefault(item => item.Priority_id == Priority_id);
-                return _priority;
-            }
-            set
-            {
-                if (Priority == value)
-                    return;
-                _priority = value;
-                OnPropertyChanged("Priority");
-            }
-        }
+        //public virtual EF_SMI_priority Priority
+        //{
+        //    get
+        //    {
+        //        return _priority;
+        //    }
+        //    set
+        //    {
+        //        if (Priority == value)
+        //            return;
+        //        _priority = value;
+        //        OnPropertyChanged("Priority");
+        //    }
+        //}
     }
     public partial class EF_SMI_Type : IName
     {

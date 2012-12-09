@@ -18,6 +18,7 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using System.ComponentModel;
+using EffixReportSystem;
 
 
 namespace EffixReportSystem	
@@ -88,8 +89,8 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("Smi_id");
 		   }
 		}
-		private bool? _has_Photo;
-		public virtual bool? Has_photo
+		private int? _has_Photo;
+		public virtual int? Has_photo
 		{
 		   get
 		   {
@@ -168,8 +169,8 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("Publication_date");
 		   }
 		}
-		private bool? _is_Initiated;
-		public virtual bool? Is_initiated
+		private int? _is_Initiated;
+		public virtual int? Is_initiated
 		{
 		   get
 		   {
@@ -184,8 +185,8 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("Is_initiated");
 		   }
 		}
-		private bool? _is_Planed;
-		public virtual bool? Is_planed
+		private int? _is_Planed;
+		public virtual int? Is_planed
 		{
 		   get
 		   {
@@ -358,6 +359,134 @@ namespace EffixReportSystem
 		 
 		  _p_Day = value;
 		  this.OnPropertyChanged("P_day");
+		   }
+		}
+		private EF_Exclusivity _eF_Exclusivity;
+		public virtual EF_Exclusivity EF_Exclusivity
+		{
+		   get
+		   {
+		       return this._eF_Exclusivity;
+		   }
+		   set
+		   {
+		       if( EF_Exclusivity == value )
+		  return;
+		 
+		  _eF_Exclusivity = value;
+		  this.OnPropertyChanged("EF_Exclusivity");
+		   }
+		}
+		private EF_Tonality _eF_Tonality;
+		public virtual EF_Tonality EF_Tonality
+		{
+		   get
+		   {
+		       return this._eF_Tonality;
+		   }
+		   set
+		   {
+		       if( EF_Tonality == value )
+		  return;
+		 
+		  _eF_Tonality = value;
+		  this.OnPropertyChanged("EF_Tonality");
+		   }
+		}
+		private EF_SMI_priority _eF_SMI_Priority;
+		public virtual EF_SMI_priority EF_SMI_priority
+		{
+		   get
+		   {
+		       return this._eF_SMI_Priority;
+		   }
+		   set
+		   {
+		       if( EF_SMI_priority == value )
+		  return;
+		 
+		  _eF_SMI_Priority = value;
+		  this.OnPropertyChanged("EF_SMI_priority");
+		   }
+		}
+		private EF_Photo _eF_Photo;
+		public virtual EF_Photo EF_Photo
+		{
+		   get
+		   {
+		       return this._eF_Photo;
+		   }
+		   set
+		   {
+		       if( EF_Photo == value )
+		  return;
+		 
+		  _eF_Photo = value;
+		  this.OnPropertyChanged("EF_Photo");
+		   }
+		}
+		private EF_Planed _eF_Planed;
+		public virtual EF_Planed EF_Planed
+		{
+		   get
+		   {
+		       return this._eF_Planed;
+		   }
+		   set
+		   {
+		       if( EF_Planed == value )
+		  return;
+		 
+		  _eF_Planed = value;
+		  this.OnPropertyChanged("EF_Planed");
+		   }
+		}
+		private EF_Initiated _eF_Initiated;
+		public virtual EF_Initiated EF_Initiated
+		{
+		   get
+		   {
+		       return this._eF_Initiated;
+		   }
+		   set
+		   {
+		       if( EF_Initiated == value )
+		  return;
+		 
+		  _eF_Initiated = value;
+		  this.OnPropertyChanged("EF_Initiated");
+		   }
+		}
+		private EF_Project _eF_Project;
+		public virtual EF_Project EF_Project
+		{
+		   get
+		   {
+		       return this._eF_Project;
+		   }
+		   set
+		   {
+		       if( EF_Project == value )
+		  return;
+		 
+		  _eF_Project = value;
+		  this.OnPropertyChanged("EF_Project");
+		   }
+		}
+		private EF_SMI _eF_SMI;
+		public virtual EF_SMI EF_SMI
+		{
+		   get
+		   {
+		       return this._eF_SMI;
+		   }
+		   set
+		   {
+		       if( EF_SMI == value )
+		  return;
+		 
+		  _eF_SMI = value;
+		  this.OnPropertyChanged("EF_SMI");
 		   }
 		}
 		public event PropertyChangedEventHandler PropertyChanged;

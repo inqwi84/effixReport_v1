@@ -18,6 +18,7 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using System.ComponentModel;
+using EffixReportSystem;
 
 
 namespace EffixReportSystem	
@@ -118,6 +119,78 @@ namespace EffixReportSystem
 		 
 		  _smi_Edition_Descr = value;
 		  this.OnPropertyChanged("Smi_edition_descr");
+		   }
+		}
+		private int? _smi_Url;
+		public virtual int? Smi_url
+		{
+		   get
+		   {
+		       return this._smi_Url;
+		   }
+		   set
+		   {
+		       if( Smi_url == value )
+		  return;
+		 
+		  _smi_Url = value;
+		  this.OnPropertyChanged("Smi_url");
+		   }
+		}
+		private int? _smi_Edition_Id;
+		public virtual int? Smi_edition_id
+		{
+		   get
+		   {
+		       return this._smi_Edition_Id;
+		   }
+		   set
+		   {
+		       if( Smi_edition_id == value )
+		  return;
+		 
+		  _smi_Edition_Id = value;
+		  this.OnPropertyChanged("Smi_edition_id");
+		   }
+		}
+		private EF_Edition _eF_Edition;
+		public virtual EF_Edition EF_Edition
+		{
+		   get
+		   {
+		       return this._eF_Edition;
+		   }
+		   set
+		   {
+		       if( EF_Edition == value )
+		  return;
+		 
+		  _eF_Edition = value;
+		  this.OnPropertyChanged("EF_Edition");
+		   }
+		}
+		private EF_SMI_Type _eF_SMI_Type;
+		public virtual EF_SMI_Type EF_SMI_Type
+		{
+		   get
+		   {
+		       return this._eF_SMI_Type;
+		   }
+		   set
+		   {
+		       if( EF_SMI_Type == value )
+		  return;
+		 
+		  _eF_SMI_Type = value;
+		  this.OnPropertyChanged("EF_SMI_Type");
+		   }
+		}
+		private IList<EF_Publication> _eF_Publications = new List<EF_Publication>();
+		public virtual IList<EF_Publication> EF_Publications
+		{
+		   get
+		   {
+		       return this._eF_Publications;
 		   }
 		}
 		public event PropertyChangedEventHandler PropertyChanged;

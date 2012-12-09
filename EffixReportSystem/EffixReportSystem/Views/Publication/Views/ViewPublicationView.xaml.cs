@@ -49,17 +49,23 @@ namespace EffixReportSystem.Views.Publication.Views
         {
             var ctx = DataContext as ViewPublicationViewModel;
             (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[1];
-            ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as EditPublicationViewModel).
-                CurrentPublication = ctx.CurrentPublication;
+            ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as EditPublicationViewModel).SetCurrentPublication(ctx.CurrentPublication.Publication_id);
         }
 
         private void NewPublicationButton_Click(object sender, RoutedEventArgs e)
         {
             var ctx = DataContext as ViewPublicationViewModel;
             (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[2];
-            ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as NewPublicationViewModel).
-                CurrentPublication = new EF_Publication();
-       }
+            var newPublicationViewModel=((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as NewPublicationViewModel);
+            newPublicationViewModel.CurrentPublication = new EF_Publication()
+                                                             {
+                                                                 Publication_date = DateTime.Now,
+                                                                 Project_id = ctx.CurrentProject.Project_id,
+                                                             };
+            newPublicationViewModel.CurrentProjectName = ctx.CurrentProjectName;
+            newPublicationViewModel.CurrentProject = ctx.CurrentProject;
+
+        }
 
         private void RemovePublicationButton_Click(object sender, RoutedEventArgs e)
         {
@@ -78,21 +84,29 @@ namespace EffixReportSystem.Views.Publication.Views
                     var project = selectedItem as EF_Project;
                     if(project!=null)
                     {
+                        ctx.CurrentProjectName = project.Project_descr;
+                        ctx.CurrentProject = project;
                         ctx.PublicationList =new ObservableCollection<EF_Publication>(ctx.AllPublications.Where(item => item.Project_id == project.Project_id));
                     }
                     var year = selectedItem as Year;
                     if (year != null)
                     {
+                        ctx.CurrentProjectName = year.Parent.Project_descr;
+                        ctx.CurrentProject = year.Parent;
                         ctx.PublicationList = new ObservableCollection<EF_Publication>(ctx.AllPublications.Where(item => item.P_year == year.Name&&item.Project_id==year.Parent.Project_id));
                     }
                     var month = selectedItem as Month;
                     if (month != null)
                     {
+                        ctx.CurrentProject = month.Parent.Parent;
+                        ctx.CurrentProjectName = month.Parent.Parent.Project_descr;
                         ctx.PublicationList = new ObservableCollection<EF_Publication>(ctx.AllPublications.Where(item => item.P_month == month.Name && item.P_year == month.Parent.Name && item.Project_id == month.Parent.Parent.Project_id));
                     }
                     var day = selectedItem as Day;
                     if (day != null)
                     {
+                        ctx.CurrentProject = day.Parent.Parent.Parent;
+                        ctx.CurrentProjectName = day.Parent.Parent.Parent.Project_descr;
                         ctx.PublicationList = new ObservableCollection<EF_Publication>(ctx.AllPublications.Where(item =>item.P_day==day.Name&& item.P_month == day.Parent.Name && item.P_year == day.Parent.Parent.Name && item.Project_id == day.Parent.Parent.Parent.Project_id));
                     }
                 }

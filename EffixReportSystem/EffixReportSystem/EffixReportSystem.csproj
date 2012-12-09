@@ -46,6 +46,28 @@
     <Reference Include="Microsoft.Practices.Unity">
       <HintPath>C:\Project\AMS\LOCALIZATION_FINAL\ams_win_client\AMSClient\Assemblies\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAzure.CloudDrive, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Projects\ReportMVVM\ReportApplicationMVVM\Libraries\Microsoft.WindowsAzure.CloudDrive.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Configuration">
+      <HintPath>..\..\..\Projects\ReportMVVM\ReportApplicationMVVM\Libraries\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Projects\ReportMVVM\ReportApplicationMVVM\Libraries\Microsoft.WindowsAzure.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Projects\ReportMVVM\ReportApplicationMVVM\Libraries\Microsoft.WindowsAzure.ServiceRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage">
+      <HintPath>..\..\..\Projects\ReportMVVM\ReportApplicationMVVM\Libraries\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Projects\ReportMVVM\ReportApplicationMVVM\Libraries\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -84,10 +106,19 @@
     <Compile Include="Helper\Classes\ObservableObject.cs" />
     <Compile Include="Helper\Classes\Partial\PartialClasses.cs" />
     <Compile Include="Helper\Interfaces\IPageViewModel.cs" />
-    <Compile Include="Model\EF_Dictionary.generated.cs">
+    <Compile Include="Model\EF_Edition.generated.cs">
       <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Model\EF_Exclusivity.generated.cs">
+      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF_Initiated.generated.cs">
+      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF_Photo.generated.cs">
+      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF_Planed.generated.cs">
       <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Model\EF_Project.generated.cs">

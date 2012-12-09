@@ -124,11 +124,35 @@ namespace EffixReportSystem
 	    	}
 		}
 		
-		public IQueryable<EF_Dictionary> EF_Dictionaries 
+		public IQueryable<EF_Planed> EF_Planeds 
 		{
 	    	get
 	    	{
-	        	return this.GetAll<EF_Dictionary>();
+	        	return this.GetAll<EF_Planed>();
+	    	}
+		}
+		
+		public IQueryable<EF_Photo> EF_Photos 
+		{
+	    	get
+	    	{
+	        	return this.GetAll<EF_Photo>();
+	    	}
+		}
+		
+		public IQueryable<EF_Initiated> EF_Initiateds 
+		{
+	    	get
+	    	{
+	        	return this.GetAll<EF_Initiated>();
+	    	}
+		}
+		
+		public IQueryable<EF_Edition> EF_Editions 
+		{
+	    	get
+	    	{
+	        	return this.GetAll<EF_Edition>();
 	    	}
 		}
 		
@@ -188,7 +212,22 @@ namespace EffixReportSystem
 			get;
 		}
 
-		IQueryable<EF_Dictionary> EF_Dictionaries 
+		IQueryable<EF_Planed> EF_Planeds 
+		{ 
+			get;
+		}
+
+		IQueryable<EF_Photo> EF_Photos 
+		{ 
+			get;
+		}
+
+		IQueryable<EF_Initiated> EF_Initiateds 
+		{ 
+			get;
+		}
+
+		IQueryable<EF_Edition> EF_Editions 
 		{ 
 			get;
 		}

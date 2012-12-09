@@ -330,11 +330,14 @@
         </DockPanel>
 
         <!--<NotificationSystemMVVM:PersonDetailsViewControl2 x:Name="ViewDetails"  Grid.Column="4" Grid.Row="1"></NotificationSystemMVVM:PersonDetailsViewControl2>-->
-        <Grid x:Name="ViewDetails"  Grid.Column="4" Grid.Row="1" Margin="10">
-            <StackPanel DataContext="{Binding}">
+        <Grid x:Name="ViewDetails"  Grid.Column="2" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel>
                 <DockPanel x:Name="SMIName" LastChildFill="False" Margin="0,5,0,5">
-                    <TextBlock HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наименование издания</TextBlock>
-                    <ComboBox SelectedValue="{Binding CurrentPublication.Smi, Mode=TwoWay}" ItemsSource="{Binding Smi}" DisplayMemberPath="Smi_name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0"  Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наименование издания</TextBlock>
+                    <ComboBox SelectedValue="{Binding CurrentPublication.EF_SMI, Mode=TwoWay}" ItemsSource="{Binding Smi}" DisplayMemberPath="Smi_name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
                 </DockPanel>
                 <DockPanel x:Name="Date" LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" Text="Дата публикации" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}"></TextBlock>
@@ -342,27 +345,27 @@
                 </DockPanel>
                 <DockPanel x:Name="Tonality"  LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Тональность</TextBlock>
-                    <ComboBox SelectedValue="{Binding CurrentPublication.Tonality}" ItemsSource="{Binding Tonalities}" DisplayMemberPath="Name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
+                    <ComboBox SelectedValue="{Binding CurrentPublication.EF_Tonality}" ItemsSource="{Binding Tonalities}" DisplayMemberPath="Name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
                 </DockPanel>
                 <DockPanel x:Name="Photo"  LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock DockPanel.Dock="Left" Margin="5,0,30,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наличие фотографии</TextBlock>
-                    <ComboBox SelectedValue="{Binding CurrentPublication.Photo}" ItemsSource="{Binding Photo}" DisplayMemberPath="Value" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
+                    <ComboBox SelectedValue="{Binding CurrentPublication.EF_Photo}" ItemsSource="{Binding Photo}" DisplayMemberPath="HasPhoto" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
                 </DockPanel>
                 <DockPanel x:Name="Exclusive"  LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Эксклюзивность</TextBlock>
-                    <ComboBox SelectedValue="{Binding CurrentPublication.Exclusivity}" ItemsSource="{Binding Exclusivities}" DisplayMemberPath="Name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
+                    <ComboBox SelectedValue="{Binding CurrentPublication.EF_Exclusivity}" ItemsSource="{Binding Exclusivities}" DisplayMemberPath="Name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
                 </DockPanel>
                 <DockPanel x:Name="Initiated"  LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Margin="5,0,0,0">Инициирована</TextBlock>
-                    <ComboBox SelectedValue="{Binding CurrentPublication.Initiated}" ItemsSource="{Binding Initiated}" DisplayMemberPath="Value" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
+                    <ComboBox SelectedValue="{Binding CurrentPublication.EF_Initiated}" ItemsSource="{Binding Initiated}" DisplayMemberPath="IsInitiated" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
                 </DockPanel>
                 <DockPanel x:Name="Planed" LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock  DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Запланирована</TextBlock>
-                    <ComboBox SelectedValue="{Binding CurrentPublication.Planed}" ItemsSource="{Binding Planed}" DisplayMemberPath="Value" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
+                    <ComboBox SelectedValue="{Binding CurrentPublication.EF_Planed}" ItemsSource="{Binding Planed}" DisplayMemberPath="IsPlaned" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
                 </DockPanel>
                 <DockPanel x:Name="Priority"  LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Приоритет</TextBlock>
-                    <ComboBox SelectedValue="{Binding CurrentPublication.Priority}" ItemsSource="{Binding Priorities}" DisplayMemberPath="Priority_name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
+                    <ComboBox SelectedValue="{Binding CurrentPublication.EF_SMI_priority}" ItemsSource="{Binding Priorities}" DisplayMemberPath="Priority_name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
                 </DockPanel>
             </StackPanel>
         </Grid>

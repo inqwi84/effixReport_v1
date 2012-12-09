@@ -23,78 +23,62 @@ using EffixReportSystem;
 
 namespace EffixReportSystem	
 {
-	public partial class EF_Project : INotifyPropertyChanged
+	public partial class EF_Edition : INotifyPropertyChanged
 	{
-		private long _project_Id;
-		public virtual long Project_id
+		private int _iD;
+		public virtual int ID
 		{
 		   get
 		   {
-		       return this._project_Id;
+		       return this._iD;
 		   }
 		   set
 		   {
-		       if( Project_id == value )
+		       if( ID == value )
 		  return;
 		 
-		  _project_Id = value;
-		  this.OnPropertyChanged("Project_id");
+		  _iD = value;
+		  this.OnPropertyChanged("ID");
 		   }
 		}
-		private string _project_Name;
-		public virtual string Project_name
+		private string _edition_Value;
+		public virtual string Edition_value
 		{
 		   get
 		   {
-		       return this._project_Name;
+		       return this._edition_Value;
 		   }
 		   set
 		   {
-		       if( Project_name == value )
+		       if( Edition_value == value )
 		  return;
 		 
-		  _project_Name = value;
-		  this.OnPropertyChanged("Project_name");
+		  _edition_Value = value;
+		  this.OnPropertyChanged("Edition_value");
 		   }
 		}
-		private long? _user_Id;
-		public virtual long? User_id
+		private string _edition_Name;
+		public virtual string Edition_name
 		{
 		   get
 		   {
-		       return this._user_Id;
+		       return this._edition_Name;
 		   }
 		   set
 		   {
-		       if( User_id == value )
+		       if( Edition_name == value )
 		  return;
 		 
-		  _user_Id = value;
-		  this.OnPropertyChanged("User_id");
+		  _edition_Name = value;
+		  this.OnPropertyChanged("Edition_name");
 		   }
 		}
-		private string _project_Descr;
-		public virtual string Project_descr
+		private IList<EF_SMI> _eF_SMIs = new List<EF_SMI>();
+		public virtual IList<EF_SMI> EF_SMIs
 		{
 		   get
 		   {
-		       return this._project_Descr;
-		   }
-		   set
-		   {
-		       if( Project_descr == value )
-		  return;
-		 
-		  _project_Descr = value;
-		  this.OnPropertyChanged("Project_descr");
-		   }
-		}
-		private IList<EF_Publication> _eF_Publications = new List<EF_Publication>();
-		public virtual IList<EF_Publication> EF_Publications
-		{
-		   get
-		   {
-		       return this._eF_Publications;
+		       return this._eF_SMIs;
 		   }
 		}
 		public event PropertyChangedEventHandler PropertyChanged;

@@ -12,6 +12,33 @@ namespace EffixReportSystem.Views.Publication.ViewModels
     {
         private bool _canEdit;
 
+        private string _currentProjectName;
+        public string CurrentProjectName
+        {
+            get { return _currentProjectName; }
+            set
+            {
+                if (_currentProjectName == value)
+                    return;
+
+                _currentProjectName = value;
+                this.OnPropertyChanged("CurrentProjectName");
+            }
+        }
+
+        private EF_Project _currentProject;
+        public EF_Project CurrentProject
+        {
+            get { return _currentProject; }
+            set
+            {
+                if (_currentProject == value)
+                    return;
+
+                _currentProject = value;
+                this.OnPropertyChanged("CurrentProject");
+            }
+        }
 
         public PublicationHelper PublicationHelper;
         public string Name { get; set; }

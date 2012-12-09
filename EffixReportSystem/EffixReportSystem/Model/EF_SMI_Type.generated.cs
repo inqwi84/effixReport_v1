@@ -18,6 +18,7 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using System.ComponentModel;
+using EffixReportSystem;
 
 
 namespace EffixReportSystem	
@@ -70,6 +71,14 @@ namespace EffixReportSystem
 		 
 		  _smi_Type_Descr = value;
 		  this.OnPropertyChanged("Smi_type_descr");
+		   }
+		}
+		private IList<EF_SMI> _eF_SMIs = new List<EF_SMI>();
+		public virtual IList<EF_SMI> EF_SMIs
+		{
+		   get
+		   {
+		       return this._eF_SMIs;
 		   }
 		}
 		public event PropertyChangedEventHandler PropertyChanged;
