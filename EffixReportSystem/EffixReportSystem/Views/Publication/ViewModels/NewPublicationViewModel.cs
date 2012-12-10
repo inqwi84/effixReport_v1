@@ -62,6 +62,11 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                 CurrentPublication.P_year = CurrentPublication.Publication_date.Value.Year.ToString();
                 CurrentPublication.P_month = CurrentPublication.Publication_date.Value.Month.ToString();
                 CurrentPublication.P_day = CurrentPublication.Publication_date.Value.Day.ToString();
+            CurrentPublication.EF_Project =
+                _model.EF_Projects.FirstOrDefault(item => item.Project_id == CurrentPublication.Project_id);
+            CurrentPublication.Name = CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') + "_" +
+                                      CurrentPublication.P_year + "_" + CurrentPublication.P_month + "_" +
+                                      CurrentPublication.P_day;
                 _model.Add(CurrentPublication);
                 _model.SaveChanges();
         }

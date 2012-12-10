@@ -146,6 +146,7 @@ namespace EffixReportSystem.Views.Publication.Views
         {
             var ctx = DataContext as NewPublicationViewModel;
             var date = ctx.CurrentPublication.Publication_date.Value;
+            ctx.SaveCurrentPublication();
             var sourceDirectory = new DirectoryInfo(_tempDirectory);
             var destinationDirectory =
                 new DirectoryInfo(_baseDirectory + "\\" + ctx.CurrentProjectName + "\\" + date.Year + "\\" + date.Month +
@@ -158,11 +159,9 @@ namespace EffixReportSystem.Views.Publication.Views
                 {
                   destinationDirectory.Create();  
                 }
-              fileInfo.MoveTo(destinationDirectory+"\\"+ctx.CurrentPublication.Name+fileInfo.Name);
-              DataHelper.SaveFilesInAzureStorage(destinationDirectory + "\\" + ctx.CurrentPublication.Name + fileInfo.Name);
+              fileInfo.MoveTo(destinationDirectory+"\\"+ctx.CurrentPublication.EF_SMI.Smi_descr.Replace('.','_')+fileInfo.Name);
+              DataHelper.SaveFilesInAzureStorage(destinationDirectory + "\\" + ctx.CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') + fileInfo.Name);
             }
-            ctx.SaveCurrentPublication();
-
             (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
         }
 
