@@ -37,6 +37,7 @@ namespace EffixReportSystem.Views.Publication.Views
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             var ctx = DataContext as EditPublicationViewModel;
+            ctx.RestoreDefaultVlues();
             (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
         }
 
