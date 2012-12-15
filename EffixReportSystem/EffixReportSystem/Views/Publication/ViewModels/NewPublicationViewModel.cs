@@ -67,6 +67,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
             CurrentPublication.Name = CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') + "_" +
                                       CurrentPublication.P_year + "_" + CurrentPublication.P_month + "_" +
                                       CurrentPublication.P_day;
+            CurrentPublication.Project_name = CurrentPublication.EF_Project.Project_descr;
                 _model.Add(CurrentPublication);
                 _model.SaveChanges();
         }

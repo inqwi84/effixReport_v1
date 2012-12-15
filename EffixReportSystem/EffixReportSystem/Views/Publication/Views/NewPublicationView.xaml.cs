@@ -59,6 +59,8 @@ namespace EffixReportSystem.Views.Publication.Views
         }
         private void MakeSnaphotsButton_Click(object sender, RoutedEventArgs e)
         {
+            var ctx = DataContext as NewPublicationViewModel;
+            ctx.ImageTileList=new ObservableCollection<DataHelper.ImageTile>();
           ClearDirectory(_tempDirectory);
           var pointsList = new ObservableCollection<Point>();
             var tmp =
