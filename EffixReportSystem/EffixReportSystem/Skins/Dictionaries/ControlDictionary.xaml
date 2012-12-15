@@ -1033,105 +1033,7 @@
     </Style>
     <!-- Общий стиль горизонтального скролбара -->
 
-    <Style x:Key="stlPositionListBoxItem" TargetType="{x:Type telerik:RadListBoxItem}">
-        <Setter Property="Padding" Value="3"/>
-        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="VerticalContentAlignment" Value="Top"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="telerik:RadDragAndDropManager.AllowDrag" Value="True" />
-        <Setter Property="telerik:DragDropManager.AllowDrag" Value="True"/>
-        <Setter Property="telerik:DragDropManager.AllowCapturedDrag" Value="True" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type telerik:RadListBoxItem}">
-                    <Grid Height="60" VerticalAlignment="Top" Margin="0,0,20,0" Cursor="Hand" SnapsToDevicePixels="True">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel x:Name="dataField" Grid.Column="1" Margin="20,0,0,2">
-                            <Grid>
-                                <Border CornerRadius="0" Height="58" BorderThickness="0,0,0,1" BorderBrush="#FFD9DBDD" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2" Background="#00000000"/>
-                                <Border x:Name="Visual" Height="55" VerticalAlignment="Top" BorderThickness="1" Grid.ColumnSpan="2" Grid.RowSpan="2" CornerRadius="5" Background="{x:Null}">
-                                    <Grid Name="grid">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                            <RowDefinition/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel  x:Name="stackpanel" Margin="20,4,20,0" Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Top">
-                                            <StackPanel.ToolTip>
-                                                <TextBlock>
-                                                        <TextBlock.Text>
-                                                       <MultiBinding StringFormat="{}{0}{1}">
-                                                        <MultiBinding.Bindings>
-                                                            <Binding Path="DeptPath"></Binding>
-                                                            <Binding Path="TrimmedDepartment_name"></Binding>
-                                                        </MultiBinding.Bindings>
-                                                    </MultiBinding>
-                                                        </TextBlock.Text>
-                                                </TextBlock>
-                                            </StackPanel.ToolTip>
-                                            <TextBlock Name="fullBlock" TextTrimming="WordEllipsis" Text="{Binding DeptPath}" FontFamily="{DynamicResource ffBaseFont}" FontSize="12" Foreground="#FF82878E">
-                                        <TextBlock.MaxWidth>
-                                           <MultiBinding Converter="{StaticResource PathConverter}">
-                                               <MultiBinding.Bindings>
-                                                   <Binding ElementName="grid" Path="ActualWidth"></Binding>
-                                                   <Binding ElementName="lastBlock" Path="ActualWidth"></Binding>
-                                                   <Binding ElementName="stackpanel" Path="Margin"></Binding>
-                                               </MultiBinding.Bindings>
-                                           </MultiBinding>
-                                        </TextBlock.MaxWidth>
-                                            </TextBlock>
-                                            <TextBlock Name="lastBlock" Text="{Binding TrimmedDepartment_name}" FontFamily="{DynamicResource ffBaseFont}" FontSize="12" Foreground="#FF82878E"></TextBlock>
-                                        </StackPanel>
-                                        <TextBlock x:Name="textBlock1" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="12" Foreground="{DynamicResource cFontColor}" 
-												Margin="20,0" Text="{Binding position_name}" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
-                                        <StackPanel Orientation="Horizontal" Margin="20,0" VerticalAlignment="Bottom">
-                                            <TextBlock x:Name="textBlock2" FontFamily="{DynamicResource ffAlternativeFontMedium}" FontSize="16" Foreground="{DynamicResource cFontColor}" 
-													VerticalAlignment="Stretch" Text="{Binding lastname}" Margin="0,0,2,0" />
-                                            <TextBlock x:Name="textBlock3" FontFamily="{DynamicResource ffAlternativeFontMedium}" FontSize="16" Foreground="{DynamicResource cFontColor}" 
-													VerticalAlignment="Stretch" Text="{Binding firstname}" Margin="0,0,2,0" />
-                                            <TextBlock x:Name="textBlock4" FontFamily="{DynamicResource ffAlternativeFontMedium}" FontSize="16" Foreground="{DynamicResource cFontColor}" 
-													VerticalAlignment="Stretch" Text="{Binding midname}" />
-                                        </StackPanel>
-                                    </Grid>
-                                </Border>
-                            </Grid>
-                        </StackPanel>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" TargetName="Visual" Value="{DynamicResource cRadListBoxBorderOver}"/>
-                            <Setter Property="Background" TargetName="Visual" Value="{DynamicResource cRadListBoxItemBackOver}"/>
-                            <Setter Property="Foreground" TargetName="lastBlock" Value="{DynamicResource cListBoxContentOver}"/>
-                            <Setter Property="Foreground" TargetName="fullBlock" Value="{DynamicResource cListBoxContentOver}"/>
-                            <Setter Property="Foreground" TargetName="textBlock1" Value="{DynamicResource cListBoxContentOver}"/>
-                            <Setter Property="Foreground" TargetName="textBlock2" Value="{DynamicResource cListBoxContentOver}"/>
-                            <Setter Property="Foreground" TargetName="textBlock3" Value="{DynamicResource cListBoxContentOver}"/>
-                            <Setter Property="Foreground" TargetName="textBlock4" Value="{DynamicResource cListBoxContentOver}"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" TargetName="Visual" Value="{DynamicResource cRadListBoxBackActive}"/>
-                            <Setter Property="BorderBrush" TargetName="Visual" Value="{DynamicResource cRadListBoxBorderActive}"/>
-                            <Setter Property="Foreground" TargetName="lastBlock" Value="{DynamicResource cListBoxContentActive}"/>
-                            <Setter Property="Foreground" TargetName="fullBlock" Value="{DynamicResource cListBoxContentActive}"/>
-                            <Setter Property="Foreground" TargetName="textBlock1" Value="{DynamicResource cListBoxContentActive}"/>
-                            <Setter Property="Foreground" TargetName="textBlock2" Value="{DynamicResource cListBoxContentActive}"/>
-                            <Setter Property="Foreground" TargetName="textBlock3" Value="{DynamicResource cListBoxContentActive}"/>
-                            <Setter Property="Foreground" TargetName="textBlock4" Value="{DynamicResource cListBoxContentActive}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+
     <!-- EndRegion -->
     <!-- Средняя кнопка меню -->
     <Style x:Key="stlMenuToggleButton" TargetType="{x:Type RadioButton}">
@@ -2328,6 +2230,78 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <!-- RadListBoxItem для отображения должностей и контактов (Employment)-->
+    <Style x:Key="stlPositionListBoxItem" TargetType="{x:Type telerik:RadListBoxItem}">
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="telerik:RadDragAndDropManager.AllowDrag" Value="False" />
+        <Setter Property="telerik:DragDropManager.AllowDrag" Value="False"/>
+        <Setter Property="telerik:DragDropManager.AllowCapturedDrag" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type telerik:RadListBoxItem}">
+                    <Grid Height="60" VerticalAlignment="Top" Margin="0,0,20,0" Cursor="Hand" SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel x:Name="dataField" Grid.Column="1" Margin="20,0,0,2">
+                            <Grid>
+                                <Border CornerRadius="0" Height="58" BorderThickness="0,0,0,1" BorderBrush="#FFD9DBDD" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2" Background="#00000000"/>
+                                <Border x:Name="Visual" Height="55" VerticalAlignment="Top" BorderThickness="1" Grid.ColumnSpan="2" Grid.RowSpan="2" CornerRadius="5" Background="{x:Null}">
+                                    <Grid Name="grid">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel  x:Name="stackpanel" Margin="20,4,0,0" Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Top">
+                                            <!--<StackPanel.ToolTip>
+                                                <TextBlock Text="{Binding Publication_name}" ></TextBlock>
+                                            </StackPanel.ToolTip>-->
+                                         
+                                            <TextBlock Name="fullBlock" TextTrimming="WordEllipsis" Text="{Binding Publication_date}" FontFamily="{DynamicResource ffBaseFont}" FontSize="12" Foreground="#FF82878E"></TextBlock>
+                                        </StackPanel>
+                                        <TextBlock Name="firstBlock" Margin="20,5" TextTrimming="WordEllipsis" Text="{Binding Publication_name}" FontFamily="{DynamicResource ffBaseFont}" FontWeight="Bold" VerticalAlignment="Top" FontSize="12" Foreground="#FF82878E"></TextBlock>
+                                        <TextBlock x:Name="textBlock1" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="12" Foreground="{DynamicResource cFontColor}" 
+												Margin="20,5" Text="{Binding Project_name}" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Right" />
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="Visual" Value="{DynamicResource cRadListBoxBorderOver}"/>
+                            <Setter Property="Background" TargetName="Visual" Value="{DynamicResource cRadListBoxItemBackOver}"/>
+                            <Setter Property="Foreground" TargetName="firstBlock" Value="{DynamicResource cListBoxContentOver}"/>
+                            <Setter Property="Foreground" TargetName="fullBlock" Value="{DynamicResource cListBoxContentOver}"/>
+                            <Setter Property="Foreground" TargetName="textBlock1" Value="{DynamicResource cListBoxContentOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" TargetName="Visual" Value="{DynamicResource cRadListBoxBackActive}"/>
+                            <Setter Property="BorderBrush" TargetName="Visual" Value="{DynamicResource cRadListBoxBorderActive}"/>
+                            <Setter Property="Foreground" TargetName="firstBlock" Value="{DynamicResource cListBoxContentOver}"/>
+                            <Setter Property="Foreground" TargetName="fullBlock" Value="{DynamicResource cListBoxContentActive}"/>
+
+                            <Setter Property="Foreground" TargetName="textBlock1" Value="{DynamicResource cListBoxContentActive}"/>
+
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- EndRegion -->
+
 
 
 </ResourceDictionary>

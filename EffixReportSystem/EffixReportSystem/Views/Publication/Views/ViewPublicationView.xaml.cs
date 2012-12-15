@@ -29,7 +29,8 @@ namespace EffixReportSystem.Views.Publication.Views
 
         private void RadWatermarkTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
+            var ctx = DataContext as ViewPublicationViewModel;
+            ctx.FilterString = (sender as TextBox).Text;
         }
 
         private void ClearSearchTextBox(object sender, RoutedEventArgs e)
@@ -86,6 +87,10 @@ namespace EffixReportSystem.Views.Publication.Views
                     {
                         ctx.CurrentProjectName = project.Project_descr;
                         ctx.CurrentProject = project;
+                        ctx.CurrentYear = null;
+                        ctx.CurrentMonth = null;
+                        ctx.CurrentDay = null;
+                        ctx.CurrentMode=ViewPublicationViewModel.FilterMode.ProjectMode;
                         ctx.PublicationList =new ObservableCollection<EF_Publication>(ctx.AllPublications.Where(item => item.Project_id == project.Project_id));
                     }
                     var year = selectedItem as Year;
@@ -93,34 +98,36 @@ namespace EffixReportSystem.Views.Publication.Views
                     {
                         ctx.CurrentProjectName = year.Parent.Project_descr;
                         ctx.CurrentProject = year.Parent;
+                        ctx.CurrentYear = year;
+                        ctx.CurrentMonth = null;
+                        ctx.CurrentDay = null;
+                        ctx.CurrentMode = ViewPublicationViewModel.FilterMode.YearMode;
                         ctx.PublicationList = new ObservableCollection<EF_Publication>(ctx.AllPublications.Where(item => item.P_year == year.Name&&item.Project_id==year.Parent.Project_id));
                     }
                     var month = selectedItem as Month;
                     if (month != null)
                     {
                         ctx.CurrentProject = month.Parent.Parent;
+                        ctx.CurrentYear = month.Parent;
+                        ctx.CurrentMonth = month;
+                        ctx.CurrentDay = null;
                         ctx.CurrentProjectName = month.Parent.Parent.Project_descr;
+                        ctx.CurrentMode = ViewPublicationViewModel.FilterMode.MonthMode;
                         ctx.PublicationList = new ObservableCollection<EF_Publication>(ctx.AllPublications.Where(item => item.P_month == month.Name && item.P_year == month.Parent.Name && item.Project_id == month.Parent.Parent.Project_id));
                     }
                     var day = selectedItem as Day;
                     if (day != null)
                     {
                         ctx.CurrentProject = day.Parent.Parent.Parent;
+                        ctx.CurrentDay = day;
+                        ctx.CurrentMonth = day.Parent;
+                        ctx.CurrentYear = day.Parent.Parent;
                         ctx.CurrentProjectName = day.Parent.Parent.Parent.Project_descr;
+                        ctx.CurrentMode = ViewPublicationViewModel.FilterMode.DayMode;
                         ctx.PublicationList = new ObservableCollection<EF_Publication>(ctx.AllPublications.Where(item =>item.P_day==day.Name&& item.P_month == day.Parent.Name && item.P_year == day.Parent.Parent.Name && item.Project_id == day.Parent.Parent.Parent.Project_id));
                     }
                 }
             }
-        }
-
-        private void ComboBox_DropDownOpened(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

@@ -64,10 +64,12 @@
         </telerik:RadTreeView>
         <telerik:RadListBox Name="PositionListBox"
                             Grid.Row="1" 
+                            Style="{StaticResource stlRadListBox}"
                             Grid.Column="2"
                             ItemsSource="{Binding PublicationList, Mode=TwoWay, IsAsync=True}"
-                            SelectedItem="{Binding CurrentPublication}"
-                            SelectionChanged="PublicationListBox_SelectionChanged">
+                            SelectionChanged="PublicationListBox_SelectionChanged"
+                            ItemContainerStyle="{StaticResource stlPositionListBoxItem}">
+            
             <telerik:RadListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="{Binding ElementName=PositionListBox,Path=ActualWidth}">

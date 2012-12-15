@@ -33,6 +33,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
             }
         }
 
+
         public List<EF_SMI> Smi { get; set; }
         public List<EF_Tonality> Tonalities { get; set; }
         public List<EF_SMI_Type> SmiTypes { get; set; }
@@ -68,6 +69,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                                       CurrentPublication.P_year + "_" + CurrentPublication.P_month + "_" +
                                       CurrentPublication.P_day;
             CurrentPublication.Project_name = CurrentPublication.EF_Project.Project_descr;
+            CurrentPublication.Publication_name = CurrentPublication.EF_SMI.Smi_descr;
                 _model.Add(CurrentPublication);
                 _model.SaveChanges();
         }

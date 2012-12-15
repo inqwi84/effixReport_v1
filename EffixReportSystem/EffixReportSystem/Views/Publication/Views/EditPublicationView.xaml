@@ -6,13 +6,15 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" mc:Ignorable="d">
     <UserControl.Resources>
         <DataTemplate x:Key="headerTemplate">
-            <TextBlock Text="{Binding ImageName}"></TextBlock>
+            <TextBlock Text="{Binding ImageName}" ></TextBlock>
         </DataTemplate>
         <DataTemplate x:Key="contentTemplate">
-            <Image Source="{Binding Image}" MouseRightButtonUp="Image_MouseRightButtonUp" MouseLeftButtonUp="Image_MouseLeftButtonUp"></Image>
+            <Image Source="{Binding Image}" MouseRightButtonUp="Image_MouseRightButtonUp" MaxHeight="200" MaxWidth="200" MouseLeftButtonUp="Image_MouseLeftButtonUp"></Image>
         </DataTemplate>
         <Style x:Key="togglelessRadTileViewItem" TargetType="{x:Type telerik:RadTileViewItem}">
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <!--<EventSetter Event="ButtonBase.MouseRightButtonUp" Handler="Image_MouseRightButtonUp"></EventSetter>
+            <EventSetter Event="ButtonBase.MouseLeftButtonUp" Handler="Image_MouseLeftButtonUp"></EventSetter>-->
             <Setter Property="VerticalContentAlignment" Value="Stretch" />
             <Setter Property="Background" Value="#E9E8E9" />
             <Setter Property="BorderBrush">
@@ -308,8 +310,10 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
-        <telerik:RadTileView x:Name="myTileView" telerik:StyleManager.Theme="Metro" Grid.Row="1" 
+        <telerik:RadTileView x:Name="myTileView" telerik:StyleManager.Theme="Metro" Grid.Row="1"
                 ItemsSource="{Binding ImageTileList}" 
+		                     IsSelectionEnabled="True"
+		                     IsVirtualizing="True"
                              SelectionMode="Single"
                              TileStateChangeTrigger="SingleClick"
 				ItemContainerStyle="{StaticResource togglelessRadTileViewItem}"

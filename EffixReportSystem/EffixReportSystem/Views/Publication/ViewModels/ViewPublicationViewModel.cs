@@ -10,7 +10,146 @@ namespace EffixReportSystem.Views.Publication.ViewModels
 {
     internal class ViewPublicationViewModel : ObservableObject, IPageViewModel
     {
+        public enum FilterMode
+        {
+            ProjectMode,
+            YearMode,
+            MonthMode,
+            DayMode
+        }
+
+        private Year _currentYear;
+        public Year CurrentYear
+        {
+            get { return _currentYear; }
+            set
+            {
+                if (_currentYear == value)
+                    return;
+
+                _currentYear = value;
+                this.OnPropertyChanged("CurrentYear");
+            }
+        }
+
+        private Month _currentMonth;
+        public Month CurrentMonth
+        {
+            get { return _currentMonth; }
+            set
+            {
+                if (_currentMonth == value)
+                    return;
+
+                _currentMonth = value;
+                this.OnPropertyChanged("CurrentMonth");
+            }
+        }
+
+        private Day _currentDay;
+        public Day CurrentDay
+        {
+            get { return _currentDay; }
+            set
+            {
+                if (_currentDay == value)
+                    return;
+
+                _currentDay = value;
+                this.OnPropertyChanged("CurrentDay");
+            }
+        }
+        private FilterMode _currentMode;
+        public FilterMode CurrentMode
+        {
+            get { return _currentMode; }
+            set
+            {
+                if (_currentMode == value)
+                    return;
+
+                _currentMode = value;
+                this.OnPropertyChanged("CurrentMode");
+            }
+        }
+
         private bool _canEdit;
+
+        private string _filterString;
+        public string FilterString
+        {
+            get { return _filterString; }
+            set
+            {
+                if (_filterString == value)
+                    return;
+
+                _filterString = value;
+                Filter();
+                this.OnPropertyChanged("FilterString");
+            }
+        }
+
+        private void Filter()
+        {
+            if (_filterString == null)
+                return;
+            switch (CurrentMode)
+            {
+                case FilterMode.ProjectMode:
+                    PublicationList =
+                        new ObservableCollection<EF_Publication>(
+                            AllPublications.Where(
+                                item =>
+                                item.Project_id == _currentProject.Project_id &&
+                                (item.Project_name.Contains(_filterString) ||
+                                 item.Publication_name.Contains(_filterString) ||
+                                 item.P_year.Contains(_filterString) ||
+                                 item.P_month.Contains(_filterString) ||
+                                 item.P_day.Contains(_filterString))));
+                    break;
+                case FilterMode.YearMode:
+                    PublicationList =
+                        new ObservableCollection<EF_Publication>(
+                            AllPublications.Where(
+                                item =>
+                                item.Project_id == _currentProject.Project_id && item.P_year == CurrentYear.Name &&
+                                (item.Project_name.Contains(_filterString) ||
+                                 item.Publication_name.Contains(_filterString) ||
+                                 item.P_year.Contains(_filterString) ||
+                                 item.P_month.Contains(_filterString) ||
+                                 item.P_day.Contains(_filterString))));
+                    break;
+                case FilterMode.MonthMode:
+                    PublicationList =
+                        new ObservableCollection<EF_Publication>(
+                            AllPublications.Where(
+                                item =>
+                                item.Project_id == _currentProject.Project_id && item.P_year == CurrentYear.Name &&
+                                (item.P_month == CurrentMonth.Name) &&
+                                (item.Project_name.Contains(_filterString) ||
+                                 item.Publication_name.Contains(_filterString) ||
+                                 item.P_year.Contains(_filterString) ||
+                                 item.P_month.Contains(_filterString) ||
+                                 item.P_day.Contains(_filterString))));
+                    break;
+                    case FilterMode.DayMode:
+                    PublicationList =
+                        new ObservableCollection<EF_Publication>(
+                            AllPublications.Where(
+                                item =>
+                                item.Project_id == _currentProject.Project_id && item.P_year == CurrentYear.Name &&
+                                (item.P_month == CurrentMonth.Name) && (item.P_day == CurrentDay.Name) &&
+                                (item.Project_name.Contains(_filterString) ||
+                                 item.Publication_name.Contains(_filterString) ||
+                                 item.P_year.Contains(_filterString) ||
+                                 item.P_month.Contains(_filterString) ||
+                                 item.P_day.Contains(_filterString))));
+                    break;
+            }
+
+
+        }
 
         private string _currentProjectName;
         public string CurrentProjectName
@@ -40,7 +179,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
             }
         }
 
-        public PublicationHelper PublicationHelper;
+       // public PublicationHelper PublicationHelper;
         public string Name { get; set; }
 
         private ObservableCollection<EF_Project> _allDepartments;
