@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -95,7 +96,7 @@ namespace EffixReportSystem.Views.Publication.Views
                 bmpCrop.Save(memoStream, ImageFormat.Png);
                 var image2 = RHelper.MemoryStreamToBitmapImage(memoStream);
 
-                var tile = new DataHelper.ImageTile {Image = image2, ImageName = index + ".png"};
+                var tile = new DataHelper.ImageTile {Image = image2, ImageName = "_"+index + ".png"};
                 tile.ImagePath = _tempDirectory + "\\" + tile.ImageName;
                 ctx.ImageTileList.Add(tile);
                 bmpCrop.Save(tile.ImagePath, ImageFormat.Png);
@@ -146,22 +147,37 @@ namespace EffixReportSystem.Views.Publication.Views
         {
             var ctx = DataContext as NewPublicationViewModel;
             var date = ctx.CurrentPublication.Publication_date.Value;
-            ctx.SaveCurrentPublication();
-            var sourceDirectory = new DirectoryInfo(_tempDirectory);
             var destinationDirectory =
-                new DirectoryInfo(_baseDirectory + "\\" + ctx.CurrentProjectName + "\\" + date.Year + "\\" + date.Month +
-                                  "\\" + date.Day);
+                new DirectoryInfo(_baseDirectory + "\\" +
+                                  ctx.CurrentProjectName + "\\" +
+                                  date.Year + "\\" +
+                                  date.Month + "\\" +
+                                  date.Day);
+
+            
+            var sourceDirectory = new DirectoryInfo(_tempDirectory);
+
             var files = sourceDirectory.GetFiles("*.*");
 
+            var index = 0;
             foreach (var fileInfo in files)
             {
-                if(!destinationDirectory.Exists)
+                if (!destinationDirectory.Exists)
                 {
-                  destinationDirectory.Create();  
+                    destinationDirectory.Create();
                 }
-              fileInfo.MoveTo(destinationDirectory+"\\"+ctx.CurrentPublication.EF_SMI.Smi_descr.Replace('.','_')+fileInfo.Name);
-              DataHelper.SaveFilesInAzureStorage(destinationDirectory + "\\" + ctx.CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') + fileInfo.Name);
+                var filePath = destinationDirectory + "\\" + ctx.CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') +
+                               fileInfo.Name.Replace(" ", "_");
+                fileInfo.MoveTo(filePath);
+                index++;
+                DataHelper.SaveFilesInAzureStorage(filePath);
+                if(index<=1)
+                {
+                    ctx.CurrentPublication.Blob_path = filePath;
+                }
             }
+            ctx.CurrentPublication.Image_count = index;
+            ctx.SaveCurrentPublication();
             (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
         }
 
