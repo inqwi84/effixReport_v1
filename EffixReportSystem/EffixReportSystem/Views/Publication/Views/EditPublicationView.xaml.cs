@@ -32,6 +32,8 @@ namespace EffixReportSystem.Views.Publication.Views
             var ctx = DataContext as EditPublicationViewModel;
             ctx.SaveCurrentPublication();
             (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
+            ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel).GetAllDepartments();
+            ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel).GetAllPublications();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
@@ -39,6 +41,8 @@ namespace EffixReportSystem.Views.Publication.Views
             var ctx = DataContext as EditPublicationViewModel;
             ctx.RestoreDefaultVlues();
             (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
+            ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel).GetAllDepartments();
+            ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel).GetAllPublications();
         }
 
         private void Image_MouseRightButtonUp(object sender, MouseButtonEventArgs e)

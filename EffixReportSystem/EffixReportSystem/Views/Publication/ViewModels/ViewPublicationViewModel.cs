@@ -110,28 +110,46 @@ namespace EffixReportSystem.Views.Publication.ViewModels
         }
 
         public IPageViewModel ParentViewModel;
-        private void GetAllDepartments()
+        public void GetAllDepartments()
         {
             using (var model = new EntitiesModel())
             {
                 _allDepartments = new ObservableCollection<EF_Project>(model.EF_Projects);
                 foreach (var dp in _allDepartments)
                 {
-                    dp.Name = dp.Project_name;
-                    dp.Children = new ObservableCollection<Year>() {new Year() {Name = "2012"}};
+                    var dp1 = dp;
+                    dp.Name = dp1.Project_name;
+                    dp.Children=new ObservableCollection<Year>();
+                    var years= model.EF_Publications.Where(item => item.Project_id == dp1.Project_id).GroupBy(item=>item.P_year);
+                    foreach (var year in years)
+                    {
+                        dp.Children.Add(new Year { Name = year.Key, Parent = dp, Children = new ObservableCollection<Month>() });
+
+                    }
                     foreach (var year in dp.Children)
                     {
-                        year.Children = new ObservableCollection<Month>() {new Month() {Name = "01"}};
-                        foreach (var months in year.Children)
+                        var year1 = year;
+                        var months = model.EF_Publications.Where(item => item.Project_id == dp1.Project_id&&item.P_year==year1.Name).GroupBy(item => item.P_month);
+                        foreach (var month in months)
                         {
-                            months.Children = new ObservableCollection<Day>() {new Day() {Name = "01"}};
+                            year.Children.Add(new Month { Name = month.Key ,Parent = year,Children = new ObservableCollection<Day>() });
                         }
+                        foreach (var month in year.Children)
+                        {
+                            var month1 = month;
+                            var days = model.EF_Publications.Where(item => item.Project_id == dp1.Project_id && item.P_year == year1.Name&&item.P_month==month1.Name).GroupBy(item => item.P_day);
+                            foreach (var day in days)
+                            {
+                                month.Children.Add( new Day { Name = day.Key,Parent = month});
+                            }
+                        }
+
                     }
                 }
             }
         }
 
-        private void GetAllPublications()
+        public void GetAllPublications()
         {
             using (var model = new EntitiesModel())
             {
@@ -150,13 +168,6 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                             foreach (var day in months1.Children)
                             {
                                 day.Parent = months1;
-                                var day1 = day;
-                                day.Children = new ObservableCollection<EF_Publication>(AllPublications.Where(
-                                    item => item.P_day == day1.Name &&
-                                            item.P_month == months1.Name &&
-                                            item.P_year == year1.Name &&
-                                            item.Project_id == dept1.Project_id
-                                                                                            ));
                             }
                         }
                     }
