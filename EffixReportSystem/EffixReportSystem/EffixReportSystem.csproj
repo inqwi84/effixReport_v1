@@ -106,6 +106,9 @@
     <Compile Include="Helper\Classes\ObservableObject.cs" />
     <Compile Include="Helper\Classes\Partial\PartialClasses.cs" />
     <Compile Include="Helper\Interfaces\IPageViewModel.cs" />
+    <Compile Include="Model\EF_Department.generated.cs">
+      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+    </Compile>
     <Compile Include="Model\EF_Edition.generated.cs">
       <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
     </Compile>

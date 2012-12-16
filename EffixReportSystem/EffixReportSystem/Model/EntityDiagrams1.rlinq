@@ -157,10 +157,10 @@
           <orm:column name="smi_edition_descr" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="LongVarchar" />
         </orm:field>
         <orm:field name="_smi_Url" property="Smi_url" behavior="readwrite" uniqueId="17bea278-3a9f-4a94-a796-2f594b15cd83" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column nullable="true" length="0" name="smi_url" scale="0" sql-type="int" ado-type="Int32" />
+          <orm:column name="smi_url" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         </orm:field>
         <orm:field name="_smi_Edition_Id" property="Smi_edition_id" behavior="readwrite" uniqueId="e69d50b6-40f8-41b6-9664-2e663b270ec3" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column nullable="true" length="0" name="smi_edition_id" scale="0" sql-type="int" ado-type="Int32" />
+          <orm:column name="smi_edition_id" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         </orm:field>
         <orm:field name="_eF_Edition" property="EF_Edition" behavior="readwrite" uniqueId="645e09ca-7027-4851-995d-0297712b9062" type="EffixReportSystem.EF_Edition">
           <orm:reference uniqueId="3c9cb7c2-8207-4aec-b1ed-6427c26e4eb9">
@@ -248,6 +248,9 @@
         <orm:field name="_p_Day" property="P_day" behavior="readwrite" uniqueId="487d3285-fa3b-4675-9185-fabd1e124115" type="System.String">
           <orm:column name="p_day" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="Varchar" />
         </orm:field>
+        <orm:field name="_department_Id" property="Department_id" behavior="readwrite" uniqueId="08dec94d-1603-424a-a556-f923dc75f71b" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column nullable="true" length="0" name="department_id" scale="0" sql-type="bigint" ado-type="Int64" />
+        </orm:field>
         <orm:field name="_eF_Exclusivity" property="EF_Exclusivity" behavior="readwrite" uniqueId="057d8573-2c0a-4901-96e7-2f0c6f5cd373" type="EffixReportSystem.EF_Exclusivity">
           <orm:reference uniqueId="b2270a33-d57d-4df9-9b1e-b554d5e9c7b4">
             <orm:sharedfield name="_exclusivity_Id" target-class="EffixReportSystem.EF_Exclusivity" target-field="_exclusivity_Id" />
@@ -296,6 +299,12 @@
             <orm:constraint name="FK_EF_Publication_0" destination-table="EF_SMI" />
           </orm:reference>
         </orm:field>
+        <orm:field name="_eF_Department" property="EF_Department" behavior="readwrite" uniqueId="4088dc1a-e7cf-4767-85bd-cc847c817b93" type="EffixReportSystem.EF_Department">
+          <orm:reference uniqueId="a73f8f04-7cdc-46d6-b2bf-67319d4ccce0">
+            <orm:sharedfield name="_department_Id" target-class="EffixReportSystem.EF_Department" target-field="_department_Id" />
+            <orm:constraint name="FK_EF_Publication_8" destination-table="EF_Departments" />
+          </orm:reference>
+        </orm:field>
       </orm:class>
       <orm:class name="EF_Project" behavior="readwrite" uniqueId="8e6da97e-c774-4dc8-aa34-2459839a73d9">
         <orm:table name="EF_Project" />
@@ -342,10 +351,10 @@
         </orm:identity>
         <orm:concurrency strategy="changed" />
         <orm:field name="_isPlaned" property="IsPlaned" behavior="readwrite" uniqueId="793faf44-5edf-4fc0-87f1-3f549289d7c1" type="System.String">
-          <orm:column nullable="true" length="15" name="isPlaned" scale="0" sql-type="nvarchar" ado-type="Varchar" />
+          <orm:column name="isPlaned" sql-type="nvarchar" nullable="true" length="15" scale="0" ado-type="Varchar" />
         </orm:field>
         <orm:field name="_iD" property="ID" behavior="readwrite" uniqueId="d6c913cc-665e-4de5-83eb-c832d6baf180" type="System.Int32">
-          <orm:column nullable="false" primary-key="true" length="0" name="ID" scale="0" sql-type="int" ado-type="Int32" />
+          <orm:column name="ID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
         </orm:field>
         <orm:field name="_eF_Publications" property="EF_Publications" behavior="readwrite" uniqueId="e2962722-d270-4c83-ad9e-0850c98bf5af" type="EffixReportSystem.EF_Publication">
           <orm:collection element-class="EffixReportSystem.EF_Publication" inverse-field="_eF_Planed" managed="true" order-by="" uniqueId="7303f837-2678-4c8b-854a-9f854b471033" />
@@ -358,10 +367,10 @@
         </orm:identity>
         <orm:concurrency strategy="changed" />
         <orm:field name="_iD" property="ID" behavior="readwrite" uniqueId="a40d0db9-f401-4d69-854b-3c7d505ba2f3" type="System.Int32">
-          <orm:column nullable="false" primary-key="true" length="0" name="ID" scale="0" sql-type="int" ado-type="Int32" />
+          <orm:column name="ID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
         </orm:field>
         <orm:field name="_hasPhoto" property="HasPhoto" behavior="readwrite" uniqueId="af90befc-66b1-4639-beca-ede424f97fb1" type="System.String">
-          <orm:column nullable="true" length="15" name="hasPhoto" scale="0" sql-type="nvarchar" ado-type="Varchar" />
+          <orm:column name="hasPhoto" sql-type="nvarchar" nullable="true" length="15" scale="0" ado-type="Varchar" />
         </orm:field>
         <orm:field name="_eF_Publications" property="EF_Publications" behavior="readwrite" uniqueId="0286f421-f9a1-47da-9772-f88852d0e552" type="EffixReportSystem.EF_Publication">
           <orm:collection element-class="EffixReportSystem.EF_Publication" inverse-field="_eF_Photo" managed="true" order-by="" uniqueId="9c1399a3-edc8-42d4-9a8c-82a6ed627203" />
@@ -374,10 +383,10 @@
         </orm:identity>
         <orm:concurrency strategy="changed" />
         <orm:field name="_isInitiated" property="IsInitiated" behavior="readwrite" uniqueId="97e9f967-31dd-46a6-b4ad-d61b5f6cf453" type="System.String">
-          <orm:column nullable="true" length="15" name="isInitiated" scale="0" sql-type="nvarchar" ado-type="Varchar" />
+          <orm:column name="isInitiated" sql-type="nvarchar" nullable="true" length="15" scale="0" ado-type="Varchar" />
         </orm:field>
         <orm:field name="_iD" property="ID" behavior="readwrite" uniqueId="709a648e-721d-46ac-95f9-7d011f017258" type="System.Int32">
-          <orm:column nullable="false" primary-key="true" length="0" name="ID" scale="0" sql-type="int" ado-type="Int32" />
+          <orm:column name="ID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
         </orm:field>
         <orm:field name="_eF_Publications" property="EF_Publications" behavior="readwrite" uniqueId="1d2db54b-1181-43e7-8e75-d364313b95d7" type="EffixReportSystem.EF_Publication">
           <orm:collection element-class="EffixReportSystem.EF_Publication" inverse-field="_eF_Initiated" managed="true" order-by="" uniqueId="9d32feb8-a0e7-454f-b2df-7184a7986735" />
@@ -390,16 +399,44 @@
         </orm:identity>
         <orm:concurrency strategy="changed" />
         <orm:field name="_iD" property="ID" behavior="readwrite" uniqueId="9c6d6c26-3d6a-4e39-aca8-114e6ce369a1" type="System.Int32">
-          <orm:column nullable="false" primary-key="true" length="0" name="ID" scale="0" sql-type="int" ado-type="Int32" />
+          <orm:column name="ID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
         </orm:field>
         <orm:field name="_edition_Value" property="Edition_value" behavior="readwrite" uniqueId="ede76270-68b9-4e5c-af64-236156eddd1c" type="System.String">
-          <orm:column nullable="true" length="50" name="edition_value" scale="0" sql-type="nvarchar" ado-type="Varchar" />
+          <orm:column name="edition_value" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="Varchar" />
         </orm:field>
         <orm:field name="_edition_Name" property="Edition_name" behavior="readwrite" uniqueId="301e6f38-00b8-4dfb-a111-bb315bc1f669" type="System.String">
-          <orm:column nullable="true" length="50" name="edition_name" scale="0" sql-type="nvarchar" ado-type="Varchar" />
+          <orm:column name="edition_name" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="Varchar" />
         </orm:field>
         <orm:field name="_eF_SMIs" property="EF_SMIs" behavior="readwrite" uniqueId="95060115-2021-4c96-8385-6f4418f3d16c" type="EffixReportSystem.EF_SMI">
           <orm:collection element-class="EffixReportSystem.EF_SMI" inverse-field="_eF_Edition" managed="true" order-by="" uniqueId="3c9cb7c2-8207-4aec-b1ed-6427c26e4eb9" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_Department" behavior="readwrite" uniqueId="3ebc447e-33fb-4136-bbb1-76fcc8eb081e">
+        <orm:table name="EF_Departments" />
+        <orm:identity>
+          <orm:single-field field-name="_department_Id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_department_Type" property="Department_type" behavior="readwrite" uniqueId="85bfb0b3-4dfb-4110-9fb5-4dc4790c6ca3" type="System.String">
+          <orm:column nullable="true" length="0" name="department_type" scale="0" sql-type="nvarchar(max)" ado-type="LongVarchar" />
+        </orm:field>
+        <orm:field name="_department_Project_Id" property="Department_project_id" behavior="readwrite" uniqueId="1c2583cd-d624-4065-ab23-32fa5d8b4be0" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column nullable="true" length="0" name="department_project_id" scale="0" sql-type="bigint" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_department_Parent_Id" property="Department_parent_id" behavior="readwrite" uniqueId="f19633f8-30f9-4508-8a0f-2534c6a65cf0" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column nullable="true" length="0" name="department_parent_id" scale="0" sql-type="bigint" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_department_Name" property="Department_name" behavior="readwrite" uniqueId="9f66c1e3-6ec0-4284-86f1-548d0c5e143a" type="System.String">
+          <orm:column nullable="true" length="0" name="department_name" scale="0" sql-type="nvarchar(max)" ado-type="LongVarchar" />
+        </orm:field>
+        <orm:field name="_department_Id" property="Department_id" behavior="readwrite" uniqueId="463c7c9c-695a-4be8-a47d-7cc0f9e7313f" type="System.Int64">
+          <orm:column nullable="false" primary-key="true" length="0" name="department_id" scale="0" sql-type="bigint" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_department_Description" property="Department_description" behavior="readwrite" uniqueId="af4ef461-77dc-4281-818d-128426a6d77f" type="System.String">
+          <orm:column nullable="true" length="0" name="department_description" scale="0" sql-type="nvarchar(max)" ado-type="LongVarchar" />
+        </orm:field>
+        <orm:field name="_eF_Publications" property="EF_Publications" behavior="readwrite" uniqueId="f5caf887-aa9c-43e1-9906-3931bf8165dd" type="EffixReportSystem.EF_Publication">
+          <orm:collection element-class="EffixReportSystem.EF_Publication" inverse-field="_eF_Department" managed="true" order-by="" uniqueId="a73f8f04-7cdc-46d6-b2bf-67319d4ccce0" />
         </orm:field>
       </orm:class>
     </orm:namespace>
@@ -449,10 +486,10 @@
         <orm:column name="smi_descr" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="LongVarchar" />
         <orm:column name="smi_edition" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="LongVarchar" />
         <orm:column name="smi_edition_descr" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="LongVarchar" />
-        <orm:column nullable="true" length="0" name="smi_url" scale="0" sql-type="int" ado-type="Int32" />
-        <orm:column nullable="true" length="0" name="smi_edition_id" scale="0" sql-type="int" ado-type="Int32" />
+        <orm:column name="smi_url" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="smi_edition_id" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         <orm:constraint name="FK_EF_SMI_1" destination-table="EF_Edition">
-          <orm:column nullable="true" length="0" name="smi_edition_id" scale="0" sql-type="int" ado-type="Int32" />
+          <orm:column name="smi_edition_id" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         </orm:constraint>
         <orm:constraint name="FK_EF_SMI_0" destination-table="EF_SMI_Type">
           <orm:column name="smi_type_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
@@ -480,6 +517,7 @@
         <orm:column name="p_year" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="Varchar" />
         <orm:column name="p_month" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="Varchar" />
         <orm:column name="p_day" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="Varchar" />
+        <orm:column nullable="true" length="0" name="department_id" scale="0" sql-type="bigint" ado-type="Int64" />
         <orm:constraint name="FK_EF_Publication_1" destination-table="EF_Exclusivity">
           <orm:column name="exclusivity_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
         </orm:constraint>
@@ -504,6 +542,9 @@
         <orm:constraint name="FK_EF_Publication_0" destination-table="EF_SMI">
           <orm:column name="smi_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
         </orm:constraint>
+        <orm:constraint name="FK_EF_Publication_8" destination-table="EF_Departments">
+          <orm:column nullable="true" length="0" name="department_id" scale="0" sql-type="bigint" ado-type="Int64" />
+        </orm:constraint>
       </orm:table>
       <orm:table name="EF_Project">
         <orm:column name="project_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
@@ -522,21 +563,29 @@
         <orm:column name="value" sql-type="bit" nullable="true" length="0" scale="0" ado-type="Bit" />
       </orm:table>
       <orm:table name="EF_Planed">
-        <orm:column nullable="true" length="15" name="isPlaned" scale="0" sql-type="nvarchar" ado-type="Varchar" />
-        <orm:column nullable="false" primary-key="true" length="0" name="ID" scale="0" sql-type="int" ado-type="Int32" />
+        <orm:column name="isPlaned" sql-type="nvarchar" nullable="true" length="15" scale="0" ado-type="Varchar" />
+        <orm:column name="ID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
       </orm:table>
       <orm:table name="EF_Photo">
-        <orm:column nullable="false" primary-key="true" length="0" name="ID" scale="0" sql-type="int" ado-type="Int32" />
-        <orm:column nullable="true" length="15" name="hasPhoto" scale="0" sql-type="nvarchar" ado-type="Varchar" />
+        <orm:column name="ID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="hasPhoto" sql-type="nvarchar" nullable="true" length="15" scale="0" ado-type="Varchar" />
       </orm:table>
       <orm:table name="EF_Initiated">
-        <orm:column nullable="true" length="15" name="isInitiated" scale="0" sql-type="nvarchar" ado-type="Varchar" />
-        <orm:column nullable="false" primary-key="true" length="0" name="ID" scale="0" sql-type="int" ado-type="Int32" />
+        <orm:column name="isInitiated" sql-type="nvarchar" nullable="true" length="15" scale="0" ado-type="Varchar" />
+        <orm:column name="ID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
       </orm:table>
       <orm:table name="EF_Edition">
-        <orm:column nullable="false" primary-key="true" length="0" name="ID" scale="0" sql-type="int" ado-type="Int32" />
-        <orm:column nullable="true" length="50" name="edition_value" scale="0" sql-type="nvarchar" ado-type="Varchar" />
-        <orm:column nullable="true" length="50" name="edition_name" scale="0" sql-type="nvarchar" ado-type="Varchar" />
+        <orm:column name="ID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="edition_value" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="Varchar" />
+        <orm:column name="edition_name" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="Varchar" />
+      </orm:table>
+      <orm:table name="EF_Departments">
+        <orm:column nullable="true" length="0" name="department_type" scale="0" sql-type="nvarchar(max)" ado-type="LongVarchar" />
+        <orm:column nullable="true" length="0" name="department_project_id" scale="0" sql-type="bigint" ado-type="Int64" />
+        <orm:column nullable="true" length="0" name="department_parent_id" scale="0" sql-type="bigint" ado-type="Int64" />
+        <orm:column nullable="true" length="0" name="department_name" scale="0" sql-type="nvarchar(max)" ado-type="LongVarchar" />
+        <orm:column nullable="false" primary-key="true" length="0" name="department_id" scale="0" sql-type="bigint" ado-type="Int64" />
+        <orm:column nullable="true" length="0" name="department_description" scale="0" sql-type="nvarchar(max)" ado-type="LongVarchar" />
       </orm:table>
     </orm:schema>
   </orm:orm>
@@ -692,6 +741,7 @@
       <Property Id="4dff8c42-9dd4-46a6-8640-2931e1df47a8" name="P_year" label="P_year : String" nullable="true" kind="Persistent" fieldName="_p_Year" />
       <Property Id="1f02b5cb-2b85-4600-bfc6-3b7142c52958" name="P_month" label="P_month : String" nullable="true" kind="Persistent" fieldName="_p_Month" />
       <Property Id="487d3285-fa3b-4675-9185-fabd1e124115" name="P_day" label="P_day : String" nullable="true" kind="Persistent" fieldName="_p_Day" />
+      <Property Id="08dec94d-1603-424a-a556-f923dc75f71b" name="Department_id" type="Int64" label="Department_id : Int64" nullable="true" kind="Persistent" fieldName="_department_Id" />
       <AssociationTargets>
         <Association Id="b2270a33-d57d-4df9-9b1e-b554d5e9c7b4" SourceMultiplicity="ZeroOne" name="EF_PublicationHasEF_Exclusivity">
           <DomainClassMoniker name="/EntitiesModel/EF_Exclusivity" />
@@ -797,6 +847,19 @@
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
+        <Association Id="a73f8f04-7cdc-46d6-b2bf-67319d4ccce0" SourceMultiplicity="ZeroOne" name="EF_PublicationHasEF_Department">
+          <DomainClassMoniker name="/EntitiesModel/EF_Department" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="7933e4c9-abe9-44bd-b589-bc2cc65d6a1b">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Department/EF_Publications" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="ed5faad0-f62b-4876-aafd-dd0b3e7c74b9">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Publication/EF_Department" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
       </AssociationTargets>
       <navigationalProperties>
         <classHasNavigationalProperties Id="af107068-233f-4a91-9876-edb6e1e8eb8d">
@@ -822,6 +885,9 @@
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="9390492e-2fea-4db5-a720-1c713b89e3a5">
           <NavigationalProperty Id="e9411891-a5ff-464e-8fb7-72971355a1fa" name="EF_SMI" type="EF_SMI" label="EF_SMI : EF_SMI" nullable="true" kind="Persistent" fieldName="_eF_SMI" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="eff97736-bf13-4188-93da-d26278ac8404">
+          <NavigationalProperty Id="4088dc1a-e7cf-4767-85bd-cc847c817b93" name="EF_Department" type="EF_Department" label="EF_Department : EF_Department" nullable="true" kind="Persistent" fieldName="_eF_Department" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
@@ -882,6 +948,19 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
+    <DomainClass Id="3ebc447e-33fb-4136-bbb1-76fcc8eb081e" name="EF_Department" namespace="EffixReportSystem" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="463c7c9c-695a-4be8-a47d-7cc0f9e7313f" name="Department_id" type="Int64" label="Department_id : Int64" kind="Persistent" identity="true" fieldName="_department_Id" />
+      <Property Id="af4ef461-77dc-4281-818d-128426a6d77f" name="Department_description" label="Department_description : String" kind="Persistent" fieldName="_department_Description" />
+      <Property Id="9f66c1e3-6ec0-4284-86f1-548d0c5e143a" name="Department_name" label="Department_name : String" kind="Persistent" fieldName="_department_Name" />
+      <Property Id="f19633f8-30f9-4508-8a0f-2534c6a65cf0" name="Department_parent_id" type="Int64" label="Department_parent_id : Int64" nullable="true" kind="Persistent" fieldName="_department_Parent_Id" />
+      <Property Id="1c2583cd-d624-4065-ab23-32fa5d8b4be0" name="Department_project_id" type="Int64" label="Department_project_id : Int64" nullable="true" kind="Persistent" fieldName="_department_Project_Id" />
+      <Property Id="85bfb0b3-4dfb-4110-9fb5-4dc4790c6ca3" name="Department_type" label="Department_type : String" kind="Persistent" fieldName="_department_Type" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="c2eed4b0-f52b-4010-9e2d-7e2feee79c14">
+          <NavigationalProperty Id="f5caf887-aa9c-43e1-9906-3931bf8165dd" name="EF_Publications" type="IList&lt;EF_Publication&gt;" label="EF_Publications : IList&lt;EF_Publication&gt;" nullable="true" kind="Persistent" fieldName="_eF_Publications" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="330f0ca3-339a-49ae-934b-7a02e6d4e172">
@@ -899,6 +978,7 @@
         <entitySetProperty name="EF_Photos" namespace="EffixReportSystem" type="EF_Photo" label="EF_Photos : IQueryable&lt;EffixReportSystem.EF_Photo&gt;" />
         <entitySetProperty name="EF_Initiateds" namespace="EffixReportSystem" type="EF_Initiated" label="EF_Initiateds : IQueryable&lt;EffixReportSystem.EF_Initiated&gt;" />
         <entitySetProperty name="EF_Editions" namespace="EffixReportSystem" type="EF_Edition" label="EF_Editions : IQueryable&lt;EffixReportSystem.EF_Edition&gt;" />
+        <entitySetProperty name="EF_Departments" namespace="EffixReportSystem" type="EF_Department" label="EF_Departments : IQueryable&lt;EffixReportSystem.EF_Department&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

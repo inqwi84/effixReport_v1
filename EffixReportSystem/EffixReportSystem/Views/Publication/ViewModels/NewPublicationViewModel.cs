@@ -72,6 +72,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
             CurrentPublication.Publication_name = CurrentPublication.EF_SMI.Smi_descr;
                 _model.Add(CurrentPublication);
                 _model.SaveChanges();
+
         }
 
         private void SetCanSaveOption()

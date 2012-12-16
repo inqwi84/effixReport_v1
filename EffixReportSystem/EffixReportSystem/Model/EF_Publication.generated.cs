@@ -361,6 +361,22 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("P_day");
 		   }
 		}
+		private long? _department_Id;
+		public virtual long? Department_id
+		{
+		   get
+		   {
+		       return this._department_Id;
+		   }
+		   set
+		   {
+		       if( Department_id == value )
+		  return;
+		 
+		  _department_Id = value;
+		  this.OnPropertyChanged("Department_id");
+		   }
+		}
 		private EF_Exclusivity _eF_Exclusivity;
 		public virtual EF_Exclusivity EF_Exclusivity
 		{
@@ -487,6 +503,22 @@ namespace EffixReportSystem
 		 
 		  _eF_SMI = value;
 		  this.OnPropertyChanged("EF_SMI");
+		   }
+		}
+		private EF_Department _eF_Department;
+		public virtual EF_Department EF_Department
+		{
+		   get
+		   {
+		       return this._eF_Department;
+		   }
+		   set
+		   {
+		       if( EF_Department == value )
+		  return;
+		 
+		  _eF_Department = value;
+		  this.OnPropertyChanged("EF_Department");
 		   }
 		}
 		public event PropertyChangedEventHandler PropertyChanged;

@@ -156,6 +156,14 @@ namespace EffixReportSystem
 	    	}
 		}
 		
+		public IQueryable<EF_Department> EF_Departments 
+		{
+	    	get
+	    	{
+	        	return this.GetAll<EF_Department>();
+	    	}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -228,6 +236,11 @@ namespace EffixReportSystem
 		}
 
 		IQueryable<EF_Edition> EF_Editions 
+		{ 
+			get;
+		}
+
+		IQueryable<EF_Department> EF_Departments 
 		{ 
 			get;
 		}
