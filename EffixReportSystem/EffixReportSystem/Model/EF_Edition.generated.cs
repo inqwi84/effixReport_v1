@@ -41,22 +41,6 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("ID");
 		   }
 		}
-		private string _edition_Value;
-		public virtual string Edition_value
-		{
-		   get
-		   {
-		       return this._edition_Value;
-		   }
-		   set
-		   {
-		       if( Edition_value == value )
-		  return;
-		 
-		  _edition_Value = value;
-		  this.OnPropertyChanged("Edition_value");
-		   }
-		}
 		private string _edition_Name;
 		public virtual string Edition_name
 		{
@@ -71,6 +55,22 @@ namespace EffixReportSystem
 		 
 		  _edition_Name = value;
 		  this.OnPropertyChanged("Edition_name");
+		   }
+		}
+		private string _edition_Value;
+		public virtual string Edition_value
+		{
+		   get
+		   {
+		       return this._edition_Value;
+		   }
+		   set
+		   {
+		       if( Edition_value == value )
+		  return;
+		 
+		  _edition_Value = value;
+		  this.OnPropertyChanged("Edition_value");
 		   }
 		}
 		private IList<EF_SMI> _eF_SMIs = new List<EF_SMI>();

@@ -25,22 +25,6 @@ namespace EffixReportSystem
 {
 	public partial class EF_Planed : INotifyPropertyChanged
 	{
-		private string _isPlaned;
-		public virtual string IsPlaned
-		{
-		   get
-		   {
-		       return this._isPlaned;
-		   }
-		   set
-		   {
-		       if( IsPlaned == value )
-		  return;
-		 
-		  _isPlaned = value;
-		  this.OnPropertyChanged("IsPlaned");
-		   }
-		}
 		private int _iD;
 		public virtual int ID
 		{
@@ -55,6 +39,22 @@ namespace EffixReportSystem
 		 
 		  _iD = value;
 		  this.OnPropertyChanged("ID");
+		   }
+		}
+		private string _isPlaned;
+		public virtual string IsPlaned
+		{
+		   get
+		   {
+		       return this._isPlaned;
+		   }
+		   set
+		   {
+		       if( IsPlaned == value )
+		  return;
+		 
+		  _isPlaned = value;
+		  this.OnPropertyChanged("IsPlaned");
 		   }
 		}
 		private IList<EF_Publication> _eF_Publications = new List<EF_Publication>();

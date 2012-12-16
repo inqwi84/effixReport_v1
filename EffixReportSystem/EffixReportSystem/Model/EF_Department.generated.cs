@@ -25,36 +25,20 @@ namespace EffixReportSystem
 {
 	public partial class EF_Department : INotifyPropertyChanged
 	{
-		private string _department_Type;
-		public virtual string Department_type
+		private long _department_Id;
+		public virtual long Department_id
 		{
 		   get
 		   {
-		       return this._department_Type;
+		       return this._department_Id;
 		   }
 		   set
 		   {
-		       if( Department_type == value )
+		       if( Department_id == value )
 		  return;
 		 
-		  _department_Type = value;
-		  this.OnPropertyChanged("Department_type");
-		   }
-		}
-		private long? _department_Project_Id;
-		public virtual long? Department_project_id
-		{
-		   get
-		   {
-		       return this._department_Project_Id;
-		   }
-		   set
-		   {
-		       if( Department_project_id == value )
-		  return;
-		 
-		  _department_Project_Id = value;
-		  this.OnPropertyChanged("Department_project_id");
+		  _department_Id = value;
+		  this.OnPropertyChanged("Department_id");
 		   }
 		}
 		private long? _department_Parent_Id;
@@ -89,20 +73,20 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("Department_name");
 		   }
 		}
-		private long _department_Id;
-		public virtual long Department_id
+		private string _department_Type;
+		public virtual string Department_type
 		{
 		   get
 		   {
-		       return this._department_Id;
+		       return this._department_Type;
 		   }
 		   set
 		   {
-		       if( Department_id == value )
+		       if( Department_type == value )
 		  return;
 		 
-		  _department_Id = value;
-		  this.OnPropertyChanged("Department_id");
+		  _department_Type = value;
+		  this.OnPropertyChanged("Department_type");
 		   }
 		}
 		private string _department_Description;
@@ -119,6 +103,22 @@ namespace EffixReportSystem
 		 
 		  _department_Description = value;
 		  this.OnPropertyChanged("Department_description");
+		   }
+		}
+		private long? _department_Project_Id;
+		public virtual long? Department_project_id
+		{
+		   get
+		   {
+		       return this._department_Project_Id;
+		   }
+		   set
+		   {
+		       if( Department_project_id == value )
+		  return;
+		 
+		  _department_Project_Id = value;
+		  this.OnPropertyChanged("Department_project_id");
 		   }
 		}
 		private IList<EF_Publication> _eF_Publications = new List<EF_Publication>();

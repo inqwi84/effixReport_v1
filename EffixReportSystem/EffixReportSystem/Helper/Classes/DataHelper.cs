@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
@@ -23,10 +25,63 @@ using Application = System.Windows.Application;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
 
+namespace EffixReportSystem
+{
+
+    public partial class EF_Department : INotifyPropertyChanged
+    {
+        private IList<EF_Department> _children;
+
+        public virtual IList<EF_Department> Children
+        {
+            get { return this._children; }
+            set
+            {
+                if (Equals(Children, value))
+                    return;
+
+                _children = value;
+                this.OnPropertyChanged("Children");
+            }
+        }
+    }
+}
+
 namespace EffixReportSystem.Helper.Classes
 {
+
     public static class DataHelper
     {
+        public static ObservableCollection<EF_Publication> GetPublicationByDepartmentId(long departmentId)
+        {
+            var result = new ObservableCollection<EF_Publication>();
+            using (var model= new EntitiesModel())
+            {
+                var department = model.EF_Departments.FirstOrDefault(dept => dept.Department_id == departmentId);
+                if (department != null)
+                    switch (department.Department_type)
+                    {
+                        case "project":
+                            result= new ObservableCollection<EF_Publication>(model.EF_Publications.Where(item => item.Project_id == department.Department_project_id));
+                            break;
+                        case "year":
+                           // var project = GetParentDepartment((long) department.Department_parent_id);
+                            result=new ObservableCollection<EF_Publication>(model.EF_Publications.Where(item=>item.Project_id==department.Department_parent_id&&item.P_year==department.Department_name));
+                            break;
+                        case "month":
+                            var year = model.EF_Departments.FirstOrDefault(item => item.Department_id == department.Department_parent_id);
+                            var project = model.EF_Departments.FirstOrDefault(item => item.Department_id == year.Department_parent_id);
+                            result=new ObservableCollection<EF_Publication>(model.EF_Publications.Where(item=>item.Project_id==project.Department_project_id&&item.P_year==year.Department_name&&item.P_month==department.Department_name));
+                            break;
+                        case "day":
+                            result = new ObservableCollection<EF_Publication>(model.EF_Publications.Where(item => item.Department_id==department.Department_id));
+                            break;
+                    }
+            }
+            return result;
+        }
+
+
         public static Visual FindAncestor(Visual child, Type typeAncestor)
         {
             DependencyObject parent = VisualTreeHelper.GetParent(child);

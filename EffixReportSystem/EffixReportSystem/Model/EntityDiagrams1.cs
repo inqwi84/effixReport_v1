@@ -116,14 +116,6 @@ namespace EffixReportSystem
 	    	}
 		}
 		
-		public IQueryable<EF_Exclusivity> EF_Exclusivities 
-		{
-	    	get
-	    	{
-	        	return this.GetAll<EF_Exclusivity>();
-	    	}
-		}
-		
 		public IQueryable<EF_Planed> EF_Planeds 
 		{
 	    	get
@@ -145,6 +137,14 @@ namespace EffixReportSystem
 	    	get
 	    	{
 	        	return this.GetAll<EF_Initiated>();
+	    	}
+		}
+		
+		public IQueryable<EF_Exclusivity> EF_Exclusivities 
+		{
+	    	get
+	    	{
+	        	return this.GetAll<EF_Exclusivity>();
 	    	}
 		}
 		
@@ -215,11 +215,6 @@ namespace EffixReportSystem
 			get;
 		}
 
-		IQueryable<EF_Exclusivity> EF_Exclusivities 
-		{ 
-			get;
-		}
-
 		IQueryable<EF_Planed> EF_Planeds 
 		{ 
 			get;
@@ -231,6 +226,11 @@ namespace EffixReportSystem
 		}
 
 		IQueryable<EF_Initiated> EF_Initiateds 
+		{ 
+			get;
+		}
+
+		IQueryable<EF_Exclusivity> EF_Exclusivities 
 		{ 
 			get;
 		}

@@ -25,22 +25,6 @@ namespace EffixReportSystem
 {
 	public partial class EF_Initiated : INotifyPropertyChanged
 	{
-		private string _isInitiated;
-		public virtual string IsInitiated
-		{
-		   get
-		   {
-		       return this._isInitiated;
-		   }
-		   set
-		   {
-		       if( IsInitiated == value )
-		  return;
-		 
-		  _isInitiated = value;
-		  this.OnPropertyChanged("IsInitiated");
-		   }
-		}
 		private int _iD;
 		public virtual int ID
 		{
@@ -55,6 +39,22 @@ namespace EffixReportSystem
 		 
 		  _iD = value;
 		  this.OnPropertyChanged("ID");
+		   }
+		}
+		private string _isInitiated;
+		public virtual string IsInitiated
+		{
+		   get
+		   {
+		       return this._isInitiated;
+		   }
+		   set
+		   {
+		       if( IsInitiated == value )
+		  return;
+		 
+		  _isInitiated = value;
+		  this.OnPropertyChanged("IsInitiated");
 		   }
 		}
 		private IList<EF_Publication> _eF_Publications = new List<EF_Publication>();

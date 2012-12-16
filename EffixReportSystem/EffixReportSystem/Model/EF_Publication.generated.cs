@@ -297,22 +297,6 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("Image_count");
 		   }
 		}
-		private string _project_Name;
-		public virtual string Project_name
-		{
-		   get
-		   {
-		       return this._project_Name;
-		   }
-		   set
-		   {
-		       if( Project_name == value )
-		  return;
-		 
-		  _project_Name = value;
-		  this.OnPropertyChanged("Project_name");
-		   }
-		}
 		private string _p_Year;
 		public virtual string P_year
 		{
@@ -361,6 +345,22 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("P_day");
 		   }
 		}
+		private string _project_Name;
+		public virtual string Project_name
+		{
+		   get
+		   {
+		       return this._project_Name;
+		   }
+		   set
+		   {
+		       if( Project_name == value )
+		  return;
+		 
+		  _project_Name = value;
+		  this.OnPropertyChanged("Project_name");
+		   }
+		}
 		private long? _department_Id;
 		public virtual long? Department_id
 		{
@@ -375,6 +375,22 @@ namespace EffixReportSystem
 		 
 		  _department_Id = value;
 		  this.OnPropertyChanged("Department_id");
+		   }
+		}
+		private EF_SMI _eF_SMI;
+		public virtual EF_SMI EF_SMI
+		{
+		   get
+		   {
+		       return this._eF_SMI;
+		   }
+		   set
+		   {
+		       if( EF_SMI == value )
+		  return;
+		 
+		  _eF_SMI = value;
+		  this.OnPropertyChanged("EF_SMI");
 		   }
 		}
 		private EF_Exclusivity _eF_Exclusivity;
@@ -393,52 +409,20 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("EF_Exclusivity");
 		   }
 		}
-		private EF_Tonality _eF_Tonality;
-		public virtual EF_Tonality EF_Tonality
+		private EF_Initiated _eF_Initiated;
+		public virtual EF_Initiated EF_Initiated
 		{
 		   get
 		   {
-		       return this._eF_Tonality;
+		       return this._eF_Initiated;
 		   }
 		   set
 		   {
-		       if( EF_Tonality == value )
+		       if( EF_Initiated == value )
 		  return;
 		 
-		  _eF_Tonality = value;
-		  this.OnPropertyChanged("EF_Tonality");
-		   }
-		}
-		private EF_SMI_priority _eF_SMI_Priority;
-		public virtual EF_SMI_priority EF_SMI_priority
-		{
-		   get
-		   {
-		       return this._eF_SMI_Priority;
-		   }
-		   set
-		   {
-		       if( EF_SMI_priority == value )
-		  return;
-		 
-		  _eF_SMI_Priority = value;
-		  this.OnPropertyChanged("EF_SMI_priority");
-		   }
-		}
-		private EF_Photo _eF_Photo;
-		public virtual EF_Photo EF_Photo
-		{
-		   get
-		   {
-		       return this._eF_Photo;
-		   }
-		   set
-		   {
-		       if( EF_Photo == value )
-		  return;
-		 
-		  _eF_Photo = value;
-		  this.OnPropertyChanged("EF_Photo");
+		  _eF_Initiated = value;
+		  this.OnPropertyChanged("EF_Initiated");
 		   }
 		}
 		private EF_Planed _eF_Planed;
@@ -457,20 +441,20 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("EF_Planed");
 		   }
 		}
-		private EF_Initiated _eF_Initiated;
-		public virtual EF_Initiated EF_Initiated
+		private EF_Photo _eF_Photo;
+		public virtual EF_Photo EF_Photo
 		{
 		   get
 		   {
-		       return this._eF_Initiated;
+		       return this._eF_Photo;
 		   }
 		   set
 		   {
-		       if( EF_Initiated == value )
+		       if( EF_Photo == value )
 		  return;
 		 
-		  _eF_Initiated = value;
-		  this.OnPropertyChanged("EF_Initiated");
+		  _eF_Photo = value;
+		  this.OnPropertyChanged("EF_Photo");
 		   }
 		}
 		private EF_Project _eF_Project;
@@ -489,20 +473,36 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("EF_Project");
 		   }
 		}
-		private EF_SMI _eF_SMI;
-		public virtual EF_SMI EF_SMI
+		private EF_SMI_priority _eF_SMI_Priority;
+		public virtual EF_SMI_priority EF_SMI_priority
 		{
 		   get
 		   {
-		       return this._eF_SMI;
+		       return this._eF_SMI_Priority;
 		   }
 		   set
 		   {
-		       if( EF_SMI == value )
+		       if( EF_SMI_priority == value )
 		  return;
 		 
-		  _eF_SMI = value;
-		  this.OnPropertyChanged("EF_SMI");
+		  _eF_SMI_Priority = value;
+		  this.OnPropertyChanged("EF_SMI_priority");
+		   }
+		}
+		private EF_Tonality _eF_Tonality;
+		public virtual EF_Tonality EF_Tonality
+		{
+		   get
+		   {
+		       return this._eF_Tonality;
+		   }
+		   set
+		   {
+		       if( EF_Tonality == value )
+		  return;
+		 
+		  _eF_Tonality = value;
+		  this.OnPropertyChanged("EF_Tonality");
 		   }
 		}
 		private EF_Department _eF_Department;

@@ -96,12 +96,14 @@ namespace EffixReportSystem
 
         private void PublicationRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-          
+            var ctx = DataContext as ApplicationViewModel;
+            if (ctx != null) ctx.CurrentPageViewModel = ctx.PageViewModels[0];
         }
 
         private void MassMediaRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            
+            var ctx = DataContext as ApplicationViewModel;
+            ctx.CurrentPageViewModel = ctx.PageViewModels[1];
         }
 
         private void PersonRadioButton_Checked(object sender, RoutedEventArgs e)

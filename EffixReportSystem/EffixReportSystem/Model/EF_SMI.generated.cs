@@ -153,22 +153,6 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("Smi_edition_id");
 		   }
 		}
-		private EF_Edition _eF_Edition;
-		public virtual EF_Edition EF_Edition
-		{
-		   get
-		   {
-		       return this._eF_Edition;
-		   }
-		   set
-		   {
-		       if( EF_Edition == value )
-		  return;
-		 
-		  _eF_Edition = value;
-		  this.OnPropertyChanged("EF_Edition");
-		   }
-		}
 		private EF_SMI_Type _eF_SMI_Type;
 		public virtual EF_SMI_Type EF_SMI_Type
 		{
@@ -183,6 +167,22 @@ namespace EffixReportSystem
 		 
 		  _eF_SMI_Type = value;
 		  this.OnPropertyChanged("EF_SMI_Type");
+		   }
+		}
+		private EF_Edition _eF_Edition;
+		public virtual EF_Edition EF_Edition
+		{
+		   get
+		   {
+		       return this._eF_Edition;
+		   }
+		   set
+		   {
+		       if( EF_Edition == value )
+		  return;
+		 
+		  _eF_Edition = value;
+		  this.OnPropertyChanged("EF_Edition");
 		   }
 		}
 		private IList<EF_Publication> _eF_Publications = new List<EF_Publication>();

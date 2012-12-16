@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Data;
 using EffixReportSystem.Helper.Classes;
 using EffixReportSystem.Helper.Interfaces;
 
@@ -17,6 +19,44 @@ namespace EffixReportSystem.Views.Publication.ViewModels
             MonthMode,
             DayMode
         }
+
+        private ObservableCollection<EF_Department> _departments;
+        public ObservableCollection<EF_Department> Departments
+        {
+            get { return _departments; }
+            set
+            {
+                if (Departments == value)
+                    return;
+
+                _departments = value;
+                this.OnPropertyChanged("Departments");
+            }
+        }
+
+        private  EF_Department _currentDepartament;
+        public EF_Department CurrentDepartament
+        {
+            get { return _currentDepartament; }
+            set
+            {
+                if (CurrentDepartament == value)
+                    return;
+
+                _currentDepartament = value;
+                try
+                {
+                    PublicationList =
+    DataHelper.GetPublicationByDepartmentId(_currentDepartament.Department_id);
+                }
+                catch (Exception)
+                {
+                }
+
+                this.OnPropertyChanged("CurrentDepartament");
+            }
+        }
+
 
         private Year _currentYear;
         public Year CurrentYear
@@ -94,61 +134,46 @@ namespace EffixReportSystem.Views.Publication.ViewModels
         {
             if (_filterString == null)
                 return;
-            switch (CurrentMode)
+            Task.Factory.StartNew(() =>
             {
-                case FilterMode.ProjectMode:
-                    PublicationList =
-                        new ObservableCollection<EF_Publication>(
-                            AllPublications.Where(
-                                item =>
-                                item.Project_id == _currentProject.Project_id &&
-                                (item.Project_name.Contains(_filterString) ||
-                                 item.Publication_name.Contains(_filterString) ||
-                                 item.P_year.Contains(_filterString) ||
-                                 item.P_month.Contains(_filterString) ||
-                                 item.P_day.Contains(_filterString))));
-                    break;
-                case FilterMode.YearMode:
-                    PublicationList =
-                        new ObservableCollection<EF_Publication>(
-                            AllPublications.Where(
-                                item =>
-                                item.Project_id == _currentProject.Project_id && item.P_year == CurrentYear.Name &&
-                                (item.Project_name.Contains(_filterString) ||
-                                 item.Publication_name.Contains(_filterString) ||
-                                 item.P_year.Contains(_filterString) ||
-                                 item.P_month.Contains(_filterString) ||
-                                 item.P_day.Contains(_filterString))));
-                    break;
-                case FilterMode.MonthMode:
-                    PublicationList =
-                        new ObservableCollection<EF_Publication>(
-                            AllPublications.Where(
-                                item =>
-                                item.Project_id == _currentProject.Project_id && item.P_year == CurrentYear.Name &&
-                                (item.P_month == CurrentMonth.Name) &&
-                                (item.Project_name.Contains(_filterString) ||
-                                 item.Publication_name.Contains(_filterString) ||
-                                 item.P_year.Contains(_filterString) ||
-                                 item.P_month.Contains(_filterString) ||
-                                 item.P_day.Contains(_filterString))));
-                    break;
-                    case FilterMode.DayMode:
-                    PublicationList =
-                        new ObservableCollection<EF_Publication>(
-                            AllPublications.Where(
-                                item =>
-                                item.Project_id == _currentProject.Project_id && item.P_year == CurrentYear.Name &&
-                                (item.P_month == CurrentMonth.Name) && (item.P_day == CurrentDay.Name) &&
-                                (item.Project_name.Contains(_filterString) ||
-                                 item.Publication_name.Contains(_filterString) ||
-                                 item.P_year.Contains(_filterString) ||
-                                 item.P_month.Contains(_filterString) ||
-                                 item.P_day.Contains(_filterString))));
-                    break;
+                PublicationList = new ObservableCollection<EF_Publication>();
+                var coll =
+                    CollectionViewSource.GetDefaultView(DataHelper.GetPublicationByDepartmentId(CurrentDepartament.Department_id));
+                coll.Filter = NameFilter;
+                PublicationList =
+                    new ObservableCollection<EF_Publication>(coll.Cast<EF_Publication>());
+            });
+
+
+        }
+
+        public bool NameFilter(object item)
+        {
+            try
+            {
+                var publication = item as EF_Publication;
+                if (publication != null)
+                {
+                    return
+                        ((publication.Project_name.ToLower().Split().Any(
+                            word => word.StartsWith(FilterString.ToLower().TrimStart()))) ||
+                         (publication.Publication_name.ToLower().Split().Any(
+                             word => word.StartsWith(FilterString.ToLower().TrimStart()))) ||
+                         (publication.P_month.ToLower().Split().Any(
+                             word => word.StartsWith(FilterString.ToLower().TrimStart()))) ||
+                         (publication.P_day.ToLower().Split().Any(
+                             word => word.StartsWith(FilterString.ToLower().TrimStart()))));
+                }
+                else
+                {
+                    return false;
+                }
+                
             }
-
-
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         private string _currentProjectName;
@@ -288,6 +313,55 @@ namespace EffixReportSystem.Views.Publication.ViewModels
             }
         }
 
+        public void Ctor()
+        {
+            using (var model = new EntitiesModel())
+            {
+                var hierarchicalList = model.EF_Departments.ToList().Select(flatItem =>
+                                                                            new EF_Department
+                                                                                {
+                                                                                    Department_name
+                                                                                        =
+                                                                                        flatItem
+                                                                                        .
+                                                                                        Department_name,
+                                                                                        Department_description = flatItem.Department_description,
+
+                                                                                    Department_id
+                                                                                        =
+                                                                                        flatItem
+                                                                                        .
+                                                                                        Department_id,
+                                                                                    Department_parent_id
+                                                                                        =
+                                                                                        flatItem
+                                                                                        .
+                                                                                        Department_parent_id,
+                                                                                }).ToList();
+
+
+                Departments =
+                    new ObservableCollection<EF_Department>(
+                        hierarchicalList.GroupJoin(hierarchicalList,
+                                                   parentItem =>
+                                                   parentItem.Department_id,
+                                                   childItem =>
+                                                   childItem.Department_parent_id,
+                                                   (parent, children) =>
+                                                   {
+                                                       parent.Children
+                                                           =
+                                                           children.
+                                                               ToList();
+                                                       return parent;
+                                                   }).Where(
+                                                           item =>
+                                                           item.Department_parent_id ==
+                                                           null).ToList());
+
+            }
+        }
+
         public void GetAllPublications()
         {
             using (var model = new EntitiesModel())
@@ -316,6 +390,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
 
         public ViewPublicationViewModel(IPageViewModel parentViewModel)
         {
+            Ctor();
             ParentViewModel = parentViewModel;
             GetAllDepartments();
             GetAllPublications();

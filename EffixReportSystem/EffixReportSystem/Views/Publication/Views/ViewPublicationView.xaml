@@ -48,17 +48,18 @@
         </DockPanel>
         <telerik:RadTreeView  Grid.Row="1" 
                               Name="ProjectsTreeView" 
-                              ItemsSource="{Binding AllDepartments, Mode=TwoWay}" 
+                              ItemsSource="{Binding Departments, Mode=TwoWay}" 
+                              SelectedItem="{Binding CurrentDepartament, Mode=TwoWay}"
                               IsRootLinesEnabled="True" 
                               IsLineEnabled="True" 
                               IsVirtualizing="True"
                               IsDragDropEnabled="False"
                               Style="{StaticResource DepartmentTreeView}"
-                              SelectionChanged="ProjectsTreeView_SelectionChanged"
+                             
                               ItemContainerStyle="{StaticResource DepartmentTreeViewItem}">
             <telerik:RadTreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Children, Mode=OneTime}">
-                    <TextBlock Text="{Binding Name, Mode=OneTime}" />
+                <HierarchicalDataTemplate ItemsSource="{Binding Children, Mode=TwoWay}">
+                    <TextBlock Text="{Binding Department_name, Mode=TwoWay}"/>
                 </HierarchicalDataTemplate>
             </telerik:RadTreeView.ItemTemplate>
         </telerik:RadTreeView>
