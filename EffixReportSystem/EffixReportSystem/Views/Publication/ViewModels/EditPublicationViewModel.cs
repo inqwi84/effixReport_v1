@@ -182,12 +182,18 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                     var container = blobClient.GetContainerReference(projectName);
 
                     // Retrieve reference to a blob named "photo1.jpg".
-                    var blockBlob = container.GetBlockBlobReference(filePath.Replace("c:\\storage\\lifan", ""));
-
+                    var tmpStr = filePath.Remove(0, filePath.IndexOf(projectName, StringComparison.Ordinal)+projectName.Length);
+                   // var blockBlob = container.GetBlockBlobReference(filePath.Replace("c:\\storage\\lifan", ""));
+                    var blockBlob = container.GetBlockBlobReference(tmpStr);
                     var path = _tempDirectory + "\\" + i + ".png";
                     // Save blob contents to a file.
                     var imageArray=blockBlob.DownloadByteArray();
                     blockBlob.DownloadToFile(path);
+                    var directoryInfo = new DirectoryInfo(filePath.Remove(filePath.LastIndexOf("\\", StringComparison.Ordinal)));
+                   if(!directoryInfo.Exists)
+                   {
+                       directoryInfo.Create();
+                   }
                     blockBlob.DownloadToFile(filePath);
                     result.Add(new DataHelper.ImageTile
                                    {

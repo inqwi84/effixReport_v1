@@ -58,11 +58,7 @@ namespace EffixReportSystem.Views.Publication.Views
             var ctx = DataContext as ViewPublicationViewModel;
             (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[2];
             var newPublicationViewModel=((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as NewPublicationViewModel);
-            newPublicationViewModel.CurrentPublication = new EF_Publication()
-                                                             {
-                                                                 Publication_date = DateTime.Now,
-                                                                 Project_id = ctx.CurrentProject.Project_id,
-                                                             };
+            newPublicationViewModel.CurrentPublication = new EF_Publication(ctx.CurrentDepartament);
             newPublicationViewModel.CurrentProjectName = ctx.CurrentProjectName;
             newPublicationViewModel.CurrentProject = ctx.CurrentProject;
 

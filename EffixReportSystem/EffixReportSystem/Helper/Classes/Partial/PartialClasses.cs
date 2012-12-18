@@ -35,6 +35,18 @@ namespace EffixReportSystem
     {
         public string Name { get; set; }
 
+
+        public EF_Publication(EF_Department department)
+        {
+            var currentProject = DataHelper.GetParentProject(department.Department_id);
+            _project_Id = currentProject.Department_id;
+            _project_Name = currentProject.Department_description;
+        }
+
+        public EF_Publication()
+        {
+            
+        }
         //private EF_SMI _smi;
         //private EF_Tonality _tonality;
         //private EF_Photo _photo;

@@ -151,40 +151,106 @@ namespace EffixReportSystem.Views.Publication.Views
         {
             var ctx = DataContext as NewPublicationViewModel;
             var date = ctx.CurrentPublication.Publication_date.Value;
-            var destinationDirectory =
-                new DirectoryInfo(_baseDirectory + "\\" +
-                                  ctx.CurrentProjectName + "\\" +
-                                  date.Year + "\\" +
-                                  date.Month + "\\" +
-                                  date.Day);
-
-            
-            var sourceDirectory = new DirectoryInfo(_tempDirectory);
-
-            var files = sourceDirectory.GetFiles("*.*");
-
-            var index = 0;
-            foreach (var fileInfo in files)
+            // проверка, если больше нет такой записи в БД!
+            var alreadyExists = DataHelper.CheckIfPublicationExists((long) ctx.CurrentPublication.Project_id,
+                                                                     ctx.CurrentPublication.EF_SMI.Smi_id,
+                                                                     date.Year,
+                                                                     date.Month,
+                                                                     date.Day);
+            //Существует
+            if (alreadyExists)
             {
-                if (!destinationDirectory.Exists)
+                var dialogResult =
+                    MessageBox.Show("Публикация с данными параметрами уже существует. Сохранить публикацию как новую?","Сохранение",MessageBoxButton.YesNoCancel);
+
+                switch (dialogResult)
                 {
-                    destinationDirectory.Create();
+                    case MessageBoxResult.Yes:
+                                      var destinationDirectory =
+                    new DirectoryInfo(_baseDirectory + "\\" +
+                                      ctx.CurrentProjectName + "\\" +
+                                      date.Year + "\\" +
+                                      date.Month + "\\" +
+                                      date.Day);
+
+
+                var sourceDirectory = new DirectoryInfo(_tempDirectory);
+
+                var files = sourceDirectory.GetFiles("*.*");
+
+                var index = 0;
+                foreach (var fileInfo in files)
+                {
+                    if (!destinationDirectory.Exists)
+                    {
+                        destinationDirectory.Create();
+                    }
+                    var filePath = destinationDirectory + "(v2)"+
+                                   ctx.CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') +
+                                   fileInfo.Name.Replace(" ", "_");
+                    fileInfo.MoveTo(filePath);
+                    index++;
+                    DataHelper.SaveFilesInAzureStorage(filePath);
+                    if (index <= 1)
+                    {
+                        ctx.CurrentPublication.Blob_path = filePath;
+                    }
                 }
-                var filePath = destinationDirectory + "\\" + ctx.CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') +
-                               fileInfo.Name.Replace(" ", "_");
-                fileInfo.MoveTo(filePath);
-                index++;
-                DataHelper.SaveFilesInAzureStorage(filePath);
-                if(index<=1)
-                {
-                    ctx.CurrentPublication.Blob_path = filePath;
+                ctx.CurrentPublication.Image_count = index;
+                ctx.SaveCurrentPublication();
+                (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
+                    (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
+                ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel).
+                    GetAllDepartments();
+                ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel).
+                    GetAllPublications();
+                        break;
+                    case MessageBoxResult.No:
+                      //  this.Close();
+                        break;
                 }
             }
-            ctx.CurrentPublication.Image_count = index;
-            ctx.SaveCurrentPublication();
-            (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
-            ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel).GetAllDepartments();
-            ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel).GetAllPublications();
+            else
+            {
+                var destinationDirectory =
+                    new DirectoryInfo(_baseDirectory + "\\" +
+                                      ctx.CurrentProjectName + "\\" +
+                                      date.Year + "\\" +
+                                      date.Month + "\\" +
+                                      date.Day);
+
+
+                var sourceDirectory = new DirectoryInfo(_tempDirectory);
+
+                var files = sourceDirectory.GetFiles("*.*");
+
+                var index = 0;
+                foreach (var fileInfo in files)
+                {
+                    if (!destinationDirectory.Exists)
+                    {
+                        destinationDirectory.Create();
+                    }
+                    var filePath = destinationDirectory + "\\" +
+                                   ctx.CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') +
+                                   fileInfo.Name.Replace(" ", "_");
+                    fileInfo.MoveTo(filePath);
+                    index++;
+                    DataHelper.SaveFilesInAzureStorage(filePath);
+                    if (index <= 1)
+                    {
+                        ctx.CurrentPublication.Blob_path = filePath;
+                    }
+                }
+                ctx.CurrentPublication.Image_count = index;
+                ctx.SaveCurrentPublication();
+                (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
+                    (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
+                ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel).
+                    GetAllDepartments();
+                ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel).
+                    GetAllPublications();
+            }
         }
 
         private void UrlTextBox_TextChanged(object sender, TextChangedEventArgs e)

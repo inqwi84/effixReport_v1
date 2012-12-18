@@ -33,6 +33,20 @@ namespace EffixReportSystem.Views.Publication.ViewModels
             }
         }
 
+        private EF_Department _currentDepartment;
+        public EF_Department CurrentDepartment
+        {
+            get { return _currentDepartment; }
+            set
+            {
+                if (CurrentDepartment == value)
+                    return;
+
+                _currentDepartment = value;
+                this.OnPropertyChanged("CurrentDepartment");
+            }
+        }
+
 
         public List<EF_SMI> Smi { get; set; }
         public List<EF_Tonality> Tonalities { get; set; }

@@ -27,6 +27,12 @@ using Size = System.Drawing.Size;
 
 namespace EffixReportSystem
 {
+    public enum ParentType
+    {
+        Project,
+        Year,
+        Month
+    }
 
     public partial class EF_Department : INotifyPropertyChanged
     {
@@ -52,6 +58,59 @@ namespace EffixReportSystem.Helper.Classes
 
     public static class DataHelper
     {
+
+        public static bool CheckIfPublicationExists(long projectId, long smiID, int pYear, int pMonth, int pDay)
+        {
+            try
+            {
+                using (var model = new EntitiesModel())
+                {
+                    var publication = model.EF_Publications.FirstOrDefault(pub => pub.Project_id == projectId &&
+                                                                   pub.Smi_id == smiID &&
+                                                                   pub.Publication_date.Value.Year == pYear &&
+                                                                   pub.Publication_date.Value.Month == pMonth &&
+                                                                   pub.Publication_date.Value.Day == pDay);
+                    return publication!=null;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public static EF_Department GetParentProject(long childId)
+        {
+            var result = new EF_Department();
+            using (var model = new EntitiesModel())
+            {
+                var child = model.EF_Departments.FirstOrDefault(item => item.Department_id == childId);
+                if (child == null) return null;
+                switch (child.Department_type)
+                {
+                    case "project":
+                        result = child;
+                        break;
+
+                            case "year":
+                        result =
+                            model.EF_Departments.FirstOrDefault(item => item.Department_id == child.Department_parent_id);
+                                break;
+                            case "month":
+                        var year =model.EF_Departments.FirstOrDefault(item => item.Department_id == child.Department_parent_id);
+                        result =
+                            model.EF_Departments.FirstOrDefault(item => item.Department_id == year.Department_parent_id);
+                        break;
+                            case "day":
+                        var monthDay = model.EF_Departments.FirstOrDefault(item => item.Department_id == child.Department_parent_id);
+                        var yearDay = model.EF_Departments.FirstOrDefault(item => item.Department_id == monthDay.Department_parent_id);
+                       result = model.EF_Departments.FirstOrDefault(item => item.Department_id == yearDay.Department_parent_id);
+                                break;
+
+                }
+            }
+            return result;
+        }
+
         public static ObservableCollection<EF_Publication> GetPublicationByDepartmentId(long departmentId)
         {
             var result = new ObservableCollection<EF_Publication>();
