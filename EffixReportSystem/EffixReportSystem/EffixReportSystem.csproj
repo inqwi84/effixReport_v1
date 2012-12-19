@@ -118,6 +118,9 @@
     <Compile Include="Model\EF_Initiated.generated.cs">
       <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
     </Compile>
+    <Compile Include="Model\EF_MassMedia.generated.cs">
+      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+    </Compile>
     <Compile Include="Model\EF_Photo.generated.cs">
       <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
     </Compile>

@@ -153,6 +153,22 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("Smi_edition_id");
 		   }
 		}
+		private long? _mass_Media_Id;
+		public virtual long? Mass_media_id
+		{
+		   get
+		   {
+		       return this._mass_Media_Id;
+		   }
+		   set
+		   {
+		       if( Mass_media_id == value )
+		  return;
+		 
+		  _mass_Media_Id = value;
+		  this.OnPropertyChanged("Mass_media_id");
+		   }
+		}
 		private EF_SMI_Type _eF_SMI_Type;
 		public virtual EF_SMI_Type EF_SMI_Type
 		{
@@ -183,6 +199,22 @@ namespace EffixReportSystem
 		 
 		  _eF_Edition = value;
 		  this.OnPropertyChanged("EF_Edition");
+		   }
+		}
+		private EF_MassMedia _eF_MassMedium;
+		public virtual EF_MassMedia EF_MassMedium
+		{
+		   get
+		   {
+		       return this._eF_MassMedium;
+		   }
+		   set
+		   {
+		       if( EF_MassMedium == value )
+		  return;
+		 
+		  _eF_MassMedium = value;
+		  this.OnPropertyChanged("EF_MassMedium");
 		   }
 		}
 		private IList<EF_Publication> _eF_Publications = new List<EF_Publication>();

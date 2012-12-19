@@ -34,7 +34,7 @@ namespace EffixReportSystem
         Month
     }
 
-    public partial class EF_Department : INotifyPropertyChanged
+    public partial class EF_Department
     {
         private IList<EF_Department> _children;
 
@@ -51,13 +51,94 @@ namespace EffixReportSystem
             }
         }
     }
+
+    public partial class EF_MassMedia 
+    {
+        private List<EF_MassMedia> _children;
+
+        public virtual List<EF_MassMedia> Children
+        {
+            get { return this._children; }
+            set
+            {
+                if (Equals(Children, value))
+                    return;
+
+                _children = value;
+                this.OnPropertyChanged("Children");
+            }
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
 
 namespace EffixReportSystem.Helper.Classes
 {
-
     public static class DataHelper
     {
+        public static List<EF_MassMedia> Traverse(this List<EF_MassMedia> c)
+        {
+            var result = new List<EF_MassMedia>();
+            foreach (var rootItem in c)
+            {
+                result.Add(rootItem);
+                result.AddRange(rootItem.Children.Traverse());
+            }
+            return result;
+        }
+
+        public static int Index = -1;
+        public static List<EF_MassMedia> TreeToFlat(EF_MassMedia rootNode)
+        {
+
+            var organizations = new List<EF_MassMedia>();
+
+            //объявляем коллекции родительских и дочерних узлов
+            var parentNodes = new List<EF_MassMedia>();
+            var childNodes = new List<EF_MassMedia>();
+
+            rootNode.Mass_media_type_id = Index;
+            Index--;
+            foreach (var node in rootNode.Children)
+            {
+                node.Mass_media_type_id = Index;
+                Index--;
+                node.Parent_type_id = null;
+                parentNodes.Add(node);
+            }
+
+            //цикл будет выполняться, пока не пуста коллекция родительских элементов
+            while (parentNodes.Count > 0)
+            {
+                //проходим по родительским элементам
+                foreach (EF_MassMedia parentNode in parentNodes)
+                {
+                    //у каждого родителя проходим по дочерним элементам
+                    foreach (EF_MassMedia child in parentNode.Children)
+                    {
+                        child.Parent_type_id = parentNode.Mass_media_type_id;
+                        childNodes.Add(child);
+                    }
+                }
+
+                //добавляем в итоговую коллекцию
+                organizations.AddRange(childNodes);
+
+                //в этом месте делаем хитрый обмен, теперь дочерние элементы становятся родительскими
+                List<EF_MassMedia> tempNodes = parentNodes;
+                parentNodes = childNodes;
+                childNodes = tempNodes;
+
+                childNodes.Clear();
+            }
+
+            var result = new List<EF_MassMedia> { rootNode };
+            return result.Traverse();
+        }
 
         public static bool CheckIfPublicationExists(long projectId, long smiID, int pYear, int pMonth, int pDay)
         {
@@ -140,6 +221,7 @@ namespace EffixReportSystem.Helper.Classes
             return result;
         }
 
+     
 
         public static Visual FindAncestor(Visual child, Type typeAncestor)
         {

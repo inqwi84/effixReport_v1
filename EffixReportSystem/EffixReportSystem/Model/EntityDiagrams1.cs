@@ -164,6 +164,14 @@ namespace EffixReportSystem
 	    	}
 		}
 		
+		public IQueryable<EF_MassMedia> EF_MassMedias 
+		{
+	    	get
+	    	{
+	        	return this.GetAll<EF_MassMedia>();
+	    	}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -241,6 +249,11 @@ namespace EffixReportSystem
 		}
 
 		IQueryable<EF_Department> EF_Departments 
+		{ 
+			get;
+		}
+
+		IQueryable<EF_MassMedia> EF_MassMedias 
 		{ 
 			get;
 		}

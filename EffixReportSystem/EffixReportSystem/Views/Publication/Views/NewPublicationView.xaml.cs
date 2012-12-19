@@ -168,7 +168,7 @@ namespace EffixReportSystem.Views.Publication.Views
                     case MessageBoxResult.Yes:
                                       var destinationDirectory =
                     new DirectoryInfo(_baseDirectory + "\\" +
-                                      ctx.CurrentProjectName + "\\" +
+                                      ctx.CurrentPublication.Project_name + "\\" +
                                       date.Year + "\\" +
                                       date.Month + "\\" +
                                       date.Day);
@@ -185,7 +185,7 @@ namespace EffixReportSystem.Views.Publication.Views
                     {
                         destinationDirectory.Create();
                     }
-                    var filePath = destinationDirectory + "(v2)"+
+                    var filePath = destinationDirectory + "\\(v2)"+
                                    ctx.CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') +
                                    fileInfo.Name.Replace(" ", "_");
                     fileInfo.MoveTo(filePath);

@@ -162,6 +162,9 @@
         <orm:field name="_smi_Edition_Id" property="Smi_edition_id" behavior="readwrite" uniqueId="db0be869-1045-44f0-8cb2-3b0a0e78468c" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="smi_edition_id" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         </orm:field>
+        <orm:field name="_mass_Media_Id" property="Mass_media_id" behavior="readwrite" uniqueId="daf11510-013b-4ecc-a48b-f0366c3b4d3a" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column nullable="true" length="0" name="mass_media_id" scale="0" sql-type="bigint" ado-type="Int64" />
+        </orm:field>
         <orm:field name="_eF_SMI_Type" property="EF_SMI_Type" behavior="readwrite" uniqueId="377d5dff-3038-44e8-90d7-ca5f439a13cc" type="EffixReportSystem.EF_SMI_Type">
           <orm:reference uniqueId="565b2c71-a469-4522-b2a0-55a0ab6b214d">
             <orm:sharedfield name="_smi_Type_Id" target-class="EffixReportSystem.EF_SMI_Type" target-field="_smi_Type_Id" />
@@ -176,6 +179,12 @@
         </orm:field>
         <orm:field name="_eF_Publications" property="EF_Publications" behavior="readwrite" uniqueId="7ab0ecbf-e8f8-4754-b3f6-7dee6a92c353" type="EffixReportSystem.EF_Publication">
           <orm:collection element-class="EffixReportSystem.EF_Publication" inverse-field="_eF_SMI" managed="true" order-by="" uniqueId="0273d539-efcc-4231-95a6-56af4b18423a" />
+        </orm:field>
+        <orm:field name="_eF_MassMedium" property="EF_MassMedium" behavior="readwrite" uniqueId="5f44d7db-e624-4a56-873d-2dcf38d4c238" type="EffixReportSystem.EF_MassMedia">
+          <orm:reference uniqueId="7865da82-4501-4235-a8e7-db1b8a57a486">
+            <orm:sharedfield name="_mass_Media_Id" target-class="EffixReportSystem.EF_MassMedia" target-field="_mass_Media_Type_Id" />
+            <orm:constraint name="FK_EF_SMI_2" destination-table="EF_MassMedia" />
+          </orm:reference>
         </orm:field>
       </orm:class>
       <orm:class name="EF_Publication" behavior="readwrite" uniqueId="41250174-64b5-4345-ab1f-ac3d9e70b8a6">
@@ -439,6 +448,28 @@
           <orm:collection element-class="EffixReportSystem.EF_Publication" inverse-field="_eF_Department" managed="true" order-by="" uniqueId="d991799d-acf7-4742-a0dd-1a16ed116720" />
         </orm:field>
       </orm:class>
+      <orm:class name="EF_MassMedia" behavior="readwrite" uniqueId="7cc8de83-4cba-42b5-9eb1-e5e1b3c65a03">
+        <orm:table name="EF_MassMedia" />
+        <orm:identity>
+          <orm:single-field field-name="_mass_Media_Type_Id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_parent_Type_Id" property="Parent_type_id" behavior="readwrite" uniqueId="f536f9a7-ce76-4602-96cb-ff217e4c4220" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column nullable="true" length="0" name="parent_type_id" scale="0" sql-type="bigint" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_mass_Media_Type_Name" property="Mass_media_type_name" behavior="readwrite" uniqueId="bd49172e-f9c8-4d15-beeb-9f6028eb6524" type="System.String">
+          <orm:column nullable="true" length="0" name="mass_media_type_name" scale="0" sql-type="nvarchar(max)" ado-type="LongVarchar" />
+        </orm:field>
+        <orm:field name="_mass_Media_Type_Id" property="Mass_media_type_id" behavior="readwrite" uniqueId="6b79c0d9-c745-4ce2-9c01-bacc88e3fd36" type="System.Int64">
+          <orm:column nullable="false" primary-key="true" length="0" name="mass_media_type_id" scale="0" sql-type="bigint" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_mass_Media_Type_Descr" property="Mass_media_type_descr" behavior="readwrite" uniqueId="dbc9514c-4c4b-4909-965e-d89e644554e3" type="System.String">
+          <orm:column nullable="true" length="0" name="mass_media_type_descr" scale="0" sql-type="nvarchar(max)" ado-type="LongVarchar" />
+        </orm:field>
+        <orm:field name="_eF_SMIs" property="EF_SMIs" behavior="readwrite" uniqueId="c99a8b5c-986d-4f4f-a7b2-c7b6941dfbab" type="EffixReportSystem.EF_SMI">
+          <orm:collection element-class="EffixReportSystem.EF_SMI" inverse-field="_eF_MassMedium" managed="true" order-by="" uniqueId="7865da82-4501-4235-a8e7-db1b8a57a486" />
+        </orm:field>
+      </orm:class>
     </orm:namespace>
     <orm:schema schema="">
       <orm:table name="EF_Users">
@@ -488,11 +519,15 @@
         <orm:column name="smi_edition_descr" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="LongVarchar" />
         <orm:column name="smi_url" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         <orm:column name="smi_edition_id" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column nullable="true" length="0" name="mass_media_id" scale="0" sql-type="bigint" ado-type="Int64" />
         <orm:constraint name="FK_EF_SMI_0" destination-table="EF_SMI_Type">
           <orm:column name="smi_type_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
         </orm:constraint>
         <orm:constraint name="FK_EF_SMI_1" destination-table="EF_Edition">
           <orm:column name="smi_edition_id" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_EF_SMI_2" destination-table="EF_MassMedia">
+          <orm:column nullable="true" length="0" name="mass_media_id" scale="0" sql-type="bigint" ado-type="Int64" />
         </orm:constraint>
       </orm:table>
       <orm:table name="EF_Publication">
@@ -580,6 +615,12 @@
         <orm:column name="department_type" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="LongVarchar" />
         <orm:column name="department_description" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="LongVarchar" />
         <orm:column name="department_project_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+      </orm:table>
+      <orm:table name="EF_MassMedia">
+        <orm:column nullable="true" length="0" name="parent_type_id" scale="0" sql-type="bigint" ado-type="Int64" />
+        <orm:column nullable="true" length="0" name="mass_media_type_name" scale="0" sql-type="nvarchar(max)" ado-type="LongVarchar" />
+        <orm:column nullable="false" primary-key="true" length="0" name="mass_media_type_id" scale="0" sql-type="bigint" ado-type="Int64" />
+        <orm:column nullable="true" length="0" name="mass_media_type_descr" scale="0" sql-type="nvarchar(max)" ado-type="LongVarchar" />
       </orm:table>
     </orm:schema>
   </orm:orm>
@@ -673,6 +714,7 @@
       <Property Id="2757d503-9328-413d-86ca-ad7983bbe78a" name="Smi_name" label="Smi_name : String" kind="Persistent" fieldName="_smi_Name" />
       <Property Id="3a5bfcaf-ffdb-4ad4-888d-e15860159226" name="Smi_type_id" type="Int64" label="Smi_type_id : Int64" nullable="true" kind="Persistent" fieldName="_smi_Type_Id" />
       <Property Id="76bbe228-af24-45e7-aa0f-9af428aaa40c" name="Smi_url" type="Int32" label="Smi_url : Int32" nullable="true" kind="Persistent" fieldName="_smi_Url" />
+      <Property Id="daf11510-013b-4ecc-a48b-f0366c3b4d3a" name="Mass_media_id" type="Int64" label="Mass_media_id : Int64" nullable="true" kind="Persistent" fieldName="_mass_Media_Id" />
       <AssociationTargets>
         <Association Id="565b2c71-a469-4522-b2a0-55a0ab6b214d" SourceMultiplicity="ZeroOne" name="EF_SMIHasEF_SMI_Type">
           <DomainClassMoniker name="/EntitiesModel/EF_SMI_Type" />
@@ -700,6 +742,19 @@
             </associationDefinesSourceProperty>
           </sourceNavigationalProperty>
         </Association>
+        <Association Id="7865da82-4501-4235-a8e7-db1b8a57a486" SourceMultiplicity="ZeroOne" name="EF_SMIHasEF_MassMedium">
+          <DomainClassMoniker name="/EntitiesModel/EF_MassMedia" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="7afe0b4d-19a7-4a80-96e1-9197554caab7">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_MassMedia/EF_SMIs" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="3294dcac-1a1a-4e7d-8ce8-3625896c8873">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_SMI/EF_MassMedium" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
       </AssociationTargets>
       <navigationalProperties>
         <classHasNavigationalProperties Id="28083092-8fa7-46c3-b9e4-f887860eeef4">
@@ -710,6 +765,9 @@
         </classHasNavigationalProperties>
         <classHasNavigationalProperties Id="e5fb4973-4fb0-4a49-beb5-be74c192552a">
           <NavigationalProperty Id="7ab0ecbf-e8f8-4754-b3f6-7dee6a92c353" name="EF_Publications" type="IList&lt;EF_Publication&gt;" label="EF_Publications : IList&lt;EF_Publication&gt;" nullable="true" kind="Persistent" fieldName="_eF_Publications" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="3f12eaef-4244-4ba5-a496-c7e1a6025662">
+          <NavigationalProperty Id="5f44d7db-e624-4a56-873d-2dcf38d4c238" name="EF_MassMedium" type="EF_MassMedium" label="EF_MassMedium : EF_MassMedium" nullable="true" kind="Persistent" fieldName="_eF_MassMedium" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
@@ -955,6 +1013,17 @@
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
+    <DomainClass Id="7cc8de83-4cba-42b5-9eb1-e5e1b3c65a03" name="EF_MassMedia" namespace="EffixReportSystem" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="6b79c0d9-c745-4ce2-9c01-bacc88e3fd36" name="Mass_media_type_id" type="Int64" label="Mass_media_type_id : Int64" kind="Persistent" identity="true" fieldName="_mass_Media_Type_Id" />
+      <Property Id="dbc9514c-4c4b-4909-965e-d89e644554e3" name="Mass_media_type_descr" label="Mass_media_type_descr : String" kind="Persistent" fieldName="_mass_Media_Type_Descr" />
+      <Property Id="bd49172e-f9c8-4d15-beeb-9f6028eb6524" name="Mass_media_type_name" label="Mass_media_type_name : String" kind="Persistent" fieldName="_mass_Media_Type_Name" />
+      <Property Id="f536f9a7-ce76-4602-96cb-ff217e4c4220" name="Parent_type_id" type="Int64" label="Parent_type_id : Int64" nullable="true" kind="Persistent" fieldName="_parent_Type_Id" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="3da222ee-80dd-4b01-a82c-1a41283a04b9">
+          <NavigationalProperty Id="c99a8b5c-986d-4f4f-a7b2-c7b6941dfbab" name="EF_SMIs" type="IList&lt;EF_SMI&gt;" label="EF_SMIs : IList&lt;EF_SMI&gt;" nullable="true" kind="Persistent" fieldName="_eF_SMIs" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="fc680909-a019-4154-870c-ac7b2fe62cc3">
@@ -973,6 +1042,7 @@
         <entitySetProperty name="EF_Exclusivities" namespace="EffixReportSystem" type="EF_Exclusivity" label="EF_Exclusivities : IQueryable&lt;EffixReportSystem.EF_Exclusivity&gt;" />
         <entitySetProperty name="EF_Editions" namespace="EffixReportSystem" type="EF_Edition" label="EF_Editions : IQueryable&lt;EffixReportSystem.EF_Edition&gt;" />
         <entitySetProperty name="EF_Departments" namespace="EffixReportSystem" type="EF_Department" label="EF_Departments : IQueryable&lt;EffixReportSystem.EF_Department&gt;" />
+        <entitySetProperty name="EF_MassMedias" namespace="EffixReportSystem" type="EF_MassMedia" label="EF_MassMedias : IQueryable&lt;EffixReportSystem.EF_MassMedia&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

@@ -392,9 +392,9 @@ namespace EffixReportSystem.Views.Publication.ViewModels
         {
             Ctor();
             ParentViewModel = parentViewModel;
-            GetAllDepartments();
-            GetAllPublications();
-            AllDepartments = _allDepartments;
+            //GetAllDepartments();
+           // GetAllPublications();
+           // AllDepartments = _allDepartments;
         }
     }
 }
