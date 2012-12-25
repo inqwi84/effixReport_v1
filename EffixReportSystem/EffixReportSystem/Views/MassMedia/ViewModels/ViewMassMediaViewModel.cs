@@ -4,12 +4,30 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using EffixReportSystem.Helper.Classes;
+using EffixReportSystem.Helper.Classes.Enums;
 using EffixReportSystem.Helper.Interfaces;
 
 namespace EffixReportSystem.Views.MassMedia.ViewModels
 {
     class ViewMassMediaViewModel :ObservableObject, IPageViewModel
     {
+
+        private ViewMode _mode;
+
+        public ViewMode Mode
+        {
+            get { return _mode; }
+            set
+            {
+                if (Mode != value)
+                {
+                    _mode = value;
+                    OnPropertyChanged("Mode");
+                }
+            }
+        }
+
+
         private IPageViewModel _currentPageViewModel;
         private List<IPageViewModel> _pageViewModels;
         private EntitiesModel _model;
@@ -124,6 +142,11 @@ namespace EffixReportSystem.Views.MassMedia.ViewModels
         {
                 _model.Add(CurrentSmi);
                 _model.SaveChanges();
+        }
+        public void SaveNewSmi()
+        {
+            _model.Add(CurrentSmi);
+            _model.SaveChanges();
         }
         public void RestoreSmi()
         {

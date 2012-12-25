@@ -24,4 +24,5 @@ namespace EffixReportSystem.Helper.Classes.Enums
         IncidentType,
         SubjectType
     };
+
 }

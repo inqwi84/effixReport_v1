@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EffixReportSystem.Helper.Classes.Enums;
 using EffixReportSystem.Views.MassMedia.ViewModels;
 using Telerik.Windows.Controls;
 
@@ -43,20 +44,41 @@ namespace EffixReportSystem.Views.MassMedia.Views
 
         private void DoneButton_Click(object sender, RoutedEventArgs e)
         {
+
             var ctx = DataContext as ViewMassMediaViewModel;
-            ctx.SaveSmi();
-            SMIDescription.IsEnabled = false;
-            SMIEdition.IsEnabled = false;
-            SMIEditionDescr.IsEnabled = false;
-            SMIName.IsEnabled = false;
-            SMIUrl.IsEnabled = false;
-            EditButton.Visibility = Visibility.Visible;
-            DoneButton.Visibility = Visibility.Collapsed;
-            CancelButton.Visibility = Visibility.Collapsed;
+            if (ctx.Mode == ViewMode.EditMode)
+            {
+                ctx.SaveSmi();
+                SMIDescription.IsEnabled = false;
+                SMIEdition.IsEnabled = false;
+                SMIEditionDescr.IsEnabled = false;
+                SMIName.IsEnabled = false;
+                SMIUrl.IsEnabled = false;
+                EditButton.Visibility = Visibility.Visible;
+                DoneButton.Visibility = Visibility.Collapsed;
+                CancelButton.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                if (ctx.Mode == ViewMode.NewMode)
+                {
+                    ctx.SaveNewSmi();
+                    SMIDescription.IsEnabled = false;
+                    SMIEdition.IsEnabled = false;
+                    SMIEditionDescr.IsEnabled = false;
+                    SMIName.IsEnabled = false;
+                    SMIUrl.IsEnabled = false;
+                    EditButton.Visibility = Visibility.Visible;
+                    DoneButton.Visibility = Visibility.Collapsed;
+                    CancelButton.Visibility = Visibility.Collapsed; 
+                }
+            }
         }
 
         private void EditPublicationButton_Click(object sender, RoutedEventArgs e)
         {
+            var ctx = DataContext as ViewMassMediaViewModel;
+            ctx.Mode=ViewMode.EditMode;
             SMIDescription.IsEnabled = true;
             SMIEdition.IsEnabled = true;
             SMIEditionDescr.IsEnabled = true;
@@ -83,7 +105,23 @@ namespace EffixReportSystem.Views.MassMedia.Views
 
         private void NewPublicationButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var ctx = DataContext as ViewMassMediaViewModel;
+            ctx.Mode=ViewMode.NewMode;
+            ctx.CurrentSmi=new EF_SMI {Mass_media_id = ctx.CurrentMassMediaDepartament.Mass_media_type_id};
+            //ctx.CurrentSmi.EF_MassMedium = ctx.CurrentMassMediaDepartament;
+            SMIDescription.Text = String.Empty;
+            SMIDescription.IsEnabled = true;
+            SMIEdition.Text = String.Empty;
+            SMIEdition.IsEnabled = true;
+            SMIEditionDescr.Text = String.Empty;
+            SMIEditionDescr.IsEnabled = true;
+            SMIName.Text = String.Empty;
+            SMIName.IsEnabled = true;
+            SMIUrl.Text = String.Empty;
+            SMIUrl.IsEnabled = true;
+            EditButton.Visibility=Visibility.Collapsed;
+            DoneButton.Visibility=Visibility.Visible;
+            CancelButton.Visibility=Visibility.Visible;
         }
 
         private void RemovePublicationButton_Click(object sender, RoutedEventArgs e)

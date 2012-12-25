@@ -132,17 +132,25 @@ namespace EffixReportSystem.Views.Publication.ViewModels
 
         private void Filter()
         {
-            if (_filterString == null)
-                return;
-            Task.Factory.StartNew(() =>
+            try
             {
-                PublicationList = new ObservableCollection<EF_Publication>();
-                var coll =
-                    CollectionViewSource.GetDefaultView(DataHelper.GetPublicationByDepartmentId(CurrentDepartament.Department_id));
-                coll.Filter = NameFilter;
-                PublicationList =
-                    new ObservableCollection<EF_Publication>(coll.Cast<EF_Publication>());
-            });
+                if (_filterString == null)
+                    return;
+                Task.Factory.StartNew(() =>
+                {
+                    PublicationList = new ObservableCollection<EF_Publication>();
+                    var coll =
+                        CollectionViewSource.GetDefaultView(DataHelper.GetPublicationByDepartmentId(CurrentDepartament.Department_id));
+                    coll.Filter = NameFilter;
+                    PublicationList =
+                        new ObservableCollection<EF_Publication>(coll.Cast<EF_Publication>());
+                });
+            }
+            catch (Exception)
+            {
+
+            }
+
 
 
         }

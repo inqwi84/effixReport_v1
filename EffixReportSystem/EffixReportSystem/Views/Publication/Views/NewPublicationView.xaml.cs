@@ -235,7 +235,7 @@ namespace EffixReportSystem.Views.Publication.Views
             {
                 var destinationDirectory =
                     new DirectoryInfo(_baseDirectory + "\\" +
-                                      ctx.CurrentProjectName + "\\" +
+                                      ctx.CurrentPublication.Project_name + "\\" +
                                       date.Year + "\\" +
                                       date.Month + "\\" +
                                       date.Day);

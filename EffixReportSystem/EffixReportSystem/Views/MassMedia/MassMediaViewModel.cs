@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using EffixReportSystem.Helper.Classes;
+using EffixReportSystem.Helper.Classes.Enums;
 using EffixReportSystem.Helper.Interfaces;
 using EffixReportSystem.Views.MassMedia.ViewModels;
 
