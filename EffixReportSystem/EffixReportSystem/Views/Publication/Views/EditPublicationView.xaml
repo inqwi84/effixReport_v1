@@ -338,14 +338,18 @@
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <StackPanel>
+            <StackPanel Margin="5">
+                <DockPanel x:Name="PublicationTitle" LastChildFill="False" Margin="0,5,0,5">
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0"  Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наименование статьи</TextBlock>
+                    <TextBox Text="{Binding CurrentPublication.Publication_name}"  HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></TextBox>
+                </DockPanel>
                 <DockPanel x:Name="SMIName" LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0"  Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наименование издания</TextBlock>
                     <ComboBox SelectedValue="{Binding CurrentPublication.EF_SMI, Mode=TwoWay}" ItemsSource="{Binding Smi}" DisplayMemberPath="Smi_name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
                 </DockPanel>
                 <DockPanel x:Name="Date" LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" Text="Дата публикации" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}"></TextBlock>
-                    <telerik:RadDatePicker  SelectedDate="{Binding CurrentPublication.Publication_date, Mode=TwoWay}"  DockPanel.Dock="Right"  Margin="0,0,5,0" DateTimeWatermarkContent="Выберите дату" telerik:StyleManager.Theme="Metro" Width="150"></telerik:RadDatePicker>
+                    <telerik:RadDatePicker  SelectedDate="{Binding CurrentPublication.Publication_date, Mode=TwoWay}"  DockPanel.Dock="Right"  DateTimeWatermarkContent="Выберите дату" telerik:StyleManager.Theme="Metro" Width="150"></telerik:RadDatePicker>
                 </DockPanel>
                 <DockPanel x:Name="Tonality"  LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Тональность</TextBlock>

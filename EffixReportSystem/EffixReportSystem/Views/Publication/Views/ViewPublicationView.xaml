@@ -51,6 +51,7 @@
                               ItemsSource="{Binding Departments, Mode=TwoWay}" 
                               SelectedItem="{Binding CurrentDepartament, Mode=TwoWay}"
                               IsRootLinesEnabled="True" 
+				              IsLoadOnDemandEnabled="True"
                               IsLineEnabled="True" 
                               IsVirtualizing="True"
                               IsDragDropEnabled="False"
@@ -93,8 +94,12 @@
         </telerik:RadListBox>
         <!--<NotificationSystemMVVM:PersonDetailsViewControl2 x:Name="ViewDetails"  Grid.Column="4" Grid.Row="1"></NotificationSystemMVVM:PersonDetailsViewControl2>-->
         <Grid x:Name="ViewDetails"  Grid.Column="4" Grid.Row="1" Margin="10">
-                    <StackPanel>
-                        <DockPanel x:Name="SMIName" LastChildFill="False" Margin="0,5,0,5">
+            <StackPanel Margin="5">
+                <DockPanel x:Name="PublicationTitle" LastChildFill="False" Margin="0,5,0,5">
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0"  Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наименование статьи</TextBlock>
+                    <TextBlock Text="{Binding CurrentPublication.Publication_name}"  HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" DockPanel.Dock="Right"></TextBlock>
+                </DockPanel>
+                <DockPanel x:Name="SMIName" LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0"  Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наименование издания</TextBlock>
                     <TextBlock Text="{Binding CurrentPublication.EF_SMI.Smi_name}" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" DockPanel.Dock="Right"></TextBlock>
                 </DockPanel>

@@ -305,7 +305,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
         public void OpenInPaint(DataHelper.ImageTile tile)
         {
             CurrentImageTile = tile;
-            Process.Start("mspaint", CurrentImageTile.ImagePath);
+            Process.Start("C:\\Program Files (x86)\\PhotoshopPortable\\PhotoshopCS4Portable.exe", CurrentImageTile.ImagePath);
         }
     }
 }

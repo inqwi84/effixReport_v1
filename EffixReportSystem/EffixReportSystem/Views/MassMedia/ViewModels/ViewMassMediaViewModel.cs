@@ -134,6 +134,18 @@ namespace EffixReportSystem.Views.MassMedia.ViewModels
 
         }
 
+        internal void PreapreContextOperationsForItem(EF_MassMedia actionItem)
+        {
+            //if (actionItem != null)
+            //{
+            //    this.ContextOperations = DataProvider.GetContextoperations(actionItem.ItemType);
+            //}
+            //else
+            //{
+            //    this.ContextOperations = DataProvider.GetContextoperations(SolutionItemType.Solution);
+            //}
+        }
+
         public void Ctor()
         {
             using (var model = new EntitiesModel())

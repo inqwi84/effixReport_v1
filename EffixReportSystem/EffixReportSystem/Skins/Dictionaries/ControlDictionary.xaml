@@ -1724,7 +1724,6 @@
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="CheckState" Value="Off"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="1,0,5,0"/>
         <Setter Property="IsDropAllowed" Value="True"/>
@@ -1898,7 +1897,6 @@
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="CheckState" Value="Off"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="1,0,5,0"/>
         <Setter Property="IsDropAllowed" Value="True"/>

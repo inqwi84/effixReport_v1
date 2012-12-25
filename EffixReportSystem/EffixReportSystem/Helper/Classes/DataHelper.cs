@@ -419,7 +419,25 @@ namespace EffixReportSystem.Helper.Classes
                 WebBrowserDocumentCompletedEventHandler(tready_Tick);
             tready.Tick += new EventHandler(tready_Tick);
         }
-
+        public HtmlCapture(WebBrowser web)
+        {
+            //initialise the webbrowser and the timer
+            tready = new Timer();
+            tready.Interval = 2000;
+            screen = Screen.PrimaryScreen.Bounds;
+            //set the webbrowser width and hight
+            web.Width = screen.Width;
+            web.Height = screen.Height;
+            //suppress script errors and hide scroll bars
+            web.ScriptErrorsSuppressed = true;
+            web.ScrollBarsEnabled = false;
+            //attached events
+            web.Navigating +=
+                new WebBrowserNavigatingEventHandler(web_Navigating);
+            web.DocumentCompleted += new
+                WebBrowserDocumentCompletedEventHandler(tready_Tick);
+            tready.Tick += new EventHandler(tready_Tick);
+        }
         #region Public methods
 
         public void Create(string url)

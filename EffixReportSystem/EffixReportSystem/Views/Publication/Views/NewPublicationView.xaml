@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:Classes="clr-namespace:EffixReportSystem.Helper.Classes"
-             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" mc:Ignorable="d">
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:controls="clr-namespace:EffixReportSystem.Controls"
+             xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" mc:Ignorable="d">
         <UserControl.Resources>
             <DataTemplate x:Key="headerTemplate">
                 <TextBlock Text="{Binding ImageName}"></TextBlock>
@@ -348,7 +350,19 @@
 								</TextBlock.Effect></TextBlock>
         </DockPanel>
         <DockPanel Height="Auto" Grid.Row="1">
-            <Classes:Ruler x:Name="hruler"
+
+
+                <TabControl x:Name="tabControl" >
+                    <TabItem Header="Web">
+                    <ScrollViewer    VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Template="{StaticResource stlScrollViewer}">
+                        <WebBrowser x:Name="webBrowser" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.CanContentScroll="False"></WebBrowser>
+</ScrollViewer>
+                    <!--<WebBrowser x:Name="webBrowser" Source="http://www.google.ru/" ></WebBrowser>-->
+                    </TabItem>
+                    <TabItem Header="SnapShot" >
+                    <ScrollViewer    VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Template="{StaticResource stlScrollViewer}">
+                        <DockPanel>
+                            <Classes:Ruler x:Name="hruler"
                                Width="Auto"
                                Unit="Cm"
                                Length="14"
@@ -357,7 +371,7 @@
                         Zoom="1"
                         AutoSize="True"
                         ClipToBounds="True" />
-            <Classes:Ruler x:Name="vruler"
+                            <Classes:Ruler x:Name="vruler"
                                Width="Auto"
                                Unit="Cm"
                                Marks="Up"
@@ -366,52 +380,57 @@
                         AutoSize="True"
                         Zoom="1"
                         ClipToBounds="True">
-                <Classes:Ruler.LayoutTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="1"
+                                <Classes:Ruler.LayoutTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="1"
                                     ScaleY="1" />
-                        <SkewTransform AngleX="0"
+                                        <SkewTransform AngleX="0"
                                    AngleY="0" />
-                        <RotateTransform Angle="90" />
-                        <TranslateTransform X="23" />
-                    </TransformGroup>
-                </Classes:Ruler.LayoutTransform>
-            </Classes:Ruler>
-            <ScrollViewer   VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Template="{StaticResource stlScrollViewer}">
-                <!--<osc:RulerScrollViewer x:Name="scr" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Grid.Column="1">-->
-                <Grid Name="qw1">
-                    <Image x:Name="img" ClipToBounds="True"></Image>
-                    <DockPanel x:Name="DockPanel" LastChildFill="False">
-                        <Grid DockPanel.Dock="Left" MinWidth="40"></Grid>
-                        <Classes:DockPanelSplitter x:Name="LeftSplitter" DockPanel.Dock="Left" Width="2" ProportionalResize="True" Background="Red" />
-                        <!--<Grid x:Name="griddus" DockPanel.Dock="Right">
-                        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="43,20,0,0" Name="button1" Visibility="Collapsed" VerticalAlignment="Top" Width="75" Click="button1_Click" />
-                    </Grid>-->
-                        <Grid DockPanel.Dock="Right" MinWidth="40"></Grid>
-                        <Classes:DockPanelSplitter x:Name="RightSplitter"  ProportionalResize="True" DockPanel.Dock="Right" Width="2"  Background="Red"/>
+                                        <RotateTransform Angle="90" />
+                                        <TranslateTransform X="23" />
+                                    </TransformGroup>
+                                </Classes:Ruler.LayoutTransform>
+                            </Classes:Ruler>
+                            <Grid Name="qw1">
+                                <Grid.RenderTransform>
+                                    <ScaleTransform x:Name="transform" ScaleX="1" ScaleY="1" />
+                                </Grid.RenderTransform>
+                                <Image x:Name="img" ClipToBounds="True"></Image>
+                                <DockPanel x:Name="DockPanel" LastChildFill="False">
+                                    <Grid DockPanel.Dock="Left" MinWidth="40"></Grid>
+                                    <Classes:DockPanelSplitter x:Name="LeftSplitter" DockPanel.Dock="Left" Width="2" ProportionalResize="True" Background="Red" />
+                                    <Grid DockPanel.Dock="Right" MinWidth="40"></Grid>
+                                    <Classes:DockPanelSplitter x:Name="RightSplitter"  ProportionalResize="True" DockPanel.Dock="Right" Width="2"  Background="Red"/>
+                                    <Grid x:Name="TopSplitter1before" DockPanel.Dock="Top"  MinHeight="10">
+                                    </Grid>
+                                    <Classes:DockPanelSplitter x:Name="TopSplitter1" ProportionalResize="True" DockPanel.Dock="Top" Background="Black"/>
+                                    <Grid x:Name="TopSplitter1after" DockPanel.Dock="Top"  MinHeight="10">
+                                    </Grid>
+                                </DockPanel>
+                            </Grid>
+                        </DockPanel>
+                    </ScrollViewer>
+                </TabItem>
+                </TabControl>
 
-                        <Grid x:Name="TopSplitter1before" DockPanel.Dock="Top"  MinHeight="10">
-                        </Grid>
-                        <Classes:DockPanelSplitter x:Name="TopSplitter1" ProportionalResize="True" DockPanel.Dock="Top" Background="Black"/>
-                        <Grid x:Name="TopSplitter1after" DockPanel.Dock="Top"  MinHeight="10">
-                        </Grid>
-                    </DockPanel>
-                </Grid>
-            </ScrollViewer>
         </DockPanel>
         <Grid x:Name="ViewDetails"  Grid.Column="2" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-                <StackPanel>
+                <StackPanel Margin="5">
+                <DockPanel x:Name="PublicationTitle" LastChildFill="False" Margin="0,5,0,5">
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0"  Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наименование статьи</TextBlock>
+                    <TextBox Text="{Binding CurrentPublication.Publication_name}"  HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></TextBox>
+                </DockPanel>
                 <DockPanel x:Name="SMIName" LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0"  Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наименование издания</TextBlock>
-                    <ComboBox SelectedValue="{Binding CurrentPublication.EF_SMI, Mode=TwoWay}" ItemsSource="{Binding Smi}" DisplayMemberPath="Smi_name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
+                   <ComboBox SelectedValue="{Binding CurrentPublication.EF_SMI, Mode=TwoWay}" ItemsSource="{Binding Smi}" DisplayMemberPath="Smi_name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
                 </DockPanel>
                 <DockPanel x:Name="Date" LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" Text="Дата публикации" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}"></TextBlock>
-                    <telerik:RadDatePicker  SelectedDate="{Binding CurrentPublication.Publication_date, Mode=TwoWay}"  DockPanel.Dock="Right"  Margin="0,0,5,0" DateTimeWatermarkContent="Выберите дату" telerik:StyleManager.Theme="Metro" Width="150"></telerik:RadDatePicker>
+                    <telerik:RadDatePicker  SelectedDate="{Binding CurrentPublication.Publication_date, Mode=TwoWay}"  DockPanel.Dock="Right"   DateTimeWatermarkContent="Выберите дату" telerik:StyleManager.Theme="Metro" Width="150"></telerik:RadDatePicker>
                 </DockPanel>
                 <DockPanel x:Name="Tonality"  LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Тональность</TextBlock>
@@ -439,14 +458,13 @@
                 </DockPanel>
             </StackPanel>
             <ScrollViewer Grid.Row="1">
-                <telerik:RadTileView x:Name="myTileView" telerik:StyleManager.Theme="Metro"  ItemsSource="{Binding ImageTileList}" 
+                <telerik:RadTileView Margin="10" x:Name="myTileView" telerik:StyleManager.Theme="Metro"  ItemsSource="{Binding ImageTileList}" 
                              SelectionMode="Single"
                              TileStateChangeTrigger="SingleClick"
 				ItemContainerStyle="{StaticResource togglelessRadTileViewItem}"
 				ItemTemplate="{StaticResource headerTemplate}" ContentTemplate="{StaticResource contentTemplate}">
                 </telerik:RadTileView>
             </ScrollViewer>
-
         </Grid>
         <StackPanel Orientation="Horizontal" Grid.Column="2"  Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Button Name="DoneButton" Style="{DynamicResource stlButton}" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="DoneButton_Click" Margin="0,0,10,0"   Content="{DynamicResource DoneButtonCtrl}" ></Button>

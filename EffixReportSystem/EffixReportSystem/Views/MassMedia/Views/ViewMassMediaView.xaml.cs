@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using EffixReportSystem.Views.MassMedia.ViewModels;
+using Telerik.Windows.Controls;
 
 namespace EffixReportSystem.Views.MassMedia.Views
 {
@@ -88,6 +89,25 @@ namespace EffixReportSystem.Views.MassMedia.Views
         private void RemovePublicationButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void RadContextMenu_Opened(object sender, RoutedEventArgs e)
+        {
+            var ctx = DataContext as ViewMassMediaViewModel;
+            RadTreeViewItem clickedItemContainer = radContextMenu.GetClickedElement<RadTreeViewItem>();
+            if (clickedItemContainer != null)
+            {
+                var clickedItem = clickedItemContainer.Item as EF_MassMedia;
+
+                if (clickedItem != null)
+                {
+                    ctx.PreapreContextOperationsForItem(clickedItem);
+                }
+            }
+            else
+            {
+                ctx.PreapreContextOperationsForItem(null);
+            }
         }
     }
 }

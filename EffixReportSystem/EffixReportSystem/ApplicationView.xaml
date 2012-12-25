@@ -7,8 +7,7 @@
         xmlns:Publication="clr-namespace:EffixReportSystem.Views.Publication"
         xmlns:Report="clr-namespace:EffixReportSystem.Views.Report"
         xmlns:Settings="clr-namespace:EffixReportSystem.Views.Settings" WindowStyle="None" 
-	    WindowStartupLocation="CenterScreen"
-	    AllowsTransparency="True" 
+	    WindowStartupLocation="CenterScreen" 
         x:Uid="ApplicationViewCtrl1"
         Title="Система отчётов" 
 	    ResizeMode="CanResizeWithGrip"
@@ -61,7 +60,7 @@
                         </StackPanel>
                     </Grid>
                 </Button>
-                <!--<Button x:Name="maximizeBtn" Click="maximizeBtn_Click" Width="24" Height="24" Style="{DynamicResource stlWindowControlButtons}" Cursor="Hand" ToolTip="Растянуть на весь экран">
+                <Button x:Name="maximizeBtn" Click="maximizeBtn_Click" Width="24" Height="24" Style="{DynamicResource stlWindowControlButtons}" Cursor="Hand" ToolTip="Растянуть на весь экран">
                     <Grid Width="10" Height="10">
                         <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
                             <Path Data="M294,417.11L302,417.11L302,423.11L294,423.11z M293,424.11L303,424.11L303,415.11L293,415.11z" Fill="{DynamicResource bControlWindowBtnBack}" Height="9" Stretch="Fill" Width="10" Effect="{DynamicResource fxLightShadow}"/>
@@ -70,7 +69,7 @@
                             <Path Data="M294,417.11L302,417.11L302,423.11L294,423.11z M293,424.11L303,424.11L303,415.11L293,415.11z" Fill="{DynamicResource bControlWindowBtnBackOver}" Height="9" Stretch="Fill" Width="10" Effect="{DynamicResource fxLightShadow}"/>
                         </StackPanel>
                     </Grid>
-                </Button>-->
+                </Button>
                 <Button x:Name="closeBtn" Click="closeBtn_Click" Width="24" Height="24" Style="{DynamicResource stlWindowControlButtons}" Cursor="Hand"  x:Uid="ApplicationViewCtrl3" ToolTip="Закрыть окно">
                     <Grid Width="10" Height="10">
                         <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
@@ -139,7 +138,7 @@
                             </StackPanel>
                         </Grid>
                     </RadioButton>
-                    <RadioButton Name="ReportRadioButton" Width="{StaticResource BWidth}" Style="{DynamicResource stlMenuToggleButtonLast}" Cursor="Hand"
+                    <RadioButton Name="ReportRadioButton" Width="{StaticResource BWidth}" Style="{DynamicResource stlMenuToggleButton}" Cursor="Hand"
  
                                  Checked="ReportRadioButton_Checked">
                         <Grid>
@@ -154,7 +153,7 @@
                             </StackPanel>
                         </Grid>
                     </RadioButton>
-                    <RadioButton Name="SettingsRadioButton" Width="{StaticResource BWidth}" Style="{DynamicResource stlMenuToggleButtonLast}" Cursor="Hand" Visibility="Collapsed" Checked="SettingsRadioButton_Checked">
+                    <RadioButton Name="SettingsRadioButton" Width="{StaticResource BWidth}" Style="{DynamicResource stlMenuToggleButtonLast}" Cursor="Hand"  Checked="SettingsRadioButton_Checked">
                         <Grid>
                             <StackPanel>
                                 <TextBlock Text= "{Binding Path=PageViewModels[4].Name}" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="14" Foreground="{DynamicResource cButtonContentColor}" Effect="{DynamicResource fxDarkShadow}"/>

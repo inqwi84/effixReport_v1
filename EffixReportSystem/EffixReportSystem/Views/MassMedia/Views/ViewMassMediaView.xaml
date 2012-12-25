@@ -4,6 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate x:Key="contextMenuItemTemplate">
+            <TextBlock Text="{Binding Header}" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="IconTemplate">
+            <Image Source="{Binding}" Width="20" Height="20" />
+        </DataTemplate>
+
+        <Style x:Key="contextMenuItemStyle" TargetType="telerik:RadMenuItem">
+            <Setter Property="Width" Value="200" />
+            <Setter Property="Icon" Value="{Binding ImagePath}" />
+            <Setter Property="IconTemplate" Value="{StaticResource IconTemplate}" />
+            <Setter Property="IsSeparator" Value="{Binding IsSeparator}" />
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -57,6 +73,13 @@
                               Style="{StaticResource DepartmentTreeView}"
                              
                               ItemContainerStyle="{StaticResource SmiDepartmentTreeViewItem}">
+            <telerik:RadContextMenu.ContextMenu>
+                <telerik:RadContextMenu x:Name="radContextMenu"
+						Opened="RadContextMenu_Opened"
+						ItemsSource="{Binding ContextOperations}"
+						ItemTemplate="{StaticResource contextMenuItemTemplate}"
+						ItemContainerStyle="{StaticResource contextMenuItemStyle}" />
+            </telerik:RadContextMenu.ContextMenu>
             <telerik:RadTreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children, Mode=TwoWay}">
                     <TextBlock Text="{Binding Mass_media_type_name, Mode=TwoWay}"/>
