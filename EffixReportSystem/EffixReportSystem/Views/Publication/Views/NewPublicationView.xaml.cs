@@ -159,10 +159,6 @@ namespace EffixReportSystem.Views.Publication.Views
             var ctx = DataContext as NewPublicationViewModel;
             (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
                 (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
-            ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
-                .GetAllDepartments();
-            ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
-                .GetAllPublications();
         }
 
         private void DoneButton_Click(object sender, RoutedEventArgs e)
@@ -219,12 +215,7 @@ namespace EffixReportSystem.Views.Publication.Views
                         ctx.SaveCurrentPublication();
                         (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
                             (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
-                        ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
-                            .
-                            GetAllDepartments();
-                        ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
-                            .
-                            GetAllPublications();
+
                         break;
                     case MessageBoxResult.No:
                         //  this.Close();
@@ -267,10 +258,7 @@ namespace EffixReportSystem.Views.Publication.Views
                 ctx.SaveCurrentPublication();
                 (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
                     (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
-                ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel).
-                    GetAllDepartments();
-                ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel).
-                    GetAllPublications();
+
             }
         }
 

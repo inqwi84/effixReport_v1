@@ -318,6 +318,12 @@ namespace EffixReportSystem.Helper.Classes
 
         }
 
+        public static long GetDepartmentId(DateTime publicationDate, long projectId)
+        {
+
+            return 0;
+        }
+
         public static void SaveFilesInAzureStorage(string filePath)
         {
             var nameArray = filePath.Split(Convert.ToChar("\\"));

@@ -83,7 +83,25 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                                       CurrentPublication.P_year + "_" + CurrentPublication.P_month + "_" +
                                       CurrentPublication.P_day;
             CurrentPublication.Project_name = CurrentPublication.EF_Project.Project_descr;
-            CurrentPublication.Publication_name = CurrentPublication.EF_SMI.Smi_descr;
+           // CurrentPublication.Publication_name = CurrentPublication.EF_SMI.Smi_descr;
+
+            var mainDept =
+                _model.EF_Departments.FirstOrDefault(dept => dept.Department_project_id == CurrentPublication.Project_id);
+            var yearDept =
+                _model.EF_Departments.FirstOrDefault(
+                    dept =>
+                    dept.Department_name.Trim() == CurrentPublication.P_year.Trim() &&
+                    dept.Department_parent_id == mainDept.Department_id);
+            var monthDept =
+                _model.EF_Departments.FirstOrDefault(
+                    dept =>
+                    dept.Department_name.Trim() == CurrentPublication.P_month.Trim() &&
+                    dept.Department_parent_id == yearDept.Department_id);
+            var dayDepth = _model.EF_Departments.FirstOrDefault(
+                    dept =>
+                    dept.Department_name.Trim() == CurrentPublication.P_day.Trim() &&
+                    dept.Department_parent_id == monthDept.Department_id);
+            CurrentPublication.Department_id = dayDepth.Department_id;
                 _model.Add(CurrentPublication);
                 _model.SaveChanges();
 

@@ -37,11 +37,6 @@ namespace EffixReportSystem.Views.MassMedia.Views
 
         }
 
-        private void PublicationListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void DoneButton_Click(object sender, RoutedEventArgs e)
         {
 
