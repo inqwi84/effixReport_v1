@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:Classes="clr-namespace:EffixReportSystem.Helper.Classes"
+             xmlns:classes="clr-namespace:EffixReportSystem.Helper.Classes"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:controls="clr-namespace:EffixReportSystem.Controls"
              xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" mc:Ignorable="d">
@@ -300,10 +300,10 @@
                 </Setter>
             </Style>
 
-        <Style TargetType="{x:Type Classes:DockPanelSplitter}">
+        <Style TargetType="{x:Type classes:DockPanelSplitter}">
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Classes:DockPanelSplitter}">
+                    <ControlTemplate TargetType="{x:Type classes:DockPanelSplitter}">
                         <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
@@ -362,7 +362,7 @@
                     <TabItem Header="SnapShot" >
                     <ScrollViewer    VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Template="{StaticResource stlScrollViewer}">
                         <DockPanel>
-                            <Classes:Ruler x:Name="hruler"
+                            <classes:Ruler x:Name="hruler"
                                Width="Auto"
                                Unit="Cm"
                                Length="14"
@@ -371,7 +371,7 @@
                         Zoom="1"
                         AutoSize="True"
                         ClipToBounds="True" />
-                            <Classes:Ruler x:Name="vruler"
+                            <classes:Ruler x:Name="vruler"
                                Width="Auto"
                                Unit="Cm"
                                Marks="Up"
@@ -380,7 +380,7 @@
                         AutoSize="True"
                         Zoom="1"
                         ClipToBounds="True">
-                                <Classes:Ruler.LayoutTransform>
+                                <classes:Ruler.LayoutTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleX="1"
                                     ScaleY="1" />
@@ -389,8 +389,8 @@
                                         <RotateTransform Angle="90" />
                                         <TranslateTransform X="23" />
                                     </TransformGroup>
-                                </Classes:Ruler.LayoutTransform>
-                            </Classes:Ruler>
+                                </classes:Ruler.LayoutTransform>
+                            </classes:Ruler>
                             <Grid Name="qw1">
                                 <Grid.RenderTransform>
                                     <ScaleTransform x:Name="transform" ScaleX="1" ScaleY="1" />
@@ -398,12 +398,12 @@
                                 <Image x:Name="img" ClipToBounds="True"></Image>
                                 <DockPanel x:Name="DockPanel" LastChildFill="False">
                                     <Grid DockPanel.Dock="Left" MinWidth="40"></Grid>
-                                    <Classes:DockPanelSplitter x:Name="LeftSplitter" DockPanel.Dock="Left" Width="2" ProportionalResize="True" Background="Red" />
+                                    <classes:DockPanelSplitter x:Name="LeftSplitter" DockPanel.Dock="Left" Width="2" ProportionalResize="True" Background="Red" />
                                     <Grid DockPanel.Dock="Right" MinWidth="40"></Grid>
-                                    <Classes:DockPanelSplitter x:Name="RightSplitter"  ProportionalResize="True" DockPanel.Dock="Right" Width="2"  Background="Red"/>
+                                    <classes:DockPanelSplitter x:Name="RightSplitter"  ProportionalResize="True" DockPanel.Dock="Right" Width="2"  Background="Red"/>
                                     <Grid x:Name="TopSplitter1before" DockPanel.Dock="Top"  MinHeight="10">
                                     </Grid>
-                                    <Classes:DockPanelSplitter x:Name="TopSplitter1" ProportionalResize="True" DockPanel.Dock="Top" Background="Black"/>
+                                    <classes:DockPanelSplitter x:Name="TopSplitter1" ProportionalResize="True" DockPanel.Dock="Top" Background="Black"/>
                                     <Grid x:Name="TopSplitter1after" DockPanel.Dock="Top"  MinHeight="10">
                                     </Grid>
                                 </DockPanel>

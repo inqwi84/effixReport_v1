@@ -108,12 +108,14 @@ namespace EffixReportSystem
 
         private void PersonRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            
+            var ctx = DataContext as ApplicationViewModel;
+            ctx.CurrentPageViewModel = ctx.PageViewModels[2];
         }
 
         private void ReportRadioButton_Checked(object sender, RoutedEventArgs e)
         {
-           
+            var ctx = DataContext as ApplicationViewModel;
+            ctx.CurrentPageViewModel = ctx.PageViewModels[3];
         }
 
         private void SettingsRadioButton_Checked(object sender, RoutedEventArgs e)

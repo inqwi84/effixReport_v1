@@ -11,6 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EffixReportSystem.Helper.Classes.Report;
+using EffixReportSystem.Views.Report.ReportTemplates;
+using Telerik.Reporting;
 
 namespace EffixReportSystem.Views.Report.Views
 {
@@ -22,6 +25,14 @@ namespace EffixReportSystem.Views.Report.Views
         public ViewReportView()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+           var report = new HeadReport();
+           var obj = new ObjectDataSource { DataSource = (new EF_Report().GetAllReports()) };
+            report.DataSource = obj;
+            reportViewer.Report=report;
         }
     }
 }

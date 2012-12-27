@@ -30,7 +30,6 @@ namespace EffixReportSystem
 		   }
 		}
     }
-
     public partial class EF_Publication : IName
     {
         public string Name { get; set; }
@@ -47,7 +46,11 @@ namespace EffixReportSystem
         {
             
         }
+        
     }
+
+
+
     public partial class EF_SMI_Type : IName
     {
         private ObservableCollection<Year> _children;
