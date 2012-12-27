@@ -1,7 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Drawing;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Media.Imaging;
+using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.StorageClient;
 
 namespace EffixReportSystem.Helper.Classes.Report
 {
@@ -89,6 +96,103 @@ namespace EffixReportSystem.Helper.Classes.Report
         public DateTime PublicationDate { get; set; }
         public string PublicationUrl { get; set; }
         public string PublicationTitle { get; set; }
+        public string MassMediaType { get; set; }
+        public List<Bitmap> ImageList { get; set; }
+        public List<string> ImagePathList { get; set; }
+        public string TempUri { get; set; }
+
+        private List<BitmapImage> GetImagesFromAzure(string imagePath,int? imageCount,string projectName)
+        {
+            return new List<BitmapImage>();
+        }
+
+        private ObservableCollection<Bitmap> GetBlobFromStorage(string blobPath, int? imageCount, string projectName)
+        {
+            var result = new ObservableCollection<Bitmap>();
+            for (var i = 0; i < imageCount; i++)
+            {
+                try
+                {
+                    var extension = blobPath.LastIndexOf("_", StringComparison.Ordinal);
+                    var filePath = blobPath.Remove(extension + 1) + i + ".png";
+                    var storageAccount = CloudStorageAccount.Parse(
+                        "DefaultEndpointsProtocol=http;AccountName=ctx;AccountKey=rCaek5ugmLbIaL2mXk3gaqMF4mzqPrUu6CXBUsXn1yrTdWBBTBsQpA2bDuyDC6BQx1NCeUhEl6p0vWT69ZNF+Q==");
+
+                    // Create the blob client.
+                    var blobClient = storageAccount.CreateCloudBlobClient();
+
+                    // Retrieve reference to a previously created container.
+                    var container = blobClient.GetContainerReference(projectName);
+
+                    // Retrieve reference to a blob named "photo1.jpg".
+                    var tmpStr = filePath.Remove(0, filePath.IndexOf(projectName, StringComparison.Ordinal) + projectName.Length);
+                    // var blockBlob = container.GetBlockBlobReference(filePath.Replace("c:\\storage\\lifan", ""));
+                    var blockBlob = container.GetBlockBlobReference(tmpStr);
+                    // Save blob contents to a file.
+                    var imageArray = blockBlob.DownloadByteArray();
+
+                    result.Add(ImageFromBuffer(imageArray));
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+            // Retrieve storage account from connection string.
+            return result;
+        }
+
+        private ObservableCollection<string> GetBlobPathFromStorage(string blobPath, int? imageCount, string projectName)
+        {
+            var result = new ObservableCollection<string>();
+            for (var i = 0; i < imageCount; i++)
+            {
+                try
+                {
+                    var extension = blobPath.LastIndexOf("_", StringComparison.Ordinal);
+                    var filePath = blobPath.Remove(extension + 1) + i + ".png";
+                    var storageAccount = CloudStorageAccount.Parse(
+                        "DefaultEndpointsProtocol=http;AccountName=ctx;AccountKey=rCaek5ugmLbIaL2mXk3gaqMF4mzqPrUu6CXBUsXn1yrTdWBBTBsQpA2bDuyDC6BQx1NCeUhEl6p0vWT69ZNF+Q==");
+
+                    // Create the blob client.
+                    var blobClient = storageAccount.CreateCloudBlobClient();
+
+                    // Retrieve reference to a previously created container.
+                    var container = blobClient.GetContainerReference(projectName);
+
+                    // Retrieve reference to a blob named "photo1.jpg".
+                    var tmpStr = filePath.Remove(0, filePath.IndexOf(projectName, StringComparison.Ordinal) + projectName.Length);
+                    // var blockBlob = container.GetBlockBlobReference(filePath.Replace("c:\\storage\\lifan", ""));
+                    var blockBlob = container.GetBlockBlobReference(tmpStr);
+                    // Save blob contents to a file.
+
+                    result.Add(blockBlob.Uri.AbsoluteUri);
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+            // Retrieve storage account from connection string.
+            return result;
+        }
+
+        public Bitmap ImageFromBuffer(Byte[] bytes)
+        {
+            var stream = new MemoryStream(bytes);
+            var image = new BitmapImage();
+            image.BeginInit();
+            image.StreamSource = stream;
+            image.EndInit();
+            BitmapImage bi = image; // Get bitmapimage from somewhere
+            MemoryStream ms = new MemoryStream();
+            BitmapEncoder encoder=new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bi));
+            encoder.Save(ms);
+            var bmp = new Bitmap(ms);
+            return bmp;
+        }
+
 
         public ReportRS(EF_Publication publication,int index)
         {
@@ -97,6 +201,19 @@ namespace EffixReportSystem.Helper.Classes.Report
             PublicationDate = (DateTime) publication.Publication_date;
             PublicationUrl = publication.Url_path;
             PublicationTitle = publication.Publication_name;
+            MassMediaType = publication.EF_SMI.EF_MassMedium.Mass_media_type_name;
+            ImageList = GetBlobFromStorage(publication.Blob_path, publication.Image_count, publication.Project_name).ToList();
+            ImagePathList = GetBlobPathFromStorage(publication.Blob_path, publication.Image_count, publication.Project_name).ToList();
+            try
+            {
+                TempUri = ImagePathList[0];
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
     }
+
 }

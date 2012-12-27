@@ -242,6 +242,12 @@
     <Compile Include="Views\Person\Views\ViewPersonView.xaml.cs">
       <DependentUpon>ViewPersonView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Report\ReportTemplates\ClippingReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\ClippingReport.Designer.cs">
+      <DependentUpon>ClippingReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Report\ReportTemplates\HeadReport.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -371,6 +377,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ReportTemplates\ClippingReport.resx">
+      <DependentUpon>ClippingReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Report\ReportTemplates\HeadReport.resx">
       <DependentUpon>HeadReport.cs</DependentUpon>
