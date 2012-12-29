@@ -277,7 +277,7 @@ namespace EffixReportSystem.Views.Publication.Views
                 GetSnapshot();
                 //webBrowser.Navigate(new Uri(ctx.CurrentUrl));
                 //var tt=  WebRequest.Create("mail.ru");
-                string original = ctx.CurrentUrl;
+                var original = ctx.CurrentUrl;
                 if (!original.StartsWith("http:"))
                     original = "http://" + original;
                 Uri uri;
@@ -322,17 +322,9 @@ namespace EffixReportSystem.Views.Publication.Views
 
         private string ExtractDomainFromURL(string sURL)
         {
+            var rg = new Regex("://(?<host>([a-z\\d][-a-z\\d]*[a-z\\d]\\.)*[a-z][-a-z\\d]+[a-z])");
 
-            Regex rg = new Regex("://(?<host>([a-z\\d][-a-z\\d]*[a-z\\d]\\.)*[a-z][-a-z\\d]+[a-z])");
-
-            if (rg.IsMatch(sURL))
-            {
-                return rg.Match(sURL).Result("${host}");
-            }
-            else
-            {
-                return string.Empty;
-            }
+            return rg.IsMatch(sURL) ? rg.Match(sURL).Result("${host}") : string.Empty;
         }
 
         private void AddSplitterButton_Click(object sender, RoutedEventArgs e)
@@ -433,10 +425,6 @@ namespace EffixReportSystem.Views.Publication.Views
         {
             var ctx = DataContext as NewPublicationViewModel;
             var tempDirectory = new DirectoryInfo(_tempDirectory);
-            //foreach (var file in tempDirectory.GetFiles("*.*"))
-            //{
-
-            //}
             var dlg = new Microsoft.Win32.OpenFileDialog
             {
                 Multiselect = true,
@@ -456,12 +444,12 @@ namespace EffixReportSystem.Views.Publication.Views
                 foreach (var filepath in dlg.FileNames)
                 {
                     var file = new FileInfo(filepath);
-                    var newFile = tempDirectory + "_"+index.ToString() + file.Extension;
+                    var newFile = tempDirectory + "_"+index + file.Extension;
                     file.MoveTo(newFile);
                     ctx.ImageTileList.Add(new DataHelper.ImageTile
                         {
                             Image = new BitmapImage(new Uri(newFile)),
-                            ImageName = "_" + index.ToString() + file.Extension,
+                            ImageName = "_" + index + file.Extension,
                             ImagePath = newFile
                         });
                     index++;
