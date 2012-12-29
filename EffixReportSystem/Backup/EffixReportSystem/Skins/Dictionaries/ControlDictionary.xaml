@@ -1,0 +1,2545 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+	xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" 
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+	xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing">
+    <Style x:Key="ButtonFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- Resource dictionary entries should be defined here. -->
+    <LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#F3F3F3" Offset="0"/>
+        <GradientStop Color="#EBEBEB" Offset="0.5"/>
+        <GradientStop Color="#DDDDDD" Offset="0.5"/>
+        <GradientStop Color="#CDCDCD" Offset="1"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
+    <Style x:Key="stlButton" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+
+                    <!-- Дизайн -->
+                    <Grid x:Name="Button" SnapsToDevicePixels="True" Height="22">
+                        <Grid x:Name="NormalState">
+                            <Border x:Name="NormalBack" Background="{DynamicResource cButtonBack}" BorderBrush="{DynamicResource cButtonBorder}" CornerRadius="3" BorderThickness="1" Effect="{DynamicResource fxLightShadow}" >
+                                <TextBlock TextWrapping="Nowrap" Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource cButtonContentColor}" Effect="{DynamicResource fxDarkShadow}" Margin="15,0,15,1" FontFamily="{DynamicResource ffBaseFont}"/>
+                            </Border>
+                        </Grid>
+                        <Grid x:Name="OverState" Opacity="0">
+                            <Border x:Name="OverBack" BorderThickness="1" BorderBrush="{DynamicResource cButtonBorderOver}" Background="{DynamicResource cButtonBackOver}" CornerRadius="3" Effect="{DynamicResource fxLightShadow}" >
+                                <TextBlock TextWrapping="Nowrap" Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource cButtonContentColor}" Effect="{DynamicResource fxOverShadow}" Margin="15,0,15,1" FontFamily="{DynamicResource ffBaseFont}"/>
+                            </Border>
+                        </Grid>
+                        <Grid x:Name="PressedState" Opacity="0">
+                            <Border x:Name="PressedBack" BorderThickness="1" BorderBrush="{DynamicResource cButtonBorderPressed}" Background="{DynamicResource cButtonBackPressed}" CornerRadius="3" Effect="{DynamicResource fxLightShadow}" >
+                                <TextBlock TextWrapping="Nowrap" Text="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource cButtonContentColorPressed}" Effect="{DynamicResource fxPressedShadow}" Margin="15,0,15,1" FontFamily="{DynamicResource ffBaseFont}"/>
+                            </Border>
+                        </Grid>
+                    </Grid>
+
+                    <!-- Действия -->
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" TargetName="OverState" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" TargetName="PressedState" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- Простая кнопка -->
+
+    <!-- Текстбокс -->
+    <Style TargetType="{x:Type TextBox}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Grid SnapsToDevicePixels="True">
+                        <Grid x:Name="NormalSTate">
+                            <Border BorderBrush="{DynamicResource cButtonBorder}" BorderThickness="1" CornerRadius="3" Background="{DynamicResource cWorkArea}">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="0" ShadowDepth="1" Color="#FFD9DBDD" Direction="270"/>
+                                </Border.Effect>
+                            </Border>
+                        </Grid>
+                        <Grid x:Name="FocusState" Opacity="0">
+                            <Border BorderBrush="{DynamicResource cButtonBorderOver}" BorderThickness="1" Background="{DynamicResource cWorkArea}" CornerRadius="3">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="0" ShadowDepth="1" Color="#FFD9DBDD" Direction="270"/>
+                                </Border.Effect>
+                            </Border>
+                        </Grid>
+                        <Grid x:Name="DisabledState" Opacity="0">
+                            <Border BorderBrush="{DynamicResource cDisabledBorder}" BorderThickness="1" Background="{DynamicResource cDisabledArea}" CornerRadius="3">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="0" ShadowDepth="1" Direction="270" Color="#FFD9DBDD"/>
+                                </Border.Effect>
+                            </Border>
+                        </Grid>
+                        <ScrollViewer x:Name="PART_ContentHost" Foreground="#FF7F848A" Margin="8,0,8,2" FontFamily="{DynamicResource ffBaseFont}" VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="DisabledState" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Opacity" TargetName="FocusState" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type PasswordBox}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                    <Grid SnapsToDevicePixels="True">
+                        <Grid x:Name="NormalSTate">
+                            <Border BorderBrush="{DynamicResource cButtonBorder}" BorderThickness="1" CornerRadius="3" Background="{DynamicResource cWorkArea}">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="0" ShadowDepth="1" Color="#FFD9DBDD" Direction="270"/>
+                                </Border.Effect>
+                            </Border>
+                        </Grid>
+                        <Grid x:Name="FocusState" Opacity="0">
+                            <Border BorderBrush="{DynamicResource cButtonBorderOver}" BorderThickness="1" Background="{DynamicResource cWorkArea}" CornerRadius="3">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="0" ShadowDepth="1" Color="#FFD9DBDD" Direction="270"/>
+                                </Border.Effect>
+                            </Border>
+                        </Grid>
+                        <Grid x:Name="DisabledState" Opacity="0">
+                            <Border BorderBrush="{DynamicResource cDisabledBorder}" BorderThickness="1" Background="{DynamicResource cDisabledArea}" CornerRadius="3">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="0" ShadowDepth="1" Direction="270" Color="#FFD9DBDD"/>
+                                </Border.Effect>
+                            </Border>
+                        </Grid>
+                        <ScrollViewer x:Name="PART_ContentHost" Foreground="#FF7F848A" Margin="8,0,8,2" FontFamily="{DynamicResource ffBaseFont}" VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="DisabledState" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Opacity" TargetName="FocusState" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Текстбокс для поиска -->
+
+    <LinearGradientBrush x:Key="TextBoxBorder" EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
+        <GradientStop Color="#ABADB3" Offset="0.05"/>
+        <GradientStop Color="#E2E3EA" Offset="0.07"/>
+        <GradientStop Color="#E3E9EF" Offset="1"/>
+    </LinearGradientBrush>
+
+    <Style x:Key="stlSearchBox" TargetType="{x:Type TextBox}">
+        <Setter Property="AllowDrop" Value="True"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <!--<Setter Property="ContextMenu" Value="{StaticResource TextBoxContextMenu}" />-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Grid>
+                        <Border x:Name="InputBorder" BorderThickness="1" CornerRadius="3" BorderBrush="#FF6C737B" Background="White">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="1" x:Name="Placeholder" Text="" Margin="4,0,4,2" VerticalAlignment="Center" FontStyle="Italic" Foreground="#FFB4B7BC" Visibility="Visible"/>
+                                <ScrollViewer Grid.Column="1" x:Name="PART_ContentHost" Foreground="#FF7F848A" FontFamily="{DynamicResource ffBaseFont}" VerticalAlignment="Center" Visibility="Visible" Background="Transparent" />
+                                <Image x:Name="SearchIcon" Grid.Column="0" Source="/Skins/Images/search.png" Stretch="Fill" Width="16" Height="16" Margin="4,0" Visibility="Visible" />
+                                <Button x:Name="DelButton" Style="{DynamicResource stlSearchBoxDelButton}" Grid.Column="2" Visibility="Visible"  VerticalAlignment="Center" Margin="4,3,4,0">
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="Placeholder" Property="Text" Value="{DynamicResource SearchTextBox}"/>
+                            <Setter TargetName="DelButton" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <EventTrigger RoutedEvent="Button.Click">
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="stlUrlTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="AllowDrop" Value="True"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Grid>
+                        <Border x:Name="InputBorder" BorderThickness="1" CornerRadius="3" BorderBrush="#FF6C737B" Background="White">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="1" x:Name="Placeholder" Text="" Margin="4,0,4,2" VerticalAlignment="Center" FontStyle="Italic" Foreground="#FFB4B7BC" Visibility="Visible"/>
+                                <ScrollViewer Grid.Column="1" x:Name="PART_ContentHost" Foreground="#FF7F848A" FontFamily="{DynamicResource ffBaseFont}" VerticalAlignment="Center" Visibility="Visible" Background="Transparent" />
+                                <Image x:Name="SearchIcon" Grid.Column="0" Source="/Skins/Images/search.png" Stretch="Fill" Width="16" Height="16" Margin="4,0" Visibility="Visible" />
+                                <Button x:Name="DelButton" Style="{DynamicResource stlSearchBoxDelButton}" Grid.Column="2" Visibility="Visible"  VerticalAlignment="Center" Margin="4,3,4,0">
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="Placeholder" Property="Text" Value="Введите адрес"/>
+                            <Setter TargetName="DelButton" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <EventTrigger RoutedEvent="Button.Click">
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="stlRadListBox" TargetType="{x:Type telerik:RadListBox}">
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="MinHeight" Value="40"/>
+        <Setter Property="Background" Value="#FFFCFCFC"/>
+        <Setter Property="Foreground" Value="#FF1E395B"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="{x:Type telerik:RadListBoxItem}">
+                    <Setter Property="Padding" Value="3"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    <Setter Property="VerticalContentAlignment" Value="Top"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type telerik:RadListBoxItem}">
+                                <Grid>
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal"/>
+                                            <VisualState x:Name="MouseOver">
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="MouseOverVisual"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Disabled">
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0" To="0.5" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="contentPresenter"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="SelectionStates">
+                                            <VisualState x:Name="Unselected"/>
+                                            <VisualState x:Name="Selected">
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="SelectedVisual"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="FocusStates">
+                                            <VisualState x:Name="Focused">
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisual"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Unfocused"/>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="2" Margin="1,0"/>
+                                    <Border x:Name="MouseOverVisual" BorderBrush="#FFB8D6FB" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2" Margin="1,0" Opacity="0" SnapsToDevicePixels="True">
+                                        <Border BorderThickness="1" CornerRadius="1" SnapsToDevicePixels="True">
+                                            <Border.BorderBrush>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="#FFFCFDFE"/>
+                                                    <GradientStop Color="#FFF2F7FE" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Border.BorderBrush>
+                                            <Border.Background>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="#FFFAFBFD" Offset="0.004"/>
+                                                    <GradientStop Color="#FFEBF3FD" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Border.Background>
+                                        </Border>
+                                    </Border>
+                                    <Border x:Name="SelectedVisual" BorderBrush="#FF7DA2CE" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2" Margin="1,0" Opacity="0" SnapsToDevicePixels="True">
+                                        <Border BorderThickness="1" CornerRadius="1" SnapsToDevicePixels="True">
+                                            <Border.BorderBrush>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="#FFEBF4FD"/>
+                                                    <GradientStop Color="#FFDBEAFD" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Border.BorderBrush>
+                                            <Border.Background>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="#FFDCEBFC"/>
+                                                    <GradientStop Color="#FFC1DBFC" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Border.Background>
+                                        </Border>
+                                    </Border>
+                                    <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    <Border x:Name="FocusVisual" BorderBrush="#FF6CAFFF" BorderThickness="1" CornerRadius="2" Margin="1,0" Opacity="0" SnapsToDevicePixels="True"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+        <Setter Property="BorderBrush" Value="#FFA0AFC3"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type telerik:RadListBox}">
+                    <ScrollViewer x:Name="PART_ScrollViewer" Margin="0,20" Padding="{TemplateBinding Padding}" VerticalScrollBarVisibility="Auto"  Template="{DynamicResource stlScrollViewer}" >
+                        <ItemsPresenter></ItemsPresenter>
+                    </ScrollViewer>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <ControlTemplate x:Key="stlScrollViewer" TargetType="{x:Type ScrollViewer}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Button Command="{x:Static DataGrid.SelectAllCommand}" Focusable="false" 
+					Style="{DynamicResource {ComponentResourceKey ResourceId=DataGridSelectAllButtonStyle, TypeInTargetAssembly={x:Type DataGrid}}}" 
+					Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+					Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+
+            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" Grid.ColumnSpan="2" Grid.Row="1"/>
+            <ScrollBar x:Name="PART_VerticalScrollBar" Grid.Column="2" Orientation="Vertical" Grid.Row="1" 
+					Maximum="{TemplateBinding ScrollableHeight}" 
+					Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" 
+					Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
+					ViewportSize="{TemplateBinding ViewportHeight}" 
+					Style="{DynamicResource stlScrollBarVertical}" Width="12" Background="{x:Null}"/>
+
+            <Grid Grid.Column="1" Grid.Row="2" Height="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                </Grid.ColumnDefinitions>
+                <ScrollBar x:Name="PART_HorizontalScrollBar" Grid.Column="1" Maximum="{TemplateBinding ScrollableWidth}" Orientation="Horizontal" 
+							Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" 
+							Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"  
+							ViewportSize="{TemplateBinding ViewportWidth}" Style="{DynamicResource stlScrollBarHorizontal}" Height="12"/>
+            </Grid>
+        </Grid>
+    </ControlTemplate>
+    <LinearGradientBrush x:Key="VerticalScrollBarBackground" EndPoint="1,0" StartPoint="0,0">
+        <GradientStop Color="#E1E1E1" Offset="0"/>
+        <GradientStop Color="#EDEDED" Offset="0.20"/>
+        <GradientStop Color="#EDEDED" Offset="0.80"/>
+        <GradientStop Color="#E3E3E3" Offset="1"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="ScrollBarDisabledBackground" Color="#F4F4F4"/>
+
+    <!-- Стиль горизонтальной кнопки скролбара -->
+    <Style x:Key="stlHorizontalScrollBarButton" TargetType="{x:Type RepeatButton}">
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+
+                    <!-- Анимация -->
+                    <ControlTemplate.Resources>
+
+                        <!-- Иконка при наведении -->
+                        <Storyboard x:Key="ArrowMousePressed">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Arrow">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Arrow">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="ArrowMouseUnpressed">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Arrow">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Arrow">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+
+                    </ControlTemplate.Resources>
+                    <!-- Анимация -->
+
+                    <Grid Width="12" Height="12">
+                        <Grid x:Name="NormalState">
+                            <Border BorderBrush="{DynamicResource cButtonBorder}" BorderThickness="1" Background="{DynamicResource cButtonBack}" CornerRadius="1"/>
+                        </Grid>
+                        <Grid x:Name="OverState" Opacity="0">
+                            <Border BorderBrush="{DynamicResource cButtonBorderOver}" BorderThickness="1" Background="{DynamicResource cButtonBackOver}" CornerRadius="1"/>
+                        </Grid>
+                        <Grid x:Name="PressedState" Opacity="0">
+                            <Border BorderBrush="{DynamicResource cButtonBorderPressed}" BorderThickness="1" Background="{DynamicResource cButtonBackPressed}" CornerRadius="1"/>
+                        </Grid>
+                        <ContentPresenter x:Name="Arrow"/>
+                    </Grid>
+                    <!-- Дизайн кнопки -->
+
+                    <!-- Действия -->
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" TargetName="OverState" Value="1"/>
+                        </Trigger>
+
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" TargetName="PressedState" Value="1"/>
+                        </Trigger>
+
+                        <!-- Стрелка в состоянии Normal -->
+                        <DataTrigger Binding="{Binding Content.Children.Count, ElementName=Arrow}" Value="2">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource ArrowMouseUnpressed}"/>
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+
+                        <!-- Стрелка при наведении -->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsPressed, RelativeSource={x:Static RelativeSource.Self}}" Value="True"/>
+                                <Condition Binding="{Binding Content.Children.Count, ElementName=Arrow}" Value="2"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource ArrowMousePressed}"/>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource ArrowMouseUnpressed}"/>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+
+                    </ControlTemplate.Triggers>
+                    <!-- Действия -->
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- Стиль горизонтальной кнопки скролбара -->
+
+    <!-- Стиль вертикальной кнопки скролбара -->
+    <Style x:Key="stlVerticalScrollBarButton" TargetType="{x:Type RepeatButton}">
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+
+                    <!-- Анимация -->
+                    <ControlTemplate.Resources>
+
+                        <!-- Иконка при наведении -->
+                        <Storyboard x:Key="ArrowMousePressed">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Arrow">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Arrow">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="ArrowMouseUnpressed">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Arrow">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Arrow">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+
+                    </ControlTemplate.Resources>
+                    <!-- Анимация -->
+
+                    <!-- Дизайн кнопки -->
+                    <Grid Width="12" Height="12">
+                        <Grid x:Name="NormalState">
+                            <Border BorderBrush="{DynamicResource cButtonBorder}" BorderThickness="1" CornerRadius="1" Background="{DynamicResource cButtonBack}"/>
+                        </Grid>
+                        <Grid x:Name="OverState" Opacity="0" >
+                            <Border BorderBrush="{DynamicResource cButtonBorderOver}" BorderThickness="1" CornerRadius="1" Background="{DynamicResource cButtonBackOver}"/>
+                        </Grid>
+                        <Grid x:Name="PressedState" Opacity="0">
+                            <Border BorderBrush="{DynamicResource cButtonBorderPressed}" BorderThickness="1" CornerRadius="1" Background="{DynamicResource cButtonBackPressed}"/>
+                        </Grid>
+                        <ContentPresenter x:Name="Arrow"/>
+                    </Grid>
+                    <!-- Дизайн кнопки -->
+
+                    <!-- Действия -->
+                    <ControlTemplate.Triggers>
+
+                        <!-- Плашка при наведении -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" TargetName="OverState" Value="1"/>
+                        </Trigger>
+
+                        <!-- Плашка при нажатии -->
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Opacity" TargetName="PressedState" Value="1"/>
+                        </Trigger>
+
+                        <!-- Стрелка в состоянии Normal -->
+                        <DataTrigger Binding="{Binding Content.Children.Count, ElementName=Arrow}" Value="2">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource ArrowMouseUnpressed}"/>
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+
+                        <!-- Стрелка при нажатии -->
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsPressed, RelativeSource={x:Static RelativeSource.Self}}" Value="True"/>
+                                <Condition Binding="{Binding Content.Children.Count, ElementName=Arrow}" Value="2"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource ArrowMousePressed}"/>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource ArrowMouseUnpressed}"/>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+
+                    </ControlTemplate.Triggers>
+                    <!-- Действия -->
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- Стиль вертикальной кнопки скролбара -->
+
+    <Style x:Key="VerticalScrollBarPageButton" TargetType="{x:Type RepeatButton}">
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Rectangle Fill="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Стиль горизонтального движка для скроллбара -->
+    <Style x:Key="stlHorizontalScrollBarThumb" TargetType="{x:Type Thumb}">
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+
+                    <Grid Width="Auto" Height="12">
+                        <Grid x:Name="NormalState">
+                            <Border BorderBrush="{DynamicResource cButtonBorder}" BorderThickness="1" CornerRadius="1" Background="{DynamicResource cButtonBack}"/>
+                        </Grid>
+                        <Grid x:Name="OverState" Opacity="0" >
+                            <Border BorderBrush="{DynamicResource cButtonBorderOver}" BorderThickness="1" CornerRadius="1" Background="{DynamicResource cButtonBackOver}"/>
+                        </Grid>
+                        <Grid x:Name="PressedState" Opacity="0">
+                            <Border BorderBrush="{DynamicResource cButtonBorderPressed}" BorderThickness="1" CornerRadius="1" Background="{DynamicResource cButtonBackPressed}"/>
+                        </Grid>
+                    </Grid>
+                    <!-- Дизайн -->
+
+                    <!-- Действия -->
+                    <ControlTemplate.Triggers>
+
+                        <!-- Плашка при наведении -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" TargetName="OverState" Value="1"/>
+                        </Trigger>
+
+                        <!-- Плашка при перетаскивании -->
+                        <Trigger Property="IsDragging" Value="True">
+                            <Setter Property="Opacity" TargetName="PressedState" Value="1"/>
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                    <!-- Действия -->
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- Стиль горизонтального движка для скроллбара -->
+
+    <!-- Стиль вертикального движка для скроллбара -->
+    <Style x:Key="stlVerticalScrollBarThumb" TargetType="{x:Type Thumb}">
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+
+                    <!-- Дизайн -->
+                    <Grid Height="Auto" Width="12">
+                        <Grid x:Name="NormalState">
+                            <Border BorderBrush="{DynamicResource cButtonBorder}" BorderThickness="1" CornerRadius="1" Background="{DynamicResource cButtonBack}"/>
+                        </Grid>
+                        <Grid x:Name="OverState" Opacity="0" >
+                            <Border BorderBrush="{DynamicResource cButtonBorderOver}" BorderThickness="1" CornerRadius="1" Background="{DynamicResource cButtonBackOver}"/>
+                        </Grid>
+                        <Grid x:Name="PressedState" Opacity="0">
+                            <Border BorderBrush="{DynamicResource cButtonBorderPressed}" BorderThickness="1" CornerRadius="1" Background="{DynamicResource cButtonBackPressed}"/>
+                        </Grid>
+                    </Grid>
+                    <!-- Дизайн -->
+
+                    <!-- Действия -->
+                    <ControlTemplate.Triggers>
+
+                        <!-- Плашка при наведении -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" TargetName="OverState" Value="1"/>
+                        </Trigger>
+
+                        <!-- Плашка при перетаскивании -->
+                        <Trigger Property="IsDragging" Value="True">
+                            <Setter Property="Opacity" TargetName="PressedState" Value="1"/>
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+                    <!-- Действия -->
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- Стиль горизонтального движка для скроллбара -->
+
+    <LinearGradientBrush x:Key="HorizontalScrollBarBackground" EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#E1E1E1" Offset="0"/>
+        <GradientStop Color="#EDEDED" Offset="0.20"/>
+        <GradientStop Color="#EDEDED" Offset="0.80"/>
+        <GradientStop Color="#E3E3E3" Offset="1"/>
+    </LinearGradientBrush>
+
+    <Style x:Key="HorizontalScrollBarPageButton" TargetType="{x:Type RepeatButton}">
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Rectangle Fill="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Общий стиль горизонтального скролбара -->
+    <Style x:Key="stlScrollBarHorizontal" TargetType="{x:Type ScrollBar}">
+        <Setter Property="Background" Value="{StaticResource VerticalScrollBarBackground}"/>
+        <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="Width" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"/>
+        <Setter Property="MinWidth" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollBar}">
+                    <Grid x:Name="Bg" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                        <Grid.RowDefinitions>
+                            <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
+                            <RowDefinition Height="0.00001*"/>
+                            <RowDefinition MaxHeight="{DynamicResource {x:Static SystemParameters.VerticalScrollBarButtonHeightKey}}"/>
+                        </Grid.RowDefinitions>
+                        <RepeatButton Command="{x:Static ScrollBar.LineUpCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource stlHorizontalScrollBarButton}" Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="UpArrow"/>
+                        <Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="1">
+                            <Track.DecreaseRepeatButton>
+                                <RepeatButton Command="{x:Static ScrollBar.PageUpCommand}" Style="{StaticResource VerticalScrollBarPageButton}"/>
+                            </Track.DecreaseRepeatButton>
+                            <Track.IncreaseRepeatButton>
+                                <RepeatButton Command="{x:Static ScrollBar.PageDownCommand}" Style="{StaticResource VerticalScrollBarPageButton}"/>
+                            </Track.IncreaseRepeatButton>
+                            <Track.Thumb>
+                                <Thumb Style="{StaticResource stlHorizontalScrollBarThumb}" Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="VerticalGripper"/>
+                            </Track.Thumb>
+                        </Track>
+                        <RepeatButton Command="{x:Static ScrollBar.LineDownCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="2" Style="{StaticResource stlHorizontalScrollBarButton}" Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="DownArrow"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="Bg" Value="{StaticResource ScrollBarDisabledBackground}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="Width" Value="Auto"/>
+                <Setter Property="MinWidth" Value="0"/>
+                <Setter Property="Height" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}"/>
+                <Setter Property="MinHeight" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}"/>
+                <Setter Property="Background" Value="{StaticResource HorizontalScrollBarBackground}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ScrollBar}">
+                            <Grid x:Name="Bg" SnapsToDevicePixels="true">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition MaxWidth="16"/>
+                                    <ColumnDefinition Width="0.00001*"/>
+                                    <ColumnDefinition MaxWidth="16"/>
+                                </Grid.ColumnDefinitions>
+                                <RepeatButton Command="{x:Static ScrollBar.LineLeftCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource stlHorizontalScrollBarButton}" SnapsToDevicePixels="True" Cursor="Hand">
+                                    <Grid>
+                                        <StackPanel>
+                                            <ed:RegularPolygon Fill="{DynamicResource cButtonContentColor}" Height="3" InnerRadius="1" Margin="0,5,1,0" PointCount="3" Stretch="Fill" Stroke="{x:Null}" Width="6" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                                <ed:RegularPolygon.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform Angle="270"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </ed:RegularPolygon.RenderTransform>
+                                            </ed:RegularPolygon>
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <ed:RegularPolygon Fill="{DynamicResource cButtonContentColorPressed}" Height="3" InnerRadius="1" Margin="0,5,1,0" PointCount="3" Stretch="Fill" Stroke="{x:Null}" Width="6" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                                <ed:RegularPolygon.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform Angle="270"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </ed:RegularPolygon.RenderTransform>
+                                            </ed:RegularPolygon>
+                                        </StackPanel>
+                                    </Grid>
+                                </RepeatButton>
+                                <Track x:Name="PART_Track" Grid.Column="1" IsEnabled="{TemplateBinding IsMouseOver}" Cursor="Hand">
+                                    <Track.DecreaseRepeatButton>
+                                        <RepeatButton Command="{x:Static ScrollBar.PageLeftCommand}" Style="{StaticResource HorizontalScrollBarPageButton}"/>
+                                    </Track.DecreaseRepeatButton>
+                                    <Track.IncreaseRepeatButton>
+                                        <RepeatButton Command="{x:Static ScrollBar.PageRightCommand}" Style="{StaticResource HorizontalScrollBarPageButton}"/>
+                                    </Track.IncreaseRepeatButton>
+                                    <Track.Thumb>
+                                        <Thumb Style="{StaticResource stlHorizontalScrollBarThumb}" Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="HorizontalGripper"/>
+                                    </Track.Thumb>
+                                </Track>
+                                <RepeatButton Grid.Column="2" Command="{x:Static ScrollBar.LineRightCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource stlHorizontalScrollBarButton}" SnapsToDevicePixels="True" Cursor="Hand">
+                                    <Grid>
+                                        <StackPanel>
+                                            <ed:RegularPolygon Fill="{DynamicResource cButtonContentColor}" Height="3" InnerRadius="1" Margin="1,5,0,0" PointCount="3" Stretch="Fill" Stroke="{x:Null}" Width="6" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                                <ed:RegularPolygon.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform Angle="90"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </ed:RegularPolygon.RenderTransform>
+                                            </ed:RegularPolygon>
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <ed:RegularPolygon Fill="{DynamicResource cButtonContentColorPressed}" Height="3" InnerRadius="1" Margin="1,5,0,0" PointCount="3" Stretch="Fill" Stroke="{x:Null}" Width="6" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                                <ed:RegularPolygon.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform Angle="90"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </ed:RegularPolygon.RenderTransform>
+                                            </ed:RegularPolygon>
+                                        </StackPanel>
+                                    </Grid>
+                                </RepeatButton>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Background" TargetName="Bg" Value="{StaticResource ScrollBarDisabledBackground}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!-- Общий стиль горизонтального скролбара -->
+
+    <!-- Общий стиль вертикального скролбара -->
+    <Style x:Key="stlScrollBarVertical" TargetType="{x:Type ScrollBar}">
+        <Setter Property="Background" Value="{StaticResource VerticalScrollBarBackground}"/>
+        <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="Width" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"/>
+        <Setter Property="MinWidth" Value="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollBar}">
+                    <Grid x:Name="Bg" SnapsToDevicePixels="true" Width="12">
+                        <Grid.RowDefinitions>
+                            <RowDefinition MaxHeight="16"/>
+                            <RowDefinition Height="0.00001*"/>
+                            <RowDefinition MaxHeight="16"/>
+                        </Grid.RowDefinitions>
+                        <RepeatButton Command="{x:Static ScrollBar.LineUpCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource stlVerticalScrollBarButton}" SnapsToDevicePixels="True" Cursor="Hand">
+                            <Grid>
+                                <StackPanel>
+                                    <ed:RegularPolygon Fill="{DynamicResource cButtonContentColor}" Height="3" InnerRadius="1" PointCount="3" Stretch="Fill" Width="6" Margin="0,4,0,0"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <ed:RegularPolygon Fill="{DynamicResource cButtonContentColorPressed}" Height="3" InnerRadius="1" PointCount="3" Stretch="Fill" Width="6" Margin="3,4,3,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </RepeatButton>
+                        <Track x:Name="PART_Track" IsDirectionReversed="true" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="1" Cursor="Hand">
+                            <Track.DecreaseRepeatButton>
+                                <RepeatButton Command="{x:Static ScrollBar.PageUpCommand}" Style="{StaticResource VerticalScrollBarPageButton}"/>
+                            </Track.DecreaseRepeatButton>
+                            <Track.IncreaseRepeatButton>
+                                <RepeatButton Command="{x:Static ScrollBar.PageDownCommand}" Style="{StaticResource VerticalScrollBarPageButton}"/>
+                            </Track.IncreaseRepeatButton>
+                            <Track.Thumb>
+                                <Thumb Style="{StaticResource stlVerticalScrollBarThumb}" SnapsToDevicePixels="True"/>
+                            </Track.Thumb>
+                        </Track>
+                        <RepeatButton Command="{x:Static ScrollBar.LineDownCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Grid.Row="2" Style="{StaticResource stlVerticalScrollBarButton}" SnapsToDevicePixels="True" Cursor="Hand">
+                            <Grid>
+                                <StackPanel>
+                                    <ed:RegularPolygon Fill="{DynamicResource cButtonContentColor}" Height="3" InnerRadius="1" PointCount="3" Stretch="Fill" Width="6" HorizontalAlignment="Center" Margin="0,5,0,0" RenderTransformOrigin="0.5,0.5">
+                                        <ed:RegularPolygon.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform ScaleY="-1" ScaleX="1"/>
+                                                <SkewTransform AngleY="0" AngleX="0"/>
+                                                <RotateTransform Angle="0"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </ed:RegularPolygon.RenderTransform>
+                                    </ed:RegularPolygon>
+                                </StackPanel>
+                                <StackPanel>
+                                    <ed:RegularPolygon Fill="{DynamicResource cButtonContentColorPressed}" Height="3" InnerRadius="1" PointCount="3" Stretch="Fill" Width="6" HorizontalAlignment="Center" Margin="0,5,0,0" RenderTransformOrigin="0.5,0.5">
+                                        <ed:RegularPolygon.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform ScaleY="-1" ScaleX="1"/>
+                                                <SkewTransform AngleY="0" AngleX="0"/>
+                                                <RotateTransform Angle="0"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </ed:RegularPolygon.RenderTransform>
+                                    </ed:RegularPolygon>
+                                </StackPanel>
+                            </Grid>
+                        </RepeatButton>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="Bg" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="Width" Value="Auto"/>
+                <Setter Property="MinWidth" Value="0"/>
+                <Setter Property="Height" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}"/>
+                <Setter Property="MinHeight" Value="{DynamicResource {x:Static SystemParameters.HorizontalScrollBarHeightKey}}"/>
+                <Setter Property="Background" Value="{StaticResource HorizontalScrollBarBackground}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ScrollBar}">
+                            <Grid x:Name="Bg" SnapsToDevicePixels="true" Height="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition MaxWidth="14"/>
+                                    <ColumnDefinition Width="0.00001*"/>
+                                    <ColumnDefinition MaxWidth="14"/>
+                                </Grid.ColumnDefinitions>
+                                <RepeatButton Command="{x:Static ScrollBar.LineLeftCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource stlVerticalScrollBarButton}" SnapsToDevicePixels="True">
+                                    <Grid>
+                                        <StackPanel>
+                                            <Polygon Fill="{DynamicResource cButtonContentColor}" Height="4" Margin="0,6,1,0" Stretch="Fill" Stroke="{x:Null}" Width="5" RenderTransformOrigin="0.5,0.5" SnapsToDevicePixels="True" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Polygon.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform Angle="-90"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </Polygon.RenderTransform>
+                                            </Polygon>
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <Polygon Fill="{DynamicResource cButtonContentColor}" Height="4" Margin="0,6,1,0" Stretch="Fill" Stroke="{x:Null}" Width="5" RenderTransformOrigin="0.5,0.5" SnapsToDevicePixels="True" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Polygon.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform Angle="-90"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </Polygon.RenderTransform>
+                                            </Polygon>
+                                        </StackPanel>
+                                    </Grid>
+                                </RepeatButton>
+                                <Track x:Name="PART_Track" Grid.Column="1" IsEnabled="{TemplateBinding IsMouseOver}">
+                                    <Track.DecreaseRepeatButton>
+                                        <RepeatButton Command="{x:Static ScrollBar.PageLeftCommand}" Style="{StaticResource HorizontalScrollBarPageButton}"/>
+                                    </Track.DecreaseRepeatButton>
+                                    <Track.IncreaseRepeatButton>
+                                        <RepeatButton Command="{x:Static ScrollBar.PageRightCommand}" Style="{StaticResource HorizontalScrollBarPageButton}"/>
+                                    </Track.IncreaseRepeatButton>
+                                    <Track.Thumb>
+                                        <Thumb Style="{StaticResource stlHorizontalScrollBarThumb}" Microsoft_Windows_Themes:ScrollChrome.ScrollGlyph="HorizontalGripper"/>
+                                    </Track.Thumb>
+                                </Track>
+                                <RepeatButton Grid.Column="2" Command="{x:Static ScrollBar.LineRightCommand}" IsEnabled="{TemplateBinding IsMouseOver}" Style="{StaticResource stlVerticalScrollBarButton}" SnapsToDevicePixels="True">
+                                    <Grid>
+                                        <StackPanel>
+                                            <Polygon Fill="{DynamicResource cButtonContentColor}" Height="4" Margin="1,6,0,0" Stretch="Fill" Stroke="{x:Null}" Width="5" RenderTransformOrigin="0.5,0.5" SnapsToDevicePixels="True" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Polygon.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform Angle="90"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </Polygon.RenderTransform>
+                                            </Polygon>
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <Polygon Fill="{DynamicResource cButtonContentColor}" Height="4" Margin="1,6,0,0" Stretch="Fill" Stroke="{x:Null}" Width="5" RenderTransformOrigin="0.5,0.5" SnapsToDevicePixels="True" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Polygon.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform Angle="90"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </Polygon.RenderTransform>
+                                            </Polygon>
+                                        </StackPanel>
+                                    </Grid>
+                                </RepeatButton>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter Property="Background" TargetName="Bg" Value="{StaticResource ScrollBarDisabledBackground}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!-- Общий стиль горизонтального скролбара -->
+
+
+    <!-- EndRegion -->
+    <!-- Средняя кнопка меню -->
+    <Style x:Key="stlMenuToggleButton" TargetType="{x:Type RadioButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+
+                    <!-- Анимация контента -->
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="IconMouseOver">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[2].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="IconMouseOut">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[2].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+
+                        <Storyboard x:Key="IconChecked">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[2].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="IconUnchecked">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[2].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+
+                    <!-- Дизайн -->
+                    <Grid x:Name="Button" SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid x:Name="NormalState" Grid.ColumnSpan="2">
+                            <Border x:Name="NormalBack" Background="{DynamicResource cButtonBack}" Grid.ColumnSpan="1" Grid.Column="0" Margin="1,0,0,0" BorderThickness="0,1" BorderBrush="{DynamicResource cButtonBorder}" Effect="{DynamicResource fxLightShadow}" />
+                        </Grid>
+                        <Grid x:Name="OverState" Grid.ColumnSpan="2" Opacity="0">
+                            <Border x:Name="OverBack" Grid.ColumnSpan="1" Grid.Column="0" Margin="1,0,0,0" BorderThickness="0,1" BorderBrush="{DynamicResource cButtonBorderOver}" Background="{DynamicResource cButtonBackOver}" Effect="{DynamicResource fxLightShadow}" />
+                        </Grid>
+                        <Grid x:Name="PressedState" Grid.ColumnSpan="2" Opacity="0">
+                            <Border x:Name="PressedBack" Grid.ColumnSpan="1" Grid.Column="0" Margin="1,0,0,0" BorderThickness="0,1" BorderBrush="{DynamicResource cButtonBorderPressed}" Background="{DynamicResource cButtonBackPressed}" Effect="{DynamicResource fxLightShadow}" />
+                        </Grid>
+                        <Grid x:Name="Flares" Grid.ColumnSpan="1" Grid.Column="1">
+                            <Rectangle x:Name="FlareLeft" Fill="{DynamicResource cButtonFlare}" HorizontalAlignment="Left" Width="1"/>
+                            <Rectangle x:Name="FlareRight" Fill="{DynamicResource cButtonFlare}" HorizontalAlignment="Right" Width="1"/>
+                        </Grid>
+                        <Rectangle x:Name="Splitter" Fill="{DynamicResource cMenuSplitter}" Grid.Column="0"/>
+                        <ContentPresenter x:Name="Content" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <!-- Действия -->
+                    <ControlTemplate.Triggers>
+
+                        <DataTrigger Binding="{Binding Content.Children.Count, ElementName=Content}" Value="3">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconMouseOut}"/>
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsMouseOver, RelativeSource={x:Static RelativeSource.Self}}" Value="True"/>
+                                <Condition Binding="{Binding Content.Children.Count, ElementName=Content}" Value="3"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconMouseOver}"/>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconMouseOut}"/>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsChecked, RelativeSource={x:Static RelativeSource.Self}}" Value="True"/>
+                                <Condition Binding="{Binding Content.Children.Count, ElementName=Content}" Value="3"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconChecked}"/>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconUnchecked}"/>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsChecked" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter
+							Property="Opacity" TargetName="OverState" Value="1"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Opacity" TargetName="PressedState" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- Средняя кнопка меню -->
+
+    <!-- Первая кнопка меню -->
+    <Style x:Key="stlMenuToggleButtonFirst" TargetType="{x:Type RadioButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+
+                    <!-- Анимация контента -->
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="IconMouseOver">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[2].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="IconMouseOut">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[2].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+
+                        <Storyboard x:Key="IconChecked">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[2].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="IconUnchecked">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[2].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+
+                    <!-- Дизайн -->
+                    <Grid x:Name="Button" SnapsToDevicePixels="True">
+                        <Grid x:Name="NormalState">
+                            <Border x:Name="NormalBack" Background="{DynamicResource cButtonBack}" BorderThickness="1,1,0,1" BorderBrush="{DynamicResource cButtonBorder}" CornerRadius="3,0,0,3" Effect="{DynamicResource fxLightShadow}" />
+                        </Grid>
+                        <Grid x:Name="OverState" Opacity="0">
+                            <Border x:Name="OverBack" BorderThickness="1,1,0,1" BorderBrush="{DynamicResource cButtonBorderOver}" Background="{DynamicResource cButtonBackOver}" CornerRadius="3,0,0,3" Effect="{DynamicResource fxLightShadow}" />
+                        </Grid>
+                        <Grid x:Name="PressedState" Opacity="0">
+                            <Border x:Name="PressedBack" BorderThickness="1,1,0,1" BorderBrush="{DynamicResource cButtonBorderPressed}" Background="{DynamicResource cButtonBackPressed}" CornerRadius="3,0,0,3" Effect="{DynamicResource fxLightShadow}" />
+                        </Grid>
+                        <Grid x:Name="Flares">
+                            <Rectangle x:Name="FlareRight" Fill="{DynamicResource cButtonFlare}" HorizontalAlignment="Right" Width="1"/>
+                        </Grid>
+                        <ContentPresenter x:Name="Content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <!-- Действия -->
+                    <ControlTemplate.Triggers>
+
+                        <DataTrigger Binding="{Binding Content.Children.Count, ElementName=Content}" Value="3">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconMouseOut}"/>
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsMouseOver, RelativeSource={x:Static RelativeSource.Self}}" Value="True"/>
+                                <Condition Binding="{Binding Content.Children.Count, ElementName=Content}" Value="3"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconMouseOver}"/>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconMouseOut}"/>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsChecked, RelativeSource={x:Static RelativeSource.Self}}" Value="True"/>
+                                <Condition Binding="{Binding Content.Children.Count, ElementName=Content}" Value="3"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconChecked}"/>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconUnchecked}"/>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsChecked" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter
+							Property="Opacity" TargetName="OverState" Value="1"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Opacity" TargetName="PressedState" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- Первая кнопка меню -->
+
+    <!-- Последняя кнопка меню -->
+    <Style x:Key="stlMenuToggleButtonLast" TargetType="{x:Type RadioButton}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+
+                    <!-- Анимация контента -->
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="IconMouseOver">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[2].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="IconMouseOut">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[2].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+
+                        <Storyboard x:Key="IconChecked">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[2].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="IconUnchecked">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[2].(UIElement.Opacity)" Storyboard.TargetName="Content">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+
+                    <!-- Дизайн -->
+                    <Grid x:Name="Button" SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid x:Name="NormalState" Grid.ColumnSpan="2">
+                            <Border x:Name="NormalBack" Background="{DynamicResource cButtonBack}" Grid.ColumnSpan="1" Grid.Column="0" Margin="1,0,0,0" BorderThickness="0,1,1,1" BorderBrush="{DynamicResource cButtonBorder}" CornerRadius="0,3,3,0" Effect="{DynamicResource fxLightShadow}" />
+                        </Grid>
+                        <Grid x:Name="OverState" Grid.ColumnSpan="2" Opacity="0">
+                            <Border x:Name="OverBack" Grid.ColumnSpan="1" Grid.Column="0" Margin="1,0,0,0" BorderThickness="0,1,1,1" BorderBrush="{DynamicResource cButtonBorderOver}" Background="{DynamicResource cButtonBackOver}" CornerRadius="0,3,3,0" Effect="{DynamicResource fxLightShadow}" />
+                        </Grid>
+                        <Grid x:Name="PressedState" Grid.ColumnSpan="2" Opacity="0">
+                            <Border x:Name="PressedBack" Grid.ColumnSpan="1" Grid.Column="0" Margin="1,0,0,0" BorderThickness="0,1,1,1" BorderBrush="{DynamicResource cButtonBorderPressed}" Background="{DynamicResource cButtonBackPressed}" CornerRadius="0,3,3,0" Effect="{DynamicResource fxLightShadow}" />
+                        </Grid>
+                        <Grid x:Name="Flares" Grid.ColumnSpan="1" Grid.Column="1">
+                            <Rectangle x:Name="FlareLeft" Fill="{DynamicResource cButtonFlare}" HorizontalAlignment="Left" Width="1"/>
+                        </Grid>
+                        <Rectangle x:Name="Splitter" Fill="{DynamicResource cMenuSplitter}" Grid.Column="0"/>
+                        <ContentPresenter x:Name="Content" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <!-- Действия -->
+                    <ControlTemplate.Triggers>
+
+                        <DataTrigger Binding="{Binding Content.Children.Count, ElementName=Content}" Value="3">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconMouseOut}"/>
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsMouseOver, RelativeSource={x:Static RelativeSource.Self}}" Value="True"/>
+                                <Condition Binding="{Binding Content.Children.Count, ElementName=Content}" Value="3"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconMouseOver}"/>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconMouseOut}"/>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsChecked, RelativeSource={x:Static RelativeSource.Self}}" Value="True"/>
+                                <Condition Binding="{Binding Content.Children.Count, ElementName=Content}" Value="3"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconChecked}"/>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconUnchecked}"/>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsChecked" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter
+							Property="Opacity" TargetName="OverState" Value="1"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Opacity" TargetName="PressedState" Value="1"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- Последняя кнопка меню -->
+    <Style x:Key="stlWindowControlButtons" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <!-- Анимация иконки -->
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="IconMouseOver">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Icon">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Icon">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                        <Storyboard x:Key="IconMouseOut">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[0].(UIElement.Opacity)" Storyboard.TargetName="Icon">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Content.Children[1].(UIElement.Opacity)" Storyboard.TargetName="Icon">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+
+                    <!-- Дизайн -->
+                    <Grid>
+                        <Border BorderBrush="#00000000" BorderThickness="1" Height="Auto" Width="Auto" Background="#00000000">
+                            <ContentPresenter x:Name="Icon" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+
+                    <!-- Действия иконки -->
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Content.Children.Count, ElementName=Icon}" Value="2">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconMouseOut}"/>
+                            </DataTrigger.EnterActions>
+                        </DataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsMouseOver, RelativeSource={x:Static RelativeSource.Self}}" Value="True"/>
+                                <Condition Binding="{Binding Content.Children.Count, ElementName=Icon}" Value="2"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconMouseOver}"/>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource IconMouseOut}"/>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Дерево департаментов -->
+    <Style x:Key="DepartmentTreeView" TargetType="{x:Type telerik:RadTreeView}">
+        <Setter Property="IsDragTooltipEnabled" Value="False"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Margin" Value="20"/>
+        <Setter Property="IsEnabled" Value="True"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="IsDropPreviewLineEnabled" Value="True"/>
+        <Setter Property="IsRootLinesEnabled" Value="True"/>
+        <Setter Property="IsLineEnabled" Value="True"/>
+        <Setter Property="IsDragDropEnabled" Value="True"/>
+        <Setter Property="TextDropAfter" Value="Разместить после "/>
+        <Setter Property="TextDropBefore" Value="Разместить до "/>
+        <Setter Property="TextDropIn" Value="Разместить в "/>
+        <Setter Property="TextDropRoot" Value="Разместить как корневой элемент "/>
+        <Setter Property="IsExpandOnDblClickEnabled" Value="True"/>
+        <Setter Property="IsDragPreviewEnabled" Value="True"/>
+        <Setter Property="SelectionMode" Value="Single"/>
+        <Setter Property="ItemsIndent" Value="20"/>
+        <Setter Property="telerik:AnimationManager.AnimationSelector">
+            <Setter.Value>
+                <telerik:AnimationSelector/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ExpanderStyle">
+            <Setter.Value>
+                <Style TargetType="{x:Type ToggleButton}">
+                    <Setter Property="IsTabStop" Value="False"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                <Grid Width="20" Height="20">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal"/>
+                                            <VisualState x:Name="Disabled">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Expander" Storyboard.TargetProperty="Visibility" Duration="0">
+                                                        <DiscreteObjectKeyFrame KeyTime="0">
+                                                            <DiscreteObjectKeyFrame.Value>
+                                                                <Visibility>Visible</Visibility>
+                                                            </DiscreteObjectKeyFrame.Value>
+                                                        </DiscreteObjectKeyFrame>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Expander" Storyboard.TargetProperty="BorderBrush" Duration="0">
+                                                        <DiscreteObjectKeyFrame KeyTime="0">
+                                                            <DiscreteObjectKeyFrame.Value>
+                                                                <SolidColorBrush Color="#FFD6D6D6"/>
+                                                            </DiscreteObjectKeyFrame.Value>
+                                                        </DiscreteObjectKeyFrame>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Expander" Storyboard.TargetProperty="Background" Duration="0">
+                                                        <DiscreteObjectKeyFrame KeyTime="0">
+                                                            <DiscreteObjectKeyFrame.Value>
+                                                                <SolidColorBrush Color="#FFF0F0F0"/>
+                                                            </DiscreteObjectKeyFrame.Value>
+                                                        </DiscreteObjectKeyFrame>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Plus" Storyboard.TargetProperty="Fill" Duration="0">
+                                                        <DiscreteObjectKeyFrame KeyTime="0">
+                                                            <DiscreteObjectKeyFrame.Value>
+                                                                <SolidColorBrush Color="#FFD6D6D6"/>
+                                                            </DiscreteObjectKeyFrame.Value>
+                                                        </DiscreteObjectKeyFrame>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Minus" Storyboard.TargetProperty="Fill" Duration="0">
+                                                        <DiscreteObjectKeyFrame KeyTime="0">
+                                                            <DiscreteObjectKeyFrame.Value>
+                                                                <SolidColorBrush Color="#FFD6D6D6"/>
+                                                            </DiscreteObjectKeyFrame.Value>
+                                                        </DiscreteObjectKeyFrame>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="CheckStates">
+                                            <VisualState x:Name="Checked">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpandedVisual" Storyboard.TargetProperty="Visibility" Duration="0">
+                                                        <DiscreteObjectKeyFrame KeyTime="0">
+                                                            <DiscreteObjectKeyFrame.Value>
+                                                                <Visibility>Visible</Visibility>
+                                                            </DiscreteObjectKeyFrame.Value>
+                                                        </DiscreteObjectKeyFrame>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CollapsedVisual" Storyboard.TargetProperty="Visibility" Duration="0">
+                                                        <DiscreteObjectKeyFrame KeyTime="0">
+                                                            <DiscreteObjectKeyFrame.Value>
+                                                                <Visibility>Hidden</Visibility>
+                                                            </DiscreteObjectKeyFrame.Value>
+                                                        </DiscreteObjectKeyFrame>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Unchecked">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ExpandedVisual" Storyboard.TargetProperty="Visibility" Duration="0">
+                                                        <DiscreteObjectKeyFrame KeyTime="0">
+                                                            <DiscreteObjectKeyFrame.Value>
+                                                                <Visibility>Hidden</Visibility>
+                                                            </DiscreteObjectKeyFrame.Value>
+                                                        </DiscreteObjectKeyFrame>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CollapsedVisual" Storyboard.TargetProperty="Visibility" Duration="0">
+                                                        <DiscreteObjectKeyFrame KeyTime="0">
+                                                            <DiscreteObjectKeyFrame.Value>
+                                                                <Visibility>Visible</Visibility>
+                                                            </DiscreteObjectKeyFrame.Value>
+                                                        </DiscreteObjectKeyFrame>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <Border x:Name="Expander" BorderThickness="1" HorizontalAlignment="Stretch" Width="9" Height="9" BorderBrush="#FFABB0B6">
+                                        <Border.Background>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="#FFF0F1F2" Offset="0"/>
+                                                <GradientStop Color="#FFCDD0D3" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <Grid x:Name="CollapsedVisual" HorizontalAlignment="Center" VerticalAlignment="Center"  Visibility="Visible">
+                                                <Path x:Name="Plus" Data="M295.5,419.6099L295.5,420.6099L297.5,420.6099L297.5,422.6099L298.5,422.6099L298.5,420.6099L300.5,420.6099L300.5,419.6099L298.5,419.6099L298.5,417.6099L297.5,417.6099L297.5,419.6099z" Fill="#FF333333" Stretch="Fill" Height="5" Width="5"/>
+                                            </Grid>
+                                            <Grid x:Name="ExpandedVisual" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible">
+                                                <Rectangle x:Name="Minus" Height="1" Width="5" Fill="#FF333333"/>
+                                            </Grid>
+                                        </Grid>
+                                    </Border>
+                                    <Border x:Name="Button" BorderBrush="#00000000" BorderThickness="1" Background="#00000000"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type telerik:RadTreeView}">
+                    <Grid x:Name="RootElement">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="DropStates">
+                                <VisualState x:Name="DropImpossible"/>
+                                <VisualState x:Name="DropPossible"/>
+                                <VisualState x:Name="DropRootPossible">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ScrollViewer" Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush Color="#7F000000"/>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                            <Grid>
+                                <ScrollViewer BorderThickness="0" Template="{DynamicResource stlScrollViewer}" Background="{x:Null}" CanContentScroll="True" HorizontalScrollBarVisibility="Auto" IsTabStop="False" VerticalScrollBarVisibility="Auto">
+                                    <ItemsPresenter/>
+                                </ScrollViewer>
+                                <Grid x:Name="DragBetweenItemsFeedback" HorizontalAlignment="Left" Height="12" Width="12" IsHitTestVisible="False" Visibility="Collapsed" VerticalAlignment="Top">
+                                    <Path Data="M296,414.1099L294,416.1099L298,420.1099L294,424.1099L296,426.1099L301.89,420.0799z" Fill="#FF40B3FF" Height="12" Stretch="Fill" Width="8" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="9,0,0,0"/>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="DepartmentTreeViewItem" x:Name="DepartmentTreeViewItem"  TargetType="{x:Type telerik:RadTreeViewItem}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="1,0,5,0"/>
+        <Setter Property="IsDropAllowed" Value="True"/>
+        <Setter Property="ItemsOptionListType" Value="Default"/>
+        <Setter Property="IsEnabled" Value="True"/>
+        <Setter Property="IsExpanded" Value="True"/>
+        <Setter Property="Foreground" Value="#FF50555A"/>
+        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type telerik:RadTreeViewItem}">
+                    <Grid x:Name="RootElement">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MouseOverVisual" Storyboard.TargetProperty="Visibility" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush Color="#FF418CBE"/>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground" Duration="0" >
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush Color="#FFC1C1C1"/>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="SelectionStates">
+                                <VisualState x:Name="Unselected">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SelectionVisual" Storyboard.TargetProperty="Visibility" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush Color="#FF50555A"/>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Selected">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SelectionVisual" Storyboard.TargetProperty="Visibility" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush Color="#FF295A7A"/>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="SelectedUnfocused">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UnfocusedVisual" Storyboard.TargetProperty="Visibility" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush Color="#FF50555A"/>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="ExpandStates">
+                                <VisualState x:Name="Expanded">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ItemsHost" Storyboard.TargetProperty="Visibility" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Collapsed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ItemsHost" Storyboard.TargetProperty="Visibility" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid x:Name="HeaderRow" Background="Transparent" MinHeight="{TemplateBinding MinHeight}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="NormalVisual" BorderBrush="#00000000" BorderThickness="1" Grid.ColumnSpan="6" Grid.Column="2" Background="#00000000" Margin="0,0,0,1" Height="Auto"/>
+                            <Border x:Name="MouseOverVisual" BorderBrush="#FFA6DBFF" BorderThickness="1" Grid.ColumnSpan="6" Grid.Column="2" Visibility="Collapsed" Background="#FFCEECFF" Margin="0,0,0,1" Height="Auto"/>
+                            <Border x:Name="UnfocusedVisual" BorderBrush="#FFD5D7DA" BorderThickness="1" Grid.ColumnSpan="6" Grid.Column="2" Visibility="Collapsed" Background="#FFE8E9EA" Margin="0,0,0,1" Height="Auto"/>
+                            <Border x:Name="SelectionVisual" BorderBrush="#FF40B3FF" BorderThickness="1" Grid.ColumnSpan="6" Grid.Column="2" Visibility="Collapsed" Background="#FFAADCFF" Margin="0,0,0,1" Height="Auto"/>
+                            <StackPanel x:Name="IndentContainer" Orientation="Horizontal">
+                                <Rectangle x:Name="IndentFirstVerticalLine" Stroke="#FFCCCCCC" Visibility="Collapsed" VerticalAlignment="Top" Width="1"/>
+                            </StackPanel>
+                            <Grid x:Name="ListRootContainer" Grid.Column="1" HorizontalAlignment="Center" MinWidth="20">
+                                <Rectangle x:Name="HorizontalLine" HorizontalAlignment="Right" Height="1" Stroke="#FFCCCCCC" VerticalAlignment="Center"/>
+                                <Rectangle x:Name="VerticalLine" HorizontalAlignment="Center" Stroke="#FFCCCCCC" VerticalAlignment="Top" Width="1"/>
+                                <ToggleButton x:Name="Expander" Background="{TemplateBinding Background}" IsTabStop="False"/>
+                            </Grid>
+                            <Rectangle x:Name="FocusVisual" Grid.ColumnSpan="6" Grid.Column="2" IsHitTestVisible="False" RadiusY="3" RadiusX="3" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 2" Visibility="Collapsed"/>
+                            <Grid Grid.ColumnSpan="2" Grid.Column="4">
+                                <TextBlock x:Name="Content" Text="{Binding Department_name}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,4,1" Foreground="#FF50555A"/>
+                            </Grid>
+                        </Grid>
+                        <ItemsPresenter x:Name="ItemsHost" Grid.Row="1" Visibility="Collapsed"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <telerik:TreeViewPanel IsItemsHost="True" IsVisualCacheEnabled="False" VerticalAlignment="Bottom"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="SmiDepartmentTreeViewItem" x:Name="SmiDepartmentTreeViewItem"  TargetType="{x:Type telerik:RadTreeViewItem}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="1,0,5,0"/>
+        <Setter Property="IsDropAllowed" Value="True"/>
+        <Setter Property="ItemsOptionListType" Value="Default"/>
+        <Setter Property="IsEnabled" Value="True"/>
+        <Setter Property="IsExpanded" Value="True"/>
+        <Setter Property="Foreground" Value="#FF50555A"/>
+        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type telerik:RadTreeViewItem}">
+                    <Grid x:Name="RootElement">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MouseOverVisual" Storyboard.TargetProperty="Visibility" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush Color="#FF418CBE"/>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground" Duration="0" >
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush Color="#FFC1C1C1"/>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="SelectionStates">
+                                <VisualState x:Name="Unselected">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SelectionVisual" Storyboard.TargetProperty="Visibility" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush Color="#FF50555A"/>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Selected">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SelectionVisual" Storyboard.TargetProperty="Visibility" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush Color="#FF295A7A"/>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="SelectedUnfocused">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UnfocusedVisual" Storyboard.TargetProperty="Visibility" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <SolidColorBrush Color="#FF50555A"/>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="ExpandStates">
+                                <VisualState x:Name="Expanded">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ItemsHost" Storyboard.TargetProperty="Visibility" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Collapsed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ItemsHost" Storyboard.TargetProperty="Visibility" Duration="0">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid x:Name="HeaderRow" Background="Transparent" MinHeight="{TemplateBinding MinHeight}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="NormalVisual" BorderBrush="#00000000" BorderThickness="1" Grid.ColumnSpan="6" Grid.Column="2" Background="#00000000" Margin="0,0,0,1" Height="Auto"/>
+                            <Border x:Name="MouseOverVisual" BorderBrush="#FFA6DBFF" BorderThickness="1" Grid.ColumnSpan="6" Grid.Column="2" Visibility="Collapsed" Background="#FFCEECFF" Margin="0,0,0,1" Height="Auto"/>
+                            <Border x:Name="UnfocusedVisual" BorderBrush="#FFD5D7DA" BorderThickness="1" Grid.ColumnSpan="6" Grid.Column="2" Visibility="Collapsed" Background="#FFE8E9EA" Margin="0,0,0,1" Height="Auto"/>
+                            <Border x:Name="SelectionVisual" BorderBrush="#FF40B3FF" BorderThickness="1" Grid.ColumnSpan="6" Grid.Column="2" Visibility="Collapsed" Background="#FFAADCFF" Margin="0,0,0,1" Height="Auto"/>
+                            <StackPanel x:Name="IndentContainer" Orientation="Horizontal">
+                                <Rectangle x:Name="IndentFirstVerticalLine" Stroke="#FFCCCCCC" Visibility="Collapsed" VerticalAlignment="Top" Width="1"/>
+                            </StackPanel>
+                            <Grid x:Name="ListRootContainer" Grid.Column="1" HorizontalAlignment="Center" MinWidth="20">
+                                <Rectangle x:Name="HorizontalLine" HorizontalAlignment="Right" Height="1" Stroke="#FFCCCCCC" VerticalAlignment="Center"/>
+                                <Rectangle x:Name="VerticalLine" HorizontalAlignment="Center" Stroke="#FFCCCCCC" VerticalAlignment="Top" Width="1"/>
+                                <ToggleButton x:Name="Expander" Background="{TemplateBinding Background}" IsTabStop="False"/>
+                            </Grid>
+                            <Rectangle x:Name="FocusVisual" Grid.ColumnSpan="6" Grid.Column="2" IsHitTestVisible="False" RadiusY="3" RadiusX="3" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 2" Visibility="Collapsed"/>
+                            <Grid Grid.ColumnSpan="2" Grid.Column="4">
+                                <TextBlock x:Name="Content" Text="{Binding Mass_media_type_name}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,4,1" Foreground="#FF50555A"/>
+                            </Grid>
+                        </Grid>
+                        <ItemsPresenter x:Name="ItemsHost" Grid.Row="1" Visibility="Collapsed"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <telerik:TreeViewPanel IsItemsHost="True" IsVisualCacheEnabled="False" VerticalAlignment="Bottom"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="GridSplitterPreviewStyle">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Fill="#80000000"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="stlGridSplitter" TargetType="{x:Type GridSplitter}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+        <Setter Property="PreviewStyle" Value="{StaticResource GridSplitterPreviewStyle}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type GridSplitter}">
+                    <Border BorderThickness="4,0" SnapsToDevicePixels="True" Background="#FFB0B6BB"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Geometry x:Key="DownArrowGeometry">M 0 0 L 3.5 4 L 7 0 Z</Geometry>
+
+    <Style x:Key="ComboBoxReadonlyToggleButton" TargetType="{x:Type ToggleButton}">
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="ClickMode" Value="Press"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Grid Height="24">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="24"/>
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="Button" BorderBrush="#FF6B727A" BorderThickness="1" CornerRadius="3" Grid.ColumnSpan="2" Background="#FFFFFFFF"/>
+                        <Grid x:Name="NormalState" Grid.Column="1">
+                            <Border BorderBrush="#FF6A7179" BorderThickness="1" HorizontalAlignment="Stretch" Grid.Column="0" CornerRadius="0,3,3,0">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF9DA2A8" Offset="0"/>
+                                        <GradientStop Color="#FF959AA4" Offset="1"/>
+                                        <GradientStop Color="#FF858B92" Offset="0.5"/>
+                                        <GradientStop Color="#FF787F87" Offset="0.51"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <Path Data="{StaticResource DownArrowGeometry}" Fill="#FFEBECED" HorizontalAlignment="Center" Margin="8,2,8,0" VerticalAlignment="Center" Grid.Column="1" Width="8" Height="5" Stretch="Fill"/>
+                        </Grid>
+                        <Grid x:Name="OverState" Grid.Column="1" Visibility="Hidden">
+                            <Border BorderBrush="#FF637F95" BorderThickness="1" HorizontalAlignment="Stretch" Grid.Column="0" CornerRadius="0,3,3,0">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF8AA5B9" Offset="0"/>
+                                        <GradientStop Color="#FF849FB6" Offset="1"/>
+                                        <GradientStop Color="#FF7894A9" Offset="0.5"/>
+                                        <GradientStop Color="#FF6E8AA0" Offset="0.51"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <Path Data="{StaticResource DownArrowGeometry}" Fill="#FFEBECED" HorizontalAlignment="Center" Margin="8,2,8,0" VerticalAlignment="Center" Grid.Column="1" Width="8" Height="5" Stretch="Fill"/>
+                        </Grid>
+                        <Grid x:Name="PressedState" Grid.Column="1" Visibility="Hidden">
+                            <Border BorderBrush="#FF40B3FF" BorderThickness="1" HorizontalAlignment="Stretch" Grid.Column="0" CornerRadius="0,3,3,0">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF9BD7FF" Offset="0"/>
+                                        <GradientStop Color="#FFB0DFFF" Offset="1"/>
+                                        <GradientStop Color="#FF7FCCFF" Offset="0.5"/>
+                                        <GradientStop Color="#FF64C1FF" Offset="0.51"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <Path Data="{StaticResource DownArrowGeometry}" Fill="#FF16567C" HorizontalAlignment="Center" Margin="8,2,8,0" VerticalAlignment="Center" Grid.Column="1" Width="8" Height="5" Stretch="Fill"/>
+                        </Grid>
+                        <Grid x:Name="DisabledState" Grid.Column="1" Visibility="Hidden">
+                            <Border BorderBrush="#FF9F9F9F" BorderThickness="1" HorizontalAlignment="Stretch" Grid.Column="0" CornerRadius="0,3,3,0">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFC3C3C3" Offset="0"/>
+                                        <GradientStop Color="#FFC3C3C3" Offset="1"/>
+                                        <GradientStop Color="#FF9E9E9E" Offset="0.51"/>
+                                        <GradientStop Color="#FFB4B4B4" Offset="0.5"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <Path Data="{StaticResource DownArrowGeometry}" Fill="#FFD8D8D8" HorizontalAlignment="Center" Margin="8,2,8,0" VerticalAlignment="Center" Grid.Column="1" Width="8" Height="5" Stretch="Fill"/>
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsChecked" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Visibility" TargetName="OverState" Value="Visible"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Visibility" TargetName="PressedState" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Visibility" TargetName="DisabledState" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type ComboBox}">
+        <Setter Property="Foreground" Value="#FF2E3134"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBox}">
+                    <Grid x:Name="MainGrid" SnapsToDevicePixels="true">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="24"/>
+                        </Grid.ColumnDefinitions>
+                        <Popup x:Name="PART_Popup" AllowsTransparency="False" Grid.ColumnSpan="3" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" Placement="Bottom" VerticalOffset="1">
+                            <Border x:Name="DropDownBorder" BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" BorderThickness="1" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Padding="0,1">
+                                <ScrollViewer x:Name="DropDownScrollViewer">
+                                    <Grid RenderOptions.ClearTypeHint="Enabled">
+                                        <Canvas HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
+                                            <Rectangle x:Name="OpaqueRect" Fill="{Binding Background, ElementName=DropDownBorder}" Height="{Binding ActualHeight, ElementName=DropDownBorder}" Width="{Binding ActualWidth, ElementName=DropDownBorder}"/>
+                                        </Canvas>
+                                        <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                    </Grid>
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                        <ToggleButton BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" Grid.ColumnSpan="3" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ComboBoxReadonlyToggleButton}"/>
+                        <ContentPresenter ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Content="{TemplateBinding SelectionBoxItem}" ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" IsHitTestVisible="false" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="8,0,8,0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0"/>
+                        <Image Width="30" Height="30" VerticalAlignment="Center" Grid.Column="1" Visibility="Visible" Source="{Binding ComboboxImage}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasItems" Value="false">
+                            <Setter Property="Height" TargetName="DropDownBorder" Value="95"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            <Setter Property="Background" Value="#FFF4F4F4"/>
+                        </Trigger>
+                        <Trigger Property="IsGrouping" Value="true">
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </Trigger>
+                        <Trigger Property="ScrollViewer.CanContentScroll" SourceName="DropDownScrollViewer" Value="false">
+                            <Setter Property="Canvas.Top" TargetName="OpaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
+                            <Setter Property="Canvas.Left" TargetName="OpaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type ComboBoxItem}">
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                    <Grid Height="24" Margin="0,1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="NormalVisual"  BorderThickness="1" Background="#00000000" Margin="2,0" Grid.ColumnSpan="2"/>
+                        <Border x:Name="MouseOverVisual" BorderThickness="1" Background="#CEECFF" BorderBrush="#A6DBFF" Margin="2,0" Visibility="Hidden" Grid.ColumnSpan="2"/>
+                        <Border x:Name="SelectedVisual" BorderThickness="1" Background="#AADCFF" BorderBrush="#40B3FF" Margin="2,0" Visibility="Hidden" Grid.ColumnSpan="2"/>
+                        <ContentPresenter Margin="8,0" VerticalAlignment="Center" Grid.Column="0"/>
+                        <Image Width="30" Height="30" VerticalAlignment="Center" Grid.Column="1" Visibility="Visible" Source="{Binding ComboboxImage}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter Property="Visibility" TargetName="MouseOverVisual" Value="Visible"/>
+                            <Setter Property="Foreground" Value="#FF418CBE"/>
+                        </Trigger>
+                        <Trigger Property="Selector.IsSelected" Value="True">
+                            <Setter Property="Visibility" TargetName="SelectedVisual" Value="Visible"/>
+                            <Setter Property="Foreground" Value="#FF295A7A"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="stlDelListBoxButton" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="18" Height="18" SnapsToDevicePixels="True" Background="#00000000" Cursor="Hand">
+                        <Grid x:Name="grid">
+                            <Ellipse Stroke="White" Height="14" Width="14" VerticalAlignment="Top">
+                                <Ellipse.Effect>
+                                    <DropShadowEffect BlurRadius="3" Direction="270" Color="#FF2E3134" ShadowDepth="2" Opacity="0.3"/>
+                                </Ellipse.Effect>
+                                <Ellipse.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFE57F7F" Offset="0"/>
+                                        <GradientStop Color="#FFF90000" Offset="1"/>
+                                        <GradientStop Color="#FFED4444" Offset="0.5"/>
+                                    </LinearGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Rectangle Margin="3,6" Stroke="{x:Null}" Fill="White" Width="6" Height="2" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                <Rectangle.Effect>
+                                    <DropShadowEffect BlurRadius="1" Direction="90" ShadowDepth="1" Color="#FFFF0B0B"/>
+                                </Rectangle.Effect>
+                            </Rectangle>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Margin" TargetName="grid" Value="0,1,0,0"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="stlAddListBoxButton" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+        <Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="18" Height="18" SnapsToDevicePixels="True" Background="#00000000" Cursor="Hand">
+                        <Grid x:Name="grid">
+                            <Ellipse Stroke="White" Height="14" Width="14" VerticalAlignment="Top">
+                                <Ellipse.Effect>
+                                    <DropShadowEffect BlurRadius="3" Direction="270" Color="#FF2E3134" ShadowDepth="2" Opacity="0.3"/>
+                                </Ellipse.Effect>
+                                <Ellipse.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF7FCC7F" Offset="0"/>
+                                        <GradientStop Color="#FF81C848" Offset="1"/>
+                                        <GradientStop Color="#FF88C600" Offset="0.5"/>
+                                    </LinearGradientBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Path Data="M2,0 L4,0 4,2 6,2 6,4 4,4 4,6 2,6 2,4 0,4 0,2 2,2 z" Fill="White" HorizontalAlignment="Stretch" Height="6" Margin="0,0,0,4" Stretch="Fill" Stroke="{x:Null}" VerticalAlignment="Stretch" Width="6" >
+                                <Path.Effect>
+                                    <DropShadowEffect BlurRadius="1" Direction="90" ShadowDepth="1" Color="#FF2DC10D"/>
+                                </Path.Effect>
+                            </Path>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Margin" TargetName="grid" Value="0,1,0,0"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Лист итем для добавления чего-либо-->
+    <Style x:Key="stlInsertSomething" TargetType="{x:Type telerik:RadListBoxItem}">
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type telerik:RadListBoxItem}">
+                    <Grid Height="58" SnapsToDevicePixels="True" Margin="0,2,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="38"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="OuterLine" VerticalAlignment="Top" BorderBrush="#FFD9DBDD" BorderThickness="0,0,0,1" Height="58" Grid.Column="1">
+                            <Border x:Name="InnerBorder" CornerRadius="4" BorderThickness="1" Background="#00000000" BorderBrush="#00000000" Cursor="Hand" VerticalAlignment="Top" Height="55" >
+                                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{TemplateBinding Property=Content}" Margin="20,0" Foreground="{DynamicResource cListBoxContent}" VerticalAlignment="Center" FontFamily="{DynamicResource ffAlternativeFontMedium}" FontSize="16"/>
+                            </Border>
+                        </Border>
+                        <Button x:Name="addButton" Content="Button" Grid.Column="0" Style="{DynamicResource stlAddListBoxButton}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="InnerBorder" Value="{DynamicResource cRadListBoxItemBackOver}"/>
+                            <Setter Property="BorderBrush" TargetName="InnerBorder" Value="{DynamicResource cRadListBoxBorderOver}"/>
+                            <Setter Property="Foreground" TargetName="textBlock" Value="{DynamicResource cListBoxContentOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter Property="Background" TargetName="InnerBorder" Value="{DynamicResource cRadListBoxBackActive}"/>
+                            <Setter Property="BorderBrush" TargetName="InnerBorder" Value="{DynamicResource cRadListBoxBorderActive}"/>
+                            <Setter Property="Foreground" TargetName="textBlock" Value="{DynamicResource cListBoxContentActive}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- RadListBoxItem для отображения должностей и контактов (Employment)-->
+    <Style x:Key="stlPositionListBoxItem" TargetType="{x:Type telerik:RadListBoxItem}">
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="telerik:RadDragAndDropManager.AllowDrag" Value="False" />
+        <Setter Property="telerik:DragDropManager.AllowDrag" Value="False"/>
+        <Setter Property="telerik:DragDropManager.AllowCapturedDrag" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type telerik:RadListBoxItem}">
+                    <Grid Height="60" VerticalAlignment="Top" Margin="0,0,20,0" Cursor="Hand" SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel x:Name="dataField" Grid.Column="1" Margin="20,0,0,2">
+                            <Grid>
+                                <Border CornerRadius="0" Height="58" BorderThickness="0,0,0,1" BorderBrush="#FFD9DBDD" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2" Background="#00000000"/>
+                                <Border x:Name="Visual" Height="55" VerticalAlignment="Top" BorderThickness="1" Grid.ColumnSpan="2" Grid.RowSpan="2" CornerRadius="5" Background="{x:Null}">
+                                    <Grid Name="grid">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel  x:Name="stackpanel" Margin="20,4,0,0" Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Top">
+                                            <!--<StackPanel.ToolTip>
+                                                <TextBlock Text="{Binding Publication_name}" ></TextBlock>
+                                            </StackPanel.ToolTip>-->
+                                         
+                                            <TextBlock Name="fullBlock" TextTrimming="WordEllipsis" Text="{Binding Publication_date}" FontFamily="{DynamicResource ffBaseFont}" FontSize="12" Foreground="#FF82878E"></TextBlock>
+                                        </StackPanel>
+                                        <TextBlock Name="firstBlock" Margin="20,5" TextTrimming="WordEllipsis" Text="{Binding Publication_name}" FontFamily="{DynamicResource ffBaseFont}" FontWeight="Bold" VerticalAlignment="Top" FontSize="12" Foreground="#FF82878E"></TextBlock>
+                                        <TextBlock x:Name="textBlock1" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="12" Foreground="{DynamicResource cFontColor}" 
+												Margin="20,5" Text="{Binding Project_name}" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Right" />
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="Visual" Value="{DynamicResource cRadListBoxBorderOver}"/>
+                            <Setter Property="Background" TargetName="Visual" Value="{DynamicResource cRadListBoxItemBackOver}"/>
+                            <Setter Property="Foreground" TargetName="firstBlock" Value="{DynamicResource cListBoxContentOver}"/>
+                            <Setter Property="Foreground" TargetName="fullBlock" Value="{DynamicResource cListBoxContentOver}"/>
+                            <Setter Property="Foreground" TargetName="textBlock1" Value="{DynamicResource cListBoxContentOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" TargetName="Visual" Value="{DynamicResource cRadListBoxBackActive}"/>
+                            <Setter Property="BorderBrush" TargetName="Visual" Value="{DynamicResource cRadListBoxBorderActive}"/>
+                            <Setter Property="Foreground" TargetName="firstBlock" Value="{DynamicResource cListBoxContentOver}"/>
+                            <Setter Property="Foreground" TargetName="fullBlock" Value="{DynamicResource cListBoxContentActive}"/>
+
+                            <Setter Property="Foreground" TargetName="textBlock1" Value="{DynamicResource cListBoxContentActive}"/>
+
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="stlSmiListBoxItem" TargetType="{x:Type telerik:RadListBoxItem}">
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="telerik:RadDragAndDropManager.AllowDrag" Value="False" />
+        <Setter Property="telerik:DragDropManager.AllowDrag" Value="False"/>
+        <Setter Property="telerik:DragDropManager.AllowCapturedDrag" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type telerik:RadListBoxItem}">
+                    <Grid Height="60" VerticalAlignment="Top" Margin="0,0,20,0" Cursor="Hand" SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel x:Name="dataField" Grid.Column="1" Margin="20,0,0,2">
+                            <Grid>
+                                <Border CornerRadius="0" Height="58" BorderThickness="0,0,0,1" BorderBrush="#FFD9DBDD" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.RowSpan="2" Background="#00000000"/>
+                                <Border x:Name="Visual" Height="55" VerticalAlignment="Top" BorderThickness="1" Grid.ColumnSpan="2" Grid.RowSpan="2" CornerRadius="5" Background="{x:Null}">
+                                    <Grid Name="grid">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel  x:Name="stackpanel" Margin="20,4,0,0" Orientation="Horizontal" Grid.ColumnSpan="2" Grid.Row="1" VerticalAlignment="Top">
+                                            <!--<StackPanel.ToolTip>
+                                                <TextBlock Text="{Binding Publication_name}" ></TextBlock>
+                                            </StackPanel.ToolTip>-->
+
+                                        <TextBlock Name="fullBlock" TextTrimming="WordEllipsis" Text="{Binding EF_MassMedium.Mass_media_type_name}" FontFamily="{DynamicResource ffBaseFont}" FontSize="12" Foreground="#FF82878E"></TextBlock>
+                                        </StackPanel>
+                                        <TextBlock Name="firstBlock" Margin="20,5" TextTrimming="WordEllipsis" Text="{Binding Smi_name}" FontFamily="{DynamicResource ffBaseFont}" FontWeight="Bold" VerticalAlignment="Top" FontSize="12" Foreground="#FF82878E"></TextBlock>
+                                        <StackPanel Grid.Column="1" Grid.RowSpan="2">
+                                            <TextBlock x:Name="textBlock1" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="12" Foreground="{DynamicResource cFontColor}" 
+												Margin="20,5" Text="{Binding Smi_edition}"  FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Right" />
+                                            <TextBlock x:Name="textBlock2" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="12" Foreground="{DynamicResource cFontColor}" 
+												Margin="20,5" Text="{Binding Smi_edition_descr}"  FontWeight="Bold" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+                                        </StackPanel>
+
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="Visual" Value="{DynamicResource cRadListBoxBorderOver}"/>
+                            <Setter Property="Background" TargetName="Visual" Value="{DynamicResource cRadListBoxItemBackOver}"/>
+                            <Setter Property="Foreground" TargetName="firstBlock" Value="{DynamicResource cListBoxContentOver}"/>
+                            <Setter Property="Foreground" TargetName="fullBlock" Value="{DynamicResource cListBoxContentOver}"/>
+                            <Setter Property="Foreground" TargetName="textBlock1" Value="{DynamicResource cListBoxContentOver}"/>
+                            <Setter Property="Foreground" TargetName="textBlock2" Value="{DynamicResource cListBoxContentOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" TargetName="Visual" Value="{DynamicResource cRadListBoxBackActive}"/>
+                            <Setter Property="BorderBrush" TargetName="Visual" Value="{DynamicResource cRadListBoxBorderActive}"/>
+                            <Setter Property="Foreground" TargetName="firstBlock" Value="{DynamicResource cListBoxContentOver}"/>
+                            <Setter Property="Foreground" TargetName="fullBlock" Value="{DynamicResource cListBoxContentActive}"/>
+
+                            <Setter Property="Foreground" TargetName="textBlock1" Value="{DynamicResource cListBoxContentActive}"/>
+                            <Setter Property="Foreground" TargetName="textBlock2" Value="{DynamicResource cListBoxContentActive}"/>
+
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- EndRegion -->
+
+
+
+</ResourceDictionary>

@@ -1,0 +1,9 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <FontFamily x:Key="ffBaseFont">/EffixReportSystem;component/Skins/Fonts/#Myriad Pro</FontFamily>
+    <FontFamily x:Key="ffBaseFontSemibold">/NotificationSystemMVVM;component/Skins/Fonts/#Myriad Pro Semibold</FontFamily>
+    <FontFamily x:Key="ffBaseFontItalic">/NotificationSystemMVVM;component/Skins/Fonts/#Myriad Pro Italic</FontFamily>
+    <FontFamily x:Key="ffAlternativeFont">/NotificationSystemMVVM;component/Skins/Fonts/#PF Agora Slab Pro</FontFamily>
+    <FontFamily x:Key="ffAlternativeFontMedium">/NotificationSystemMVVM;component/Skins/Fonts/#PF Agora Slab Pro Medium</FontFamily>
+</ResourceDictionary>

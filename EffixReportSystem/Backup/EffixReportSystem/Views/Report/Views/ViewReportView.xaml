@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="EffixReportSystem.Views.Report.Views.ViewReportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:telerik="clr-namespace:Telerik.ReportViewer.Wpf;assembly=Telerik.ReportViewer.Wpf"
+             mc:Ignorable="d">
+    <Grid Margin="0,-50,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Label Margin="5" VerticalAlignment="Center">Начало периода</Label>
+            <DatePicker Margin="5" VerticalAlignment="Center"></DatePicker>
+            <Label Margin="5" VerticalAlignment="Center">Конец периода</Label>
+            <DatePicker Margin="5" VerticalAlignment="Center"></DatePicker>
+            <Button Margin="5" VerticalAlignment="Center" Click="Button_Click_1">Сформировать отчет</Button>
+        </StackPanel>
+        <telerik:ReportViewer x:Name="reportViewer" Grid.Row="1"></telerik:ReportViewer>
+    </Grid>
+</UserControl>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="_UpgradeWizard_Files\UpgradeWizardLog.xslt"?>
+<log>
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem\EffixReportSystem.csproj" />
+  <event action="Analyze" type="Success" name="Assembly References" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem\app.config" />
+  <event action="Analyze" type="Success" name="Http Handlers" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem\app.config" />
+  <event action="Analyze" type="Success" name="Handlers (IIS7+)" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem\app.config" />
+  <event action="Analyze" type="Success" name="Config Sections" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem\app.config" />
+  <event action="Analyze" type="Success" name="Render Extensions" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem\app.config" />
+  <event action="Analyze" type="Success" name="Session State Providers" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem\app.config" />
+  <event action="Analyze" type="Success" name="app.config" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem\app.config" />
+  <event action="Analyze" type="Success" name="Resources.resx" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem\Properties\Resources.resx" />
+  <event action="Analyze" type="Success" name="ClippingReport.resx" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem\Views\Report\ReportTemplates\ClippingReport.resx" />
+  <event action="Analyze" type="Success" name="HeadReport.resx" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem\Views\Report\ReportTemplates\HeadReport.resx" />
+  <event action="Analyze" type="Success" name="EffixReportSystem" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem\EffixReportSystem.csproj" />
+  <event action="Analyze" type="Success" name="EffixReportSystem" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem.sln" />
+  <event action="Backup" type="Success" name="EffixReportSystem" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem\EffixReportSystem.csproj" />
+  <event action="Upgrade" type="Success" name="Assembly References" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem\EffixReportSystem.csproj" />
+  <event action="Upgrade" type="Success" name="ClippingReport.resx" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem\Views\Report\ReportTemplates\ClippingReport.resx" />
+  <event action="Upgrade" type="Success" name="HeadReport.resx" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem\Views\Report\ReportTemplates\HeadReport.resx" />
+  <event action="Upgrade" type="Success" name="EffixReportSystem" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem\EffixReportSystem.csproj" />
+  <event action="Upgrade" type="Success" name="EffixReportSystem" path="C:\Users\Николай\Desktop\EffixProject\EffixReportSystem\EffixReportSystem.sln" />
+</log>

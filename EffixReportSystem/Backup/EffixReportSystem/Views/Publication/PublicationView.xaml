@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="EffixReportSystem.Views.Publication.PublicationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ViewModels="clr-namespace:EffixReportSystem.Views.Publication.ViewModels"
+             xmlns:Views="clr-namespace:EffixReportSystem.Views.Publication.Views" mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type ViewModels:ViewPublicationViewModel}">
+            <Views:ViewPublicationView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:EditPublicationViewModel}">
+            <Views:EditPublicationView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ViewModels:NewPublicationViewModel}">
+            <Views:NewPublicationView />
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <ContentControl x:Name="WorkingArea" Content="{Binding CurrentPageViewModel}"></ContentControl>
+    </Grid>
+</UserControl>

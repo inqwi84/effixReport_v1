@@ -1,0 +1,176 @@
+﻿<Window x:Class="EffixReportSystem.ApplicationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:MassMedia="clr-namespace:EffixReportSystem.Views.MassMedia"
+        xmlns:Person="clr-namespace:EffixReportSystem.Views.Person"
+        xmlns:Publication="clr-namespace:EffixReportSystem.Views.Publication"
+        xmlns:Report="clr-namespace:EffixReportSystem.Views.Report"
+        xmlns:Settings="clr-namespace:EffixReportSystem.Views.Settings" WindowStyle="None" 
+	    WindowStartupLocation="CenterScreen" 
+        x:Uid="ApplicationViewCtrl1"
+        Title="Система отчётов" 
+	    ResizeMode="CanResizeWithGrip"
+	    Background="Transparent">
+    <Window.Resources>
+        <System:Double x:Key="BWidth">100</System:Double>
+        <DataTemplate DataType="{x:Type Publication:PublicationViewModel}">
+            <Publication:PublicationView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type MassMedia:MassMediaViewModel}">
+            <MassMedia:MassMediaView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type Person:PersonViewModel}">
+            <Person:PersonView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type Report:ReportViewModel}">
+            <Report:ReportView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type Settings:SettingsViewModel}">
+            <Settings:SettingsView />
+        </DataTemplate>
+    </Window.Resources>
+    <Border x:Name="LayoutRoot" 
+            BorderBrush="{DynamicResource bWindowBorder}" 
+            BorderThickness="1" 
+            CornerRadius="10,10,0,10"
+            MouseMove="LayoutRoot_MouseMove" 
+            Background="{DynamicResource bWindowBack}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="64"/>
+                <!--Window control buttons-->
+                <!--<RowDefinition Height="76"/>-->
+                <RowDefinition x:Name="resizingRow" Height="100"/>
+                <!--Logo and menu buttons-->
+                <RowDefinition Height="*"/>
+                <!--Tasks Datagrid-->
+                <RowDefinition Height="32"/>
+                <!--StatusBar-->
+            </Grid.RowDefinitions>
+            <!--Window control buttons-->
+            <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right" Margin="15,10,10,15" VerticalAlignment="Top">
+                <Button x:Name="minimizeBtn" Click="minimizeBtn_Click" Width="24" Height="24" Style="{DynamicResource stlWindowControlButtons}" Cursor="Hand"  x:Uid="ApplicationViewCtrl2" ToolTip="Свернуть">
+                    <Grid Width="10" Height="10">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+                            <Path Data="M293,418.61L303,418.61L303,420.61L293,420.61z" Fill="{DynamicResource bControlWindowBtnBack}" Height="2" Stretch="Fill" Width="10" Effect="{DynamicResource fxLightShadow}" VerticalAlignment="Bottom"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+                            <Path Data="M293,418.61L303,418.61L303,420.61L293,420.61z" Fill="{DynamicResource bControlWindowBtnBackOver}" Height="2" Stretch="Fill" Width="10" Effect="{DynamicResource fxLightShadow}" VerticalAlignment="Bottom"/>
+                        </StackPanel>
+                    </Grid>
+                </Button>
+                <Button x:Name="maximizeBtn" Click="maximizeBtn_Click" Width="24" Height="24" Style="{DynamicResource stlWindowControlButtons}" Cursor="Hand" ToolTip="Растянуть на весь экран">
+                    <Grid Width="10" Height="10">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+                            <Path Data="M294,417.11L302,417.11L302,423.11L294,423.11z M293,424.11L303,424.11L303,415.11L293,415.11z" Fill="{DynamicResource bControlWindowBtnBack}" Height="9" Stretch="Fill" Width="10" Effect="{DynamicResource fxLightShadow}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+                            <Path Data="M294,417.11L302,417.11L302,423.11L294,423.11z M293,424.11L303,424.11L303,415.11L293,415.11z" Fill="{DynamicResource bControlWindowBtnBackOver}" Height="9" Stretch="Fill" Width="10" Effect="{DynamicResource fxLightShadow}"/>
+                        </StackPanel>
+                    </Grid>
+                </Button>
+                <Button x:Name="closeBtn" Click="closeBtn_Click" Width="24" Height="24" Style="{DynamicResource stlWindowControlButtons}" Cursor="Hand"  x:Uid="ApplicationViewCtrl3" ToolTip="Закрыть окно">
+                    <Grid Width="10" Height="10">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+                            <Path Data="M301.75,415.1099L298,418.6199L294.25,415.1099L293,416.2799L296.75,419.7799L293,423.2899L294.25,424.4599L298,420.9499L301.75,424.4599L303,423.2899L299.25,419.7799L303,416.2799z" Height="10" Stretch="Fill" Width="10" Fill="{DynamicResource bControlWindowBtnBack}" Effect="{DynamicResource fxLightShadow}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+                            <Path Data="M301.75,415.1099L298,418.6199L294.25,415.1099L293,416.2799L296.75,419.7799L293,423.2899L294.25,424.4599L298,420.9499L301.75,424.4599L303,423.2899L299.25,419.7799L303,416.2799z" Height="10" Stretch="Fill" Width="10" Fill="{DynamicResource bControlWindowBtnBackOver}" Effect="{DynamicResource fxLightShadow}"/>
+                        </StackPanel>
+                    </Grid>
+                </Button>
+            </StackPanel>
+            <DockPanel Grid.Row="1">
+                <!--Logo-->
+                <StackPanel Margin="55,0,0,0" Orientation="Vertical" Width="64">
+                    <Image Name="imgTitle" Stretch="Fill" HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" />
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock Name="txtTitle" TextWrapping="Nowrap"  FontSize="33" FontFamily="{DynamicResource ffAlternativeFont}" Margin="0,0,-107,0" Foreground="{DynamicResource cHeaderFontColor}" Effect="{DynamicResource fxLightShadow}"/>
+                    <TextBlock Name="txtTitleDetails" TextWrapping="Nowrap"  Margin="0,-5,0,0" Foreground="{DynamicResource cFontColor}" Effect="{DynamicResource fxLightShadow}" FontFamily="{DynamicResource ffBaseFont}"/>
+                </StackPanel>
+                <StackPanel Name="ButtonStackPanel" Background="Silver"  Orientation="Horizontal" Margin="0,10,20,10"  Height="32" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <RadioButton Name="PublicationRadioButton" IsChecked="True"  Width="{StaticResource BWidth}" 
+                                 Checked="PublicationRadioButton_Checked" 
+                                 Style="{DynamicResource stlMenuToggleButtonFirst}"
+                                 Cursor="Hand">
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text= "{Binding Path=PageViewModels[0].Name}"  FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="14" Foreground="{DynamicResource cButtonContentColor}" Effect="{DynamicResource fxDarkShadow}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text= "{Binding Path=PageViewModels[0].Name}" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="14" Foreground="{DynamicResource cButtonContentColor}" Effect="{DynamicResource fxOverShadow}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text= "{Binding Path=PageViewModels[0].Name}" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="14" Foreground="{DynamicResource cButtonContentColorPressed}" Effect="{DynamicResource fxPressedShadow}"/>
+                            </StackPanel>
+                        </Grid>
+                    </RadioButton>
+
+                    <RadioButton Name="MassMediaRadioButton" Width="{StaticResource BWidth}" 
+                                
+                                Checked="MassMediaRadioButton_Checked" Style="{DynamicResource stlMenuToggleButton}" Cursor="Hand">
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text= "{Binding Path=PageViewModels[1].Name}" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="14" Foreground="{DynamicResource cButtonContentColor}" Effect="{DynamicResource fxDarkShadow}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text= "{Binding Path=PageViewModels[1].Name}" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="14" Foreground="{DynamicResource cButtonContentColor}" Effect="{DynamicResource fxOverShadow}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text= "{Binding Path=PageViewModels[1].Name}" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="14" Foreground="{DynamicResource cButtonContentColorPressed}" Effect="{DynamicResource fxPressedShadow}"/>
+                            </StackPanel>
+                        </Grid>
+                    </RadioButton>
+                    <RadioButton Name="PersonRadioButton" Width="{StaticResource BWidth}" Style="{DynamicResource stlMenuToggleButton}" Cursor="Hand"
+
+                                 Checked="PersonRadioButton_Checked">
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text= "{Binding Path=PageViewModels[2].Name}" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="14" Foreground="{DynamicResource cButtonContentColor}" Effect="{DynamicResource fxDarkShadow}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text= "{Binding Path=PageViewModels[2].Name}" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="14" Foreground="{DynamicResource cButtonContentColor}" Effect="{DynamicResource fxOverShadow}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text= "{Binding Path=PageViewModels[2].Name}" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="14" Foreground="{DynamicResource cButtonContentColorPressed}" Effect="{DynamicResource fxPressedShadow}"/>
+                            </StackPanel>
+                        </Grid>
+                    </RadioButton>
+                    <RadioButton Name="ReportRadioButton" Width="{StaticResource BWidth}" Style="{DynamicResource stlMenuToggleButton}" Cursor="Hand"
+ 
+                                 Checked="ReportRadioButton_Checked">
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text= "{Binding Path=PageViewModels[3].Name}" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="14" Foreground="{DynamicResource cButtonContentColor}" Effect="{DynamicResource fxDarkShadow}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text= "{Binding Path=PageViewModels[3].Name}" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="14" Foreground="{DynamicResource cButtonContentColor}" Effect="{DynamicResource fxOverShadow}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text= "{Binding Path=PageViewModels[3].Name}" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="14" Foreground="{DynamicResource cButtonContentColorPressed}" Effect="{DynamicResource fxPressedShadow}"/>
+                            </StackPanel>
+                        </Grid>
+                    </RadioButton>
+                    <RadioButton Name="SettingsRadioButton" Width="{StaticResource BWidth}" Style="{DynamicResource stlMenuToggleButtonLast}" Cursor="Hand"  Checked="SettingsRadioButton_Checked">
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text= "{Binding Path=PageViewModels[4].Name}" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="14" Foreground="{DynamicResource cButtonContentColor}" Effect="{DynamicResource fxDarkShadow}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text= "{Binding Path=PageViewModels[4].Name}" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="14" Foreground="{DynamicResource cButtonContentColor}" Effect="{DynamicResource fxOverShadow}"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <TextBlock Text= "{Binding Path=PageViewModels[4].Name}" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="14" Foreground="{DynamicResource cButtonContentColorPressed}" Effect="{DynamicResource fxPressedShadow}"/>
+                            </StackPanel>
+                        </Grid>
+                    </RadioButton>
+                </StackPanel>
+            </DockPanel>
+            <Border x:Name="WorkingAreaBorder" Grid.Row="2" BorderThickness="1,1,1,1" BorderBrush="{DynamicResource bWindowBorder}" Background="{DynamicResource cWorkArea}" CornerRadius="6" Margin="4,0" Effect="{DynamicResource fxLightShadow}">
+                <ContentControl x:Name="WorkingArea" Content="{Binding CurrentPageViewModel}"></ContentControl>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

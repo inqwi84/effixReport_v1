@@ -29,10 +29,17 @@ namespace EffixReportSystem.Views.Report.Views
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-           var report = new HeadReport();
-           var obj = new ObjectDataSource { DataSource = (new EF_Report().GetAllReports()) };
-            report.DataSource = obj;
-            reportViewer.Report=report;
+           var report = new ClippingReport();
+           reportViewer.ReportSource=report;
+
+
+             //    .GroupFooter.Items.Add(new PictureBox(){ Value = "c:\\ing.png"});
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var report = new HeadReport();
+            reportViewer.ReportSource = report;
         }
     }
 }

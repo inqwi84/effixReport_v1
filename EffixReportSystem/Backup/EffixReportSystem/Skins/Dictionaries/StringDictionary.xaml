@@ -1,0 +1,160 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Uid="SnapShotsLabelCtrl" x:Key="SnapShotsLabelCtrl">Скриншоты</system:String>
+   <system:String x:Uid="SubstitutionViewCtrl2" x:Key="SubstitutionViewCtrl2">Должности</system:String>
+   <system:String  x:Uid="SubstitutionViewCtrl3" x:Key="SubstitutionViewCtrl3">Замещающие лица</system:String>
+   <system:String x:Uid="SubstitutionViewCtrl4" x:Key="SubstitutionViewCtrl4">Информация о должности</system:String>
+   <system:String x:Uid="NewButtonCtrl" x:Key="NewButtonCtrl">новое</system:String>
+<system:String x:Uid="NewButtonCtrl2" x:Key="NewButtonCtrl2">новая</system:String>
+<system:String x:Uid="NewButtonCtrl3" x:Key="NewButtonCtrl3">новая</system:String>
+   <system:String x:Uid="EditButtonCtrl" x:Key="EditButtonCtrl">правка</system:String>
+   <system:String x:Uid="NewButtonOnTemplateCtrl" x:Key="NewButtonOnTemplateCtrl">на основе выбранного</system:String>
+<system:String x:Uid="NewButtonOnTemplateCtrl2" x:Key="NewButtonOnTemplateCtrl2">на основе</system:String>
+   <system:String x:Uid="RemoveButtonCtrl" x:Key="RemoveButtonCtrl">удалить</system:String>
+   <system:String x:Uid="ObjectLabelCtrl" x:Key="ObjectLabelCtrl">Объект</system:String>
+      <system:String x:Uid="ObjectLabelCtrl1" x:Key="ObjectLabelCtrl1">Объект:</system:String>
+   <system:String x:Uid="CategoryLabelCtrl" x:Key="CategoryLabelCtrl">Категория</system:String>
+      <system:String x:Uid="CategoryLabelCtrl1" x:Key="CategoryLabelCtrl1">Категория:</system:String>
+    <system:String x:Uid="ProjectsLabelCtrl" x:Key="ProjectsLabelCtrl">Дерево проектов</system:String>
+    <system:String x:Uid="PublicationsLabelCtrl" x:Key="PublicationsLabelCtrl">Список публикаций</system:String>
+    <system:String x:Uid="PublicationInfoCtrl" x:Key="PublicationInfoCtrl">Информация о публикации</system:String>
+    
+   <system:String x:Uid="SubstitutionListCtrl" x:Key="SubstitutionListCtrl">Список замещения</system:String>
+   <system:String x:Uid="SubstitutionEmploymentsCtrl" x:Key="SubstitutionEmploymentsCtrl">Замещающие лица</system:String>
+   <system:String x:Uid="EmploymentInfoCtrl" x:Key="EmploymentInfoCtrl">Информация о должности</system:String>
+   <system:String x:Uid="ContactInfoCtrl" x:Key="ContactInfoCtrl">Информация о контакте</system:String>
+   <system:String x:Uid="DoneButtonCtrl" x:Key="DoneButtonCtrl">готово</system:String>
+   <system:String x:Uid="CancelButtonCtrl" x:Key="CancelButtonCtrl">отмена</system:String>
+   <system:String x:Uid="HeadLabelCtrl" x:Key="HeadLabelCtrl">Начальники</system:String>
+   <system:String x:Uid="SubordinateLabelCtrl" x:Key="SubordinateLabelCtrl">Подчиненные</system:String>
+   <system:String x:Uid="NotesLabelCtrl" x:Key="NotesLabelCtrl">Заметки</system:String>
+   <system:String x:Uid="SelectedContactsLabelCtrl" x:Key="SelectedContactsLabelCtrl">Выбранные контакты</system:String>
+   <system:String x:Uid="SelectedEmploymentsLabelCtrl" x:Key="SelectedEmploymentsLabelCtrl">Выбранные должности</system:String>
+   <system:String x:Uid="SelectButtonCtrl" x:Key="SelectButtonCtrl">выбрать</system:String>
+   <system:String x:Uid="AddNewEmploymentTypeCtrl" x:Key="AddNewEmploymentTypeCtrl">добавление новой</system:String>
+   <system:String x:Uid="InputNewEmploymentCtrl" x:Key="InputNewEmploymentCtrl">Введите наименование должности</system:String>
+   <system:String x:Uid="InputPriorityCtrl" x:Key="InputPriorityCtrl">Задайте приоритет</system:String>
+<system:String x:Uid="SaveButtonCtrl" x:Key="SaveButtonCtrl">сохранить</system:String>
+<system:String x:Uid="InputPhoneCtrl" x:Key="InputPhoneCtrl">Введите номер телефона</system:String>
+<system:String x:Uid="InputEmailCtrl" x:Key="InputEmailCtrl">Введите почтовый адрес</system:String>
+<system:String x:Uid="InputURLCtrl" x:Key="InputURLCtrl">Введите адрес сайта</system:String>
+<system:String x:Uid="InputAddress" x:Key="InputAddress">Введите адрес</system:String>
+<system:String x:Uid="InputLastNameCtrl" x:Key="InputLastNameCtrl">Введите фамилию</system:String>
+<system:String x:Uid="InputFirstNameCtrl" x:Key="InputFirstNameCtrl">Введите имя</system:String>
+<system:String x:Uid="InputMidNameCtrl" x:Key="InputMidNameCtrl">Введите отчество</system:String>
+<system:String x:Uid="CollapseButtonCtrl" x:Key="CollapseButtonCtrl">Свернуть</system:String>
+<system:String x:Uid="CloseWindowCtrl" x:Key="CloseWindowCtrl">Закрыть окно</system:String>
+<system:String x:Uid="AddNewTypeCtrl" x:Key="AddNewTypeCtrl">Добавление нового типа</system:String>
+<system:String x:Uid="InputContactNameCtrl" x:Key="InputContactNameCtrl">Введите наименование нового контакта</system:String>
+<system:String x:Uid="InputContactTypeCtrl" x:Key="InputContactTypeCtrl">Задайте тип контакта</system:String>
+<system:String x:Uid="IsSystemCtrl" x:Key="IsSystemCtrl">Системный</system:String>
+<system:String x:Uid="IsUserCtrl" x:Key="IsUserCtrl">Пользовательский</system:String>
+<system:String x:Uid="NotificationTextCtrl" x:Key="NotificationTextCtrl">Текст оповещения</system:String>
+<system:String x:Uid="SMSLimitCtrl" x:Key="SMSLimitCtrl">SMS-сообщение ограничено первыми  </system:String>
+<system:String x:Uid="SMSLimitCtrl2" x:Key="SMSLimitCtrl2">  символами</system:String>
+<system:String x:Uid="SMSLengthCtrl" x:Key="SMSLengthCtrl">Длина сообщения: </system:String>
+<system:String x:Uid="PriorityLabelCtrl" x:Key="PriorityLabelCtrl">Приоритет</system:String>
+<system:String x:Uid="PriorityLabelCtrl1" x:Key="PriorityLabelCtrl1">Приоритет:</system:String>
+<system:String x:Uid="SourceLabelCtrl" x:Key="SourceLabelCtrl">Источник</system:String>
+<system:String x:Uid="EmailSourceCtrl" x:Key="EmailSourceCtrl">Обращение по E-mail</system:String>
+<system:String x:Uid="TetATetSourceCtrl" x:Key="TetATetSourceCtrl">Личное обращение</system:String>
+<system:String x:Uid="MonitoringSourceCtrl" x:Key="MonitoringSourceCtrl">Система мониторинга</system:String>
+<system:String x:Uid="ImportListButtonCtrl" x:Key="ImportListButtonCtrl">импорт списка</system:String>
+<system:String x:Uid="ClearListButtonCtrl" x:Key="ClearListButtonCtrl">очистить список</system:String>
+<system:String x:Uid="NotificationListsCtrl" x:Key="NotificationListsCtrl">Списки оповещения</system:String>
+<system:String x:Uid="EmpContactsLabelCtrl" x:Key="EmpContactsLabelCtrl">Должностные лица</system:String>
+<system:String x:Uid="SmallAllLableCtrl" x:Key="SmallAllLableCtrl">все</system:String>
+     
+    <system:String x:Uid="WrongValue" x:Key="WrongValue">Данное значение не является правильным</system:String>
+    <system:String x:Uid="PhoneLabelCtrl" x:Key="Phone">Телефон</system:String>
+    <system:String x:Uid="Address" x:Key="Address">Адрес</system:String>
+    <system:String x:Uid="AddContact" x:Key="AddContact">Добавить контакт</system:String>
+    <system:String x:Uid="AllDepartments" x:Key="AllDepartments">Все</system:String>
+    <system:String x:Uid="Error" x:Key="Error">ошибка</system:String>
+    <system:String x:Uid="InProcess" x:Key="InProcess">выполняется</system:String>
+    <system:String x:Uid="Finished" x:Key="Finished">завершена</system:String>
+    <system:String x:Uid="Created" x:Key="Created">создана</system:String>
+    <system:String x:Uid="InQueue" x:Key="InQueue">в очереди</system:String>
+    <system:String x:Uid="Stopped" x:Key="Stopped">остановлена</system:String>
+    <system:String x:Uid="Unknown" x:Key="Unknown">неизвестно</system:String>
+    <system:String x:Uid="PriorityLow" x:Key="PriorityLow">низкий</system:String>
+    <system:String x:Uid="PriorityMedium" x:Key="PriorityMedium">средний</system:String>
+    <system:String x:Uid="PriorityHigh" x:Key="PriorityHigh">высокий</system:String>
+    <system:String x:Uid="AlreadyStarted" x:Key="AlreadyStarted">Приложение уже запущено</system:String>
+    <system:String x:Uid="Login" x:Key="Login">Выполняется вход в систему</system:String>
+    <system:String x:Uid="UserRights" x:Key="UserRights">Загрузка прав пользователя</system:String>
+    <system:String x:Uid="Delivered" x:Key="Delivered">отправлено</system:String>
+    <system:String x:Uid="NotDelivered" x:Key="NotDelivered">не доставлено</system:String>
+    <system:String x:Uid="Affirmed" x:Key="Affirmed">подтверждено</system:String>
+    <system:String x:Uid="Notification" x:Key="Notification">Оповещение</system:String>
+    <system:String x:Uid="DetailedInformation" x:Key="DetailedInformation">детальная информация</system:String>
+    <system:String x:Uid="MainPage" x:Key="MainPage">Главная</system:String>
+    <system:String x:Uid="AddGroupToNotification" x:Key="AddGroupToNotification">Добавление группы к правилу оповещения</system:String>
+    <system:String x:Uid="AddEmploymentToNotification" x:Key="AddEmploymentToNotification">Добавление должности к правилу оповещения</system:String>
+    <system:String x:Uid="EditNotificationRule" x:Key="EditNotificationRule">Редактирование правила оповещения</system:String>
+    <system:String x:Uid="ViewNotificationRule" x:Key="ViewNotificationRule">Просмотр правила оповещения</system:String>
+    <system:String x:Uid="AddGroupToNotificationTask" x:Key="AddGroupToNotificationTask">Добавление групп к задаче оповещения</system:String>
+    <system:String x:Uid="AddEmploymentToNotificationTask" x:Key="AddEmploymentToNotificationTask">Добавление должностей к задаче оповещения</system:String>
+    <system:String x:Uid="NewTaskOnTemplate" x:Key="NewTaskOnTemplate">Новая задача оповещения на основе</system:String>
+    <system:String x:Uid="NewTask" x:Key="NewTask">Новая задача оповещения</system:String>
+    <system:String x:Uid="AddEmploymentToList" x:Key="AddEmploymentToList">Добавить должность в список</system:String>
+    <system:String x:Uid="AddEmployment" x:Key="AddEmployment">Добавить должность</system:String>
+    <system:String x:Uid="AlreadyExistsInList" x:Key="AlreadyExistsInList">Данная должность содержится в списке</system:String>
+    <system:String x:Uid="AddToList" x:Key="AddToList">Добавить в список</system:String>
+    <system:String x:Uid="Edit" x:Key="Edit">редактирование</system:String>
+    <system:String x:Uid="RuleAlreadyExists" x:Key="RuleAlreadyExists">Аналогичное правило уже существует</system:String>
+    <system:String x:Uid="View" x:Key="View">просмотр</system:String>
+    <system:String x:Uid="SortBySubject" x:Key="SortBySubject">Сортировка по событию</system:String>
+    <system:String x:Uid="SortByObject" x:Key="SortByObject">Сортировка по объекту</system:String>
+    <system:String x:Uid="ServiceUnavailable" x:Key="ServiceUnavailable">Сервис временно недоступен</system:String>
+    <system:String x:Uid="ImpossibleAddEmployment" x:Key="ImpossibleAddEmployment">Невозможно добавить должность</system:String>
+    <system:String x:Uid="Add" x:Key="Add">Добавить</system:String>
+    <system:String x:Uid="ValidEmail" x:Key="ValidEmail">Неправильный E-mail адресс</system:String>
+    <system:String x:Uid="System" x:Key="System">Системн</system:String>
+    <system:String x:Uid="Contacts" x:Key="Contacts">Контакты</system:String>
+    <system:String x:Uid="ContactLabelCtrl"  x:Key="ContactLabelCtrl">Контакт</system:String>
+    <system:String x:Uid="AddNewEmployment"  x:Key="AddNewEmployment">Добавить новую должность</system:String>
+    <system:String x:Uid="Employments" x:Key="Employments">Должности</system:String>
+    <system:String x:Uid="DropToAdd" x:Key="DropToAdd">Перетащите, чтобы добавить</system:String>
+    <system:String x:Uid="AddToHead" x:Key="AddToHead">Добавить должность в список начальников</system:String>
+    <system:String x:Uid="AlreadyExistsInSubordinates" x:Key="AlreadyExistsInSubordinates">Данная должность содержится в списке подчиненных</system:String>
+    <system:String x:Uid="AddToSubordinate" x:Key="AddToSubordinate">Добавить должность в список подчиненных</system:String>
+    <system:String x:Uid="AlreadyExistsInHead" x:Key="AlreadyExistsInHead">Данная должность содержится в списке начальников</system:String>
+    <system:String x:Uid="Settings" x:Key="Settings">Настройки</system:String>
+    <system:String x:Uid="EditSubstitution" x:Key="EditSubstitution">Редактирование замещения</system:String>
+    <system:String x:Uid="ViewSubstitution" x:Key="ViewSubstitution">Просмотр замещения</system:String>
+    <system:String x:Uid="Substitution" x:Key="Substitution">Замещение</system:String>
+    <system:String x:Uid="AddToSubstitution" x:Key="AddToSubstitution">Добавить в замещающие</system:String>
+    <system:String x:Uid="AddToSubstitutionList" x:Key="AddToSubstitutionList">Добавить должность в список замещения</system:String>
+    <system:String x:Uid="AlreadyExistsInChild" x:Key="AlreadyExistsInChild">Должность уже существует в дочерних элементах</system:String>
+    <system:String x:Uid="ImpossibleToSelf" x:Key="ImpossibleToSelf">Невозможно добавить должность к самой себе</system:String>
+    <system:String x:Uid="AlreadyExistsInHeadElements" x:Key="AlreadyExistsInHeadElements">Должность уже существует в родительских элементах</system:String>
+    <system:String x:Uid="bSystem" x:Key="bSystem">Система</system:String>
+    <system:String x:Uid="sNotification" x:Key="sNotification">формирования отчётов</system:String>
+    <system:String x:Uid="GroupsLabelCtrl" x:Key="Groups">Группы</system:String>
+    <system:String x:Uid="GroupsLabelCtrl1" x:Key="GroupsLabelCtrl1">Группа </system:String>
+    <system:String x:Uid="ViewList" x:Key="ViewList">просмотр списка</system:String>
+    <system:String x:Uid="Journal" x:Key="Journal">Журнал</system:String>
+    <system:String x:Uid="sNotifications" x:Key="sNotifications">оповещений</system:String>
+    <system:String x:Uid="NoContacts" x:Key="NoContacts">Задача оповещения не содержит ни одного контакта</system:String>
+    <system:String x:Uid="MakeNotification" x:Key="MakeNotification">создание оповещения</system:String>
+
+    <system:String x:Uid="BeginLabelCtrl" x:Key="BeginLabelCtrl">Начало</system:String>
+    <system:String x:Uid="StatusLabelCtrl" x:Key="StatusLabelCtrl">Статус</system:String>
+    <system:String x:Uid="StatusLabelCtrl1" x:Key="StatusLabelCtrl1">Статус:</system:String>
+    <system:String x:Uid="ResourcesLabelCtrl" x:Key="ResourcesLabelCtrl">Ресурсы</system:String>
+    <system:String x:Uid="StartTaskLabelCtrl" x:Key="StartTaskLabelCtrl">Старт задачи оповещения:</system:String>
+    <system:String x:Uid="MessageTextLabelCtrl" x:Key="MessageTextLabelCtrl">Текст сообщения:</system:String>
+    <system:String x:Uid="TimeLabelCtrl" x:Key="TimeLabelCtrl">Время</system:String>
+    <system:String x:Uid="DetailedInfoLabelCtrl" x:Key="DetailedInfoLabelCtrl">Детальный отчёт</system:String>
+    <system:String x:Uid="ExportTextLabelCtrl" x:Key="ExportTextLabelCtrl">Экспорт документа</system:String>
+    <system:String x:Uid="MakeReportLabelCtrl" x:Key="MakeReportLabelCtrl">Сформировать отчёт</system:String>
+    <system:String x:Uid="DescriptionLabelCtrl" x:Key="DescriptionLabelCtrl">Описание</system:String>
+    <system:String x:Uid="OperatorLabelCtrl" x:Key="OperatorLabelCtrl">Оператор:</system:String>
+    <system:String x:Uid="AwayButtonCtrl" x:Key="AwayButtonCtrl">отойти</system:String>
+    <system:String x:Uid="SearchTextBox" x:Key="SearchTextBox">поиск</system:String>
+    <system:String x:Uid="AppendixA" x:Key="AppendixA">Приложение А</system:String>
+    <system:String x:Uid="NotificationListLabel" x:Key="NotificationListLabel">Список оповещения</system:String>
+    <system:String x:Uid="NotificatedSubst" x:Key="NotificatedSubst">оповещен замещающий</system:String>
+</ResourceDictionary>

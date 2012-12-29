@@ -89,6 +89,24 @@ namespace EffixReportSystem.Helper.Classes.Report
     {
         public string AValue { get; set; }
     }
+
+    public class ImageReport
+    {
+        public Bitmap Image { get; set; }
+        public string Title { get; set; }
+    }
+
+    public class ImageReportsList :List<ImageReport>
+    {
+        public ImageReportsList ()
+        {
+           var report = new ImageReport() { Image = new Bitmap("c:\\ing.png"), Title = "ing.png" };
+        this.Add(report);
+           var  report2 = new ImageReport() { Image = new Bitmap("c:\\img.jpg"), Title = "img.jpg" };
+            this.Add(report2);
+        }
+    }
+
     public class ReportRS
     {
         public int Index { get; set; }
@@ -212,8 +230,10 @@ namespace EffixReportSystem.Helper.Classes.Report
             {
 
             }
-
         }
     }
-
+    public class TileImages
+    {
+        
+    }
 }

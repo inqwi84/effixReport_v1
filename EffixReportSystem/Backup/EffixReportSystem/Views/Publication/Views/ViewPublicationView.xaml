@@ -1,0 +1,146 @@
+﻿<UserControl x:Class="EffixReportSystem.Views.Publication.Views.ViewPublicationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" mc:Ignorable="d">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="9"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="9"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border x:Name="Header" BorderThickness="0,0,0,1" Background="{DynamicResource cButtonBack}" CornerRadius="4.2,4.2,0,0" Grid.ColumnSpan="5" BorderBrush="{DynamicResource cButtonBorder}"/>
+        <GridSplitter Style="{DynamicResource stlGridSplitter}" Grid.Column="1" HorizontalAlignment="Stretch" Grid.RowSpan="5"/>
+        <GridSplitter Style="{DynamicResource stlGridSplitter}" Grid.Column="3" HorizontalAlignment="Stretch" Grid.RowSpan="5"/>
+        <DockPanel LastChildFill="False" Margin="0,0,4,0">
+            <TextBlock   Text="{DynamicResource ProjectsLabelCtrl}" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="20,0" FontFamily="{DynamicResource ffAlternativeFontMedium}" FontSize="16" Foreground="#FFEBECED">			
+			                	<TextBlock.Effect>
+			                		<DropShadowEffect BlurRadius="0" ShadowDepth="1" Color="#FF333333" Direction="90"/>
+			                	</TextBlock.Effect></TextBlock>
+        </DockPanel>
+        <DockPanel LastChildFill="False" Margin="0,0,4,0" Grid.Column="2">
+            <TextBlock   Text="{DynamicResource PublicationsLabelCtrl}" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="20,0" FontFamily="{DynamicResource ffAlternativeFontMedium}" FontSize="16" Foreground="#FFEBECED">			
+			                	<TextBlock.Effect>
+			                		<DropShadowEffect BlurRadius="0" ShadowDepth="1" Color="#FF333333" Direction="90"/>
+			                	</TextBlock.Effect></TextBlock>
+            <TextBox Name="SearchTextBox"
+                Style="{DynamicResource stlSearchBox}"
+                    VerticalAlignment="Center"
+                Text="{Binding FilterString, Mode=OneWay}" 
+                TextChanged="RadWatermarkTextBox_TextChanged" 
+                Margin="0,0,20,0" 
+                Height="22" 
+                Width="309" ButtonBase.Click="ClearSearchTextBox"></TextBox>
+
+        </DockPanel>
+        <DockPanel LastChildFill="False" Grid.Column="4"  Margin="0,0,4,0">
+            <TextBlock   Text="{DynamicResource PublicationInfoCtrl}"  DockPanel.Dock="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="{DynamicResource ffAlternativeFontMedium}" FontSize="16" Foreground="#FFEBECED"><TextBlock.Effect>
+									<DropShadowEffect BlurRadius="0" ShadowDepth="1" Color="#FF333333" Direction="90"/>
+								</TextBlock.Effect></TextBlock>
+        </DockPanel>
+        <telerik:RadTreeView  Grid.Row="1" 
+                              Name="ProjectsTreeView" 
+                              ItemsSource="{Binding Departments, Mode=TwoWay}" 
+                              SelectedItem="{Binding CurrentDepartament, Mode=TwoWay}"
+                              IsRootLinesEnabled="True" 
+				              IsLoadOnDemandEnabled="True"
+                              IsLineEnabled="True" 
+                              IsVirtualizing="True"
+                              IsDragDropEnabled="False"
+                              Style="{StaticResource DepartmentTreeView}"
+                             
+                              ItemContainerStyle="{StaticResource DepartmentTreeViewItem}">
+            <telerik:RadTreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Children, Mode=TwoWay}">
+                    <TextBlock Text="{Binding Department_name, Mode=TwoWay}"/>
+                </HierarchicalDataTemplate>
+            </telerik:RadTreeView.ItemTemplate>
+        </telerik:RadTreeView>
+        <telerik:RadListBox Name="PositionListBox"
+                            Grid.Row="1" 
+                            Style="{StaticResource stlRadListBox}"
+                            Grid.Column="2"
+                            ItemsSource="{Binding PublicationList, Mode=TwoWay, IsAsync=True}"
+                            SelectionChanged="PublicationListBox_SelectionChanged"
+                            ItemContainerStyle="{StaticResource stlPositionListBoxItem}">
+            
+            <telerik:RadListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Width="{Binding ElementName=PositionListBox,Path=ActualWidth}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Path=Publication_name}"></TextBlock>
+                        <TextBlock Text="{Binding Path=Publication_date}" Grid.Row="1"></TextBlock>
+                        <TextBlock Text="{Binding Path=Url_path}" Grid.Row="1" Grid.Column="1"></TextBlock>
+                        <TextBlock Text="{Binding Path=Project_name}" Grid.Column="1" HorizontalAlignment="Right"></TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </telerik:RadListBox.ItemTemplate>
+
+        </telerik:RadListBox>
+        <!--<NotificationSystemMVVM:PersonDetailsViewControl2 x:Name="ViewDetails"  Grid.Column="4" Grid.Row="1"></NotificationSystemMVVM:PersonDetailsViewControl2>-->
+        <Grid x:Name="ViewDetails"  Grid.Column="4" Grid.Row="1" Margin="10">
+            <StackPanel Margin="5">
+                <DockPanel x:Name="PublicationTitle" LastChildFill="False" Margin="0,5,0,5">
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0"  Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наименование статьи</TextBlock>
+                    <TextBlock Text="{Binding CurrentPublication.Publication_name}"  HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" DockPanel.Dock="Right"></TextBlock>
+                </DockPanel>
+                <DockPanel x:Name="SMIName" LastChildFill="False" Margin="0,5,0,5">
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0"  Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наименование издания</TextBlock>
+                    <TextBlock Text="{Binding CurrentPublication.EF_SMI.Smi_name}" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" DockPanel.Dock="Right"></TextBlock>
+                </DockPanel>
+                        <DockPanel x:Name="Date" LastChildFill="False" Margin="0,5,0,5">
+                            <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" Text="Дата публикации" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}"></TextBlock>
+                    <telerik:RadDatePicker IsEnabled="False" SelectedDate="{Binding CurrentPublication.Publication_date, Mode=TwoWay}" IsReadOnly="True" DockPanel.Dock="Right"  Margin="0,0,5,0" DateTimeWatermarkContent="Выберите дату" telerik:StyleManager.Theme="Metro" Width="150"></telerik:RadDatePicker>
+                        </DockPanel>
+                        <DockPanel x:Name="Tonality"  LastChildFill="False" Margin="0,5,0,5">
+                            <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Тональность</TextBlock>
+                    <TextBlock Text="{Binding CurrentPublication.EF_Tonality.Name}" DockPanel.Dock="Right"  Margin="0,0,5,0" ></TextBlock>
+                        </DockPanel>
+                        <DockPanel x:Name="Photo"  LastChildFill="False" Margin="0,5,0,5">
+                            <TextBlock DockPanel.Dock="Left" Margin="5,0,30,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наличие фотографии</TextBlock>
+                    <TextBlock Text="{Binding CurrentPublication.EF_Photo.HasPhoto}"  DockPanel.Dock="Right"  Margin="0,0,5,0"></TextBlock>
+                        </DockPanel>
+                        <DockPanel x:Name="Exclusive"  LastChildFill="False" Margin="0,5,0,5">
+                            <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Эксклюзивность</TextBlock>
+                    <TextBlock Text="{Binding CurrentPublication.EF_Exclusivity.Name}" DockPanel.Dock="Right" Width="150" Margin="0,0,5,0"></TextBlock>
+                        </DockPanel>
+                        <DockPanel x:Name="Initiated"  LastChildFill="False" Margin="0,5,0,5">
+                            <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Margin="5,0,0,0">Инициирована</TextBlock>
+                    <TextBlock Text="{Binding CurrentPublication.EF_Initiated.IsInitiated}" DockPanel.Dock="Right"  Margin="0,0,5,0"></TextBlock>
+                        </DockPanel>
+                        <DockPanel x:Name="Planed" LastChildFill="False" Margin="0,5,0,5">
+                            <TextBlock  DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Запланирована</TextBlock>
+                    <TextBlock Text="{Binding CurrentPublication.EF_Planed.IsPlaned}" DockPanel.Dock="Right" Margin="0,0,5,0"></TextBlock>
+                        </DockPanel>
+                        <DockPanel x:Name="Priority"  LastChildFill="False" Margin="0,5,0,5">
+                            <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Приоритет</TextBlock>
+                    <TextBlock Text="{Binding CurrentPublication.EF_SMI_priority.Priority_name}" DockPanel.Dock="Right"  Margin="0,0,5,0" ></TextBlock>
+                        </DockPanel>
+                    </StackPanel>
+        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Column="4"  Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <!--<Button Name="DoneButton" Style="{DynamicResource stlButton}" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="DoneButton_Click" Margin="0,0,10,0" Visibility="Collapsed"  Content="{DynamicResource DoneButtonCtrl}" ></Button>-->
+            <Button Name="EditButton" Style="{DynamicResource stlButton}" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="EditPublicationButton_Click" IsEnabled="{Binding CanEdit}" Margin="0,0,10,0"  Content="{DynamicResource EditButtonCtrl}" ></Button>
+            <!--<Button Name="CancelButton" Style="{DynamicResource stlButton}" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="CancelButton_Click" Margin="0,0,10,0" Visibility="Collapsed"  Content="{DynamicResource CancelButtonCtrl}"></Button>-->
+        </StackPanel>
+        <StackPanel Name="newDeleteStackPanel" Grid.Column="2"  Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Style="{DynamicResource stlButton}" Cursor="Hand" Margin="0,0,10,0" Click="NewPublicationButton_Click"  Content="{DynamicResource NewButtonCtrl3}"></Button>
+            <Button Style="{DynamicResource stlButton}" Cursor="Hand" Margin="0,0,0,0" Click="RemovePublicationButton_Click" IsEnabled="{Binding CanEdit}"  Content="{DynamicResource RemoveButtonCtrl}" ></Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

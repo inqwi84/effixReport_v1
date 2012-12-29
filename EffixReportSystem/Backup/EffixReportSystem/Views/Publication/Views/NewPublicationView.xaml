@@ -1,0 +1,478 @@
+﻿<UserControl x:Class="EffixReportSystem.Views.Publication.Views.NewPublicationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:classes="clr-namespace:EffixReportSystem.Helper.Classes"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:controls="clr-namespace:EffixReportSystem.Controls"
+             xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" mc:Ignorable="d">
+        <UserControl.Resources>
+            <DataTemplate x:Key="headerTemplate">
+                <TextBlock Text="{Binding ImageName}"></TextBlock>
+            </DataTemplate>
+            <DataTemplate x:Key="contentTemplate">
+                <Image Source="{Binding Image}" MouseRightButtonUp="Image_MouseRightButtonUp" MouseLeftButtonUp="Image_MouseLeftButtonUp"></Image>
+            </DataTemplate>
+            <Style x:Key="togglelessRadTileViewItem" TargetType="{x:Type telerik:RadTileViewItem}">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                <Setter Property="Background" Value="#E9E8E9" />
+                <Setter Property="BorderBrush">
+                    <Setter.Value>
+                        <LinearGradientBrush EndPoint="0.971000015735626,0.5" StartPoint="0.0399999991059303,0.5">
+                            <GradientStop Color="#B2B2B9" Offset="0" />
+                            <GradientStop Color="#B5C9DB" Offset="0.5" />
+                            <GradientStop Color="#B2B2B9" Offset="1" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Padding" Value="7" />
+                <Setter Property="Foreground" Value="#FFDDDDDD" />
+                <Setter Property="TileState" Value="Restored" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type telerik:RadTileViewItem}">
+                            <Grid SnapsToDevicePixels="True">
+                                <Border BorderBrush="{TemplateBinding BorderBrush}"
+										BorderThickness="{TemplateBinding BorderThickness}"
+										Background="{TemplateBinding Background}" CornerRadius="3"
+										Margin="{TemplateBinding Padding}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <ContentPresenter x:Name="ContentElement"
+												ContentTemplate="{TemplateBinding ContentTemplate}"
+												Content="{TemplateBinding Content}"
+												HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+												Grid.Row="1"
+												VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                        <Grid x:Name="ContentCacheHost" Grid.Row="1" />
+                                        <Border BorderThickness="0,0,0,1" Background="#888E97" CornerRadius="2"
+												Padding="10,0,7,0">
+                                            <Border.BorderBrush>
+                                                <LinearGradientBrush EndPoint="0.971000015735626,0.5"
+														StartPoint="0.0399999991059303,0.5">
+                                                    <GradientStop Color="#FF707070" Offset="0" />
+                                                    <GradientStop Color="#FFA3A3A3" Offset="0.5" />
+                                                    <GradientStop Color="#FF707070" Offset="1" />
+                                                </LinearGradientBrush>
+                                            </Border.BorderBrush>
+                                            <Grid MinHeight="28">
+                                                <Border x:Name="GripBarElement" Background="Transparent" >
+                                                    <ContentPresenter x:Name="HeaderElement"
+															ContentTemplate="{TemplateBinding HeaderTemplate}"
+															Content="{TemplateBinding Content}"
+															HorizontalAlignment="Left" Margin="0,0,10,0"
+															VerticalAlignment="Center" />
+                                                </Border>
+                                                <!--<ToggleButton x:Name="MaximizeToggleButton" HorizontalAlignment="Right"
+														Height="17" VerticalAlignment="Center" Width="17">
+													<ToggleButton.Template>
+														<ControlTemplate TargetType="{x:Type ToggleButton}">
+															<Grid SnapsToDevicePixels="True">
+																<Grid x:Name="Restore" Background="Transparent"
+																		Height="14" Width="14">
+																	<Grid.ToolTip>
+																		<ToolTip Content="Maximize"
+																				telerik:LocalizationManager.ResourceKey="TileViewItemMaximizeText" />
+																	</Grid.ToolTip>
+																	<Rectangle x:Name="RestoreIcon" Fill="#FF575859"
+																			Height="10" StrokeThickness="1" Width="10">
+																		<Rectangle.Stroke>
+																			<LinearGradientBrush
+																					EndPoint="0.971000015735626,0.5"
+																					StartPoint="0.0399999991059303,0.5">
+																				<GradientStop Color="#FF707070"
+																						Offset="0" />
+																				<GradientStop Color="#FFA3A3A3"
+																						Offset="0.5" />
+																				<GradientStop Color="#FF707070"
+																						Offset="1" />
+																			</LinearGradientBrush>
+																		</Rectangle.Stroke>
+																	</Rectangle>
+																	<Rectangle x:Name="RestoreIcon1" Fill="#FF575859"
+																			Height="10" Margin="0,4,4,0"
+																			StrokeThickness="1" Width="10">
+																		<Rectangle.Stroke>
+																			<LinearGradientBrush
+																					EndPoint="0.971000015735626,0.5"
+																					StartPoint="0.0399999991059303,0.5">
+																				<GradientStop Color="#FF707070"
+																						Offset="0" />
+																				<GradientStop Color="#FFA3A3A3"
+																						Offset="0.5" />
+																				<GradientStop Color="#FF707070"
+																						Offset="1" />
+																			</LinearGradientBrush>
+																		</Rectangle.Stroke>
+																	</Rectangle>
+																</Grid>
+																<Grid x:Name="Collapse" Background="Transparent"
+																		Height="5" Visibility="Collapsed" Width="12">
+																	<Grid.ToolTip>
+																		<ToolTip Content="Minimize"
+																				telerik:LocalizationManager.ResourceKey="TileViewItemMinimizeText" />
+																	</Grid.ToolTip>
+																	<Rectangle x:Name="CollapseIcon" Fill="#FF575859"
+																			StrokeThickness="1">
+																		<Rectangle.Stroke>
+																			<LinearGradientBrush
+																					EndPoint="0.971000015735626,0.5"
+																					StartPoint="0.0399999991059303,0.5">
+																				<GradientStop Color="#FF707070"
+																						Offset="0" />
+																				<GradientStop Color="#FFA3A3A3"
+																						Offset="0.5" />
+																				<GradientStop Color="#FF707070"
+																						Offset="1" />
+																			</LinearGradientBrush>
+																		</Rectangle.Stroke>
+																	</Rectangle>
+																</Grid>
+															</Grid>
+															<ControlTemplate.Triggers>
+																<Trigger Property="IsMouseOver" Value="True">
+																	<Setter Property="Fill" TargetName="RestoreIcon"
+																			Value="#FF878787" />
+																	<Setter Property="Stroke" TargetName="RestoreIcon">
+																		<Setter.Value>
+																			<LinearGradientBrush
+																					EndPoint="0.971000015735626,0.5"
+																					StartPoint="0.0399999991059303,0.5">
+																				<GradientStop Color="#FFB0B0B0"
+																						Offset="0" />
+																				<GradientStop Color="#FFB0B0B0"
+																						Offset="1" />
+																				<GradientStop Color="#FFE0E1E2"
+																						Offset="0.5" />
+																			</LinearGradientBrush>
+																		</Setter.Value>
+																	</Setter>
+																	<Setter Property="Fill" TargetName="RestoreIcon1"
+																			Value="#FF878787" />
+																	<Setter Property="Stroke" TargetName="RestoreIcon1">
+																		<Setter.Value>
+																			<LinearGradientBrush
+																					EndPoint="0.971000015735626,0.5"
+																					StartPoint="0.0399999991059303,0.5">
+																				<GradientStop Color="#FFB0B0B0"
+																						Offset="0" />
+																				<GradientStop Color="#FFB0B0B0"
+																						Offset="1" />
+																				<GradientStop Color="#FFE0E1E2"
+																						Offset="0.5" />
+																			</LinearGradientBrush>
+																		</Setter.Value>
+																	</Setter>
+																	<Setter Property="Fill" TargetName="CollapseIcon"
+																			Value="#FF878787" />
+																	<Setter Property="Stroke" TargetName="CollapseIcon">
+																		<Setter.Value>
+																			<LinearGradientBrush
+																					EndPoint="0.971000015735626,0.5"
+																					StartPoint="0.0399999991059303,0.5">
+																				<GradientStop Color="#FFB0B0B0"
+																						Offset="0" />
+																				<GradientStop Color="#FFB0B0B0"
+																						Offset="1" />
+																				<GradientStop Color="#FFE0E1E2"
+																						Offset="0.5" />
+																			</LinearGradientBrush>
+																		</Setter.Value>
+																	</Setter>
+																</Trigger>
+																<Trigger Property="IsPressed" Value="True">
+																	<Setter Property="Fill" TargetName="RestoreIcon">
+																		<Setter.Value>
+																			<LinearGradientBrush EndPoint="0.5,1"
+																					StartPoint="0.5,0">
+																				<GradientStop Color="#FF2E2D2D"
+																						Offset="0" />
+																				<GradientStop Color="#FF424242"
+																						Offset="1" />
+																				<GradientStop Color="#FF424242"
+																						Offset="0.14" />
+																			</LinearGradientBrush>
+																		</Setter.Value>
+																	</Setter>
+																	<Setter Property="Stroke" TargetName="RestoreIcon"
+																			Value="#FF1A1A1A" />
+																	<Setter Property="Fill" TargetName="RestoreIcon1">
+																		<Setter.Value>
+																			<LinearGradientBrush EndPoint="0.5,1"
+																					StartPoint="0.5,0">
+																				<GradientStop Color="#FF2E2D2D"
+																						Offset="0" />
+																				<GradientStop Color="#FF424242"
+																						Offset="1" />
+																				<GradientStop Color="#FF424242"
+																						Offset="0.14" />
+																			</LinearGradientBrush>
+																		</Setter.Value>
+																	</Setter>
+																	<Setter Property="Stroke" TargetName="RestoreIcon1"
+																			Value="#FF1A1A1A" />
+																	<Setter Property="Fill" TargetName="CollapseIcon">
+																		<Setter.Value>
+																			<LinearGradientBrush EndPoint="0.5,1"
+																					StartPoint="0.5,0">
+																				<GradientStop Color="#FF2E2D2D"
+																						Offset="0" />
+																				<GradientStop Color="#FF424242"
+																						Offset="1" />
+																				<GradientStop Color="#FF424242"
+																						Offset="0.14" />
+																			</LinearGradientBrush>
+																		</Setter.Value>
+																	</Setter>
+																	<Setter Property="Stroke" TargetName="CollapseIcon"
+																			Value="#FF1A1A1A" />
+																</Trigger>
+																<Trigger Property="IsChecked" Value="True">
+																	<Trigger.EnterActions>
+																		<BeginStoryboard>
+																			<Storyboard>
+																				<ObjectAnimationUsingKeyFrames
+																						Storyboard.TargetProperty="Visibility"
+																						Storyboard.TargetName="Restore">
+																					<DiscreteObjectKeyFrame KeyTime="0">
+																						<DiscreteObjectKeyFrame.Value>
+																							<Visibility>Collapsed</Visibility>
+																						</DiscreteObjectKeyFrame.Value>
+																					</DiscreteObjectKeyFrame>
+																				</ObjectAnimationUsingKeyFrames>
+																				<ObjectAnimationUsingKeyFrames
+																						Storyboard.TargetProperty="Visibility"
+																						Storyboard.TargetName="Collapse">
+																					<DiscreteObjectKeyFrame KeyTime="0">
+																						<DiscreteObjectKeyFrame.Value>
+																							<Visibility>Visible</Visibility>
+																						</DiscreteObjectKeyFrame.Value>
+																					</DiscreteObjectKeyFrame>
+																				</ObjectAnimationUsingKeyFrames>
+																			</Storyboard>
+																		</BeginStoryboard>
+																	</Trigger.EnterActions>
+																	<Trigger.ExitActions>
+																		<BeginStoryboard>
+																			<Storyboard>
+																				<ObjectAnimationUsingKeyFrames
+																						Storyboard.TargetProperty="Visibility"
+																						Storyboard.TargetName="Restore">
+																					<DiscreteObjectKeyFrame KeyTime="0">
+																						<DiscreteObjectKeyFrame.Value>
+																							<Visibility>Visible</Visibility>
+																						</DiscreteObjectKeyFrame.Value>
+																					</DiscreteObjectKeyFrame>
+																				</ObjectAnimationUsingKeyFrames>
+																				<ObjectAnimationUsingKeyFrames
+																						Storyboard.TargetProperty="Visibility"
+																						Storyboard.TargetName="Collapse">
+																					<DiscreteObjectKeyFrame KeyTime="0">
+																						<DiscreteObjectKeyFrame.Value>
+																							<Visibility>Collapsed</Visibility>
+																						</DiscreteObjectKeyFrame.Value>
+																					</DiscreteObjectKeyFrame>
+																				</ObjectAnimationUsingKeyFrames>
+																			</Storyboard>
+																		</BeginStoryboard>
+																	</Trigger.ExitActions>
+																</Trigger>
+																<Trigger Property="IsEnabled" Value="False" />
+															</ControlTemplate.Triggers>
+														</ControlTemplate>
+													</ToggleButton.Template>
+												</ToggleButton>-->
+                                            </Grid>
+                                        </Border>
+                                        <Rectangle x:Name="DisabledVisual" Fill="#99FFFFFF" RadiusY="4" RadiusX="4"
+												Grid.RowSpan="2" Visibility="Collapsed" />
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        <Style TargetType="{x:Type classes:DockPanelSplitter}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type classes:DockPanelSplitter}">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="9"/>
+            <ColumnDefinition Width="350"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="Header" BorderThickness="0,0,0,1" Background="{DynamicResource cButtonBack}" CornerRadius="4.2,4.2,0,0" Grid.ColumnSpan="3" BorderBrush="{DynamicResource cButtonBorder}"/>
+        <GridSplitter Style="{DynamicResource stlGridSplitter}" Grid.Column="1" HorizontalAlignment="Stretch" Grid.RowSpan="5"/>
+        <DockPanel LastChildFill="False" Margin="0,0,4,0">
+            <TextBlock   Text="Введите адрес публикации" DockPanel.Dock="Left" VerticalAlignment="Center" Margin="20,0" FontFamily="{DynamicResource ffAlternativeFontMedium}" FontSize="16" Foreground="#FFEBECED">			
+			                	<TextBlock.Effect>
+			                		<DropShadowEffect BlurRadius="0" ShadowDepth="1" Color="#FF333333" Direction="90"/>
+			                	</TextBlock.Effect></TextBlock>
+            <TextBox Name="UrlTextBox"
+                Style="{DynamicResource stlUrlTextBox}"
+                VerticalAlignment="Center"
+                TextChanged="UrlTextBox_TextChanged" 
+                KeyDown="UrlTextBox_KeyDown"
+                Margin="0,0,20,0" 
+                Height="22" 
+                Width="309"
+                ButtonBase.Click="ClearSearchTextBox"></TextBox>
+            <Button Style="{StaticResource stlAddListBoxButton}" VerticalAlignment="Center" Margin="0,0,10,0" Click="AddSplitterButton_Click"></Button>
+            <Button Style="{StaticResource stlDelListBoxButton}"  VerticalAlignment="Center" Click="RemoveSplitterButton_Click"></Button>
+        </DockPanel>
+        <DockPanel LastChildFill="False" Margin="0,0,4,0" Grid.Column="2">
+            <TextBlock   Text="{DynamicResource PublicationInfoCtrl}"  DockPanel.Dock="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontFamily="{DynamicResource ffAlternativeFontMedium}" FontSize="16" Foreground="#FFEBECED"><TextBlock.Effect>
+									<DropShadowEffect BlurRadius="0" ShadowDepth="1" Color="#FF333333" Direction="90"/>
+								</TextBlock.Effect></TextBlock>
+        </DockPanel>
+        <DockPanel Height="Auto" Grid.Row="1">
+
+
+                <TabControl x:Name="tabControl" >
+                    <TabItem Header="Web">
+                    <ScrollViewer    VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Template="{StaticResource stlScrollViewer}">
+                        <WebBrowser x:Name="webBrowser" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.IsDeferredScrollingEnabled="False" ScrollViewer.CanContentScroll="False"></WebBrowser>
+</ScrollViewer>
+                    <!--<WebBrowser x:Name="webBrowser" Source="http://www.google.ru/" ></WebBrowser>-->
+                    </TabItem>
+                    <TabItem Header="SnapShot" >
+                    <ScrollViewer    VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Template="{StaticResource stlScrollViewer}">
+                        <DockPanel>
+                            <classes:Ruler x:Name="hruler"
+                               Width="Auto"
+                               Unit="Cm"
+                               Length="14"
+                               DockPanel.Dock="Top"
+                               Margin="21,0,0,0"
+                        Zoom="1"
+                        AutoSize="True"
+                        ClipToBounds="True" />
+                            <classes:Ruler x:Name="vruler"
+                               Width="Auto"
+                               Unit="Cm"
+                               Marks="Up"
+                               RenderTransformOrigin="0,0"
+                               Length="7"
+                        AutoSize="True"
+                        Zoom="1"
+                        ClipToBounds="True">
+                                <classes:Ruler.LayoutTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="1"
+                                    ScaleY="1" />
+                                        <SkewTransform AngleX="0"
+                                   AngleY="0" />
+                                        <RotateTransform Angle="90" />
+                                        <TranslateTransform X="23" />
+                                    </TransformGroup>
+                                </classes:Ruler.LayoutTransform>
+                            </classes:Ruler>
+                            <Grid Name="qw1">
+                                <Grid.RenderTransform>
+                                    <ScaleTransform x:Name="transform" ScaleX="1" ScaleY="1" />
+                                </Grid.RenderTransform>
+                                <Image x:Name="img" ClipToBounds="True"></Image>
+                                <DockPanel x:Name="DockPanel" LastChildFill="False">
+                                    <Grid DockPanel.Dock="Left" MinWidth="40"></Grid>
+                                    <classes:DockPanelSplitter x:Name="LeftSplitter" DockPanel.Dock="Left" Width="2" ProportionalResize="True" Background="Red" />
+                                    <Grid DockPanel.Dock="Right" MinWidth="40"></Grid>
+                                    <classes:DockPanelSplitter x:Name="RightSplitter"  ProportionalResize="True" DockPanel.Dock="Right" Width="2"  Background="Red"/>
+                                    <Grid x:Name="TopSplitter1before" DockPanel.Dock="Top"  MinHeight="10">
+                                    </Grid>
+                                    <classes:DockPanelSplitter x:Name="TopSplitter1" ProportionalResize="True" DockPanel.Dock="Top" Background="Black"/>
+                                    <Grid x:Name="TopSplitter1after" DockPanel.Dock="Top"  MinHeight="10">
+                                    </Grid>
+                                </DockPanel>
+                            </Grid>
+                        </DockPanel>
+                    </ScrollViewer>
+                </TabItem>
+                </TabControl>
+
+        </DockPanel>
+        <Grid x:Name="ViewDetails"  Grid.Column="2" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+                <StackPanel Margin="5">
+                <DockPanel x:Name="PublicationTitle" LastChildFill="False" Margin="0,5,0,5">
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0"  Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наименование статьи</TextBlock>
+                    <TextBox Text="{Binding CurrentPublication.Publication_name}"  HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></TextBox>
+                </DockPanel>
+                <DockPanel x:Name="SMIName" LastChildFill="False" Margin="0,5,0,5">
+                    <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0"  Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наименование издания</TextBlock>
+                   <ComboBox SelectedValue="{Binding CurrentPublication.EF_SMI, Mode=TwoWay}" ItemsSource="{Binding Smi}" DisplayMemberPath="Smi_name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
+                </DockPanel>
+                <DockPanel x:Name="Date" LastChildFill="False" Margin="0,5,0,5">
+                    <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" Text="Дата публикации" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}"></TextBlock>
+                    <telerik:RadDatePicker  SelectedDate="{Binding CurrentPublication.Publication_date, Mode=TwoWay}"  DockPanel.Dock="Right"   DateTimeWatermarkContent="Выберите дату" telerik:StyleManager.Theme="Metro" Width="150"></telerik:RadDatePicker>
+                </DockPanel>
+                <DockPanel x:Name="Tonality"  LastChildFill="False" Margin="0,5,0,5">
+                    <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Тональность</TextBlock>
+                    <ComboBox SelectedValue="{Binding CurrentPublication.EF_Tonality}" ItemsSource="{Binding Tonalities}" DisplayMemberPath="Name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
+                </DockPanel>
+                <DockPanel x:Name="Photo"  LastChildFill="False" Margin="0,5,0,5">
+                    <TextBlock DockPanel.Dock="Left" Margin="5,0,30,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наличие фотографии</TextBlock>
+                    <ComboBox SelectedValue="{Binding CurrentPublication.EF_Photo}" ItemsSource="{Binding Photo}" DisplayMemberPath="HasPhoto" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
+                </DockPanel>
+                <DockPanel x:Name="Exclusive"  LastChildFill="False" Margin="0,5,0,5">
+                    <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Эксклюзивность</TextBlock>
+                    <ComboBox SelectedValue="{Binding CurrentPublication.EF_Exclusivity}" ItemsSource="{Binding Exclusivities}" DisplayMemberPath="Name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
+                </DockPanel>
+                <DockPanel x:Name="Initiated"  LastChildFill="False" Margin="0,5,0,5">
+                    <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Margin="5,0,0,0">Инициирована</TextBlock>
+                    <ComboBox SelectedValue="{Binding CurrentPublication.EF_Initiated}" ItemsSource="{Binding Initiated}" DisplayMemberPath="IsInitiated" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
+                </DockPanel>
+                <DockPanel x:Name="Planed" LastChildFill="False" Margin="0,5,0,5">
+                    <TextBlock  DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Запланирована</TextBlock>
+                    <ComboBox SelectedValue="{Binding CurrentPublication.EF_Planed}" ItemsSource="{Binding Planed}" DisplayMemberPath="IsPlaned" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
+                </DockPanel>
+                <DockPanel x:Name="Priority"  LastChildFill="False" Margin="0,5,0,5">
+                    <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Приоритет</TextBlock>
+                    <ComboBox SelectedValue="{Binding CurrentPublication.EF_SMI_priority}" ItemsSource="{Binding Priorities}" DisplayMemberPath="Priority_name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
+                </DockPanel>
+            </StackPanel>
+            <ScrollViewer Grid.Row="1">
+                <telerik:RadTileView Margin="10" x:Name="myTileView" telerik:StyleManager.Theme="Metro"  ItemsSource="{Binding ImageTileList}" 
+                             SelectionMode="Single"
+                             TileStateChangeTrigger="SingleClick"
+				ItemContainerStyle="{StaticResource togglelessRadTileViewItem}"
+				ItemTemplate="{StaticResource headerTemplate}" ContentTemplate="{StaticResource contentTemplate}">
+                </telerik:RadTileView>
+            </ScrollViewer>
+        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Column="2"  Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Name="DoneButton" Style="{DynamicResource stlButton}" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="DoneButton_Click" Margin="0,0,10,0"   Content="{DynamicResource DoneButtonCtrl}" ></Button>
+            <Button Name="CancelButton" Style="{DynamicResource stlButton}" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="CancelButton_Click" Margin="0,0,10,0"   Content="{DynamicResource CancelButtonCtrl}"></Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal"  Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Name="MakeSnaphotsButton" Style="{DynamicResource stlButton}" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="MakeSnaphotsButton_Click" Margin="0,0,10,0"   Content="Сделать снимок" ></Button>
+            <!--<Button Name="CancelButton" Style="{DynamicResource stlButton}" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="CancelButton_Click" Margin="0,0,10,0"   Content="{DynamicResource CancelButtonCtrl}"></Button>-->
+        </StackPanel>
+    </Grid>
+</UserControl>

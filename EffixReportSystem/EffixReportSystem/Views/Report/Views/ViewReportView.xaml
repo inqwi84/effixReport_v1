@@ -16,6 +16,7 @@
             <Label Margin="5" VerticalAlignment="Center">Конец периода</Label>
             <DatePicker Margin="5" VerticalAlignment="Center"></DatePicker>
             <Button Margin="5" VerticalAlignment="Center" Click="Button_Click_1">Сформировать отчет</Button>
+            <Button Margin="5,15" VerticalAlignment="Center" Click="Button_Click_2" Content="Сформировать отчет2"/>
         </StackPanel>
         <telerik:ReportViewer x:Name="reportViewer" Grid.Row="1"></telerik:ReportViewer>
     </Grid>
