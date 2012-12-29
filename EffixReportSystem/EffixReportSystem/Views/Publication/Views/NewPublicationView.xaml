@@ -416,8 +416,8 @@
         </DockPanel>
         <Grid x:Name="ViewDetails"  Grid.Column="2" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
                 <StackPanel Margin="5">
                 <DockPanel x:Name="PublicationTitle" LastChildFill="False" Margin="0,5,0,5">
@@ -472,7 +472,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal"  Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Button Name="MakeSnaphotsButton" Style="{DynamicResource stlButton}" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="MakeSnaphotsButton_Click" Margin="0,0,10,0"   Content="Сделать снимок" ></Button>
-            <!--<Button Name="CancelButton" Style="{DynamicResource stlButton}" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="CancelButton_Click" Margin="0,0,10,0"   Content="{DynamicResource CancelButtonCtrl}"></Button>-->
+            <Button Name="ImportSnapShotButton" Style="{DynamicResource stlButton}" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ImportSnapshotButton_Click" Margin="0,0,10,0"   Content="Импортировать"></Button>
         </StackPanel>
     </Grid>
 </UserControl>

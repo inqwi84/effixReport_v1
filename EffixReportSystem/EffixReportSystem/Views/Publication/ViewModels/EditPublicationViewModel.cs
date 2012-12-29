@@ -17,19 +17,9 @@ namespace EffixReportSystem.Views.Publication.ViewModels
     class EditPublicationViewModel:ObservableObject, IPageViewModel
     {
         private long _publicationId;
-        public PublicationHelper PublicationHelper;
         private readonly EntitiesModel _model = new EntitiesModel();
         private readonly string _tempDirectory = String.Empty;
         private string _baseDirectory = String.Empty;
-        //public ObservableCollection<EF_SMI> Smi { get { return PublicationHelper.Instance.Smi; }}
-        //public ObservableCollection<EF_Tonality> Tonalities { get { return PublicationHelper.Instance.Tonalities; } }
-        //public ObservableCollection<EF_SMI_Type> SmiTypes { get { return PublicationHelper.Instance.SmiTypes; }}
-        //public ObservableCollection<EF_Exclusivity> Exclusivities { get { return PublicationHelper.Instance.Exclusivities; }}
-        //public ObservableCollection<EF_SMI_priority> Priorities { get { return PublicationHelper.Instance.Priorities; }}
-        //public ObservableCollection<EF_Initiated> Initiated { get { return PublicationHelper.Instance.Initiated; }}
-        //public ObservableCollection<EF_Planed> Planed { get { return PublicationHelper.Instance.Planed; }}
-        //public ObservableCollection<EF_Photo> Photo { get { return PublicationHelper.Instance.Photo; }}
-
         public List<EF_SMI> Smi { get; set; }
         public List<EF_Tonality> Tonalities { get; set; }
         public List<EF_SMI_Type> SmiTypes { get; set; }
@@ -48,35 +38,56 @@ namespace EffixReportSystem.Views.Publication.ViewModels
         }
         public void RestoreDefaultVlues()
         {
-            CurrentPublication = _model.EF_Publications.FirstOrDefault(item => item.Publication_id == _publicationId);
-            if (CurrentPublication != null)
+            try
             {
-                var destinationDirectory =
-                    new DirectoryInfo(_baseDirectory + "\\" +
-                                      CurrentPublication.Project_name + "\\" +
-                                      CurrentPublication.P_year + "\\" +
-                                      CurrentPublication.P_month + "\\" +
-                                      CurrentPublication.P_day);
-                if (!destinationDirectory.Exists)
+                CurrentPublication = _model.EF_Publications.FirstOrDefault(item => item.Publication_id == _publicationId);
+                if (CurrentPublication != null)
                 {
-                    destinationDirectory.Create();
-                }
-                foreach (var imageTile in ImageTileList)
-                {
-                    var file = new FileInfo(imageTile.ImagePath);
-                    if (file.Exists)
+                    try
                     {
-                        file.Delete();
+                        var destinationDirectory =
+    new DirectoryInfo(_baseDirectory + "\\" +
+                      CurrentPublication.Project_name + "\\" +
+                      CurrentPublication.P_year + "\\" +
+                      CurrentPublication.P_month + "\\" +
+                      CurrentPublication.P_day);
+                        if (!destinationDirectory.Exists)
+                        {
+                            destinationDirectory.Create();
+                        }
+                        foreach (var imageTile in ImageTileList)
+                        {
+                            var file = new FileInfo(imageTile.ImagePath);
+                            if (file.Exists)
+                            {
+                                file.Delete();
+                            }
+                            using (var fs = file.Create())
+                            {
+                                var info = BufferFromImage(imageTile.Image);
+                                fs.Write(info, 0, info.Length);
+                            }
+                        }
                     }
-                    using (var fs = file.Create())
+                    catch (Exception)
                     {
-                        var info = BufferFromImage(imageTile.Image);
-                        fs.Write(info, 0, info.Length);
                     }
                 }
             }
-            ImageTileList.Clear();
-            ClearDirectory(_tempDirectory);
+            catch (Exception)
+            {
+            }
+            try
+            {
+                ImageTileList.Clear();
+                ClearDirectory(_tempDirectory);
+            }
+            catch (Exception)
+            {
+
+            }
+
+
         }
 
         public Byte[] BufferFromImage(BitmapImage imageSource)
@@ -100,48 +111,70 @@ namespace EffixReportSystem.Views.Publication.ViewModels
         {
             if (CurrentPublication != null)
             {
-                var date = CurrentPublication.Publication_date.Value;
-                var destinationDirectory =
-                    new DirectoryInfo(_baseDirectory + "\\" +
-                                      CurrentPublication.Project_name + "\\" +
-                                      date.Year + "\\" +
-                                      date.Month + "\\" +
-                                      date.Day);
-
-
-                var sourceDirectory = new DirectoryInfo(_tempDirectory);
-
-                var files = sourceDirectory.GetFiles("*.*");
-
-                var index = 0;
-                foreach (var fileInfo in files)
+                try
                 {
-                    if (!destinationDirectory.Exists)
+                    var date = CurrentPublication.Publication_date.Value;
+                    var destinationDirectory =
+                        new DirectoryInfo(_baseDirectory + "\\" +
+                                          CurrentPublication.Project_name + "\\" +
+                                          date.Year + "\\" +
+                                          date.Month + "\\" +
+                                          date.Day);
+
+
+                    var sourceDirectory = new DirectoryInfo(_tempDirectory);
+
+                    var files = sourceDirectory.GetFiles("*.*");
+
+                    var index = 0;
+                    foreach (var fileInfo in files)
                     {
-                        destinationDirectory.Create();
+                        if (!destinationDirectory.Exists)
+                        {
+                            destinationDirectory.Create();
+                        }
+                        var filePath = destinationDirectory + "\\" + CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') +
+                                       "_" +
+                                       fileInfo.Name;
+                        var fInfo = new FileInfo(filePath);
+                        if (fInfo.Exists)
+                        {
+                            fInfo.Delete();
+                        }
+                        fileInfo.MoveTo(filePath);
+                        index++;
+                        DataHelper.SaveFilesInAzureStorage(filePath);
+                        if (index <= 1)
+                        {
+                            CurrentPublication.Blob_path = filePath;
+                        }
                     }
-                    var filePath = destinationDirectory + "\\" + CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') +
-                                   "_" +
-                                   fileInfo.Name;
-                    var fInfo = new FileInfo(filePath);
-                    if(fInfo.Exists)
-                    {
-                        fInfo.Delete();
-                    }
-                    fileInfo.MoveTo(filePath);
-                    index++;
-                    DataHelper.SaveFilesInAzureStorage(filePath);
-                    if (index <= 1)
-                    {
-                        CurrentPublication.Blob_path = filePath;
-                    }
+                    CurrentPublication.Image_count = index;
                 }
-                CurrentPublication.Image_count = index;
+                catch (Exception)
+                {
+                }
+           
+               try
+                {
+                    _model.Add(CurrentPublication);
+                    _model.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                }
+                try
+                {
+                    ImageTileList.Clear();
+                    ClearDirectory(_tempDirectory);
+                }
+                catch (Exception)
+                {
+
+                }
             }
-            ImageTileList.Clear();
-            ClearDirectory(_tempDirectory);
-            _model.Add(CurrentPublication);
-            _model.SaveChanges();
+
         }
         public void ClearDirectory(string dirPath)
         {
@@ -281,13 +314,6 @@ namespace EffixReportSystem.Views.Publication.ViewModels
             _tempDirectory = "c:\\storage\\temp";
             _baseDirectory = "c:\\storage";
             ParentViewModel = parentViewModel;
-            //ImageTileList=new ObservableCollection<DataHelper.ImageTile>
-            //                  {
-            //                      new DataHelper.ImageTile() {ImageName = "1",Image = new BitmapImage(new Uri("c:\\1.png")),ImagePath ="c:\\1.png" },
-            //                      new DataHelper.ImageTile() {ImageName = "2",Image = new BitmapImage(new Uri("c:\\2.png")),ImagePath ="c:\\2.png" },
-            //                      new DataHelper.ImageTile() {ImageName = "3",Image = new BitmapImage(new Uri("c:\\3.png")),ImagePath ="c:\\3.png" },
-            //                      new DataHelper.ImageTile() {ImageName = "4",Image = new BitmapImage(new Uri("c:\\4.png")),ImagePath ="c:\\4.png" },
-            //                  };
             Smi = new List<EF_SMI>(_model.EF_SMIs);
             Tonalities = new List<EF_Tonality>(_model.EF_Tonalities);
             SmiTypes = new List<EF_SMI_Type>(_model.EF_SMI_Types);

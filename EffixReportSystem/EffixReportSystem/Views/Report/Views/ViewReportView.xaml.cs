@@ -32,7 +32,6 @@ namespace EffixReportSystem.Views.Report.Views
            var report = new ClippingReport();
            reportViewer.ReportSource=report;
 
-
              //    .GroupFooter.Items.Add(new PictureBox(){ Value = "c:\\ing.png"});
         }
 

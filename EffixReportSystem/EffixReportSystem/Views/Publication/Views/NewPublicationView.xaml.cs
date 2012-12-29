@@ -410,96 +410,17 @@ namespace EffixReportSystem.Views.Publication.Views
             (tile as RadTileViewItem).TileState = TileViewItemState.Maximized;
         }
 
-        private void Qw1_OnMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-
-            Point position;
-
-
-
-
-            position = e.GetPosition(this);
-
-            
-
-            var transformGroup = qw1.RenderTransform;
-            transformGroup.Value.Scale(0.5,0.5);
-
-          //  ScaleTransform transform = (ScaleTransform)transformGroup;
-
-
-
-
-            if (e.Delta > 0)
-
-            {
-
-              //  if (zoomIn < 20)
-
-                {
-
-               //     transform.ScaleX += .2;
-
-                //    transform.ScaleY += .2;
-
-                    //transform.CenterX = position.X;
-
-                    //transform.CenterY = position.Y;
-
-               //     zoomIn = zoomIn + 1;
-
-               //     zoomOut = zoomOut - 1;
-
-                }
-
-                
-
-            }
-
-            if (e.Delta < 0)
-
-            {
-
-             //   if (zoomOut < 0)
-
-                {
-
-                  //  transform.ScaleX += -.2;
-
-                 //   transform.ScaleY += -.2;
-
-                    //transform.CenterX = position.X;
-
-                    //transform.CenterY = position.Y;
-
-                //    zoomIn = zoomIn - 1;
-
-                 //   zoomOut = zoomOut + 1;
-
-                }
-
-            }
-
-         }
-
-        private void RemoveSplitterButton_Click2(object sender, RoutedEventArgs e)
-        {
-            transform.CenterX = 50;
-            transform.CenterY = 50;
-            transform.ScaleX = 0.5;
-            transform.ScaleY = 0.5;
-        }
         private void UserControl_KeyDown(object sender, KeyEventArgs e)
         {
 
-            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.Add)
+            if (Keyboard.Modifiers == ModifierKeys.Control && (e.Key == Key.Add) || (e.Key == Key.OemPlus))
             {
                 transform.ScaleX *= 1.25;
                 transform.ScaleY *= 1.25;
                 transform.CenterX = 0;
                 transform.CenterY = 0;
             }
-            if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.Subtract)
+            if (Keyboard.Modifiers == ModifierKeys.Control && (e.Key == Key.Subtract) || (e.Key == Key.OemMinus))
             {
                 transform.ScaleX /= 1.25;
                 transform.ScaleY /= 1.25;
@@ -507,9 +428,47 @@ namespace EffixReportSystem.Views.Publication.Views
                 transform.CenterY = 0;
             }
         }
-    }
 
+        private void ImportSnapshotButton_Click(object sender, RoutedEventArgs e)
+        {
+            var ctx = DataContext as NewPublicationViewModel;
+            var tempDirectory = new DirectoryInfo(_tempDirectory);
+            //foreach (var file in tempDirectory.GetFiles("*.*"))
+            //{
 
+            //}
+            var dlg = new Microsoft.Win32.OpenFileDialog
+            {
+                Multiselect = true,
+                Title = "Select configuration",
+                DefaultExt = ".png",
+                Filter = "PNG-file (.png)|*.png|JPEG-file (.jpg)|*.jpg|BMP-file (.bmp)|*.bmp",
+                CheckFileExists = true
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                var index = 0;
+                foreach (var file in tempDirectory.GetFiles("*.*"))
+                {
+                    file.Delete();
+                }
+                foreach (var filepath in dlg.FileNames)
+                {
+                    var file = new FileInfo(filepath);
+                    var newFile = tempDirectory + "_"+index.ToString() + file.Extension;
+                    file.MoveTo(newFile);
+                    ctx.ImageTileList.Add(new DataHelper.ImageTile
+                        {
+                            Image = new BitmapImage(new Uri(newFile)),
+                            ImageName = "_" + index.ToString() + file.Extension,
+                            ImagePath = newFile
+                        });
+                    index++;
+                }
+            }
+        }
     }
+}
 
 
