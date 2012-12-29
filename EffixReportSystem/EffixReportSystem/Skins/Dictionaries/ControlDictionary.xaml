@@ -71,7 +71,7 @@
     <!-- Простая кнопка -->
 
     <!-- Текстбокс -->
-    <Style TargetType="{x:Type TextBox}">
+    <Style TargetType="{x:Type TextBox}" x:Key="stlTextBox">
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
         <Setter Property="BorderBrush" Value="{StaticResource TextBoxBorder}"/>
@@ -1877,7 +1877,7 @@
                             </Grid>
                             <Rectangle x:Name="FocusVisual" Grid.ColumnSpan="6" Grid.Column="2" IsHitTestVisible="False" RadiusY="3" RadiusX="3" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 2" Visibility="Collapsed"/>
                             <Grid Grid.ColumnSpan="2" Grid.Column="4">
-                                <TextBlock x:Name="Content" Text="{Binding Department_name}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,4,1" Foreground="#FF50555A"/>
+                                <TextBlock x:Name="Content" Text="{Binding Department_name}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4,0,4,1" Foreground="#FF50555A" />
                             </Grid>
                         </Grid>
                         <ItemsPresenter x:Name="ItemsHost" Grid.Row="1" Visibility="Collapsed"/>

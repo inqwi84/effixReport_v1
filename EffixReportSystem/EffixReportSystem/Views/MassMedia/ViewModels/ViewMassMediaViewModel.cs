@@ -27,6 +27,64 @@ namespace EffixReportSystem.Views.MassMedia.ViewModels
             }
         }
 
+        public void CreateMassMedia()
+        {
+            
+        }
+        public void RemoveMassMedia()
+        {
+           _model.Delete(_model.EF_MassMedias.FirstOrDefault(item=>item.Mass_media_type_id==CurrentMassMediaDepartament.Mass_media_type_id));
+            _model.SaveChanges();
+            ReloadMassMedia();
+        }
+        public void RenameMassMedia()
+        {
+            
+        }
+
+        public void ReloadMassMedia()
+        {
+            using (var model = new EntitiesModel())
+            {
+                var hierarchicalList = model.EF_MassMedias.ToList().Select(flatItem =>
+                                                                            new EF_MassMedia
+                                                                            {
+                                                                                Mass_media_type_name =
+                                                                                    flatItem
+                                                                                    .
+                                                                                    Mass_media_type_name,
+                                                                                Mass_media_type_descr = flatItem.Mass_media_type_descr,
+
+                                                                                Mass_media_type_id
+                                                                                    =
+                                                                                    flatItem
+                                                                                    .Mass_media_type_id,
+
+                                                                                Parent_type_id =
+                                                                                    flatItem.Parent_type_id,
+                                                                            }).ToList();
+
+                MassMediaDepartments =
+                    new ObservableCollection<EF_MassMedia>(
+                        hierarchicalList.GroupJoin(hierarchicalList,
+                                                   parentItem =>
+                                                   parentItem.Mass_media_type_id,
+                                                   childItem =>
+                                                   childItem.Parent_type_id,
+                                                   (parent, children) =>
+                                                   {
+                                                       parent.Children
+                                                           =
+                                                           children.
+                                                               ToList();
+                                                       return parent;
+                                                   }).Where(
+                                                           item =>
+                                                           item.Parent_type_id ==
+                                                           null).ToList());
+
+            }
+        }
 
         private IPageViewModel _currentPageViewModel;
         private List<IPageViewModel> _pageViewModels;

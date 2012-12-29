@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using EffixReportSystem.Helper.Classes.Enums;
+using EffixReportSystem.Views.MassMedia.Controls;
 using EffixReportSystem.Views.MassMedia.ViewModels;
 using Telerik.Windows.Controls;
 
@@ -124,22 +125,53 @@ namespace EffixReportSystem.Views.MassMedia.Views
 
         }
 
-        private void RadContextMenu_Opened(object sender, RoutedEventArgs e)
+       // private void RadContextMenu_Opened(object sender, RoutedEventArgs e)
+        //{
+        //    var ctx = DataContext as ViewMassMediaViewModel;
+        //    RadTreeViewItem clickedItemContainer = radContextMenu.GetClickedElement<RadTreeViewItem>();
+        //    if (clickedItemContainer != null)
+        //    {
+        //        var clickedItem = clickedItemContainer.Item as EF_MassMedia;
+
+        //        if (clickedItem != null)
+        //        {
+        //            ctx.PreapreContextOperationsForItem(clickedItem);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        ctx.PreapreContextOperationsForItem(null);
+        //    }
+       // }
+        private void AddMassMediaMenuItem_Click(object sender, RoutedEventArgs e)
         {
             var ctx = DataContext as ViewMassMediaViewModel;
-            RadTreeViewItem clickedItemContainer = radContextMenu.GetClickedElement<RadTreeViewItem>();
-            if (clickedItemContainer != null)
+            if (ctx.CurrentMassMediaDepartament != null)
             {
-                var clickedItem = clickedItemContainer.Item as EF_MassMedia;
-
-                if (clickedItem != null)
-                {
-                    ctx.PreapreContextOperationsForItem(clickedItem);
-                }
+                var addMassMediaWindow = new AddMassMediaWindow(ctx.CurrentMassMediaDepartament, ViewMode.NewMode);
+                addMassMediaWindow.ShowDialog();
+                ctx.ReloadMassMedia();
             }
-            else
+          
+        }
+
+        private void RemoveMassMediaMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var ctx = DataContext as ViewMassMediaViewModel;
+            if (ctx.CurrentMassMediaDepartament != null)
             {
-                ctx.PreapreContextOperationsForItem(null);
+                ctx.RemoveMassMedia();
+            }
+        }
+
+        private void RenameMassMediaMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var ctx = DataContext as ViewMassMediaViewModel;
+            if (ctx.CurrentMassMediaDepartament != null)
+            {
+                var addMassMediaWindow = new AddMassMediaWindow(ctx.CurrentMassMediaDepartament,ViewMode.EditMode);
+                addMassMediaWindow.ShowDialog();
+                ctx.ReloadMassMedia();
             }
         }
     }

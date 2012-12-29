@@ -71,15 +71,15 @@
                               IsVirtualizing="True"
                               IsDragDropEnabled="False"
                               Style="{StaticResource DepartmentTreeView}"
-                             
                               ItemContainerStyle="{StaticResource SmiDepartmentTreeViewItem}">
-            <telerik:RadContextMenu.ContextMenu>
-                <telerik:RadContextMenu x:Name="radContextMenu"
-						Opened="RadContextMenu_Opened"
-						ItemsSource="{Binding ContextOperations}"
-						ItemTemplate="{StaticResource contextMenuItemTemplate}"
-						ItemContainerStyle="{StaticResource contextMenuItemStyle}" />
-            </telerik:RadContextMenu.ContextMenu>
+            <telerik:RadTreeView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Добавить" Click="AddMassMediaMenuItem_Click"/>
+                    <MenuItem Header="Удалить" Click="RemoveMassMediaMenuItem_Click"/>
+                    <MenuItem Header="Переименовать" Click="RenameMassMediaMenuItem_Click"/>
+                    </ContextMenu>
+            </telerik:RadTreeView.ContextMenu>
+            
             <telerik:RadTreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children, Mode=TwoWay}">
                     <TextBlock Text="{Binding Mass_media_type_name, Mode=TwoWay}"/>

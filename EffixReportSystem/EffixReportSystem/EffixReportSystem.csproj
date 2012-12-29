@@ -219,8 +219,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
     </Compile>
-    <Compile Include="Views\Authorization\LoginWindow.xaml.cs">
-      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    <Compile Include="Views\Authorization\LoginWindow.xaml.cs" />
+    <Compile Include="Views\MassMedia\Controls\AddMassMediaWindow.xaml.cs">
+      <DependentUpon>AddMassMediaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Publication\PublicationView.xaml.cs">
       <DependentUpon>PublicationView.xaml</DependentUpon>
@@ -319,6 +320,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Authorization\LoginWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MassMedia\Controls\AddMassMediaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -420,7 +425,6 @@
     <Resource Include="Skins\Fonts\PFAgoraSlabPro-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\MassMedia\Controls\" />
     <Folder Include="Views\Person\Controls\" />
     <Folder Include="Views\Publication\Controls\" />
     <Folder Include="Views\Report\Controls\" />
