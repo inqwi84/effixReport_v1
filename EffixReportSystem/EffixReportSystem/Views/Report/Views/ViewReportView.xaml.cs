@@ -29,10 +29,18 @@ namespace EffixReportSystem.Views.Report.Views
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-           var report = new ClippingReport();
-           reportViewer.ReportSource=report;
-
-             //    .GroupFooter.Items.Add(new PictureBox(){ Value = "c:\\ing.png"});
+            var rBook = new ReportBook();
+            var report1 =new HeadReport();
+            rBook.Reports.Add(report1);
+            using (var model=new EntitiesModel())
+            {
+                foreach (var report in model.EF_Publications.Select(publication => new ClippingReport(publication)))
+                {
+                    rBook.Reports.Add(report);
+                }
+            }
+            rBook.Reports.Add(new DiagramReport());
+            reportViewer.ReportSource = rBook;
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

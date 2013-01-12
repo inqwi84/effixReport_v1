@@ -1,0 +1,73 @@
+﻿<Window x:Class="EffixReportSystem.Views.Publication.Controls.AddYearWindow"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AddMonthWindow" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip" Background="Transparent"
+        Height="200" Width="350" SnapsToDevicePixels="True"
+        PreviewKeyDown="Window_PreviewKeyDown" Loaded="Window_Loaded">
+    <Border x:Name="LayoutRoot" BorderThickness="1"  CornerRadius="5,5,0,5" Background="{DynamicResource bWindowBack}">
+        <Grid>
+            <!--Кнопка выхода из системы-->
+            <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Right" Margin="5,5,5,5" VerticalAlignment="Top">
+                <Button x:Name="closeBtn" Click="closeBtn_Click" Width="24" Height="24" x:Uid="close_1" Style="{DynamicResource stlWindowControlButtons}" Cursor="Hand" ToolTip="Закрыть окно">
+                    <Grid Width="10" Height="10">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+                            <Path Data="M301.75,415.1099L298,418.6199L294.25,415.1099L293,416.2799L296.75,419.7799L293,423.2899L294.25,424.4599L298,420.9499L301.75,424.4599L303,423.2899L299.25,419.7799L303,416.2799z" Height="10" Stretch="Fill" Width="10" Fill="{DynamicResource bControlWindowBtnBack}" Effect="{DynamicResource fxLightShadow}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+                            <Path Data="M301.75,415.1099L298,418.6199L294.25,415.1099L293,416.2799L296.75,419.7799L293,423.2899L294.25,424.4599L298,420.9499L301.75,424.4599L303,423.2899L299.25,419.7799L303,416.2799z" Height="10" Stretch="Fill" Width="10" Fill="{DynamicResource bControlWindowBtnBackOver}" Effect="{DynamicResource fxLightShadow}"/>
+                        </StackPanel>
+                    </Grid>
+                </Button>
+            </StackPanel>
+
+            <!--Выбора варианта входа в систему-->
+            <Grid Margin="15,25,15,15">
+                <Grid.RowDefinitions>
+                    <!--Лого-->
+                    <RowDefinition Height="Auto"/>
+                    <!--Label: Вход в систему-->
+                    <RowDefinition Height="Auto"/>
+                    <!--Вход на основе сертификатов-->
+                    <RowDefinition Height="Auto"/>
+                    <!--Вход на основе логина и пароля-->
+                    <RowDefinition Height="Auto"/>
+                    <!--Конпка входа-->
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <!--Лого-->
+                <!--Label: Вход в систему-->
+                <Grid Grid.Row="1" Margin="30,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="1" x:Name="AddDepartmentTitleTextBlock" Text="Добавление раздела ГОД" FontSize="14"  VerticalAlignment="Center"/>
+                </Grid>
+                <GroupBox Grid.Row="2" Margin="15" >
+                    <Grid x:Name="ViewDetails" Margin="5" >
+                        <StackPanel>
+                            <DockPanel  LastChildFill="False" Margin="0,15,0,5">
+                                <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="5,0,0,0"  Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наименование</TextBlock>
+                                <TextBox  x:Name="SMIName"  Margin="0,0,5,0" Width="160" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" DockPanel.Dock="Right"></TextBox>
+                            </DockPanel>
+                            <Border Margin="5">
+
+                            </Border>
+                            <Border>
+                                <StackPanel></StackPanel>
+                            </Border>
+                        </StackPanel>
+
+                    </Grid>
+                </GroupBox>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                    <Button x:Name="DoneButton"   Style="{StaticResource stlButton}"  Click="doneButton_Click" Content="Готово" Margin="0,0,5,0"/>
+                    <Button x:Name="CancelButton" Style="{StaticResource stlButton}"  Click="cancelButton_Click" Content="Отмена"/>
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

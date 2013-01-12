@@ -1,4 +1,6 @@
-﻿namespace EffixReportSystem.Views.Report.ReportTemplates
+﻿using EffixReportSystem.Helper.Classes.Report;
+
+namespace EffixReportSystem.Views.Report.ReportTemplates
 {
     using System;
     using System.ComponentModel;
@@ -10,18 +12,15 @@
     /// <summary>
     /// Summary description for ClippingReport.
     /// </summary>
-    public partial class ClippingReport : Telerik.Reporting.Report
+    public partial class ClippingReport : Report
     {
-        public ClippingReport()
+        public ClippingReport(EF_Publication publication)
         {
             //
             // Required for telerik Reporting designer support
             //
             InitializeComponent();
-
-            //
-            // TODO: Add any constructor code after InitializeComponent call
-            //
+            list1.DataSource = new ImageReportsList(publication);
         }
     }
 }

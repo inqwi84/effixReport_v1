@@ -105,6 +105,17 @@ namespace EffixReportSystem.Helper.Classes.Report
            var  report2 = new ImageReport() { Image = new Bitmap("c:\\img.jpg"), Title = "img.jpg" };
             this.Add(report2);
         }
+        public ImageReportsList(EF_Publication publication)
+        {
+            var tmp = ReportRS.GetBlobFromStorage(publication.Blob_path, publication.Image_count,
+                                                  publication.Project_name);
+            foreach (var bitmap in tmp)
+            {
+                var report = new ImageReport() { Image = bitmap, Title = "ing.png" };
+                this.Add(report);
+            }
+        }
+
     }
 
     public class ReportRS
@@ -119,12 +130,12 @@ namespace EffixReportSystem.Helper.Classes.Report
         public List<string> ImagePathList { get; set; }
         public string TempUri { get; set; }
 
-        private List<BitmapImage> GetImagesFromAzure(string imagePath,int? imageCount,string projectName)
+        public static List<BitmapImage> GetImagesFromAzure(string imagePath, int? imageCount, string projectName)
         {
             return new List<BitmapImage>();
         }
 
-        private ObservableCollection<Bitmap> GetBlobFromStorage(string blobPath, int? imageCount, string projectName)
+        public static ObservableCollection<Bitmap> GetBlobFromStorage(string blobPath, int? imageCount, string projectName)
         {
             var result = new ObservableCollection<Bitmap>();
             for (var i = 0; i < imageCount; i++)
@@ -160,7 +171,7 @@ namespace EffixReportSystem.Helper.Classes.Report
             return result;
         }
 
-        private ObservableCollection<string> GetBlobPathFromStorage(string blobPath, int? imageCount, string projectName)
+        public static ObservableCollection<string> GetBlobPathFromStorage(string blobPath, int? imageCount, string projectName)
         {
             var result = new ObservableCollection<string>();
             for (var i = 0; i < imageCount; i++)
@@ -195,7 +206,7 @@ namespace EffixReportSystem.Helper.Classes.Report
             return result;
         }
 
-        public Bitmap ImageFromBuffer(Byte[] bytes)
+        public static Bitmap ImageFromBuffer(Byte[] bytes)
         {
             var stream = new MemoryStream(bytes);
             var image = new BitmapImage();

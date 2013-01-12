@@ -223,6 +223,18 @@
     <Compile Include="Views\MassMedia\Controls\AddMassMediaWindow.xaml.cs">
       <DependentUpon>AddMassMediaWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Publication\Controls\AddDayWindow.xaml.cs">
+      <DependentUpon>AddDayWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Publication\Controls\AddMonthWindow.xaml.cs">
+      <DependentUpon>AddMonthWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Publication\Controls\AddProjectWindow.xaml.cs">
+      <DependentUpon>AddProjectWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Publication\Controls\AddYearWindow.xaml.cs">
+      <DependentUpon>AddYearWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Publication\PublicationView.xaml.cs">
       <DependentUpon>PublicationView.xaml</DependentUpon>
     </Compile>
@@ -266,6 +278,12 @@
     </Compile>
     <Compile Include="Views\Report\ReportTemplates\HeadReport.Designer.cs">
       <DependentUpon>HeadReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\DiagramReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\DiagramReport.Designer.cs">
+      <DependentUpon>DiagramReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Report\ViewModels\ViewReportViewModel.cs" />
     <Compile Include="Views\Report\ReportView.xaml.cs">
@@ -324,6 +342,22 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MassMedia\Controls\AddMassMediaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Publication\Controls\AddDayWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Publication\Controls\AddMonthWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Publication\Controls\AddProjectWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Publication\Controls\AddYearWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -398,6 +432,9 @@
     <EmbeddedResource Include="Views\Report\ReportTemplates\ClippingReport.resx">
       <DependentUpon>ClippingReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ReportTemplates\DiagramReport.resx">
+      <DependentUpon>DiagramReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Report\ReportTemplates\HeadReport.resx">
       <DependentUpon>HeadReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -426,7 +463,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Person\Controls\" />
-    <Folder Include="Views\Publication\Controls\" />
     <Folder Include="Views\Report\Controls\" />
     <Folder Include="Views\Settings\Controls\" />
   </ItemGroup>

@@ -46,8 +46,9 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                 _currentDepartament = value;
                 try
                 {
-                    PublicationList =
-    DataHelper.GetPublicationByDepartmentId(_currentDepartament.Department_id);
+                    Task.Factory.StartNew(() =>
+                                          PublicationList =
+                                          DataHelper.GetPublicationByDepartmentId(_currentDepartament.Department_id));
                 }
                 catch (Exception)
                 {
@@ -279,6 +280,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                 var hierarchicalList = model.EF_Departments.ToList().Select(flatItem =>
                                                                             new EF_Department
                                                                                 {
+                                                                                    Department_type = flatItem.Department_type,
                                                                                     Department_name
                                                                                         =
                                                                                         flatItem

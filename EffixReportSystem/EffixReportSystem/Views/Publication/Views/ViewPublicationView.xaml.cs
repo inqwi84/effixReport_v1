@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EffixReportSystem.Views.Publication.Controls;
 using EffixReportSystem.Views.Publication.ViewModels;
 using Telerik.Windows.Controls;
 
@@ -68,6 +69,44 @@ namespace EffixReportSystem.Views.Publication.Views
         private void RemovePublicationButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void AddDepartmentItem_Click(object sender, RoutedEventArgs e)
+        {
+            var ctx = DataContext as ViewPublicationViewModel;
+            if (ctx == null) return;
+            var currentDepartment = ctx.CurrentDepartament;
+            switch (currentDepartment.Department_type.Trim())
+            {
+                case "all":
+                    var projectWindow = new AddProjectWindow();
+                    projectWindow.ShowDialog();
+                    break;
+                case "year":
+                    var monthWindow = new AddMonthWindow();
+                    monthWindow.ShowDialog();
+                    break;
+                case "month":
+                    var dayWindow = new AddDayWindow();
+                    dayWindow.ShowDialog();
+                    break;
+                case "project":
+                    var yearWindow = new AddYearWindow();
+                    yearWindow.ShowDialog();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void RemoveDepartmentMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        private void RenameDepartmentMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }

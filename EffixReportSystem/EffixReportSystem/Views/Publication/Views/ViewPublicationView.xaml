@@ -58,6 +58,13 @@
                               Style="{StaticResource DepartmentTreeView}"
                              
                               ItemContainerStyle="{StaticResource DepartmentTreeViewItem}">
+            <telerik:RadTreeView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Добавить" Click="AddDepartmentItem_Click"/>
+                    <MenuItem Header="Удалить" Click="RemoveDepartmentMenuItem_Click"/>
+                    <MenuItem Header="Переименовать" Click="RenameDepartmentMenuItem_Click"/>
+                </ContextMenu>
+            </telerik:RadTreeView.ContextMenu>
             <telerik:RadTreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Children, Mode=TwoWay}">
                     <TextBlock Text="{Binding Department_name, Mode=TwoWay}"/>
