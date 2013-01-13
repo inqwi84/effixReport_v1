@@ -72,6 +72,7 @@ namespace EffixReportSystem.Views.Publication.Views
 
         private void MakeSnaphotsButton_Click(object sender, RoutedEventArgs e)
         {
+            //CommonLibraries.Log.Logger.Initialize();
             var ctx = DataContext as NewPublicationViewModel;
             ctx.ImageTileList = new ObservableCollection<DataHelper.ImageTile>();
             ClearDirectory(_tempDirectory);
@@ -444,7 +445,7 @@ namespace EffixReportSystem.Views.Publication.Views
                 foreach (var filepath in dlg.FileNames)
                 {
                     var file = new FileInfo(filepath);
-                    var newFile = tempDirectory + "_"+index + file.Extension;
+                    var newFile = tempDirectory+"\\" + "_"+index + file.Extension;
                     file.MoveTo(newFile);
                     ctx.ImageTileList.Add(new DataHelper.ImageTile
                         {

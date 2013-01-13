@@ -80,6 +80,8 @@ namespace EffixReportSystem.Views.Publication.Views
             {
                 case "all":
                     var projectWindow = new AddProjectWindow();
+                    projectWindow.DoneButton.Click+=DoneButton_Click;
+                    projectWindow.DataContext = new AddProjectViewModel();
                     projectWindow.ShowDialog();
                     break;
                 case "year":
@@ -97,6 +99,11 @@ namespace EffixReportSystem.Views.Publication.Views
                 default:
                     break;
             }
+        }
+
+        private void DoneButton_Click(object sender, RoutedEventArgs e)
+        {
+           //обновить дерево
         }
 
         private void RemoveDepartmentMenuItem_Click(object sender, RoutedEventArgs e)

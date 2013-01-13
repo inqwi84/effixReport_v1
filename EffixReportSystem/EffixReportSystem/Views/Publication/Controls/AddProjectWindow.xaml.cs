@@ -18,6 +18,7 @@ namespace EffixReportSystem.Views.Publication.Controls
     /// </summary>
     public partial class AddProjectWindow : Window
     {
+        private int _errors = 0;
         public AddProjectWindow()
         {
             InitializeComponent();
@@ -46,6 +47,49 @@ namespace EffixReportSystem.Views.Publication.Controls
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void Validation_Error(object sender, ValidationErrorEventArgs e)
+        {
+            if (e.Action == ValidationErrorEventAction.Added)
+                _errors++;
+            else
+                _errors--;
+        }
+
+        private void Confirm_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = _errors == 0;
+            e.Handled = true;
+        }
+
+        private void Confirm_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                using (var model = new EntitiesModel())
+                {
+                    var newProject = new EF_Project { Project_name = ProjectName.Text, Project_descr = ProjectDescr.Text, Project_id = model.EF_Projects.Max(item => item.Project_id) + 1 };
+                    model.Add(newProject);
+                    var newDepartment = new EF_Department
+                    {
+                        Department_type = "project",
+                        Department_name = newProject.Project_name,
+                        Department_description = newProject.Project_descr,
+                        Department_project_id = newProject.Project_id,
+                        Department_parent_id = 56,
+                        Department_id = model.EF_Departments.Max(item => item.Department_id) + 1
+                    };
+                    model.Add(newDepartment);
+                    model.SaveChanges();
+                }
+                this.Close();
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
     }
 }

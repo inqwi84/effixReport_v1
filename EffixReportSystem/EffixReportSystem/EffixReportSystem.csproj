@@ -164,6 +164,7 @@
     <Compile Include="Helper\Classes\Enums\ViewMode.cs" />
     <Compile Include="Helper\Classes\Report\ReportSource.cs" />
     <Compile Include="Helper\Classes\Ruler.cs" />
+    <Compile Include="Helper\Classes\ValidationRules\TextBoxValidationRule.cs" />
     <Compile Include="Helper\Interfaces\IName.cs" />
     <Compile Include="Helper\Classes\ObservableObject.cs" />
     <Compile Include="Helper\Classes\Partial\PartialClasses.cs" />
@@ -239,6 +240,7 @@
       <DependentUpon>PublicationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Publication\PublicationViewModel.cs" />
+    <Compile Include="Views\Publication\ViewModels\AddProjectViewModel.cs" />
     <Compile Include="Views\Publication\ViewModels\EditPublicationViewModel.cs" />
     <Compile Include="Views\Publication\ViewModels\NewPublicationViewModel.cs" />
     <Compile Include="Views\Publication\ViewModels\ViewPublicationViewModel.cs" />

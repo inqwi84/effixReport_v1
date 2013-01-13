@@ -1,7 +1,15 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="EffixReportSystem.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TempDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">c:\storage\temp</Value>
+    </Setting>
+    <Setting Name="PhotoshopExecutable" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">c:\Pragram Files\Photoshop\Photoshop.exe</Value>
+    </Setting>
+    <Setting Name="BaseDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">c:\storage</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
