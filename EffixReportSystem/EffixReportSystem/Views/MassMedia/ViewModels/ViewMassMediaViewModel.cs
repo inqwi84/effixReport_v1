@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using EffixReportSystem.Helper.Classes;
 using EffixReportSystem.Helper.Classes.Enums;
 using EffixReportSystem.Helper.Interfaces;
@@ -164,7 +165,8 @@ namespace EffixReportSystem.Views.MassMedia.ViewModels
                     return;
 
                 _currentMassMediaDepartament = value;
-                SmiList =GetSmiByMassMediaDepartmentId(_currentMassMediaDepartament);
+                Task.Factory.StartNew(() =>
+                                      SmiList = GetSmiByMassMediaDepartmentId(_currentMassMediaDepartament));
                 this.OnPropertyChanged("CurrentMassMediaDepartament");
             }
         }

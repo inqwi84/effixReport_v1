@@ -41,10 +41,11 @@ namespace EffixReportSystem.Views.Publication.Views
         public NewPublicationView()
         {
             InitializeComponent();
-            _tempDirectory = "c:\\storage\\temp";
-            _baseDirectory = "c:\\storage";
+            _tempDirectory = Properties.Settings.Default.TempDirectory;
+            //_tempDirectory = "c:\\storage\\temp";
+            _baseDirectory = Properties.Settings.Default.BaseDirectory;
+            //_baseDirectory = "c:\\storage";
             KeyDown += UserControl_KeyDown;
-            // webBrowser.Navigate("mail.ru");
         }
 
         private void ClearSearchTextBox(object sender, RoutedEventArgs e)

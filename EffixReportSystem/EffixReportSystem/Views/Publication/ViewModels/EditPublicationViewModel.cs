@@ -311,8 +311,10 @@ namespace EffixReportSystem.Views.Publication.ViewModels
         public IPageViewModel ParentViewModel;
         public EditPublicationViewModel(IPageViewModel parentViewModel)
         {
-            _tempDirectory = "c:\\storage\\temp";
-            _baseDirectory = "c:\\storage";
+            //_tempDirectory = "c:\\storage\\temp";
+            //_baseDirectory = "c:\\storage";
+            _tempDirectory = Properties.Settings.Default.TempDirectory;
+            _baseDirectory = Properties.Settings.Default.BaseDirectory;
             ParentViewModel = parentViewModel;
             Smi = new List<EF_SMI>(_model.EF_SMIs);
             Tonalities = new List<EF_Tonality>(_model.EF_Tonalities);
@@ -331,7 +333,8 @@ namespace EffixReportSystem.Views.Publication.ViewModels
         public void OpenInPaint(DataHelper.ImageTile tile)
         {
             CurrentImageTile = tile;
-            Process.Start("C:\\Program Files (x86)\\PhotoshopPortable\\PhotoshopCS4Portable.exe", CurrentImageTile.ImagePath);
+            //Process.Start("C:\\Program Files (x86)\\PhotoshopPortable\\PhotoshopCS4Portable.exe", CurrentImageTile.ImagePath);
+            Process.Start(Properties.Settings.Default.PhotoshopExecutable, CurrentImageTile.ImagePath);
         }
     }
 }

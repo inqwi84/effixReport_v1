@@ -76,28 +76,8 @@
                             Style="{StaticResource stlRadListBox}"
                             Grid.Column="2"
                             ItemsSource="{Binding PublicationList, Mode=TwoWay, IsAsync=True}"
-                            SelectionChanged="PublicationListBox_SelectionChanged"
-                            ItemContainerStyle="{StaticResource stlPositionListBoxItem}">
-            
-            <telerik:RadListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid Width="{Binding ElementName=PositionListBox,Path=ActualWidth}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding Path=Publication_name}"></TextBlock>
-                        <TextBlock Text="{Binding Path=Publication_date}" Grid.Row="1"></TextBlock>
-                        <TextBlock Text="{Binding Path=Url_path}" Grid.Row="1" Grid.Column="1"></TextBlock>
-                        <TextBlock Text="{Binding Path=Project_name}" Grid.Column="1" HorizontalAlignment="Right"></TextBlock>
-                    </Grid>
-                </DataTemplate>
-            </telerik:RadListBox.ItemTemplate>
-
+                            ItemContainerStyle="{StaticResource stlPositionListBoxItem}"
+                            SelectedItem="{Binding CurrentPublication, Mode=TwoWay,IsAsync=True}">
         </telerik:RadListBox>
         <!--<NotificationSystemMVVM:PersonDetailsViewControl2 x:Name="ViewDetails"  Grid.Column="4" Grid.Row="1"></NotificationSystemMVVM:PersonDetailsViewControl2>-->
         <Grid x:Name="ViewDetails"  Grid.Column="4" Grid.Row="1" Margin="10">

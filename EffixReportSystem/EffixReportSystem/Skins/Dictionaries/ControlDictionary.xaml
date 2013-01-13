@@ -2431,7 +2431,7 @@
 
                                             <TextBlock Name="fullBlock" TextTrimming="WordEllipsis" Text="{Binding Publication_date, StringFormat=dd/MM/yyyy}" FontFamily="{DynamicResource ffBaseFont}" FontSize="12" Foreground="#FF82878E"></TextBlock>
                                         </StackPanel>
-                                        <TextBlock Name="firstBlock" Margin="20,5" TextTrimming="WordEllipsis" Text="{Binding Publication_name}" FontFamily="{DynamicResource ffBaseFont}" FontWeight="Bold" VerticalAlignment="Top" FontSize="12" Foreground="#FF82878E"></TextBlock>
+                                        <TextBlock Name="firstBlock" Margin="20,5" TextTrimming="WordEllipsis" Text="{Binding Path=EF_SMI.Smi_name}" FontFamily="{DynamicResource ffBaseFont}" FontWeight="Bold" VerticalAlignment="Top" FontSize="12" Foreground="#FF82878E"></TextBlock>
                                         <TextBlock x:Name="textBlock1" FontFamily="{DynamicResource ffBaseFontSemibold}" FontSize="12" Foreground="{DynamicResource cFontColor}" 
 												Margin="20,5" Text="{Binding Project_name}" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Right" />
                                     </Grid>

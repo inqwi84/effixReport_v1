@@ -21,6 +21,12 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
             //
             InitializeComponent();
             list1.DataSource = new ImageReportsList(publication);
+            MassMediaNameTextBox.Value = publication.EF_SMI.Smi_name;
+            PublicationDateTextBox.Value = publication.Publication_date.Value.ToShortDateString();
+            if (String.IsNullOrEmpty(publication.Url_path)) return;
+            UrlTextBox.Value = publication.Url_path;
+       //     var navUrl = new NavigateToUrlAction {Url = publication.Url_path};
+           // UrlTextBox.Action = navUrl;
         }
     }
 }

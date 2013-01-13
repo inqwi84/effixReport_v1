@@ -205,7 +205,6 @@ namespace EffixReportSystem.Helper.Classes
                             result= new ObservableCollection<EF_Publication>(model.EF_Publications.Where(item => item.Project_id == department.Department_project_id));
                             break;
                         case "year":
-                           // var project = GetParentDepartment((long) department.Department_parent_id);
                             result=new ObservableCollection<EF_Publication>(model.EF_Publications.Where(item=>item.Project_id==department.Department_parent_id&&item.P_year==department.Department_name));
                             break;
                         case "month":
@@ -215,6 +214,9 @@ namespace EffixReportSystem.Helper.Classes
                             break;
                         case "day":
                             result = new ObservableCollection<EF_Publication>(model.EF_Publications.Where(item => item.Department_id==department.Department_id));
+                            break;
+                        default:
+                            result = new ObservableCollection<EF_Publication>(model.EF_Publications);
                             break;
                     }
             }
@@ -318,17 +320,14 @@ namespace EffixReportSystem.Helper.Classes
 
         }
 
-        public static long GetDepartmentId(DateTime publicationDate, long projectId)
-        {
 
-            return 0;
-        }
 
         public static void SaveFilesInAzureStorage(string filePath)
         {
             var nameArray = filePath.Split(Convert.ToChar("\\"));
             var projectNameContainer = nameArray[2];
-            var fileName = filePath.Replace("c:\\storage\\" + projectNameContainer, String.Empty);
+           // var fileName = filePath.Replace("c:\\storage\\" + projectNameContainer, String.Empty);
+            var fileName = filePath.Replace(Properties.Settings.Default.BaseDirectory+"\\" + projectNameContainer, String.Empty);
             try
             {
                 var cloudStorageAccount = CloudStorageAccount.Parse(
