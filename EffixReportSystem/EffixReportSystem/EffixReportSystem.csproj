@@ -240,7 +240,10 @@
       <DependentUpon>PublicationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Publication\PublicationViewModel.cs" />
+    <Compile Include="Views\Publication\ViewModels\AddDayViewModel.cs" />
+    <Compile Include="Views\Publication\ViewModels\AddMonthViewModel.cs" />
     <Compile Include="Views\Publication\ViewModels\AddProjectViewModel.cs" />
+    <Compile Include="Views\Publication\ViewModels\AddYearViewModel.cs" />
     <Compile Include="Views\Publication\ViewModels\EditPublicationViewModel.cs" />
     <Compile Include="Views\Publication\ViewModels\NewPublicationViewModel.cs" />
     <Compile Include="Views\Publication\ViewModels\ViewPublicationViewModel.cs" />
