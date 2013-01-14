@@ -86,7 +86,9 @@ namespace EffixReportSystem.Views.Publication.Views
 
         private void RemovePublicationButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var ctx = DataContext as ViewPublicationViewModel;
+            if (ctx == null) return;
+            ctx.RemoveCurrentPublication();
         }
 
         private void AddDepartmentItem_Click(object sender, RoutedEventArgs e)

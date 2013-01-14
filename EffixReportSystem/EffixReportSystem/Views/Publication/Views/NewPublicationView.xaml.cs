@@ -270,6 +270,8 @@ namespace EffixReportSystem.Views.Publication.Views
                     ctx.SaveCurrentPublication();
                     (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
                         (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
+                    ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
+                        .ReloadDepartments();
 
                 }
             }

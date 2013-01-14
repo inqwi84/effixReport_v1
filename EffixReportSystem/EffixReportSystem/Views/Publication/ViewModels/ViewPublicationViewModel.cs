@@ -319,11 +319,76 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                                                            item =>
                                                            item.Department_parent_id ==
                                                            null).ToList());
+            }
+        }
+          public void RemoveCurrentPublication()
+          {
+
+              var id = CurrentPublication.Publication_id;
+                  Task.Factory.StartNew(() =>
+                      {
+                          using (var model = new EntitiesModel())
+                          {
+                              var rem =
+                                  model.EF_Publications.FirstOrDefault(
+                                      item => item.Publication_id == id);
+                              model.Delete(rem);
+                              model.SaveChanges();
+                          }
+                      });
+                  PublicationList.Remove(
+                      PublicationList.FirstOrDefault(item => item.Publication_id == CurrentPublication.Publication_id));
+          }
+
+        public void ReloadDepartments()
+        {
+             using (var model = new EntitiesModel())
+            {
+                var hierarchicalList = model.EF_Departments.ToList().Select(flatItem =>
+                                                                            new EF_Department
+                                                                                {
+                                                                                    Department_type = flatItem.Department_type,
+                                                                                    Department_name
+                                                                                        =
+                                                                                        flatItem
+                                                                                        .
+                                                                                        Department_name,
+                                                                                        Department_description = flatItem.Department_description,
+
+                                                                                    Department_id
+                                                                                        =
+                                                                                        flatItem
+                                                                                        .
+                                                                                        Department_id,
+                                                                                    Department_parent_id
+                                                                                        =
+                                                                                        flatItem
+                                                                                        .
+                                                                                        Department_parent_id,
+                                                                                }).ToList();
+
+
+                Departments =
+                    new ObservableCollection<EF_Department>(
+                        hierarchicalList.GroupJoin(hierarchicalList,
+                                                   parentItem =>
+                                                   parentItem.Department_id,
+                                                   childItem =>
+                                                   childItem.Department_parent_id,
+                                                   (parent, children) =>
+                                                   {
+                                                       parent.Children
+                                                           =
+                                                           children.
+                                                               ToList();
+                                                       return parent;
+                                                   }).Where(
+                                                           item =>
+                                                           item.Department_parent_id ==
+                                                           null).ToList());
 
             }
         }
-
-
         public ViewPublicationViewModel(IPageViewModel parentViewModel)
         {
             Ctor();
