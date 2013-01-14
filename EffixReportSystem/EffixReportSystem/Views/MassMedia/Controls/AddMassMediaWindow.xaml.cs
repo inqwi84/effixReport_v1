@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CommonLibraries.Log;
 using EffixReportSystem.Helper.Classes.Enums;
 
 namespace EffixReportSystem.Views.MassMedia.Controls
@@ -50,34 +51,42 @@ namespace EffixReportSystem.Views.MassMedia.Controls
 
         private void doneButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_mode == ViewMode.NewMode)
+            try
             {
-                var name = SMIName.Text;
-                using (var model = new EntitiesModel())
+                if (_mode == ViewMode.NewMode)
                 {
-                    var id = model.EF_MassMedias.Max(item => item.Mass_media_type_id) + 1;
-                    model.Add(new EF_MassMedia
+                    var name = SMIName.Text;
+                    using (var model = new EntitiesModel())
+                    {
+                        var id = model.EF_MassMedias.Max(item => item.Mass_media_type_id) + 1;
+                        model.Add(new EF_MassMedia
                         {
                             Mass_media_type_id = id,
                             Children = new List<EF_MassMedia>(),
                             Parent_type_id = _massMediaDepartment.Mass_media_type_id,
                             Mass_media_type_name = name
                         });
-                    model.SaveChanges();
+                        model.SaveChanges();
+                    }
                 }
-            }
-            else
-            {
-                var name = SMIName.Text;
-                using (var model = new EntitiesModel())
+                else
                 {
-                    var dept =
-                        model.EF_MassMedias.FirstOrDefault(
-                            item => item.Mass_media_type_id == _massMediaDepartment.Mass_media_type_id);
-                    if (dept != null) dept.Mass_media_type_name = name;
-                    model.SaveChanges();
+                    var name = SMIName.Text;
+                    using (var model = new EntitiesModel())
+                    {
+                        var dept =
+                            model.EF_MassMedias.FirstOrDefault(
+                                item => item.Mass_media_type_id == _massMediaDepartment.Mass_media_type_id);
+                        if (dept != null) dept.Mass_media_type_name = name;
+                        model.SaveChanges();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Logger.TraceError(ex.Message);
+            }      
             this.Close();
         }
 

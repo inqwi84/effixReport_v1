@@ -1,20 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using CommonLibraries.Log;
 using EffixReportSystem.Helper.Classes.Enums;
 using EffixReportSystem.Views.MassMedia.Controls;
 using EffixReportSystem.Views.MassMedia.ViewModels;
-using Telerik.Windows.Controls;
 
 namespace EffixReportSystem.Views.MassMedia.Views
 {
@@ -44,7 +34,15 @@ namespace EffixReportSystem.Views.MassMedia.Views
             var ctx = DataContext as ViewMassMediaViewModel;
             if (ctx.Mode == ViewMode.EditMode)
             {
-                ctx.SaveSmi();
+                try
+                {
+                    ctx.SaveSmi();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    Logger.TraceError(ex.Message);
+                }
                 SMIDescription.IsEnabled = false;
                 SMIEdition.IsEnabled = false;
                 SMIEditionDescr.IsEnabled = false;
@@ -58,7 +56,15 @@ namespace EffixReportSystem.Views.MassMedia.Views
             {
                 if (ctx.Mode == ViewMode.NewMode)
                 {
-                    ctx.SaveNewSmi();
+                    try
+                    {
+                        ctx.SaveNewSmi();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        Logger.TraceError(ex.Message);
+                    }
                     SMIDescription.IsEnabled = false;
                     SMIEdition.IsEnabled = false;
                     SMIEditionDescr.IsEnabled = false;
@@ -88,7 +94,19 @@ namespace EffixReportSystem.Views.MassMedia.Views
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             var ctx = DataContext as ViewMassMediaViewModel;
-            ctx.RestoreSmi();
+
+            if (ctx != null)
+            {
+                try
+                {
+                    ctx.RestoreSmi();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    Logger.TraceError(ex.Message);
+                }
+            }
             SMIDescription.IsEnabled = false;
             SMIEdition.IsEnabled = false;
             SMIEditionDescr.IsEnabled = false;
@@ -101,10 +119,20 @@ namespace EffixReportSystem.Views.MassMedia.Views
 
         private void NewPublicationButton_Click(object sender, RoutedEventArgs e)
         {
-            var ctx = DataContext as ViewMassMediaViewModel;
-            ctx.Mode=ViewMode.NewMode;
-            ctx.CurrentSmi=new EF_SMI {Mass_media_id = ctx.CurrentMassMediaDepartament.Mass_media_type_id};
-            //ctx.CurrentSmi.EF_MassMedium = ctx.CurrentMassMediaDepartament;
+            try
+            {
+                var ctx = DataContext as ViewMassMediaViewModel;
+                if (ctx != null)
+                {
+                    ctx.Mode = ViewMode.NewMode;
+                    ctx.CurrentSmi = new EF_SMI { Mass_media_id = ctx.CurrentMassMediaDepartament.Mass_media_type_id };
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Logger.TraceError(ex.Message);
+            }
             SMIDescription.Text = String.Empty;
             SMIDescription.IsEnabled = true;
             SMIEdition.Text = String.Empty;
@@ -115,9 +143,9 @@ namespace EffixReportSystem.Views.MassMedia.Views
             SMIName.IsEnabled = true;
             SMIUrl.Text = String.Empty;
             SMIUrl.IsEnabled = true;
-            EditButton.Visibility=Visibility.Collapsed;
-            DoneButton.Visibility=Visibility.Visible;
-            CancelButton.Visibility=Visibility.Visible;
+            EditButton.Visibility = Visibility.Collapsed;
+            DoneButton.Visibility = Visibility.Visible;
+            CancelButton.Visibility = Visibility.Visible;
         }
 
         private void RemovePublicationButton_Click(object sender, RoutedEventArgs e)
@@ -125,53 +153,52 @@ namespace EffixReportSystem.Views.MassMedia.Views
 
         }
 
-       // private void RadContextMenu_Opened(object sender, RoutedEventArgs e)
-        //{
-        //    var ctx = DataContext as ViewMassMediaViewModel;
-        //    RadTreeViewItem clickedItemContainer = radContextMenu.GetClickedElement<RadTreeViewItem>();
-        //    if (clickedItemContainer != null)
-        //    {
-        //        var clickedItem = clickedItemContainer.Item as EF_MassMedia;
-
-        //        if (clickedItem != null)
-        //        {
-        //            ctx.PreapreContextOperationsForItem(clickedItem);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        ctx.PreapreContextOperationsForItem(null);
-        //    }
-       // }
         private void AddMassMediaMenuItem_Click(object sender, RoutedEventArgs e)
         {
             var ctx = DataContext as ViewMassMediaViewModel;
-            if (ctx.CurrentMassMediaDepartament != null)
+            if (ctx == null || ctx.CurrentMassMediaDepartament == null) return;
+            try
             {
                 var addMassMediaWindow = new AddMassMediaWindow(ctx.CurrentMassMediaDepartament, ViewMode.NewMode);
                 addMassMediaWindow.ShowDialog();
                 ctx.ReloadMassMedia();
             }
-          
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Logger.TraceError(ex.Message);
+            }
         }
 
         private void RemoveMassMediaMenuItem_Click(object sender, RoutedEventArgs e)
         {
             var ctx = DataContext as ViewMassMediaViewModel;
-            if (ctx.CurrentMassMediaDepartament != null)
+            if (ctx == null || ctx.CurrentMassMediaDepartament == null) return;
+            try
             {
                 ctx.RemoveMassMedia();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Logger.TraceError(ex.Message);
             }
         }
 
         private void RenameMassMediaMenuItem_Click(object sender, RoutedEventArgs e)
         {
             var ctx = DataContext as ViewMassMediaViewModel;
-            if (ctx.CurrentMassMediaDepartament != null)
+            if (ctx == null || ctx.CurrentMassMediaDepartament == null) return;
+            try
             {
-                var addMassMediaWindow = new AddMassMediaWindow(ctx.CurrentMassMediaDepartament,ViewMode.EditMode);
+                var addMassMediaWindow = new AddMassMediaWindow(ctx.CurrentMassMediaDepartament, ViewMode.EditMode);
                 addMassMediaWindow.ShowDialog();
                 ctx.ReloadMassMedia();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Logger.TraceError(ex.Message);
             }
         }
     }

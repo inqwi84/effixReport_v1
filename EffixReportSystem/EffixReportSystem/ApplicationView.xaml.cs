@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CommonLibraries.Log;
 using EffixReportSystem.Helper.Classes;
 using EffixReportSystem.Helper.Interfaces;
 
@@ -24,12 +25,20 @@ namespace EffixReportSystem
         public ApplicationView()
         {
             InitializeComponent();
-            var t = "logo.png";
-            var strUri2 = String.Format(@"pack://application:,,,/EffixReportSystem;component/Skins/Images/{0}", t);
-            imgTitle.Source = new BitmapImage(new Uri(strUri2));
-            txtTitle.Text = DataHelper.GetStringFromDictionary("StringDictionary", "bSystem");//"";
-            txtTitleDetails.Text = DataHelper.GetStringFromDictionary("StringDictionary", "sNotification");//"";
-            DataContext = new ApplicationViewModel();
+            try
+            {
+                var t = "logo.png";
+                var strUri2 = String.Format(@"pack://application:,,,/EffixReportSystem;component/Skins/Images/{0}", t);
+                imgTitle.Source = new BitmapImage(new Uri(strUri2));
+                txtTitle.Text = DataHelper.GetStringFromDictionary("StringDictionary", "bSystem");//"";
+                txtTitleDetails.Text = DataHelper.GetStringFromDictionary("StringDictionary", "sNotification");//"";
+                DataContext = new ApplicationViewModel();
+            }
+            catch (Exception ex)
+            {
+                Logger.TraceError(ex.Message);
+            }
+
         }
 
         #region Events
@@ -103,25 +112,25 @@ namespace EffixReportSystem
         private void MassMediaRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             var ctx = DataContext as ApplicationViewModel;
-            ctx.CurrentPageViewModel = ctx.PageViewModels[1];
+            if (ctx != null) ctx.CurrentPageViewModel = ctx.PageViewModels[1];
         }
 
         private void PersonRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             var ctx = DataContext as ApplicationViewModel;
-            ctx.CurrentPageViewModel = ctx.PageViewModels[2];
+            if (ctx != null) ctx.CurrentPageViewModel = ctx.PageViewModels[2];
         }
 
         private void ReportRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             var ctx = DataContext as ApplicationViewModel;
-            ctx.CurrentPageViewModel = ctx.PageViewModels[3];
+            if (ctx != null) ctx.CurrentPageViewModel = ctx.PageViewModels[3];
         }
 
         private void SettingsRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             var ctx = DataContext as ApplicationViewModel;
-            ctx.CurrentPageViewModel = ctx.PageViewModels[4];
+            if (ctx != null) ctx.CurrentPageViewModel = ctx.PageViewModels[4];
         }
     }
 }

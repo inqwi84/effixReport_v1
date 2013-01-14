@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CommonLibraries.Log;
 using EffixReportSystem.Views.Publication.Controls;
 using EffixReportSystem.Views.Publication.ViewModels;
 using Telerik.Windows.Controls;
@@ -30,8 +31,15 @@ namespace EffixReportSystem.Views.Publication.Views
 
         private void RadWatermarkTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var ctx = DataContext as ViewPublicationViewModel;
-            ctx.FilterString = (sender as TextBox).Text;
+            try
+            {
+                var ctx = DataContext as ViewPublicationViewModel;
+                if (ctx != null) ctx.FilterString = (sender as TextBox).Text;
+            }
+            catch (Exception ex)
+            {
+                Logger.TraceError(ex.Message);
+            }
         }
 
         private void ClearSearchTextBox(object sender, RoutedEventArgs e)
@@ -39,32 +47,42 @@ namespace EffixReportSystem.Views.Publication.Views
           
         }
 
-        //
-        private void PublicationListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var ctx = DataContext as ViewPublicationViewModel;
-            if (ctx != null) ctx.CurrentPublication = (sender as RadListBox).SelectedItem as EF_Publication;
-        }
-
-
         private void EditPublicationButton_Click(object sender, RoutedEventArgs e)
         {
-            var ctx = DataContext as ViewPublicationViewModel;
-            (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[1];
-            ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as EditPublicationViewModel).SetCurrentPublication(ctx.CurrentPublication.Publication_id);
+            try
+            {
+                var ctx = DataContext as ViewPublicationViewModel;
+                if (ctx == null) return;
+                (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[1];
+                ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as EditPublicationViewModel).SetCurrentPublication(ctx.CurrentPublication.Publication_id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Logger.TraceError(ex.Message);
+            }
+
         }
 
         private void NewPublicationButton_Click(object sender, RoutedEventArgs e)
         {
-            var ctx = DataContext as ViewPublicationViewModel;
-            (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[2];
-            var newPublicationViewModel=((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as NewPublicationViewModel);
-            newPublicationViewModel.CurrentDepartment = ctx.CurrentDepartament;
-            newPublicationViewModel.CurrentPublication = new EF_Publication(ctx.CurrentDepartament);
-            newPublicationViewModel.CurrentProjectName = ctx.CurrentProjectName;
-            newPublicationViewModel.CurrentProject = ctx.CurrentProject;
-
-        }
+            try
+            {
+                var ctx = DataContext as ViewPublicationViewModel;
+                if (ctx == null) return;
+                (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[2];
+                var newPublicationViewModel = ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as NewPublicationViewModel);
+                newPublicationViewModel.CurrentDepartment = ctx.CurrentDepartament;
+                newPublicationViewModel.CurrentPublication = new EF_Publication(ctx.CurrentDepartament);
+                newPublicationViewModel.CurrentProjectName = ctx.CurrentProjectName;
+                newPublicationViewModel.CurrentProject = ctx.CurrentProject;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Logger.TraceError(ex.Message);
+            }
+       }
 
         private void RemovePublicationButton_Click(object sender, RoutedEventArgs e)
         {
@@ -73,31 +91,39 @@ namespace EffixReportSystem.Views.Publication.Views
 
         private void AddDepartmentItem_Click(object sender, RoutedEventArgs e)
         {
-            var ctx = DataContext as ViewPublicationViewModel;
-            if (ctx == null) return;
-            var currentDepartment = ctx.CurrentDepartament;
-            switch (currentDepartment.Department_type.Trim())
+            try
             {
-                case "all":
-                    var projectWindow = new AddProjectWindow();
-                    projectWindow.DoneButton.Click+=DoneButton_Click;
-                    projectWindow.DataContext = new AddProjectViewModel();
-                    projectWindow.ShowDialog();
-                    break;
-                case "year":
-                    var monthWindow = new AddMonthWindow();
-                    monthWindow.ShowDialog();
-                    break;
-                case "month":
-                    var dayWindow = new AddDayWindow();
-                    dayWindow.ShowDialog();
-                    break;
-                case "project":
-                    var yearWindow = new AddYearWindow();
-                    yearWindow.ShowDialog();
-                    break;
-                default:
-                    break;
+                var ctx = DataContext as ViewPublicationViewModel;
+                if (ctx == null) return;
+                var currentDepartment = ctx.CurrentDepartament;
+                switch (currentDepartment.Department_type.Trim())
+                {
+                    case "all":
+                        var projectWindow = new AddProjectWindow();
+                        projectWindow.DoneButton.Click += DoneButton_Click;
+                        projectWindow.DataContext = new AddProjectViewModel();
+                        projectWindow.ShowDialog();
+                        break;
+                    case "year":
+                        var monthWindow = new AddMonthWindow();
+                        monthWindow.ShowDialog();
+                        break;
+                    case "month":
+                        var dayWindow = new AddDayWindow();
+                        dayWindow.ShowDialog();
+                        break;
+                    case "project":
+                        var yearWindow = new AddYearWindow();
+                        yearWindow.ShowDialog();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Logger.TraceError(ex.Message);
             }
         }
 

@@ -426,7 +426,7 @@
                 </DockPanel>
                 <DockPanel x:Name="SMIName" LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0"  Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наименование издания</TextBlock>
-                   <ComboBox SelectedValue="{Binding CurrentPublication.EF_SMI, Mode=TwoWay}" ItemsSource="{Binding Smi}" DisplayMemberPath="Smi_name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
+                   <ComboBox SelectedValue="{Binding CurrentPublication.EF_SMI, Mode=TwoWay}" ItemsSource="{Binding Smi, IsAsync=True}" VirtualizingStackPanel.IsVirtualizing="True" DisplayMemberPath="Smi_name" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Width="150" DockPanel.Dock="Right"></ComboBox>
                 </DockPanel>
                 <DockPanel x:Name="Date" LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" Text="Дата публикации" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}"></TextBlock>

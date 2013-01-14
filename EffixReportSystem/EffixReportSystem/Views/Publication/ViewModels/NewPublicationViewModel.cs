@@ -77,6 +77,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                 CurrentPublication.P_year = CurrentPublication.Publication_date.Value.Year.ToString();
                 CurrentPublication.P_month = CurrentPublication.Publication_date.Value.Month.ToString();
                 CurrentPublication.P_day = CurrentPublication.Publication_date.Value.Day.ToString();
+
             CurrentPublication.EF_Project =
                 _model.EF_Projects.FirstOrDefault(item => item.Project_id == CurrentPublication.Project_id);
             CurrentPublication.Name = CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') + "_" +
@@ -92,43 +93,55 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                     dept =>
                     dept.Department_name.Trim() == CurrentPublication.P_year.Trim() &&
                     dept.Department_parent_id == mainDept.Department_id);
+            if(yearDept==null)
+            {
+             yearDept=new EF_Department
+                 {
+                     Department_type = "year",
+                     Department_name =  CurrentPublication.P_year,
+                     Department_description = CurrentPublication.P_year + " год",
+                     Department_parent_id = mainDept.Department_id,
+                     Department_id = +_model.EF_Departments.Max(item => item.Department_id) + 1
+                 };
+                _model.Add(yearDept);
+                _model.SaveChanges();
+            }
             var monthDept =
                 _model.EF_Departments.FirstOrDefault(
                     dept =>
                     dept.Department_name.Trim() == CurrentPublication.P_month.Trim() &&
                     dept.Department_parent_id == yearDept.Department_id);
+            if (monthDept == null)
+            {
+                monthDept = new EF_Department
+                {
+                    Department_type = "month",
+                    Department_name =  CurrentPublication.P_month,
+                    Department_parent_id = yearDept.Department_id,
+                    Department_id = +_model.EF_Departments.Max(item => item.Department_id) + 1
+                };
+                _model.Add(monthDept);
+                _model.SaveChanges();
+            }
             var dayDepth = _model.EF_Departments.FirstOrDefault(
                     dept =>
                     dept.Department_name.Trim() == CurrentPublication.P_day.Trim() &&
                     dept.Department_parent_id == monthDept.Department_id);
+            if (dayDepth == null)
+            {
+                dayDepth = new EF_Department
+                {
+                    Department_type = "day",
+                    Department_name =  CurrentPublication.P_day,
+                    Department_parent_id = monthDept.Department_id,
+                    Department_id = +_model.EF_Departments.Max(item => item.Department_id) + 1
+                };
+                _model.Add(dayDepth);
+                _model.SaveChanges();
+            }
             CurrentPublication.Department_id = dayDepth.Department_id;
                 _model.Add(CurrentPublication);
                 _model.SaveChanges();
-
-        }
-
-        private void SetCanSaveOption()
-        {
-            //try
-            //{
-            //    CanSave = true;
-            //    if (CurrentPublication.Has_photo == null || CurrentPublication.Is_initiated == null ||
-            //        CurrentPublication.Is_planed == null || CurrentPublication.Exclusivity == null ||
-            //        CurrentPublication.Publication_date == null || CurrentPublication.Smi == null ||
-            //        CurrentPublication.Tonality == null) return;
-            //    if (CurrentPublication.Project_name.ToLower().Contains("arteks"))
-            //    {
-            //        CanSave = CurrentPublication.Priority != null;
-            //    }
-            //    else
-            //    {
-            //        CanSave = true;
-            //    }
-            //    CanSave = true;
-            //}
-            //catch (Exception)
-            //{
-            //}
 
         }
 
@@ -221,7 +234,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
         public void OpenInPaint(DataHelper.ImageTile tile)
         {
             CurrentImageTile = tile;
-            Process.Start("C:\\Program Files (x86)\\PhotoshopPortable\\PhotoshopCS4Portable.exe", CurrentImageTile.ImagePath);
+            Process.Start(Properties.Settings.Default.PhotoshopExecutable, CurrentImageTile.ImagePath);
         }
 
         public IPageViewModel ParentViewModel;

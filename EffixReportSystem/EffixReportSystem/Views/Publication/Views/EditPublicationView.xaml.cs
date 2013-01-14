@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CommonLibraries.Log;
 using EffixReportSystem.Helper.Classes;
 using EffixReportSystem.Views.Publication.ViewModels;
 using Telerik.Windows.Controls;
@@ -30,23 +31,47 @@ namespace EffixReportSystem.Views.Publication.Views
         private void DoneButton_Click(object sender, RoutedEventArgs e)
         {
             var ctx = DataContext as EditPublicationViewModel;
-            ctx.SaveCurrentPublication();
+            try
+            {
+                ctx.SaveCurrentPublication();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Logger.TraceError(ex.Message);
+            }
             (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             var ctx = DataContext as EditPublicationViewModel;
-            ctx.RestoreDefaultVlues();
+            try
+            {
+                ctx.RestoreDefaultVlues();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Logger.TraceError(ex.Message);
+            }
             (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
         }
 
         private void Image_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var ctx = DataContext as EditPublicationViewModel;
-            var parent = DataHelper.FindAncestor(sender as Image,typeof(RadTileViewItem));
-            var parentCtx = (parent as RadTileViewItem).DataContext as DataHelper.ImageTile;
-            ctx.OpenInPaint(parentCtx);
+            try
+            {
+                var ctx = DataContext as EditPublicationViewModel;
+                var parent = DataHelper.FindAncestor(sender as Image, typeof(RadTileViewItem));
+                var parentCtx = (parent as RadTileViewItem).DataContext as DataHelper.ImageTile;
+                ctx.OpenInPaint(parentCtx);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Logger.TraceError(ex.Message);
+            }
         }
 
         private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

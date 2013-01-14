@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:EffixReportSystem="clr-namespace:EffixReportSystem.Helper.Classes.Converters"
-             StartupUri="ApplicationView.xaml">
+             StartupUri="ApplicationView.xaml"
+             DispatcherUnhandledException="Application_DispatcherUnhandledException">
     <Application.Resources>
         <ResourceDictionary>
             <EffixReportSystem:PathConverter x:Key="PathConverter" />
