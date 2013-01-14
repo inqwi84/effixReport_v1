@@ -28,5 +28,21 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
        //     var navUrl = new NavigateToUrlAction {Url = publication.Url_path};
            // UrlTextBox.Action = navUrl;
         }
+        public ClippingReport(EF_Publication publication, string smiType)
+        {
+            //
+            // Required for telerik Reporting designer support
+            //
+            InitializeComponent();
+            list1.DataSource = new ImageReportsList(publication);
+            MassMediaNameTextBox.Value = publication.EF_SMI.Smi_name;
+            SmiTypeTextBox.Value = publication.EF_SMI.EF_SMI_Type.Smi_type_name;
+            InitiatedTextBox.Value = publication.Is_initiated==0 ? "Неинициированные публикации" : "Инициированные публикации";
+            PublicationDateTextBox.Value = publication.Publication_date.Value.ToShortDateString();
+            if (String.IsNullOrEmpty(publication.Url_path)) return;
+            UrlTextBox.Value = publication.Url_path;
+            //     var navUrl = new NavigateToUrlAction {Url = publication.Url_path};
+            // UrlTextBox.Action = navUrl;
+        }
     }
 }
