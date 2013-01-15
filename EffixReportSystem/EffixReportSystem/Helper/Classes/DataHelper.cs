@@ -421,28 +421,11 @@ namespace EffixReportSystem.Helper.Classes
             web.Navigating +=
                 new WebBrowserNavigatingEventHandler(web_Navigating);
             web.DocumentCompleted += new
-                WebBrowserDocumentCompletedEventHandler(tready_Tick);
+                WebBrowserDocumentCompletedEventHandler(web_DocumentCompleted);
             tready.Tick += new EventHandler(tready_Tick);
         }
-        public HtmlCapture(WebBrowser web)
-        {
-            //initialise the webbrowser and the timer
-            tready = new Timer();
-            tready.Interval = 2000;
-            screen = Screen.PrimaryScreen.Bounds;
-            //set the webbrowser width and hight
-            web.Width = screen.Width;
-            web.Height = screen.Height;
-            //suppress script errors and hide scroll bars
-            web.ScriptErrorsSuppressed = true;
-            web.ScrollBarsEnabled = false;
-            //attached events
-            web.Navigating +=
-                new WebBrowserNavigatingEventHandler(web_Navigating);
-            web.DocumentCompleted += new
-                WebBrowserDocumentCompletedEventHandler(tready_Tick);
-            tready.Tick += new EventHandler(tready_Tick);
-        }
+
+
         #region Public methods
 
         public void Create(string url)
@@ -461,8 +444,8 @@ namespace EffixReportSystem.Helper.Classes
 
         #region Events
 
-        private void web_DocumentCompleted(object sender,
-                                           WebBrowserDocumentCompletedEventArgs e)
+        void web_DocumentCompleted(object sender,
+           WebBrowserDocumentCompletedEventArgs e)
         {
             //start the timer
             tready.Start();
@@ -471,7 +454,7 @@ namespace EffixReportSystem.Helper.Classes
         private void web_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             //stop the timer   
-            tready.Stop();
+           tready.Stop();
         }
 
         private void tready_Tick(object sender, EventArgs e)

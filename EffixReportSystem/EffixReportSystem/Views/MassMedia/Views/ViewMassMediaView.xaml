@@ -137,20 +137,6 @@
                     <TextBlock  DockPanel.Dock="Left" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}" Margin="5,0,0,0">Адрес сайта</TextBlock>
                     <TextBox x:Name="SMIUrl" IsEnabled="False" Text="{Binding CurrentSmi.Smi_url}" DockPanel.Dock="Right" Width="150"  Margin="0,0,5,0"></TextBox>
                 </DockPanel>
-                <Border Margin="5">
-                    <StackPanel>
-                        <TextBlock>Список контактов</TextBlock>
-                        <telerik:RadListBox>
-                            <telerik:RadListBoxItem>контакт1</telerik:RadListBoxItem>
-                            <telerik:RadListBoxItem>контакт2</telerik:RadListBoxItem>
-                            <telerik:RadListBoxItem>контакт3</telerik:RadListBoxItem>
-                            <telerik:RadListBoxItem>контакт4</telerik:RadListBoxItem>
-                        </telerik:RadListBox>
-                    </StackPanel>
-                </Border>
-                <Border>
-                    <StackPanel></StackPanel>
-                </Border>
             </StackPanel>
             
         </Grid>
