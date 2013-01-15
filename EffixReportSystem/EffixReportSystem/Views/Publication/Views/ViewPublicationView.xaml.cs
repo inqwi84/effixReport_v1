@@ -143,5 +143,13 @@ namespace EffixReportSystem.Views.Publication.Views
         {
            
         }
+
+        private void TreeViewSelectedChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var ctx = DataContext as ViewPublicationViewModel;
+            if (ctx == null) return;
+
+            ctx.CurrentDepartament = (sender as RadTreeView).SelectedItem as EF_Department;
+        }
     }
 }

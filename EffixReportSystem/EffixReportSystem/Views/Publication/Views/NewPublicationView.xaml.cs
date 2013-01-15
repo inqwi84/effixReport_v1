@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using CommonLibraries.Log;
 using EffixReportSystem.Helper.Classes;
+using EffixReportSystem.Helper.Classes.Enums;
 using EffixReportSystem.Views.Publication.ViewModels;
 using Telerik.Windows.Controls;
 using Brushes = System.Windows.Media.Brushes;
@@ -64,6 +65,7 @@ namespace EffixReportSystem.Views.Publication.Views
             try
             {
                 var ctx = DataContext as NewPublicationViewModel;
+                ctx.SnapShotMode = ViewMode.MakeSnapshot;
                 ctx.ImageTileList = new ObservableCollection<DataHelper.ImageTile>();
                 ClearDirectory(_tempDirectory);
                 var pointsList = new ObservableCollection<Point>();
@@ -161,8 +163,16 @@ namespace EffixReportSystem.Views.Publication.Views
             try
             {
                 var ctx = DataContext as NewPublicationViewModel;
+                ctx.ImageTileList.Clear();
+                var dir = new DirectoryInfo(Properties.Settings.Default.TempDirectory);
+                foreach (var file in dir.GetFiles("*.*"))
+                {
+                   file.Delete(); 
+                }
                 (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
                     (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
+                ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
+    .CurrentDepartament = ctx.CurrentDepartment;
             }
             catch (Exception ex)
             {
@@ -236,43 +246,84 @@ namespace EffixReportSystem.Views.Publication.Views
                 }
                 else
                 {
-                    var destinationDirectory =
-                        new DirectoryInfo(_baseDirectory + "\\" +
-                                          ctx.CurrentPublication.Project_name + "\\" +
-                                          date.Year + "\\" +
-                                          date.Month + "\\" +
-                                          date.Day);
-
-
-                    var sourceDirectory = new DirectoryInfo(_tempDirectory);
-
-                    var files = sourceDirectory.GetFiles("*.*");
-
-                    var index = 0;
-                    foreach (var fileInfo in files)
+                    if (ctx.SnapShotMode == ViewMode.MakeSnapshot)
                     {
-                        if (!destinationDirectory.Exists)
-                        {
-                            destinationDirectory.Create();
-                        }
-                        var filePath = destinationDirectory + "\\" +
-                                       ctx.CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') +
-                                       fileInfo.Name.Replace(" ", "_");
-                        fileInfo.MoveTo(filePath);
-                        index++;
-                        DataHelper.SaveFilesInAzureStorage(filePath);
-                        if (index <= 1)
-                        {
-                            ctx.CurrentPublication.Blob_path = filePath;
-                        }
-                    }
-                    ctx.CurrentPublication.Image_count = index;
-                    ctx.SaveCurrentPublication();
-                    (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
-                        (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
-                    ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
-                        .ReloadDepartments();
+                        var destinationDirectory =
+                            new DirectoryInfo(_baseDirectory + "\\" +
+                                              ctx.CurrentPublication.Project_name + "\\" +
+                                              date.Year + "\\" +
+                                              date.Month + "\\" +
+                                              date.Day);
 
+
+                        var sourceDirectory = new DirectoryInfo(_tempDirectory);
+
+                        var files = sourceDirectory.GetFiles("*.*");
+
+                        var index = 0;
+                        foreach (var fileInfo in files)
+                        {
+                            if (!destinationDirectory.Exists)
+                            {
+                                destinationDirectory.Create();
+                            }
+                            var filePath = destinationDirectory + "\\" +
+                                           ctx.CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') +
+                                           fileInfo.Name.Replace(" ", "_");
+                            fileInfo.MoveTo(filePath);
+                            index++;
+                            DataHelper.SaveFilesInAzureStorage(filePath);
+                            if (index <= 1)
+                            {
+                                ctx.CurrentPublication.Blob_path = filePath;
+                            }
+                        }
+                        ctx.CurrentPublication.Image_count = index;
+                        ctx.SaveCurrentPublication();
+                        (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
+                            (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
+                        ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
+                            .ReloadDepartments();
+                        ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
+                            .CurrentDepartament = ctx.CurrentDepartment;
+                    }
+                    else
+                    {
+                        var destinationDirectory =
+                            new DirectoryInfo(_baseDirectory + "\\" +
+                                              ctx.CurrentPublication.Project_name + "\\" +
+                                              date.Year + "\\" +
+                                              date.Month + "\\" +
+                                              date.Day);
+                        var sourceDirectory = new DirectoryInfo(_tempDirectory);
+                        var files = sourceDirectory.GetFiles("*.*");
+                        var index = 0;
+                        foreach (var fileInfo in files)
+                        {
+                            if (!destinationDirectory.Exists)
+                            {
+                                destinationDirectory.Create();
+                            }
+                            var filePath = destinationDirectory + "\\" +
+                                           ctx.CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') +
+                                           fileInfo.Name.Replace(" ", "_");
+                            fileInfo.CopyTo(filePath);
+                            index++;
+                            DataHelper.SaveFilesInAzureStorage(filePath);
+                            if (index <= 1)
+                            {
+                                ctx.CurrentPublication.Blob_path = filePath;
+                            }
+                        }
+                        ctx.CurrentPublication.Image_count = index;
+                        ctx.SaveCurrentPublication();
+                        (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
+                            (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
+                        ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
+                            .ReloadDepartments();
+                        ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
+                            .CurrentDepartament = ctx.CurrentDepartment;
+                    }
                 }
             }
             catch (Exception ex)
@@ -280,7 +331,6 @@ namespace EffixReportSystem.Views.Publication.Views
                 MessageBox.Show(ex.Message);
                 Logger.TraceError(ex.Message);
             }
-           
         }
 
         private void UrlTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -483,6 +533,8 @@ namespace EffixReportSystem.Views.Publication.Views
             try
             {
                 var ctx = DataContext as NewPublicationViewModel;
+                ctx.SnapShotMode=ViewMode.ImportSnapshot;
+                ctx.ImageTileList=new ObservableCollection<DataHelper.ImageTile>();
                 var tempDirectory = new DirectoryInfo(_tempDirectory);
                 var dlg = new Microsoft.Win32.OpenFileDialog
                 {

@@ -13,7 +13,9 @@ namespace EffixReportSystem.Helper.Classes.Enums
         AddTemplated,
         ViewOnlyMode,
         AddToList,
-        AddToTree
+        AddToTree,
+        MakeSnapshot,
+        ImportSnapshot
     };
 
     public enum SortingMode

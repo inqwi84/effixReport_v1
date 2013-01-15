@@ -280,6 +280,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                 var hierarchicalList = model.EF_Departments.ToList().Select(flatItem =>
                                                                             new EF_Department
                                                                                 {
+                                                                                    Department_project_id = flatItem.Department_project_id,
                                                                                     Department_type = flatItem.Department_type,
                                                                                     Department_name
                                                                                         =
@@ -346,7 +347,8 @@ namespace EffixReportSystem.Views.Publication.ViewModels
             {
                 var hierarchicalList = model.EF_Departments.ToList().Select(flatItem =>
                                                                             new EF_Department
-                                                                                {
+                                                                                { 
+                                                                                    Department_project_id = flatItem.Department_project_id,
                                                                                     Department_type = flatItem.Department_type,
                                                                                     Department_name
                                                                                         =
