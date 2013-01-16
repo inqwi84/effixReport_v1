@@ -9,8 +9,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Telerik.Reporting.TableGroup tableGroup3 = new Telerik.Reporting.TableGroup();
-            Telerik.Reporting.TableGroup tableGroup4 = new Telerik.Reporting.TableGroup();
+            Telerik.Reporting.TableGroup tableGroup1 = new Telerik.Reporting.TableGroup();
+            Telerik.Reporting.TableGroup tableGroup2 = new Telerik.Reporting.TableGroup();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClippingReport));
             this.detail = new Telerik.Reporting.DetailSection();
             this.list1 = new Telerik.Reporting.List();
@@ -41,16 +41,16 @@
             this.list1.Body.Columns.Add(new Telerik.Reporting.TableBodyColumn(Telerik.Reporting.Drawing.Unit.Inch(7D)));
             this.list1.Body.Rows.Add(new Telerik.Reporting.TableBodyRow(Telerik.Reporting.Drawing.Unit.Inch(8.82071590423584D)));
             this.list1.Body.SetCellContent(0, 0, this.panel1);
-            tableGroup3.Name = "ColumnGroup";
-            this.list1.ColumnGroups.Add(tableGroup3);
+            tableGroup1.Name = "ColumnGroup";
+            this.list1.ColumnGroups.Add(tableGroup1);
             this.list1.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
             this.panel1});
             this.list1.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.18334579467773438D), Telerik.Reporting.Drawing.Unit.Inch(3.9418537198798731E-05D));
             this.list1.Name = "list1";
-            tableGroup4.Groupings.AddRange(new Telerik.Reporting.Grouping[] {
+            tableGroup2.Groupings.AddRange(new Telerik.Reporting.Grouping[] {
             new Telerik.Reporting.Grouping(null)});
-            tableGroup4.Name = "DetailGroup";
-            this.list1.RowGroups.Add(tableGroup4);
+            tableGroup2.Name = "DetailGroup";
+            this.list1.RowGroups.Add(tableGroup2);
             this.list1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(7D), Telerik.Reporting.Drawing.Unit.Inch(8.82071590423584D));
             // 
             // panel1
@@ -76,10 +76,10 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.383385181427002D), Telerik.Reporting.Drawing.Unit.Inch(7.8837074397597462E-05D));
+            this.pictureBox1.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.8000001907348633D), Telerik.Reporting.Drawing.Unit.Inch(7.8837074397597462E-05D));
             this.pictureBox1.MimeType = "image/jpeg";
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.9000003337860107D), Telerik.Reporting.Drawing.Unit.Inch(0.39162763953208923D));
+            this.pictureBox1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.3833062648773193D), Telerik.Reporting.Drawing.Unit.Inch(0.39162763953208923D));
             this.pictureBox1.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.ScaleProportional;
             this.pictureBox1.Value = ((object)(resources.GetObject("pictureBox1.Value")));
             // 
@@ -104,9 +104,11 @@
             // MassMediaNameTextBox
             // 
             this.MassMediaNameTextBox.Anchoring = Telerik.Reporting.AnchoringStyles.Right;
-            this.MassMediaNameTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.083543144166469574D), Telerik.Reporting.Drawing.Unit.Inch(0.70000004768371582D));
+            this.MassMediaNameTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.083543144166469574D), Telerik.Reporting.Drawing.Unit.Inch(0.60007864236831665D));
             this.MassMediaNameTextBox.Name = "MassMediaNameTextBox";
-            this.MassMediaNameTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(7.0999603271484375D), Telerik.Reporting.Drawing.Unit.Inch(0.20000004768371582D));
+            this.MassMediaNameTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(7.0999603271484375D), Telerik.Reporting.Drawing.Unit.Inch(0.29984259605407715D));
+            this.MassMediaNameTextBox.Style.Font.Name = "Calibri";
+            this.MassMediaNameTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(20D);
             this.MassMediaNameTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
             this.MassMediaNameTextBox.Value = "";
             // 
@@ -125,6 +127,8 @@
             this.PublicationDateTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.083543144166469574D), Telerik.Reporting.Drawing.Unit.Inch(1D));
             this.PublicationDateTextBox.Name = "PublicationDateTextBox";
             this.PublicationDateTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(7.0999603271484375D), Telerik.Reporting.Drawing.Unit.Inch(0.1789696216583252D));
+            this.PublicationDateTextBox.Style.Font.Name = "Calibri";
+            this.PublicationDateTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
             this.PublicationDateTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
             this.PublicationDateTextBox.Value = "";
             // 
@@ -132,7 +136,11 @@
             // 
             this.InitiatedTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.4999997615814209D), Telerik.Reporting.Drawing.Unit.Inch(0.099999986588954926D));
             this.InitiatedTextBox.Name = "InitiatedTextBox";
-            this.InitiatedTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(3.6833460330963135D), Telerik.Reporting.Drawing.Unit.Inch(0.19999997317790985D));
+            this.InitiatedTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(3.6833460330963135D), Telerik.Reporting.Drawing.Unit.Inch(0.29992136359214783D));
+            this.InitiatedTextBox.Style.Color = System.Drawing.Color.MidnightBlue;
+            this.InitiatedTextBox.Style.Font.Bold = true;
+            this.InitiatedTextBox.Style.Font.Name = "Cambria";
+            this.InitiatedTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(16D);
             this.InitiatedTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
             this.InitiatedTextBox.Value = "";
             // 
@@ -141,6 +149,11 @@
             this.SmiTypeTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.4999997615814209D), Telerik.Reporting.Drawing.Unit.Inch(0.40000000596046448D));
             this.SmiTypeTextBox.Name = "SmiTypeTextBox";
             this.SmiTypeTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(3.6834249496459961D), Telerik.Reporting.Drawing.Unit.Inch(0.19999997317790985D));
+            this.SmiTypeTextBox.Style.Color = System.Drawing.Color.CornflowerBlue;
+            this.SmiTypeTextBox.Style.Font.Bold = true;
+            this.SmiTypeTextBox.Style.Font.Italic = true;
+            this.SmiTypeTextBox.Style.Font.Name = "Calibri";
+            this.SmiTypeTextBox.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(11D);
             this.SmiTypeTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
             this.SmiTypeTextBox.Value = "";
             // 
@@ -156,8 +169,9 @@
             this.UrlTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(2D), Telerik.Reporting.Drawing.Unit.Inch(3.9418537198798731E-05D));
             this.UrlTextBox.Name = "UrlTextBox";
             this.UrlTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(5.1833457946777344D), Telerik.Reporting.Drawing.Unit.Inch(0.19999980926513672D));
+            this.UrlTextBox.Style.Font.Name = "Calibri";
             this.UrlTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
-            this.UrlTextBox.Value = "textBox2";
+            this.UrlTextBox.Value = "";
             // 
             // ClippingReport
             // 
