@@ -226,9 +226,13 @@ namespace EffixReportSystem.Helper.Classes
             double xDest = (Unit == Unit.Cm ? DipHelper.CmToDip(Length) : DipHelper.InchToDip(Length)) * this.Zoom;
             drawingContext.DrawRectangle(null, BorderPen, new Rect(new Point(0.0, 0.0), new Point(xDest, Height)));
             double chip = Unit == Unit.Cm ? DipHelper.CmToDip(Chip) : DipHelper.InchToDip(Chip);
-            //drawingContext.DrawLine(RedPen, new Point(chip, 0), new Point(chip, Height));
-            //drawingContext.DrawLine(RedPen, new Point(chip*2, 0), new Point(chip*2, Height));
-            //drawingContext.DrawLine(RedPen, new Point(chip*2, 0), new Point(chip*2, Height));
+            for (var i = 1; i < 10;i++ )
+            {
+                drawingContext.DrawLine(RedPen, new Point(chip*i, 0), new Point(chip*i, Height));
+                //drawingContext.DrawLine(RedPen, new Point(chip * 2, 0), new Point(chip * 2, Height));
+                //drawingContext.DrawLine(RedPen, new Point(chip * 2, 0), new Point(chip * 2, Height)); 
+            }
+
 
             for (double dUnit = 0; dUnit <= Length; dUnit++)
             {
