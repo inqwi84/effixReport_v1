@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EffixReportSystem", "EffixReportSystem\EffixReportSystem.csproj", "{0E3A0E28-CEFB-4691-8954-25F8D24138A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsApplication1", "WindowsApplication1\WindowsApplication1\WindowsApplication1.csproj", "{23248BC3-51DD-4FD2-959C-B7A00591B4CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,16 @@ Global
 		{0E3A0E28-CEFB-4691-8954-25F8D24138A0}.Release|Mixed Platforms.Build.0 = Release|x86
 		{0E3A0E28-CEFB-4691-8954-25F8D24138A0}.Release|x86.ActiveCfg = Release|x86
 		{0E3A0E28-CEFB-4691-8954-25F8D24138A0}.Release|x86.Build.0 = Release|x86
+		{23248BC3-51DD-4FD2-959C-B7A00591B4CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23248BC3-51DD-4FD2-959C-B7A00591B4CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23248BC3-51DD-4FD2-959C-B7A00591B4CD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{23248BC3-51DD-4FD2-959C-B7A00591B4CD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{23248BC3-51DD-4FD2-959C-B7A00591B4CD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{23248BC3-51DD-4FD2-959C-B7A00591B4CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23248BC3-51DD-4FD2-959C-B7A00591B4CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23248BC3-51DD-4FD2-959C-B7A00591B4CD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{23248BC3-51DD-4FD2-959C-B7A00591B4CD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{23248BC3-51DD-4FD2-959C-B7A00591B4CD}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
