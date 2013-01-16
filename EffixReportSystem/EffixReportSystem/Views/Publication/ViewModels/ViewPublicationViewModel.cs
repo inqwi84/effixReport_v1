@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using CommonLibraries.Log;
 using EffixReportSystem.Helper.Classes;
 using EffixReportSystem.Helper.Interfaces;
 
@@ -34,27 +35,31 @@ namespace EffixReportSystem.Views.Publication.ViewModels
             }
         }
 
-        private  EF_Department _currentDepartament;
-        public EF_Department CurrentDepartament
+        private  EF_Department _currentDepartment;
+        public EF_Department CurrentDepartment
         {
-            get { return _currentDepartament; }
+            get { return _currentDepartment; }
             set
             {
-                if (CurrentDepartament == value)
-                    return;
-
-                _currentDepartament = value;
-                try
+                if (value != null)
                 {
-                    Task.Factory.StartNew(() =>
-                                          PublicationList =
-                                          DataHelper.GetPublicationByDepartmentId(_currentDepartament.Department_id));
-                }
-                catch (Exception)
-                {
-                }
+                    if (CurrentDepartment == value)
+                        return;
 
-                this.OnPropertyChanged("CurrentDepartament");
+                    _currentDepartment = value;
+                    try
+                    {
+                        Task.Factory.StartNew(() =>
+                                              PublicationList =
+                                              DataHelper.GetPublicationByDepartmentId(_currentDepartment.Department_id));
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.TraceError(ex.Message);
+                    }
+
+                    this.OnPropertyChanged("CurrentDepartament");
+                }
             }
         }
 
@@ -141,7 +146,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                 {
                     PublicationList = new ObservableCollection<EF_Publication>();
                     var coll =
-                        CollectionViewSource.GetDefaultView(DataHelper.GetPublicationByDepartmentId(CurrentDepartament.Department_id));
+                        CollectionViewSource.GetDefaultView(DataHelper.GetPublicationByDepartmentId(CurrentDepartment.Department_id));
                     coll.Filter = NameFilter;
                     PublicationList =
                         new ObservableCollection<EF_Publication>(coll.Cast<EF_Publication>());

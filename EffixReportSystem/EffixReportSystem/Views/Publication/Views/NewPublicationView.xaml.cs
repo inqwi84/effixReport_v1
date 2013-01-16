@@ -172,7 +172,7 @@ namespace EffixReportSystem.Views.Publication.Views
                 (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
                     (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
                 ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
-    .CurrentDepartament = ctx.CurrentDepartment;
+    .CurrentDepartment = ctx.CurrentDepartment;
             }
             catch (Exception ex)
             {
@@ -285,7 +285,7 @@ namespace EffixReportSystem.Views.Publication.Views
                         ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
                             .ReloadDepartments();
                         ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
-                            .CurrentDepartament = ctx.CurrentDepartment;
+                            .CurrentDepartment = ctx.CurrentDepartment;
                     }
                     else
                     {
@@ -322,7 +322,7 @@ namespace EffixReportSystem.Views.Publication.Views
                         ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
                             .ReloadDepartments();
                         ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
-                            .CurrentDepartament = ctx.CurrentDepartment;
+                            .CurrentDepartment = ctx.CurrentDepartment;
                     }
                 }
             }

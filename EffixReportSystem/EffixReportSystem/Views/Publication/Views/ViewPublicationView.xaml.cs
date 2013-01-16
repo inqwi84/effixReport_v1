@@ -72,8 +72,8 @@ namespace EffixReportSystem.Views.Publication.Views
                 if (ctx == null) return;
                 (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[2];
                 var newPublicationViewModel = ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as NewPublicationViewModel);
-                newPublicationViewModel.CurrentDepartment = ctx.CurrentDepartament;
-                newPublicationViewModel.CurrentPublication = new EF_Publication(ctx.CurrentDepartament);
+                newPublicationViewModel.CurrentDepartment = ctx.CurrentDepartment;
+                newPublicationViewModel.CurrentPublication = new EF_Publication(ctx.CurrentDepartment);
                 newPublicationViewModel.CurrentProjectName = ctx.CurrentProjectName;
                 newPublicationViewModel.CurrentProject = ctx.CurrentProject;
             }
@@ -97,7 +97,7 @@ namespace EffixReportSystem.Views.Publication.Views
             {
                 var ctx = DataContext as ViewPublicationViewModel;
                 if (ctx == null) return;
-                var currentDepartment = ctx.CurrentDepartament;
+                var currentDepartment = ctx.CurrentDepartment;
                 switch (currentDepartment.Department_type.Trim())
                 {
                     case "all":
@@ -148,8 +148,12 @@ namespace EffixReportSystem.Views.Publication.Views
         {
             var ctx = DataContext as ViewPublicationViewModel;
             if (ctx == null) return;
+            ctx.CurrentDepartment = (sender as RadTreeView).SelectedItem as EF_Department;
+        }
 
-            ctx.CurrentDepartament = (sender as RadTreeView).SelectedItem as EF_Department;
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
