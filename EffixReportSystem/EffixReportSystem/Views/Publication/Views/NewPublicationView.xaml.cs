@@ -554,7 +554,7 @@ namespace EffixReportSystem.Views.Publication.Views
                 {
                     var file = new FileInfo(filepath);
                     var newFile = tempDirectory + "\\" + "_" + index + file.Extension;
-                    file.MoveTo(newFile);
+                    file.CopyTo(newFile,true);
                     ctx.ImageTileList.Add(new DataHelper.ImageTile
                     {
                         Image = new BitmapImage(new Uri(newFile)),
