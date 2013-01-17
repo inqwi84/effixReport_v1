@@ -63,10 +63,11 @@
             // pictureBox2
             // 
             this.pictureBox2.Bindings.Add(new Telerik.Reporting.Binding("Value", "=Fields.Image"));
+            this.pictureBox2.Docking = Telerik.Reporting.DockingStyle.Fill;
             this.pictureBox2.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.9418537198798731E-05D), Telerik.Reporting.Drawing.Unit.Inch(3.9418537198798731E-05D));
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(6.9999213218688965D), Telerik.Reporting.Drawing.Unit.Inch(8.6999225616455078D));
-            this.pictureBox2.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.Normal;
+            this.pictureBox2.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(7D), Telerik.Reporting.Drawing.Unit.Inch(8.82071590423584D));
+            this.pictureBox2.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.ScaleProportional;
             // 
             // textBox1
             // 

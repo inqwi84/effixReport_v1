@@ -15,9 +15,17 @@ namespace EffixReportSystem
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            try
+            {
+                Logger.AddListenerTextWriter();
+                Logger.AddListenerConsole();
+            }
+            catch (Exception)
+            {
+
+            }
             Logger.Initialize("EffixReportSystem");
-            Logger.AddListenerTextWriter();
-            Logger.AddListenerConsole();
+
             base.OnStartup(e);
         }
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
