@@ -321,6 +321,12 @@
     <Compile Include="Views\Report\ReportTemplates\ClippingReport.Designer.cs">
       <DependentUpon>ClippingReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Report\ReportTemplates\ClippingReport_v2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\ClippingReport_v2.Designer.cs">
+      <DependentUpon>ClippingReport_v2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Report\ReportTemplates\HeadReport.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -480,6 +486,9 @@
     <EmbeddedResource Include="Views\Report\ReportTemplates\ClippingReport.resx">
       <DependentUpon>ClippingReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ReportTemplates\ClippingReport_v2.resx">
+      <DependentUpon>ClippingReport_v2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Report\ReportTemplates\DiagramReport.resx">
       <DependentUpon>DiagramReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -600,82 +609,82 @@
   <ItemGroup>
     <PublishFile Include="EnvDTE">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="EnvDTE80">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Telerik.Reporting">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Telerik.Reporting.Adomd">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Telerik.Reporting.Adomd.pdb">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Telerik.Reporting.Cache.Database">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Telerik.Reporting.Cache.Database.pdb">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Telerik.Reporting.OpenXmlRendering">
       <Visible>False</Visible>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>
