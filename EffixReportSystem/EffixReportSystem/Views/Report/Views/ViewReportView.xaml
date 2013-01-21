@@ -11,12 +11,21 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Label Margin="5" VerticalAlignment="Center">Наименование проекта</Label>
+            <ComboBox x:Name="ProjectsComboBox" Margin="5" VerticalAlignment="Center" SelectedIndex="0">
+                <ComboBoxItem>не выбрано</ComboBoxItem>
+                <ComboBoxItem>Лифан Моторс Рус</ComboBoxItem>
+                <ComboBoxItem>Артекс Jaguar</ComboBoxItem>
+                <ComboBoxItem>Артекс Hyundai</ComboBoxItem>
+                <ComboBoxItem>Авторусь</ComboBoxItem>
+                <ComboBoxItem>АвтоАЛЕА Honda</ComboBoxItem>
+            </ComboBox>
             <Label Margin="5" VerticalAlignment="Center">Начало периода</Label>
-            <DatePicker Margin="5" VerticalAlignment="Center"></DatePicker>
+            <DatePicker x:Name="BeginPeriod" Margin="5" VerticalAlignment="Center"></DatePicker>
             <Label Margin="5" VerticalAlignment="Center">Конец периода</Label>
-            <DatePicker Margin="5" VerticalAlignment="Center"></DatePicker>
-            <Button Margin="5" VerticalAlignment="Center" Click="Button_Click_1">Сформировать отчет</Button>
-            <Button Margin="5,15" VerticalAlignment="Center" Click="Button_Click_2" Content="Сформировать отчет2"/>
+            <DatePicker x:Name="EndPeriod" Margin="5" VerticalAlignment="Center"></DatePicker>
+            <Button Margin="5" VerticalAlignment="Center" Click="Button_Click_1" Width="120"  Style="{DynamicResource stlButton}">Отчет</Button>
+            <Button Visibility="Collapsed" Margin="5,15" VerticalAlignment="Center" Click="Button_Click_2" Content="Сформировать отчет2"/>
         </StackPanel>
         <telerik:ReportViewer x:Name="reportViewer" Grid.Row="1"></telerik:ReportViewer>
     </Grid>

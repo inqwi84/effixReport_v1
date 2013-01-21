@@ -52,7 +52,10 @@ namespace EffixReportSystem.Views.Publication.ViewModels
         }
 
 
-        public List<EF_SMI> Smi { get; set; }
+        public List<EF_SMI> Smi
+        {
+            get { return _model.EF_SMIs.ToList(); }
+        }
         public List<EF_Tonality> Tonalities { get; set; }
         public List<EF_SMI_Type> SmiTypes { get; set; }
         public List<EF_Exclusivity> Exclusivities { get; set; }
@@ -251,7 +254,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                 ParentViewModel = parentViewModel;
                 CurrentUrl = String.Empty;
                 ImageTileList = new ObservableCollection<DataHelper.ImageTile>();
-                Smi = new List<EF_SMI>(_model.EF_SMIs);
+                //Smi = new List<EF_SMI>(_model.EF_SMIs);
                 Tonalities = new List<EF_Tonality>(_model.EF_Tonalities);
                 SmiTypes = new List<EF_SMI_Type>(_model.EF_SMI_Types);
                 Exclusivities = new List<EF_Exclusivity>(_model.EF_Exclusivities);

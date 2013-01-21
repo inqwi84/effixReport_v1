@@ -32,6 +32,9 @@ namespace EffixReportSystem.Views.Report.Views
     /// </summary>
     public partial class ViewReportView : UserControl
     {
+        private int index = 0;
+        private DateTime bDate;
+        private DateTime eDate;
         private BackgroundWorker bw = new BackgroundWorker();
         ReportBook rootBook = new ReportBook();
         public ViewReportView()
@@ -46,56 +49,83 @@ namespace EffixReportSystem.Views.Report.Views
 
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
-            var rBook = new ReportBook();
-            var report1 = new HeadReport();
-            rBook.Reports.Add(report1);
-            using (var model = new EntitiesModel())
+            switch (index)
             {
-                var initiatedPublications = model.EF_Publications.Where(item => item.Is_initiated == 1).GroupBy(gr => gr.EF_SMI.EF_SMI_Type.Smi_type_name);
-                var notInitiatedPublications = model.EF_Publications.Where(item => item.Is_initiated == 0).GroupBy(gr => gr.EF_SMI.EF_SMI_Type.Smi_type_name);
-                int init = 0;
-                int notInit = 0;
-                foreach (var grouped in initiatedPublications)
-                {
-                    foreach (var efPublication in grouped)
-                    {
-                        if (init == 0)
-                        {
-                            var rpr = new ClippingReport(efPublication,
-                                                         efPublication.EF_SMI.EF_SMI_Type.Smi_type_name);
-                            rBook.Reports.Add(rpr);
-                            init++;
-                        }
-                        else
-                        {
-                            var rpr = new ClippingReport(efPublication);
-                            rBook.Reports.Add(rpr);
-                        }
-                    }
-                    init = 0;
-                }
-                foreach (var grouped in notInitiatedPublications)
-                {
-                    foreach (var efPublication in grouped)
-                    {
-                        if (notInit == 0)
-                        {
-                            var rpr = new ClippingReport(efPublication,
-                                                         efPublication.EF_SMI.EF_SMI_Type.Smi_type_name);
-                            rBook.Reports.Add(rpr);
-                            notInit++;
-                        }
-                        else
-                        {
-                            var rpr = new ClippingReport(efPublication);
-                            rBook.Reports.Add(rpr);
-                        }
-                    }
-                    notInit = 0;
-                }
+                //не выбрано
+                case 0:
+                    MessageBox.Show("Не выбран проект");
+                    break;
+                //лифан
+                case 1:
+                 rootBook= MakeReport("lifan", bDate, eDate);
+                    break;
+                //артекс ягуар
+                case 2:
+                    rootBook = MakeReport("arteks-jaguar", bDate, eDate);
+                    break;
+                //артекс хюндай
+                case 3:
+                    rootBook = MakeReport("arteks-hyundai", bDate, eDate);
+                    break;
+                //авторусь
+                case 4:
+                    rootBook = MakeReport("avtorus", bDate, eDate);
+                    break;
+                //автоалея ХОнда
+                case 5:
+                    rootBook = MakeReport("avtoalea-honda", bDate, eDate);
+                    break;
             }
-            rBook.Reports.Add(new DiagramReport());
-            rootBook = rBook;
+            //var rBook = new ReportBook();
+            //var report1 = new HeadReport();
+            //rBook.Reports.Add(report1);
+            //using (var model = new EntitiesModel())
+            //{
+            //    var initiatedPublications = model.EF_Publications.Where(item => item.Is_initiated == 1).GroupBy(gr => gr.EF_SMI.EF_SMI_Type.Smi_type_name);
+            //    var notInitiatedPublications = model.EF_Publications.Where(item => item.Is_initiated == 0).GroupBy(gr => gr.EF_SMI.EF_SMI_Type.Smi_type_name);
+            //    int init = 0;
+            //    int notInit = 0;
+            //    foreach (var grouped in initiatedPublications)
+            //    {
+            //        foreach (var efPublication in grouped)
+            //        {
+            //            if (init == 0)
+            //            {
+            //                var rpr = new ClippingReport(efPublication,
+            //                                             efPublication.EF_SMI.EF_SMI_Type.Smi_type_name);
+            //                rBook.Reports.Add(rpr);
+            //                init++;
+            //            }
+            //            else
+            //            {
+            //                var rpr = new ClippingReport(efPublication);
+            //                rBook.Reports.Add(rpr);
+            //            }
+            //        }
+            //        init = 0;
+            //    }
+            //    foreach (var grouped in notInitiatedPublications)
+            //    {
+            //        foreach (var efPublication in grouped)
+            //        {
+            //            if (notInit == 0)
+            //            {
+            //                var rpr = new ClippingReport(efPublication,
+            //                                             efPublication.EF_SMI.EF_SMI_Type.Smi_type_name);
+            //                rBook.Reports.Add(rpr);
+            //                notInit++;
+            //            }
+            //            else
+            //            {
+            //                var rpr = new ClippingReport(efPublication);
+            //                rBook.Reports.Add(rpr);
+            //            }
+            //        }
+            //        notInit = 0;
+            //    }
+            //}
+            //rBook.Reports.Add(new DiagramReport());
+            //rootBook = rBook;
         }
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -122,6 +152,13 @@ namespace EffixReportSystem.Views.Report.Views
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            if (bw.IsBusy != true)
+            {
+                index = ProjectsComboBox.SelectedIndex;
+                bDate = BeginPeriod.SelectedDate.Value;
+                eDate = EndPeriod.SelectedDate.Value;
+                bw.RunWorkerAsync();
+            }
             //var rBook = new ReportBook();
             //var report1 =new HeadReport();
             //rBook.Reports.Add(report1);
@@ -134,17 +171,63 @@ namespace EffixReportSystem.Views.Report.Views
             //}
             //rBook.Reports.Add(new DiagramReport());
             //reportViewer.ReportSource = rBook;
-            MakeReport();
+            //switch (ProjectsComboBox.SelectedIndex)
+            //{
+            //        //не выбрано
+            //    case 0:
+            //        MessageBox.Show("Не выбран проект");
+            //        break;
+            //        //лифан
+            //    case 1:
+            //        Task.Factory.StartNew(() =>
+            //            {
+            //                MakeReport("lifan", BeginPeriod.SelectedDate.Value, EndPeriod.SelectedDate.Value);
+            //            });
+            //        break;
+            //        //артекс ягуар
+            //    case 2:
+            //        Task.Factory.StartNew(() =>
+            //        {
+            //            MakeReport("arteks-jaguar", BeginPeriod.SelectedDate.Value, EndPeriod.SelectedDate.Value);
+            //        });
+            //        break;
+            //        //артекс хюндай
+            //    case 3:
+            //        Task.Factory.StartNew(() =>
+            //        {
+            //            MakeReport("arteks-hyundai", BeginPeriod.SelectedDate.Value, EndPeriod.SelectedDate.Value);
+            //        });
+            //        break;
+            //        //авторусь
+            //    case 4:
+            //        Task.Factory.StartNew(() =>
+            //        {
+            //            MakeReport("avtorus", BeginPeriod.SelectedDate.Value, EndPeriod.SelectedDate.Value);
+            //        });
+            //        break;
+            //        //автоалея ХОнда
+            //    case 5:
+            //        Task.Factory.StartNew(() =>
+            //        {
+            //            MakeReport("avtoalea-honda", BeginPeriod.SelectedDate.Value, EndPeriod.SelectedDate.Value);
+            //        });
+            //        break;
+            //}
         }
 
-        private void MakeReport()
+        private ReportBook MakeReport(string projName, DateTime beginPeriod, DateTime endPeriod)
         {
             var rBook = new ReportBook();
-          //  var report1 = new HeadReport();
-          //  rBook.Reports.Add(report1);
+            var report1 = new HeadReport();
+            rBook.Reports.Add(report1);
             using (var model=new EntitiesModel())
             {
-                foreach (var item in model.EF_Publications.Where(item=>item.Project_name.Contains("avto")))
+                var tst =
+                    model.EF_Publications.Where(
+                        item =>
+                        item.Project_name.ToLower().Contains(projName.ToLower()) && item.Publication_date.Value >= beginPeriod &&
+                        item.Publication_date <= endPeriod);
+                foreach (var item in model.EF_Publications.Where(item => item.Project_name.Equals(projName)&&item.Publication_date>=beginPeriod&&item.Publication_date<=endPeriod))
                 {
                     var imageColl= new ObservableCollection<Bitmap>();
                     imageColl = GetImageCollection(item);
@@ -156,7 +239,8 @@ namespace EffixReportSystem.Views.Report.Views
                 }
             }
             rBook.Reports.Add(new DiagramReport());
-            reportViewer.ReportSource = rBook;
+           // reportViewer.ReportSource = rBook;
+            return rBook;
         }
         private ObservableCollection<Bitmap>GetImageCollection(EF_Publication publication)
         {
