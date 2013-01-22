@@ -218,16 +218,11 @@ namespace EffixReportSystem.Views.Report.Views
         private ReportBook MakeReport(string projName, DateTime beginPeriod, DateTime endPeriod)
         {
             var rBook = new ReportBook();
-            var report1 = new HeadReport();
-            rBook.Reports.Add(report1);
             using (var model=new EntitiesModel())
             {
-                var tst =
-                    model.EF_Publications.Where(
-                        item =>
-                        item.Project_name.ToLower().Contains(projName.ToLower()) && item.Publication_date.Value >= beginPeriod &&
-                        item.Publication_date <= endPeriod);
-                foreach (var item in model.EF_Publications.Where(item => item.Project_name.Equals(projName)&&item.Publication_date>=beginPeriod&&item.Publication_date<=endPeriod))
+                var report1 = new HeadReport(projName, beginPeriod, endPeriod);
+                rBook.Reports.Add(report1);
+                foreach (var item in model.EF_Publications.Where(item => item.Project_name.Equals(projName)&&item.Publication_date>=beginPeriod&&item.Publication_date<=endPeriod).OrderBy(dt=>dt.Publication_date).ThenBy(nm=>nm.EF_SMI.Smi_name))
                 {
                     var imageColl= new ObservableCollection<Bitmap>();
                     imageColl = GetImageCollection(item);

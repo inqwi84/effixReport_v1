@@ -68,14 +68,19 @@ namespace EffixReportSystem.Helper.Classes.Report
         //    result.Add(new TT() { AValue = "3" });
         //    return result;
         //}
+
+
         [System.ComponentModel.DataObjectMethod(System.ComponentModel.DataObjectMethodType.Select)]
-        public List<ReportRS> GetAllReports()
+        public List<ReportRS> GetAllReports(string projName,DateTime beginPeriod,DateTime endPeriod)
         {
             var result = new List<ReportRS>();
             using (var model = new EntitiesModel())
             {
                 int index = 1;
-                foreach (var reportRs in model.EF_Publications)
+                foreach (var reportRs in model.EF_Publications.Where(
+                        item =>
+                        item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                        item.Publication_date <= endPeriod).OrderBy(dt=>dt.Publication_date).ThenBy(nm=>nm.EF_SMI.Smi_name))
                 {
                     result.Add(new ReportRS(reportRs,index));
                     index++;
@@ -84,6 +89,7 @@ namespace EffixReportSystem.Helper.Classes.Report
             return result;
         }
     }
+                   
 
     public class TT
     {
@@ -122,7 +128,7 @@ namespace EffixReportSystem.Helper.Classes.Report
     {
         public int Index { get; set; }
         public string MassMediaName { get; set; }
-        public DateTime PublicationDate { get; set; }
+        public string PublicationDate { get; set; }
         public string PublicationUrl { get; set; }
         public string PublicationTitle { get; set; }
         public string MassMediaType { get; set; }
@@ -227,7 +233,7 @@ namespace EffixReportSystem.Helper.Classes.Report
         {
             Index = index;
             MassMediaName = publication.EF_SMI.Smi_name;
-            PublicationDate = (DateTime) publication.Publication_date;
+            PublicationDate = ((DateTime) publication.Publication_date).ToShortDateString();
             PublicationUrl = publication.Url_path;
             PublicationTitle = publication.Publication_name;
             MassMediaType = publication.EF_SMI.EF_MassMedium.Mass_media_type_name;

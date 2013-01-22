@@ -14,14 +14,18 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
     /// </summary>
     public partial class HeadReport : Telerik.Reporting.Report
     {
-        public HeadReport()
+        //public HeadReport()
+        //{
+        //    InitializeComponent();
+        //    var obj = new ObjectDataSource { DataSource = (new EF_Report().GetAllReports()) };
+        //    this.DataSource = obj;
+        //}
+
+        public HeadReport(string projName,DateTime beginPeriod,DateTime endPeriod)
         {
-            //
-            // Required for telerik Reporting designer support
-            //
             InitializeComponent();
-            var obj = new ObjectDataSource { DataSource = (new EF_Report().GetAllReports()) };
-            this.DataSource = obj;
+            var obj = new ObjectDataSource { DataSource = (new EF_Report().GetAllReports(projName, beginPeriod,endPeriod)) };
+            this.table2.DataSource = obj;
         }
     }
 }
