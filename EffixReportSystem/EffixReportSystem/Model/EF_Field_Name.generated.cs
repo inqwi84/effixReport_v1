@@ -18,27 +18,42 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using System.ComponentModel;
-using EffixReportSystem;
 
 
 namespace EffixReportSystem	
 {
-	public partial class EF_Tonality : INotifyPropertyChanged
+	public partial class EF_Field_Name : INotifyPropertyChanged
 	{
-		private long _tonality_id;
-		public virtual long Tonality_id
+		private long _field_name_id;
+		public virtual long Field_name_id
 		{
 		   get
 		   {
-		       return this._tonality_id;
+		       return this._field_name_id;
 		   }
 		   set
 		   {
-		       if( Tonality_id == value )
+		       if( Field_name_id == value )
 		  return;
 		 
-		  _tonality_id = value;
-		  this.OnPropertyChanged("Tonality_id");
+		  _field_name_id = value;
+		  this.OnPropertyChanged("Field_name_id");
+		   }
+		}
+		private long _field_type_id;
+		public virtual long Field_type_id
+		{
+		   get
+		   {
+		       return this._field_type_id;
+		   }
+		   set
+		   {
+		       if( Field_type_id == value )
+		  return;
+		 
+		  _field_type_id = value;
+		  this.OnPropertyChanged("Field_type_id");
 		   }
 		}
 		private string _name;
@@ -55,14 +70,6 @@ namespace EffixReportSystem
 		 
 		  _name = value;
 		  this.OnPropertyChanged("Name");
-		   }
-		}
-		private IList<EF_Publication> _eF_Publications = new List<EF_Publication>();
-		public virtual IList<EF_Publication> EF_Publications
-		{
-		   get
-		   {
-		       return this._eF_Publications;
 		   }
 		}
 		public event PropertyChangedEventHandler PropertyChanged;

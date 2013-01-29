@@ -25,67 +25,67 @@ namespace EffixReportSystem
 {
 	public partial class EF_Project : INotifyPropertyChanged
 	{
-		private long _project_Id;
+		private long _project_id;
 		public virtual long Project_id
 		{
 		   get
 		   {
-		       return this._project_Id;
+		       return this._project_id;
 		   }
 		   set
 		   {
 		       if( Project_id == value )
 		  return;
 		 
-		  _project_Id = value;
+		  _project_id = value;
 		  this.OnPropertyChanged("Project_id");
 		   }
 		}
-		private string _project_Name;
+		private string _project_name;
 		public virtual string Project_name
 		{
 		   get
 		   {
-		       return this._project_Name;
+		       return this._project_name;
 		   }
 		   set
 		   {
 		       if( Project_name == value )
 		  return;
 		 
-		  _project_Name = value;
+		  _project_name = value;
 		  this.OnPropertyChanged("Project_name");
 		   }
 		}
-		private long? _user_Id;
+		private long? _user_id;
 		public virtual long? User_id
 		{
 		   get
 		   {
-		       return this._user_Id;
+		       return this._user_id;
 		   }
 		   set
 		   {
 		       if( User_id == value )
 		  return;
 		 
-		  _user_Id = value;
+		  _user_id = value;
 		  this.OnPropertyChanged("User_id");
 		   }
 		}
-		private string _project_Descr;
+		private string _project_descr;
 		public virtual string Project_descr
 		{
 		   get
 		   {
-		       return this._project_Descr;
+		       return this._project_descr;
 		   }
 		   set
 		   {
 		       if( Project_descr == value )
 		  return;
 		 
-		  _project_Descr = value;
+		  _project_descr = value;
 		  this.OnPropertyChanged("Project_descr");
 		   }
 		}

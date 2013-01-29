@@ -30,7 +30,7 @@ namespace EffixReportSystem
 		private static BackendConfiguration backend = GetBackendConfiguration();
 		
 			
-		private static MetadataSource metadataSource = XmlMetadataSource.FromAssemblyResource("EntityDiagrams1.rlinq");
+		private static MetadataSource metadataSource = XmlMetadataSource.FromAssemblyResource("EntitiesModel.rlinq");
 	
 		public EntitiesModel()
 			:base(connectionStringName, backend, metadataSource)
@@ -132,11 +132,35 @@ namespace EffixReportSystem
 	    	}
 		}
 		
+		public IQueryable<EF_Person> EF_People 
+		{
+	    	get
+	    	{
+	        	return this.GetAll<EF_Person>();
+	    	}
+		}
+		
+		public IQueryable<EF_MassMedia> EF_MassMedias 
+		{
+	    	get
+	    	{
+	        	return this.GetAll<EF_MassMedia>();
+	    	}
+		}
+		
 		public IQueryable<EF_Initiated> EF_Initiateds 
 		{
 	    	get
 	    	{
 	        	return this.GetAll<EF_Initiated>();
+	    	}
+		}
+		
+		public IQueryable<EF_Field_Name> EF_Field_Names 
+		{
+	    	get
+	    	{
+	        	return this.GetAll<EF_Field_Name>();
 	    	}
 		}
 		
@@ -164,18 +188,26 @@ namespace EffixReportSystem
 	    	}
 		}
 		
-		public IQueryable<EF_MassMedia> EF_MassMedias 
+		public IQueryable<EF_Contact_Field_Type> EF_Contact_Field_Types 
 		{
 	    	get
 	    	{
-	        	return this.GetAll<EF_MassMedia>();
+	        	return this.GetAll<EF_Contact_Field_Type>();
+	    	}
+		}
+		
+		public IQueryable<EF_Contact_Attribute> EF_Contact_Attributes 
+		{
+	    	get
+	    	{
+	        	return this.GetAll<EF_Contact_Attribute>();
 	    	}
 		}
 		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
-			backend.Backend = "azure";
+			backend.Backend = "Azure";
 			backend.ProviderName = "System.Data.SqlClient";
 			return backend;
 		}
@@ -233,7 +265,22 @@ namespace EffixReportSystem
 			get;
 		}
 
+		IQueryable<EF_Person> EF_People 
+		{ 
+			get;
+		}
+
+		IQueryable<EF_MassMedia> EF_MassMedias 
+		{ 
+			get;
+		}
+
 		IQueryable<EF_Initiated> EF_Initiateds 
+		{ 
+			get;
+		}
+
+		IQueryable<EF_Field_Name> EF_Field_Names 
 		{ 
 			get;
 		}
@@ -253,7 +300,12 @@ namespace EffixReportSystem
 			get;
 		}
 
-		IQueryable<EF_MassMedia> EF_MassMedias 
+		IQueryable<EF_Contact_Field_Type> EF_Contact_Field_Types 
+		{ 
+			get;
+		}
+
+		IQueryable<EF_Contact_Attribute> EF_Contact_Attributes 
 		{ 
 			get;
 		}

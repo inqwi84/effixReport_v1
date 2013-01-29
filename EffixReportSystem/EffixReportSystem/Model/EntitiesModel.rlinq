@@ -1,0 +1,1189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DomainModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="2.0.0.0" name="EntitiesModel" namespace="EffixReportSystem" showPropertiesCompartment="true" xmlns="http://www.telerik.com/ORM">
+  <orm:orm name="EntitiesModel" backend="azure" xmlns:orm="http://tempuri.org/ORM">
+    <orm:namespace name="EffixReportSystem" default="true">
+      <orm:class name="EF_User" uniqueId="f497b681-2406-4640-b1c6-360b13bc9ff2">
+        <orm:table name="EF_Users" />
+        <orm:identity>
+          <orm:key-generator name="autoinc" />
+          <orm:single-field field-name="_usr_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_usr_id" property="Usr_id" behavior="readwrite" uniqueId="ca8d3ef5-717d-4643-9330-64182bff72ed" type="System.Int64">
+          <orm:column name="usr_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_usr_login" property="Usr_login" behavior="readwrite" uniqueId="b97a7cf6-bf33-4cf6-b103-0c66a73145ff" type="System.String">
+          <orm:column name="usr_login" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_pass" property="Pass" behavior="readwrite" uniqueId="ecd7d63f-3216-4188-bb42-668ac7d9bb98" type="System.String">
+          <orm:column name="pass" sql-type="nvarchar" nullable="true" length="16" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_fname" property="Fname" behavior="readwrite" uniqueId="6cbdea60-10c1-4212-ac80-bb6f5f006654" type="System.String">
+          <orm:column name="fname" sql-type="nvarchar" nullable="true" length="70" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_sname" property="Sname" behavior="readwrite" uniqueId="05b13218-0c3c-430d-a547-f643ba0e68e6" type="System.String">
+          <orm:column name="sname" sql-type="nvarchar" nullable="true" length="70" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_mname" property="Mname" behavior="readwrite" uniqueId="50b2ae9f-3716-47b4-bb9d-e843f0c2341e" type="System.String">
+          <orm:column name="mname" sql-type="nvarchar" nullable="true" length="70" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_usr_position" property="Usr_position" behavior="readwrite" uniqueId="2fdde0b0-164e-4cdc-acf2-afdef5808e45" type="System.String">
+          <orm:column name="usr_position" sql-type="nvarchar" nullable="true" length="250" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_s_tel" property="S_tel" behavior="readwrite" uniqueId="2b5e2891-1921-4fcc-8159-f25ee0730173" type="System.String">
+          <orm:column name="s_tel" sql-type="nvarchar" nullable="true" length="20" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_m_tel" property="M_tel" behavior="readwrite" uniqueId="a11b4be0-38fe-4fcc-8544-c44a56d08d23" type="System.String">
+          <orm:column name="m_tel" sql-type="nvarchar" nullable="true" length="20" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_post_address" property="Post_address" behavior="readwrite" uniqueId="2a9ce936-ef45-48e0-943e-65f200b77f81" type="System.String">
+          <orm:column name="post_address" sql-type="nvarchar" nullable="true" length="250" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_usr_priority" property="Usr_priority" behavior="readwrite" uniqueId="773c7dc4-2ba6-489d-ad65-cb16431a7d8f" type="System.Int32">
+          <orm:column name="usr_priority" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_usr_type" property="Usr_type" behavior="readwrite" uniqueId="2dd2fee9-30df-4ecd-9a64-8bb4a6957317" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="usr_type" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_datecrt" property="Datecrt" behavior="readwrite" uniqueId="777475f4-d44e-4873-ba63-24c6aa5e4cab" type="System.Nullable`1[[System.DateTimeOffset, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="datecrt" sql-type="datetimeoffset" nullable="true" length="7" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_email" property="Email" behavior="readwrite" uniqueId="6c3d4289-272b-47d9-84da-70be328eaf74" type="System.String">
+          <orm:column name="email" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_department_id" property="Department_id" behavior="readwrite" uniqueId="462d95d8-4efb-4c93-bbad-38a69e38c0ce" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="department_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_cert" property="Cert" behavior="readwrite" uniqueId="3f273460-0aa6-4147-8c50-1deda9a5d9f5" type="System.String">
+          <orm:column name="cert" sql-type="nvarchar" nullable="true" length="2000" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_lock_period" property="Lock_period" behavior="readwrite" uniqueId="a922d11c-2e7c-4ec2-ab05-8959739adf30" type="System.Nullable`1[[System.DateTimeOffset, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="lock_period" sql-type="datetimeoffset" nullable="true" length="7" scale="0" ado-type="DateTime" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_User_Activity" uniqueId="326d7674-fda6-490f-9da2-f8869782432d">
+        <orm:table name="EF_User_Activity" />
+        <orm:identity>
+          <orm:single-field field-name="_user_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_user_id" property="User_id" behavior="readwrite" uniqueId="fd0ba158-2cae-469a-aff0-2fa147eeb5c1" type="System.Int64">
+          <orm:column name="user_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_session_id" property="Session_id" behavior="readwrite" uniqueId="d64f1bb5-19c6-4b9d-842b-04bc78dffa78" type="System.String">
+          <orm:column name="session_id" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_time" property="Time" behavior="readwrite" uniqueId="fd5b04df-d1e4-42dd-8c18-0001a42a829f" type="System.DateTime">
+          <orm:column name="time" sql-type="smalldatetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_ip" property="Ip" behavior="readwrite" uniqueId="d818e2dd-6890-4031-8b6a-42a70c54ccde" type="System.String">
+          <orm:column name="ip" sql-type="nchar" nullable="false" length="10" scale="0" ado-type="UnicodeStringFixedLength" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_Tonality" uniqueId="afef3cff-71e9-4774-ba57-f0d42ef3b536">
+        <orm:table name="EF_Tonality" />
+        <orm:identity>
+          <orm:single-field field-name="_tonality_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_tonality_id" property="Tonality_id" behavior="readwrite" uniqueId="265edafc-8d57-405c-bbe1-fad74b88cc60" type="System.Int64">
+          <orm:column name="tonality_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="7eb1433a-76a6-455c-bd67-12f4ec1a90d3" type="System.String">
+          <orm:column name="name" sql-type="nvarchar(max)" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_eF_Publications" property="EF_Publications" behavior="readwrite" uniqueId="ef0c2bd5-fd08-495e-9d1b-89709e8dce78" type="EffixReportSystem.EF_Publication">
+          <orm:collection element-class="EffixReportSystem.EF_Publication" inverse-field="_eF_Tonality" order-by="" uniqueId="25ae6e19-bd04-40fd-816c-89e6a935d99c" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_SMI_Type" uniqueId="6b019dda-95ce-4c59-8f0c-8250d319858a">
+        <orm:table name="EF_SMI_Type" />
+        <orm:identity>
+          <orm:single-field field-name="_smi_type_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_smi_type_id" property="Smi_type_id" behavior="readwrite" uniqueId="580316bb-af46-454c-b204-731de733e3c9" type="System.Int64">
+          <orm:column name="smi_type_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_smi_type_name" property="Smi_type_name" behavior="readwrite" uniqueId="8541762d-5e81-423e-a414-f1823dd08fc3" type="System.String">
+          <orm:column name="smi_type_name" sql-type="nvarchar(max)" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_smi_type_descr" property="Smi_type_descr" behavior="readwrite" uniqueId="eb640f94-4967-4855-aa7b-de5d00a84d8c" type="System.String">
+          <orm:column name="smi_type_descr" sql-type="nvarchar(max)" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_eF_SMIs" property="EF_SMIs" behavior="readwrite" uniqueId="6097df37-edcf-44c4-95d1-77e6ffcea36a" type="EffixReportSystem.EF_SMI">
+          <orm:collection element-class="EffixReportSystem.EF_SMI" inverse-field="_eF_SMI_Type" order-by="" uniqueId="d776273d-f2c9-44fa-8791-f4c27d6644c9" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_SMI_priority" uniqueId="870839f9-797a-481a-b389-8b5b6d4039b8">
+        <orm:table name="EF_SMI_priority" />
+        <orm:identity>
+          <orm:single-field field-name="_priority_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_priority_id" property="Priority_id" behavior="readwrite" uniqueId="27f924f8-0a93-4506-b846-b54469a07799" type="System.Int64">
+          <orm:column name="priority_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_priority_name" property="Priority_name" behavior="readwrite" uniqueId="09475cc7-4a97-49cd-a0be-a65f6ef32d8e" type="System.String">
+          <orm:column name="priority_name" sql-type="nvarchar(max)" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_eF_Publications" property="EF_Publications" behavior="readwrite" uniqueId="cb960328-44c9-44fc-9900-17125c770a6e" type="EffixReportSystem.EF_Publication">
+          <orm:collection element-class="EffixReportSystem.EF_Publication" inverse-field="_eF_SMI_priority" order-by="" uniqueId="f766b4a9-3244-4bbb-9106-3760bb56356e" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_SMI" uniqueId="90d23fcc-0df7-4d71-9458-c29a011e44c1">
+        <orm:table name="EF_SMI" />
+        <orm:identity>
+          <orm:key-generator name="autoinc" />
+          <orm:single-field field-name="_smi_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_smi_id" property="Smi_id" behavior="readwrite" uniqueId="6e67813e-0a73-48d6-bd7e-137cffb0f536" type="System.Int64">
+          <orm:column name="smi_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_smi_name" property="Smi_name" behavior="readwrite" uniqueId="ddc5d79b-ea87-4309-8b9d-e9392ec13f71" type="System.String">
+          <orm:column name="smi_name" sql-type="nvarchar(max)" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_smi_type_id" property="Smi_type_id" behavior="readwrite" uniqueId="b37500ac-ea33-49a1-938b-39d39f8dae99" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="smi_type_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_smi_descr" property="Smi_descr" behavior="readwrite" uniqueId="9220374d-afa9-4fc2-8791-379d8e6e6499" type="System.String">
+          <orm:column name="smi_descr" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_smi_edition" property="Smi_edition" behavior="readwrite" uniqueId="9bcf233a-b038-4d3c-8f8d-6a1a4f0c1734" type="System.String">
+          <orm:column name="smi_edition" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_smi_edition_descr" property="Smi_edition_descr" behavior="readwrite" uniqueId="51b2f4f3-08c7-4733-bf37-02c68db857cc" type="System.String">
+          <orm:column name="smi_edition_descr" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_smi_url" property="Smi_url" behavior="readwrite" uniqueId="69fb7124-d2e8-4ea3-b490-58584d228d9b" type="System.String">
+          <orm:column name="smi_url" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_smi_edition_id" property="Smi_edition_id" behavior="readwrite" uniqueId="9bd85df8-7b6e-4229-8974-8446f72c4ae4" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="smi_edition_id" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_mass_media_id" property="Mass_media_id" behavior="readwrite" uniqueId="0b558bc9-a1c1-4319-88ab-04d94cc621ce" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="mass_media_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_eF_SMI_Type" property="EF_SMI_Type" behavior="readwrite" uniqueId="da51f486-9850-418b-87b3-fa89f0a6b292" type="EffixReportSystem.EF_SMI_Type">
+          <orm:reference uniqueId="d776273d-f2c9-44fa-8791-f4c27d6644c9">
+            <orm:sharedfield name="_smi_type_id" target-class="EffixReportSystem.EF_SMI_Type" target-field="_smi_type_id" />
+            <orm:constraint name="FK_EF_SMI_0" destination-table="EF_SMI_Type" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_eF_Edition" property="EF_Edition" behavior="readwrite" uniqueId="ee53da0c-1620-490b-b93a-4f7026630f07" type="EffixReportSystem.EF_Edition">
+          <orm:reference uniqueId="1543511a-fea0-45b6-bc7e-04e227ed75b2">
+            <orm:sharedfield name="_smi_edition_id" target-class="EffixReportSystem.EF_Edition" target-field="_iD" />
+            <orm:constraint name="FK_EF_SMI_1" destination-table="EF_Edition" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_eF_MassMedium" property="EF_MassMedium" behavior="readwrite" uniqueId="32e0cc1b-16ae-4892-b968-3b9dae74a5fd" type="EffixReportSystem.EF_MassMedia">
+          <orm:reference uniqueId="158d6ae4-2566-4b23-8322-f7971baee87e">
+            <orm:sharedfield name="_mass_media_id" target-class="EffixReportSystem.EF_MassMedia" target-field="_mass_media_type_id" />
+            <orm:constraint name="FK_EF_SMI_2" destination-table="EF_MassMedia" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_eF_Publications" property="EF_Publications" behavior="readwrite" uniqueId="8780d0b4-5f77-4c8a-8063-5c8c5aaf1143" type="EffixReportSystem.EF_Publication">
+          <orm:collection element-class="EffixReportSystem.EF_Publication" inverse-field="_eF_SMI" order-by="" uniqueId="417dfb9b-1bc3-4cf1-b11c-9f7022d1e587" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_Publication" uniqueId="1aef62db-2e87-4550-9911-9f36d4e68790">
+        <orm:table name="EF_Publication" />
+        <orm:identity>
+          <orm:key-generator name="autoinc" />
+          <orm:single-field field-name="_publication_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_publication_id" property="Publication_id" behavior="readwrite" uniqueId="5ac152c3-c4a3-4c1e-b26a-ca89bd88284d" type="System.Int64">
+          <orm:column name="publication_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_tonality_id" property="Tonality_id" behavior="readwrite" uniqueId="2201e03f-7d70-4845-96e2-c090bd00b6df" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="tonality_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_publication_name" property="Publication_name" behavior="readwrite" uniqueId="9ea7a07f-c4c2-4450-9ef4-85dacd7b2850" type="System.String">
+          <orm:column name="publication_name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_smi_id" property="Smi_id" behavior="readwrite" uniqueId="976a2828-0782-4fcd-9dc2-75f80ce5e617" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="smi_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_has_photo" property="Has_photo" behavior="readwrite" uniqueId="97dcf26b-6904-4015-ae9a-ef29c444f7fe" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="has_photo" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_exclusivity_id" property="Exclusivity_id" behavior="readwrite" uniqueId="cc11510d-393c-4f44-b219-3603645b41fd" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="exclusivity_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_project_id" property="Project_id" behavior="readwrite" uniqueId="ad46fbef-aa16-4cc9-8064-58566e351ac8" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="project_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_ceation_date" property="Ceation_date" behavior="readwrite" uniqueId="85b57a6a-5935-4a3d-a952-39edd96196c5" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="ceation_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_publication_date" property="Publication_date" behavior="readwrite" uniqueId="308dbc59-65d1-43ae-a620-367b1fdc88f2" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="publication_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_is_initiated" property="Is_initiated" behavior="readwrite" uniqueId="d91872fd-c41d-4ca4-90fb-c3c581ba0c7f" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="is_initiated" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_is_planed" property="Is_planed" behavior="readwrite" uniqueId="a26747f8-ba8a-43df-a6b2-dfcad9f6d165" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="is_planed" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_screenshot_path" property="Screenshot_path" behavior="readwrite" uniqueId="4d0a5771-cbef-473c-a949-e7f5a0781112" type="System.String">
+          <orm:column name="screenshot_path" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_priority_id" property="Priority_id" behavior="readwrite" uniqueId="594aece5-ddd5-4596-b940-ad78503af828" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="priority_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_url_path" property="Url_path" behavior="readwrite" uniqueId="8f864461-646d-4194-9e2f-d067ba66bd18" type="System.String">
+          <orm:column name="url_path" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_user_id" property="User_id" behavior="readwrite" uniqueId="8743bd66-5d80-4cef-82a4-27ffab52cf82" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="user_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_blob_path" property="Blob_path" behavior="readwrite" uniqueId="f096184b-b3bb-45c3-a116-cbe11f5879d3" type="System.String">
+          <orm:column name="blob_path" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_image_count" property="Image_count" behavior="readwrite" uniqueId="21b95705-eea5-4b8a-a15b-8fb6e553b392" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="image_count" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_p_year" property="P_year" behavior="readwrite" uniqueId="f50d887f-b386-41db-9169-4bebbfaa20be" type="System.String">
+          <orm:column name="p_year" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_p_month" property="P_month" behavior="readwrite" uniqueId="0143b6bc-49c6-48eb-a6a6-946d2b4e4a9a" type="System.String">
+          <orm:column name="p_month" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_p_day" property="P_day" behavior="readwrite" uniqueId="2e80d398-43e2-450a-b2da-0b84a8176d86" type="System.String">
+          <orm:column name="p_day" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_project_name" property="Project_name" behavior="readwrite" uniqueId="74971d26-98d1-4852-8a65-ec640dd9c1e7" type="System.String">
+          <orm:column name="project_name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_department_id" property="Department_id" behavior="readwrite" uniqueId="79f2c069-8e0a-481f-96fd-61ad066244dc" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="department_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_eF_SMI" property="EF_SMI" behavior="readwrite" uniqueId="9c3e980e-a7ad-47a9-a046-350e5363c928" type="EffixReportSystem.EF_SMI">
+          <orm:reference uniqueId="417dfb9b-1bc3-4cf1-b11c-9f7022d1e587">
+            <orm:sharedfield name="_smi_id" target-class="EffixReportSystem.EF_SMI" target-field="_smi_id" />
+            <orm:constraint name="FK_EF_Publication_0" destination-table="EF_SMI" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_eF_Exclusivity" property="EF_Exclusivity" behavior="readwrite" uniqueId="7a2d2f84-5897-48ab-a880-f2b876923de9" type="EffixReportSystem.EF_Exclusivity">
+          <orm:reference uniqueId="400aaae7-4c9f-409e-97a8-6d1c8a58a6c7">
+            <orm:sharedfield name="_exclusivity_id" target-class="EffixReportSystem.EF_Exclusivity" target-field="_exclusivity_id" />
+            <orm:constraint name="FK_EF_Publication_1" destination-table="EF_Exclusivity" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_eF_Initiated" property="EF_Initiated" behavior="readwrite" uniqueId="ca960d04-d0da-44b2-aef3-2ac5ff2166f2" type="EffixReportSystem.EF_Initiated">
+          <orm:reference uniqueId="d1e1bc16-cd4f-4618-9a30-558ba725b3ba">
+            <orm:sharedfield name="_is_initiated" target-class="EffixReportSystem.EF_Initiated" target-field="_iD" />
+            <orm:constraint name="FK_EF_Publication_2" destination-table="EF_Initiated" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_eF_Planed" property="EF_Planed" behavior="readwrite" uniqueId="40c1c72f-658d-4fb9-81d6-bf87237bce18" type="EffixReportSystem.EF_Planed">
+          <orm:reference uniqueId="2ba658b1-537f-47f9-b5d0-36d6279f7127">
+            <orm:sharedfield name="_is_planed" target-class="EffixReportSystem.EF_Planed" target-field="_iD" />
+            <orm:constraint name="FK_EF_Publication_3" destination-table="EF_Planed" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_eF_Photo" property="EF_Photo" behavior="readwrite" uniqueId="d011a31d-7be8-42fb-83d8-099d2692ed3d" type="EffixReportSystem.EF_Photo">
+          <orm:reference uniqueId="8096209c-66f6-4e84-bca2-b0fe7b1ac785">
+            <orm:sharedfield name="_has_photo" target-class="EffixReportSystem.EF_Photo" target-field="_iD" />
+            <orm:constraint name="FK_EF_Publication_4" destination-table="EF_Photo" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_eF_Project" property="EF_Project" behavior="readwrite" uniqueId="211d78ba-8beb-4313-8e58-4e4e5e02adc1" type="EffixReportSystem.EF_Project">
+          <orm:reference uniqueId="c56cf922-c688-4d24-9d9d-c721433b99a6">
+            <orm:sharedfield name="_project_id" target-class="EffixReportSystem.EF_Project" target-field="_project_id" />
+            <orm:constraint name="FK_EF_Publication_5" destination-table="EF_Project" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_eF_SMI_priority" property="EF_SMI_priority" behavior="readwrite" uniqueId="4763e706-dc5e-4037-9f66-e1b5a7928d0b" type="EffixReportSystem.EF_SMI_priority">
+          <orm:reference uniqueId="f766b4a9-3244-4bbb-9106-3760bb56356e">
+            <orm:sharedfield name="_priority_id" target-class="EffixReportSystem.EF_SMI_priority" target-field="_priority_id" />
+            <orm:constraint name="FK_EF_Publication_6" destination-table="EF_SMI_priority" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_eF_Tonality" property="EF_Tonality" behavior="readwrite" uniqueId="4bcb4ade-90c2-4f18-9683-a82693d7e326" type="EffixReportSystem.EF_Tonality">
+          <orm:reference uniqueId="25ae6e19-bd04-40fd-816c-89e6a935d99c">
+            <orm:sharedfield name="_tonality_id" target-class="EffixReportSystem.EF_Tonality" target-field="_tonality_id" />
+            <orm:constraint name="FK_EF_Publication_7" destination-table="EF_Tonality" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_eF_Department" property="EF_Department" behavior="readwrite" uniqueId="35b984a9-b007-4778-9ea0-8f95463afa15" type="EffixReportSystem.EF_Department">
+          <orm:reference uniqueId="37a39716-f762-492f-bfd0-af8eb9688fc6">
+            <orm:sharedfield name="_department_id" target-class="EffixReportSystem.EF_Department" target-field="_department_id" />
+            <orm:constraint name="FK_EF_Publication_8" destination-table="EF_Departments" />
+          </orm:reference>
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_Project" uniqueId="c47f04c0-c878-48b2-b964-f62f3a33757b">
+        <orm:table name="EF_Project" />
+        <orm:identity>
+          <orm:single-field field-name="_project_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_project_id" property="Project_id" behavior="readwrite" uniqueId="58886e2b-ab3b-414c-a0a6-09bdf1a94465" type="System.Int64">
+          <orm:column name="project_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_project_name" property="Project_name" behavior="readwrite" uniqueId="91fb6aea-6ced-4394-be00-08ee846bd1a4" type="System.String">
+          <orm:column name="project_name" sql-type="nvarchar(max)" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_user_id" property="User_id" behavior="readwrite" uniqueId="7cab7937-b1ad-4d47-b4f2-f417b0abf962" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="user_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_project_descr" property="Project_descr" behavior="readwrite" uniqueId="3b028bc8-d099-4c8f-a492-4950fb62be44" type="System.String">
+          <orm:column name="project_descr" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_eF_Publications" property="EF_Publications" behavior="readwrite" uniqueId="ba443798-02d5-43af-812a-e743feaccef3" type="EffixReportSystem.EF_Publication">
+          <orm:collection element-class="EffixReportSystem.EF_Publication" inverse-field="_eF_Project" order-by="" uniqueId="c56cf922-c688-4d24-9d9d-c721433b99a6" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_Planed" uniqueId="6c7cf12c-fb04-4f52-9a71-0584f635f55a">
+        <orm:table name="EF_Planed" />
+        <orm:identity>
+          <orm:single-field field-name="_iD" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_iD" property="ID" behavior="readwrite" uniqueId="fd4221d0-fca7-444c-98f1-31e3b0dc4676" type="System.Int32">
+          <orm:column name="ID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_isPlaned" property="IsPlaned" behavior="readwrite" uniqueId="34809864-e462-4d06-9567-6587c109900f" type="System.String">
+          <orm:column name="isPlaned" sql-type="nvarchar" nullable="true" length="15" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_eF_Publications" property="EF_Publications" behavior="readwrite" uniqueId="f062781d-57a3-4c8d-92bb-8f8c3ebfd003" type="EffixReportSystem.EF_Publication">
+          <orm:collection element-class="EffixReportSystem.EF_Publication" inverse-field="_eF_Planed" order-by="" uniqueId="2ba658b1-537f-47f9-b5d0-36d6279f7127" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_Photo" uniqueId="5e879f4a-74b4-4f26-96f2-dc70c1d6d232">
+        <orm:table name="EF_Photo" />
+        <orm:identity>
+          <orm:single-field field-name="_iD" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_iD" property="ID" behavior="readwrite" uniqueId="27bba861-ed14-463c-a604-a0dc8acf70ab" type="System.Int32">
+          <orm:column name="ID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_hasPhoto" property="HasPhoto" behavior="readwrite" uniqueId="2c56720c-a188-4367-a247-4d4c914aa971" type="System.String">
+          <orm:column name="hasPhoto" sql-type="nvarchar" nullable="true" length="15" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_eF_Publications" property="EF_Publications" behavior="readwrite" uniqueId="6c918395-0001-4f46-a5a4-6ad46c1d69c3" type="EffixReportSystem.EF_Publication">
+          <orm:collection element-class="EffixReportSystem.EF_Publication" inverse-field="_eF_Photo" order-by="" uniqueId="8096209c-66f6-4e84-bca2-b0fe7b1ac785" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_Person" uniqueId="28b8f1bc-2af1-4a33-9572-7ec68306ab62">
+        <orm:table name="EF_Persons" />
+        <orm:identity>
+          <orm:key-generator name="autoinc" />
+          <orm:single-field field-name="_person_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_person_id" property="Person_id" behavior="readwrite" uniqueId="cc50e815-6a6e-44c9-a2c2-13967fe5cb8b" type="System.Int64">
+          <orm:column name="person_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_lastname" property="Lastname" behavior="readwrite" uniqueId="47fac681-c6b9-4e55-85bc-209af68ab0a0" type="System.String">
+          <orm:column name="lastname" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_firstname" property="Firstname" behavior="readwrite" uniqueId="3b6741ca-0fc2-4c35-849b-53ec405afa32" type="System.String">
+          <orm:column name="firstname" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_midname" property="Midname" behavior="readwrite" uniqueId="cc14a108-78f1-481d-a984-403a92d235a1" type="System.String">
+          <orm:column name="midname" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_notes" property="Notes" behavior="readwrite" uniqueId="5fead713-2964-4930-aa2c-07f87fea041a" type="System.String">
+          <orm:column name="notes" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_employment_name" property="Employment_name" behavior="readwrite" uniqueId="958e57ba-f9cb-47b3-95d3-20fabcd42afb" type="System.String">
+          <orm:column name="employment_name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_smi_id" property="Smi_id" behavior="readwrite" uniqueId="5aaa4809-ee26-478a-9364-1fe7183d5959" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="smi_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_MassMedia" uniqueId="3f76ab0e-d5bc-47a3-bfeb-7b51525ecfff">
+        <orm:table name="EF_MassMedia" />
+        <orm:identity>
+          <orm:single-field field-name="_mass_media_type_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_mass_media_type_id" property="Mass_media_type_id" behavior="readwrite" uniqueId="30905241-a9a2-46f4-a473-60ab199f56a1" type="System.Int64">
+          <orm:column name="mass_media_type_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_parent_type_id" property="Parent_type_id" behavior="readwrite" uniqueId="e5c4b5a1-dfdf-44fb-9c0c-a75dffaeb61e" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="parent_type_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_mass_media_type_name" property="Mass_media_type_name" behavior="readwrite" uniqueId="b99b1710-0192-4cf1-8454-5e3dcdecf838" type="System.String">
+          <orm:column name="mass_media_type_name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_mass_media_type_descr" property="Mass_media_type_descr" behavior="readwrite" uniqueId="27f232d7-6583-4261-b2c0-40e3eb1da487" type="System.String">
+          <orm:column name="mass_media_type_descr" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_eF_SMIs" property="EF_SMIs" behavior="readwrite" uniqueId="1fa0c717-36aa-4eda-9e68-0b9d664695bf" type="EffixReportSystem.EF_SMI">
+          <orm:collection element-class="EffixReportSystem.EF_SMI" inverse-field="_eF_MassMedium" order-by="" uniqueId="158d6ae4-2566-4b23-8322-f7971baee87e" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_Initiated" uniqueId="652fc509-a7fb-445f-9d6b-78c6763b3c00">
+        <orm:table name="EF_Initiated" />
+        <orm:identity>
+          <orm:single-field field-name="_iD" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_iD" property="ID" behavior="readwrite" uniqueId="e93f1cc7-0db9-4155-87fc-2a8a75937547" type="System.Int32">
+          <orm:column name="ID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_isInitiated" property="IsInitiated" behavior="readwrite" uniqueId="0edb5171-f105-4402-b50d-5aa6d234afba" type="System.String">
+          <orm:column name="isInitiated" sql-type="nvarchar" nullable="true" length="15" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_eF_Publications" property="EF_Publications" behavior="readwrite" uniqueId="c1ea7dc1-80e8-4c36-83c6-86f394082a5d" type="EffixReportSystem.EF_Publication">
+          <orm:collection element-class="EffixReportSystem.EF_Publication" inverse-field="_eF_Initiated" order-by="" uniqueId="d1e1bc16-cd4f-4618-9a30-558ba725b3ba" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_Field_Name" uniqueId="fe249c4a-bbb8-4444-b750-ca06670f41b4">
+        <orm:table name="EF_Field_Names" />
+        <orm:identity>
+          <orm:key-generator name="autoinc" />
+          <orm:single-field field-name="_field_name_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_field_name_id" property="Field_name_id" behavior="readwrite" uniqueId="f07fa602-7e93-484a-a03f-7ac3123f0c87" type="System.Int64">
+          <orm:column name="field_name_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_field_type_id" property="Field_type_id" behavior="readwrite" uniqueId="e58f28c6-e699-4f69-9c1b-e5fce3f1a6b1" type="System.Int64">
+          <orm:column name="field_type_id" sql-type="bigint" nullable="false" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="5edf97f5-886b-40db-8a30-5382e8d53bf4" type="System.String">
+          <orm:column name="name" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_Exclusivity" uniqueId="750c41f7-06c0-4ce6-aacd-f82376a89ba6">
+        <orm:table name="EF_Exclusivity" />
+        <orm:identity>
+          <orm:single-field field-name="_exclusivity_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_exclusivity_id" property="Exclusivity_id" behavior="readwrite" uniqueId="cb1fdb03-6bb5-47d0-bd52-9116fdd6e462" type="System.Int64">
+          <orm:column name="exclusivity_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="508961ec-12e3-475e-85ad-c526997e11fa" type="System.String">
+          <orm:column name="name" sql-type="nvarchar(max)" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_eF_Publications" property="EF_Publications" behavior="readwrite" uniqueId="23c83548-4308-4caf-91e7-419984aec7db" type="EffixReportSystem.EF_Publication">
+          <orm:collection element-class="EffixReportSystem.EF_Publication" inverse-field="_eF_Exclusivity" order-by="" uniqueId="400aaae7-4c9f-409e-97a8-6d1c8a58a6c7" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_Edition" uniqueId="019093ac-7a8a-412d-b132-7d8f20af291e">
+        <orm:table name="EF_Edition" />
+        <orm:identity>
+          <orm:single-field field-name="_iD" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_iD" property="ID" behavior="readwrite" uniqueId="22aa23a8-1c6a-43aa-a32c-ece4f7900acf" type="System.Int32">
+          <orm:column name="ID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_edition_name" property="Edition_name" behavior="readwrite" uniqueId="6ba5625d-f9b5-4dcd-accc-fbb801f4cb06" type="System.String">
+          <orm:column name="edition_name" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_edition_value" property="Edition_value" behavior="readwrite" uniqueId="2b536b52-6399-4a06-ab36-12b51943b91c" type="System.String">
+          <orm:column name="edition_value" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_eF_SMIs" property="EF_SMIs" behavior="readwrite" uniqueId="ab54e966-51e1-4570-ba13-a89343d13493" type="EffixReportSystem.EF_SMI">
+          <orm:collection element-class="EffixReportSystem.EF_SMI" inverse-field="_eF_Edition" order-by="" uniqueId="1543511a-fea0-45b6-bc7e-04e227ed75b2" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_Department" uniqueId="d9e8fa56-ed3a-492e-b25f-460416b0ea0f">
+        <orm:table name="EF_Departments" />
+        <orm:identity>
+          <orm:single-field field-name="_department_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_department_id" property="Department_id" behavior="readwrite" uniqueId="74af8b8e-0f9a-431c-b1e3-81853df4dbbe" type="System.Int64">
+          <orm:column name="department_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_department_parent_id" property="Department_parent_id" behavior="readwrite" uniqueId="19520a4b-c269-4a6d-b3cb-5099ec602af6" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="department_parent_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_department_name" property="Department_name" behavior="readwrite" uniqueId="bf397631-08f8-47e4-8a23-08a5d66eb007" type="System.String">
+          <orm:column name="department_name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_department_type" property="Department_type" behavior="readwrite" uniqueId="cfe91482-4367-4d9f-b5aa-2e1c0eed366d" type="System.String">
+          <orm:column name="department_type" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_department_description" property="Department_description" behavior="readwrite" uniqueId="704ce781-246d-4aee-9dd2-5057ecaca5d3" type="System.String">
+          <orm:column name="department_description" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_department_project_id" property="Department_project_id" behavior="readwrite" uniqueId="68c49617-b5f3-4fd1-9692-2e57e1eb76f8" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="department_project_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_eF_Publications" property="EF_Publications" behavior="readwrite" uniqueId="bf44d23d-cc71-498c-93bd-8330e10be934" type="EffixReportSystem.EF_Publication">
+          <orm:collection element-class="EffixReportSystem.EF_Publication" inverse-field="_eF_Department" order-by="" uniqueId="37a39716-f762-492f-bfd0-af8eb9688fc6" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_Contact_Field_Type" uniqueId="4d3f3b66-917d-4878-aedd-85fcba0383ca">
+        <orm:table name="EF_Contact_Field_Types" />
+        <orm:identity>
+          <orm:key-generator name="autoinc" />
+          <orm:single-field field-name="_field_type_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_field_type_id" property="Field_type_id" behavior="readwrite" uniqueId="8c1556b9-90c0-4972-89b6-6c3eff2a63f3" type="System.Int64">
+          <orm:column name="field_type_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_field_type_name" property="Field_type_name" behavior="readwrite" uniqueId="10b59f61-3d6d-472a-b0a0-3eb821794834" type="System.String">
+          <orm:column name="field_type_name" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_value_type" property="Value_type" behavior="readwrite" uniqueId="29549ae5-8552-417a-8145-e56da0750d65" type="System.String">
+          <orm:column name="value_type" sql-type="nvarchar" nullable="true" length="15" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="EF_Contact_Attribute" uniqueId="2a278715-504e-4e3b-9126-fa6014c0399b">
+        <orm:table name="EF_Contact_Attributes" />
+        <orm:identity>
+          <orm:single-field field-name="_person_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_person_id" property="Person_id" behavior="readwrite" uniqueId="c532eda8-0ee9-45d4-9c6d-acc3453cc1f4" type="System.Int64">
+          <orm:column name="person_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_field_name_id" property="Field_name_id" behavior="readwrite" uniqueId="f67e0d39-730e-4d52-a9fb-17482ab2f7d5" type="System.Int64">
+          <orm:column name="field_name_id" sql-type="bigint" nullable="false" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_value" property="Value" behavior="readwrite" uniqueId="1272e89b-11fb-4628-b85e-48b4ded7078f" type="System.String">
+          <orm:column name="value" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_list_index" property="List_index" behavior="readwrite" uniqueId="afc83286-73aa-42c4-9d7b-8fe043d23bd2" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="list_index" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+      </orm:class>
+    </orm:namespace>
+    <orm:schema schema="">
+      <orm:table name="EF_Users">
+        <orm:column name="usr_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int64" />
+        <orm:column name="usr_login" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="pass" sql-type="nvarchar" nullable="true" length="16" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="fname" sql-type="nvarchar" nullable="true" length="70" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="sname" sql-type="nvarchar" nullable="true" length="70" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="mname" sql-type="nvarchar" nullable="true" length="70" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="usr_position" sql-type="nvarchar" nullable="true" length="250" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="s_tel" sql-type="nvarchar" nullable="true" length="20" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="m_tel" sql-type="nvarchar" nullable="true" length="20" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="post_address" sql-type="nvarchar" nullable="true" length="250" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="usr_priority" sql-type="int" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="usr_type" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="datecrt" sql-type="datetimeoffset" nullable="true" length="7" scale="0" ado-type="DateTime" />
+        <orm:column name="email" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="department_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        <orm:column name="cert" sql-type="nvarchar" nullable="true" length="2000" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="lock_period" sql-type="datetimeoffset" nullable="true" length="7" scale="0" ado-type="DateTime" />
+      </orm:table>
+      <orm:table name="EF_User_Activity">
+        <orm:column name="user_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        <orm:column name="session_id" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="time" sql-type="smalldatetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="ip" sql-type="nchar" nullable="false" length="10" scale="0" ado-type="UnicodeStringFixedLength" />
+      </orm:table>
+      <orm:table name="EF_Tonality">
+        <orm:column name="tonality_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        <orm:column name="name" sql-type="nvarchar(max)" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+      </orm:table>
+      <orm:table name="EF_SMI_Type">
+        <orm:column name="smi_type_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        <orm:column name="smi_type_name" sql-type="nvarchar(max)" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="smi_type_descr" sql-type="nvarchar(max)" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+      </orm:table>
+      <orm:table name="EF_SMI_priority">
+        <orm:column name="priority_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        <orm:column name="priority_name" sql-type="nvarchar(max)" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+      </orm:table>
+      <orm:table name="EF_SMI">
+        <orm:column name="smi_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int64" />
+        <orm:column name="smi_name" sql-type="nvarchar(max)" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="smi_type_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        <orm:column name="smi_descr" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="smi_edition" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="smi_edition_descr" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="smi_url" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="smi_edition_id" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="mass_media_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        <orm:constraint name="FK_EF_SMI_0" destination-table="EF_SMI_Type">
+          <orm:column name="smi_type_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:constraint>
+        <orm:constraint name="FK_EF_SMI_1" destination-table="EF_Edition">
+          <orm:column name="smi_edition_id" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_EF_SMI_2" destination-table="EF_MassMedia">
+          <orm:column name="mass_media_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="EF_Publication">
+        <orm:column name="publication_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int64" />
+        <orm:column name="tonality_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        <orm:column name="publication_name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="smi_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        <orm:column name="has_photo" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="exclusivity_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        <orm:column name="project_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        <orm:column name="ceation_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="publication_date" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="is_initiated" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="is_planed" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="screenshot_path" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="priority_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        <orm:column name="url_path" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="user_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        <orm:column name="blob_path" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="image_count" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="p_year" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="p_month" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="p_day" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="project_name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="department_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        <orm:constraint name="FK_EF_Publication_0" destination-table="EF_SMI">
+          <orm:column name="smi_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:constraint>
+        <orm:constraint name="FK_EF_Publication_1" destination-table="EF_Exclusivity">
+          <orm:column name="exclusivity_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:constraint>
+        <orm:constraint name="FK_EF_Publication_2" destination-table="EF_Initiated">
+          <orm:column name="is_initiated" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_EF_Publication_3" destination-table="EF_Planed">
+          <orm:column name="is_planed" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_EF_Publication_4" destination-table="EF_Photo">
+          <orm:column name="has_photo" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_EF_Publication_5" destination-table="EF_Project">
+          <orm:column name="project_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:constraint>
+        <orm:constraint name="FK_EF_Publication_6" destination-table="EF_SMI_priority">
+          <orm:column name="priority_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:constraint>
+        <orm:constraint name="FK_EF_Publication_7" destination-table="EF_Tonality">
+          <orm:column name="tonality_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:constraint>
+        <orm:constraint name="FK_EF_Publication_8" destination-table="EF_Departments">
+          <orm:column name="department_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="EF_Project">
+        <orm:column name="project_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        <orm:column name="project_name" sql-type="nvarchar(max)" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="user_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        <orm:column name="project_descr" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+      </orm:table>
+      <orm:table name="EF_Planed">
+        <orm:column name="ID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="isPlaned" sql-type="nvarchar" nullable="true" length="15" scale="0" ado-type="UnicodeStringVariableLength" />
+      </orm:table>
+      <orm:table name="EF_Photo">
+        <orm:column name="ID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="hasPhoto" sql-type="nvarchar" nullable="true" length="15" scale="0" ado-type="UnicodeStringVariableLength" />
+      </orm:table>
+      <orm:table name="EF_Persons">
+        <orm:column name="person_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int64" />
+        <orm:column name="lastname" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="firstname" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="midname" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="notes" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="employment_name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="smi_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+      </orm:table>
+      <orm:table name="EF_MassMedia">
+        <orm:column name="mass_media_type_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        <orm:column name="parent_type_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        <orm:column name="mass_media_type_name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="mass_media_type_descr" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+      </orm:table>
+      <orm:table name="EF_Initiated">
+        <orm:column name="ID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="isInitiated" sql-type="nvarchar" nullable="true" length="15" scale="0" ado-type="UnicodeStringVariableLength" />
+      </orm:table>
+      <orm:table name="EF_Field_Names">
+        <orm:column name="field_name_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int64" />
+        <orm:column name="field_type_id" sql-type="bigint" nullable="false" length="0" scale="0" ado-type="Int64" />
+        <orm:column name="name" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+      </orm:table>
+      <orm:table name="EF_Exclusivity">
+        <orm:column name="exclusivity_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        <orm:column name="name" sql-type="nvarchar(max)" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+      </orm:table>
+      <orm:table name="EF_Edition">
+        <orm:column name="ID" sql-type="int" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="edition_name" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="edition_value" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+      </orm:table>
+      <orm:table name="EF_Departments">
+        <orm:column name="department_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        <orm:column name="department_parent_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        <orm:column name="department_name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="department_type" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="department_description" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="department_project_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+      </orm:table>
+      <orm:table name="EF_Contact_Field_Types">
+        <orm:column name="field_type_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int64" />
+        <orm:column name="field_type_name" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="value_type" sql-type="nvarchar" nullable="true" length="15" scale="0" ado-type="UnicodeStringVariableLength" />
+      </orm:table>
+      <orm:table name="EF_Contact_Attributes">
+        <orm:column name="person_id" sql-type="bigint" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int64" />
+        <orm:column name="field_name_id" sql-type="bigint" nullable="false" length="0" scale="0" ado-type="Int64" />
+        <orm:column name="value" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="list_index" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
+      </orm:table>
+    </orm:schema>
+    <orm:relational-naming-settings>
+      <orm:remove-camel-case>False</orm:remove-camel-case>
+      <orm:source-strategy>Property</orm:source-strategy>
+    </orm:relational-naming-settings>
+  </orm:orm>
+  <ModelSettings xmlns="">
+    <AppConfigConnectionPropertyName>Connection</AppConfigConnectionPropertyName>
+    <AppConfigConnectionString>server=tcp:m6ufktgcjh.database.windows.net,1433;database=Effix;user id=EF_Admin@m6ufktgcjh;password=Effix1984</AppConfigConnectionString>
+    <NamingSettings>
+      <ClassRules>
+        <CaseMode>PascalCase</CaseMode>
+        <PluralizationMode>Singularize</PluralizationMode>
+      </ClassRules>
+      <FieldRules>
+        <AddPrefix>_</AddPrefix>
+        <CaseMode>CamelCase</CaseMode>
+      </FieldRules>
+      <PropertyRules>
+        <CaseMode>PascalCase</CaseMode>
+      </PropertyRules>
+    </NamingSettings>
+    <CodeGenerationSettings>
+      <MappingDefinitionType>Xml</MappingDefinitionType>
+    </CodeGenerationSettings>
+    <SchemaUpdateSettings />
+    <BackendConfigurationSettings>
+      <BackendConfiguration>
+        <Backend>Azure</Backend>
+        <ProviderName>System.Data.SqlClient</ProviderName>
+      </BackendConfiguration>
+    </BackendConfigurationSettings>
+  </ModelSettings>
+  <Types>
+    <DomainClass Id="f497b681-2406-4640-b1c6-360b13bc9ff2" name="EF_User" namespace="EffixReportSystem" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="ca8d3ef5-717d-4643-9330-64182bff72ed" name="Usr_id" type="Int64" label="Usr_id : Int64" kind="Persistent" identity="true" fieldName="_usr_id" />
+      <Property Id="3f273460-0aa6-4147-8c50-1deda9a5d9f5" name="Cert" label="Cert : String" kind="Persistent" fieldName="_cert" />
+      <Property Id="777475f4-d44e-4873-ba63-24c6aa5e4cab" name="Datecrt" type="DateTimeOffset" label="Datecrt : DateTimeOffset" nullable="true" kind="Persistent" fieldName="_datecrt" />
+      <Property Id="462d95d8-4efb-4c93-bbad-38a69e38c0ce" name="Department_id" type="Int64" label="Department_id : Int64" nullable="true" kind="Persistent" fieldName="_department_id" />
+      <Property Id="6c3d4289-272b-47d9-84da-70be328eaf74" name="Email" label="Email : String" kind="Persistent" fieldName="_email" />
+      <Property Id="6cbdea60-10c1-4212-ac80-bb6f5f006654" name="Fname" label="Fname : String" kind="Persistent" fieldName="_fname" />
+      <Property Id="a922d11c-2e7c-4ec2-ab05-8959739adf30" name="Lock_period" type="DateTimeOffset" label="Lock_period : DateTimeOffset" nullable="true" kind="Persistent" fieldName="_lock_period" />
+      <Property Id="a11b4be0-38fe-4fcc-8544-c44a56d08d23" name="M_tel" label="M_tel : String" kind="Persistent" fieldName="_m_tel" />
+      <Property Id="50b2ae9f-3716-47b4-bb9d-e843f0c2341e" name="Mname" label="Mname : String" kind="Persistent" fieldName="_mname" />
+      <Property Id="ecd7d63f-3216-4188-bb42-668ac7d9bb98" name="Pass" label="Pass : String" kind="Persistent" fieldName="_pass" />
+      <Property Id="2a9ce936-ef45-48e0-943e-65f200b77f81" name="Post_address" label="Post_address : String" kind="Persistent" fieldName="_post_address" />
+      <Property Id="2b5e2891-1921-4fcc-8159-f25ee0730173" name="S_tel" label="S_tel : String" kind="Persistent" fieldName="_s_tel" />
+      <Property Id="05b13218-0c3c-430d-a547-f643ba0e68e6" name="Sname" label="Sname : String" kind="Persistent" fieldName="_sname" />
+      <Property Id="b97a7cf6-bf33-4cf6-b103-0c66a73145ff" name="Usr_login" label="Usr_login : String" kind="Persistent" fieldName="_usr_login" />
+      <Property Id="2fdde0b0-164e-4cdc-acf2-afdef5808e45" name="Usr_position" label="Usr_position : String" kind="Persistent" fieldName="_usr_position" />
+      <Property Id="773c7dc4-2ba6-489d-ad65-cb16431a7d8f" name="Usr_priority" type="Int32" label="Usr_priority : Int32" kind="Persistent" fieldName="_usr_priority" />
+      <Property Id="2dd2fee9-30df-4ecd-9a64-8bb4a6957317" name="Usr_type" type="Int32" label="Usr_type : Int32" nullable="true" kind="Persistent" fieldName="_usr_type" />
+    </DomainClass>
+    <DomainClass Id="326d7674-fda6-490f-9da2-f8869782432d" name="EF_User_Activity" namespace="EffixReportSystem" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="fd0ba158-2cae-469a-aff0-2fa147eeb5c1" name="User_id" type="Int64" label="User_id : Int64" kind="Persistent" identity="true" fieldName="_user_id" />
+      <Property Id="d818e2dd-6890-4031-8b6a-42a70c54ccde" name="Ip" label="Ip : String" kind="Persistent" fieldName="_ip" />
+      <Property Id="d64f1bb5-19c6-4b9d-842b-04bc78dffa78" name="Session_id" label="Session_id : String" kind="Persistent" fieldName="_session_id" />
+      <Property Id="fd5b04df-d1e4-42dd-8c18-0001a42a829f" name="Time" type="DateTime" label="Time : DateTime" kind="Persistent" fieldName="_time" />
+    </DomainClass>
+    <DomainClass Id="afef3cff-71e9-4774-ba57-f0d42ef3b536" name="EF_Tonality" namespace="EffixReportSystem" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="265edafc-8d57-405c-bbe1-fad74b88cc60" name="Tonality_id" type="Int64" label="Tonality_id : Int64" kind="Persistent" identity="true" fieldName="_tonality_id" />
+      <Property Id="7eb1433a-76a6-455c-bd67-12f4ec1a90d3" name="Name" label="Name : String" kind="Persistent" fieldName="_name" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="b3ef05dc-bdb8-4a97-a768-3c53f268e6d7">
+          <NavigationalProperty Id="ef0c2bd5-fd08-495e-9d1b-89709e8dce78" name="EF_Publications" type="IList&lt;EF_Publication&gt;" label="EF_Publications : IList&lt;EF_Publication&gt;" nullable="true" kind="Persistent" fieldName="_eF_Publications" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="6b019dda-95ce-4c59-8f0c-8250d319858a" name="EF_SMI_Type" namespace="EffixReportSystem" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="580316bb-af46-454c-b204-731de733e3c9" name="Smi_type_id" type="Int64" label="Smi_type_id : Int64" kind="Persistent" identity="true" fieldName="_smi_type_id" />
+      <Property Id="eb640f94-4967-4855-aa7b-de5d00a84d8c" name="Smi_type_descr" label="Smi_type_descr : String" kind="Persistent" fieldName="_smi_type_descr" />
+      <Property Id="8541762d-5e81-423e-a414-f1823dd08fc3" name="Smi_type_name" label="Smi_type_name : String" kind="Persistent" fieldName="_smi_type_name" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="794b5ed4-3287-4d97-a55f-252202caaf30">
+          <NavigationalProperty Id="6097df37-edcf-44c4-95d1-77e6ffcea36a" name="EF_SMIs" type="IList&lt;EF_SMI&gt;" label="EF_SMIs : IList&lt;EF_SMI&gt;" nullable="true" kind="Persistent" fieldName="_eF_SMIs" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="870839f9-797a-481a-b389-8b5b6d4039b8" name="EF_SMI_priority" namespace="EffixReportSystem" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="27f924f8-0a93-4506-b846-b54469a07799" name="Priority_id" type="Int64" label="Priority_id : Int64" kind="Persistent" identity="true" fieldName="_priority_id" />
+      <Property Id="09475cc7-4a97-49cd-a0be-a65f6ef32d8e" name="Priority_name" label="Priority_name : String" kind="Persistent" fieldName="_priority_name" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="a5d17112-4f9e-4cce-85d6-93c24f3c9996">
+          <NavigationalProperty Id="cb960328-44c9-44fc-9900-17125c770a6e" name="EF_Publications" type="IList&lt;EF_Publication&gt;" label="EF_Publications : IList&lt;EF_Publication&gt;" nullable="true" kind="Persistent" fieldName="_eF_Publications" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="90d23fcc-0df7-4d71-9458-c29a011e44c1" name="EF_SMI" namespace="EffixReportSystem" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="6e67813e-0a73-48d6-bd7e-137cffb0f536" name="Smi_id" type="Int64" label="Smi_id : Int64" kind="Persistent" identity="true" fieldName="_smi_id" />
+      <Property Id="0b558bc9-a1c1-4319-88ab-04d94cc621ce" name="Mass_media_id" type="Int64" label="Mass_media_id : Int64" nullable="true" kind="Persistent" fieldName="_mass_media_id" />
+      <Property Id="9220374d-afa9-4fc2-8791-379d8e6e6499" name="Smi_descr" label="Smi_descr : String" kind="Persistent" fieldName="_smi_descr" />
+      <Property Id="9bcf233a-b038-4d3c-8f8d-6a1a4f0c1734" name="Smi_edition" label="Smi_edition : String" kind="Persistent" fieldName="_smi_edition" />
+      <Property Id="51b2f4f3-08c7-4733-bf37-02c68db857cc" name="Smi_edition_descr" label="Smi_edition_descr : String" kind="Persistent" fieldName="_smi_edition_descr" />
+      <Property Id="9bd85df8-7b6e-4229-8974-8446f72c4ae4" name="Smi_edition_id" type="Int32" label="Smi_edition_id : Int32" nullable="true" kind="Persistent" fieldName="_smi_edition_id" />
+      <Property Id="ddc5d79b-ea87-4309-8b9d-e9392ec13f71" name="Smi_name" label="Smi_name : String" kind="Persistent" fieldName="_smi_name" />
+      <Property Id="b37500ac-ea33-49a1-938b-39d39f8dae99" name="Smi_type_id" type="Int64" label="Smi_type_id : Int64" nullable="true" kind="Persistent" fieldName="_smi_type_id" />
+      <Property Id="69fb7124-d2e8-4ea3-b490-58584d228d9b" name="Smi_url" label="Smi_url : String" kind="Persistent" fieldName="_smi_url" />
+      <AssociationTargets>
+        <Association Id="d776273d-f2c9-44fa-8791-f4c27d6644c9" SourceMultiplicity="ZeroOne" name="EF_SMIHasEF_SMI_Type">
+          <DomainClassMoniker name="/EntitiesModel/EF_SMI_Type" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="e89413a1-bc69-4a34-9eee-19f1f300a91b">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_SMI_Type/EF_SMIs" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="90f06381-aa3d-4d33-8818-7d81ed930e74">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_SMI/EF_SMI_Type" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="1543511a-fea0-45b6-bc7e-04e227ed75b2" SourceMultiplicity="ZeroOne" name="EF_SMIHasEF_Edition">
+          <DomainClassMoniker name="/EntitiesModel/EF_Edition" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="358a18f8-ad63-486a-ba9e-ee1654098961">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Edition/EF_SMIs" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="e1416bf1-3491-4d7f-9d89-89079d71ed4d">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_SMI/EF_Edition" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="158d6ae4-2566-4b23-8322-f7971baee87e" SourceMultiplicity="ZeroOne" name="EF_SMIHasEF_MassMedium">
+          <DomainClassMoniker name="/EntitiesModel/EF_MassMedia" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="259d45f5-dded-4296-a0e4-43767eb9b064">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_MassMedia/EF_SMIs" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="ee4149c3-cc6d-42a6-a866-aa3270f0a074">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_SMI/EF_MassMedium" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="e7f96171-2851-4a4d-a689-a67b572cb496">
+          <NavigationalProperty Id="da51f486-9850-418b-87b3-fa89f0a6b292" name="EF_SMI_Type" type="EF_SMI_Type" label="EF_SMI_Type : EF_SMI_Type" nullable="true" kind="Persistent" fieldName="_eF_SMI_Type" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="205eb7c8-988a-4880-aa63-d1b79a01d7c0">
+          <NavigationalProperty Id="ee53da0c-1620-490b-b93a-4f7026630f07" name="EF_Edition" type="EF_Edition" label="EF_Edition : EF_Edition" nullable="true" kind="Persistent" fieldName="_eF_Edition" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="6d4f8040-2bee-428d-a524-98a13adbeac0">
+          <NavigationalProperty Id="32e0cc1b-16ae-4892-b968-3b9dae74a5fd" name="EF_MassMedium" type="EF_MassMedium" label="EF_MassMedium : EF_MassMedium" nullable="true" kind="Persistent" fieldName="_eF_MassMedium" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="d1ee60e9-1e81-4dd1-bc76-a33c392c0f0a">
+          <NavigationalProperty Id="8780d0b4-5f77-4c8a-8063-5c8c5aaf1143" name="EF_Publications" type="IList&lt;EF_Publication&gt;" label="EF_Publications : IList&lt;EF_Publication&gt;" nullable="true" kind="Persistent" fieldName="_eF_Publications" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="1aef62db-2e87-4550-9911-9f36d4e68790" name="EF_Publication" namespace="EffixReportSystem" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="5ac152c3-c4a3-4c1e-b26a-ca89bd88284d" name="Publication_id" type="Int64" label="Publication_id : Int64" kind="Persistent" identity="true" fieldName="_publication_id" />
+      <Property Id="f096184b-b3bb-45c3-a116-cbe11f5879d3" name="Blob_path" label="Blob_path : String" kind="Persistent" fieldName="_blob_path" />
+      <Property Id="85b57a6a-5935-4a3d-a952-39edd96196c5" name="Ceation_date" type="DateTime" label="Ceation_date : DateTime" nullable="true" kind="Persistent" fieldName="_ceation_date" />
+      <Property Id="79f2c069-8e0a-481f-96fd-61ad066244dc" name="Department_id" type="Int64" label="Department_id : Int64" nullable="true" kind="Persistent" fieldName="_department_id" />
+      <Property Id="cc11510d-393c-4f44-b219-3603645b41fd" name="Exclusivity_id" type="Int64" label="Exclusivity_id : Int64" nullable="true" kind="Persistent" fieldName="_exclusivity_id" />
+      <Property Id="97dcf26b-6904-4015-ae9a-ef29c444f7fe" name="Has_photo" type="Int32" label="Has_photo : Int32" nullable="true" kind="Persistent" fieldName="_has_photo" />
+      <Property Id="21b95705-eea5-4b8a-a15b-8fb6e553b392" name="Image_count" type="Int32" label="Image_count : Int32" nullable="true" kind="Persistent" fieldName="_image_count" />
+      <Property Id="d91872fd-c41d-4ca4-90fb-c3c581ba0c7f" name="Is_initiated" type="Int32" label="Is_initiated : Int32" nullable="true" kind="Persistent" fieldName="_is_initiated" />
+      <Property Id="a26747f8-ba8a-43df-a6b2-dfcad9f6d165" name="Is_planed" type="Int32" label="Is_planed : Int32" nullable="true" kind="Persistent" fieldName="_is_planed" />
+      <Property Id="2e80d398-43e2-450a-b2da-0b84a8176d86" name="P_day" label="P_day : String" kind="Persistent" fieldName="_p_day" />
+      <Property Id="0143b6bc-49c6-48eb-a6a6-946d2b4e4a9a" name="P_month" label="P_month : String" kind="Persistent" fieldName="_p_month" />
+      <Property Id="f50d887f-b386-41db-9169-4bebbfaa20be" name="P_year" label="P_year : String" kind="Persistent" fieldName="_p_year" />
+      <Property Id="594aece5-ddd5-4596-b940-ad78503af828" name="Priority_id" type="Int64" label="Priority_id : Int64" nullable="true" kind="Persistent" fieldName="_priority_id" />
+      <Property Id="ad46fbef-aa16-4cc9-8064-58566e351ac8" name="Project_id" type="Int64" label="Project_id : Int64" nullable="true" kind="Persistent" fieldName="_project_id" />
+      <Property Id="74971d26-98d1-4852-8a65-ec640dd9c1e7" name="Project_name" label="Project_name : String" kind="Persistent" fieldName="_project_name" />
+      <Property Id="308dbc59-65d1-43ae-a620-367b1fdc88f2" name="Publication_date" type="DateTime" label="Publication_date : DateTime" nullable="true" kind="Persistent" fieldName="_publication_date" />
+      <Property Id="9ea7a07f-c4c2-4450-9ef4-85dacd7b2850" name="Publication_name" label="Publication_name : String" kind="Persistent" fieldName="_publication_name" />
+      <Property Id="4d0a5771-cbef-473c-a949-e7f5a0781112" name="Screenshot_path" label="Screenshot_path : String" kind="Persistent" fieldName="_screenshot_path" />
+      <Property Id="976a2828-0782-4fcd-9dc2-75f80ce5e617" name="Smi_id" type="Int64" label="Smi_id : Int64" nullable="true" kind="Persistent" fieldName="_smi_id" />
+      <Property Id="2201e03f-7d70-4845-96e2-c090bd00b6df" name="Tonality_id" type="Int64" label="Tonality_id : Int64" nullable="true" kind="Persistent" fieldName="_tonality_id" />
+      <Property Id="8f864461-646d-4194-9e2f-d067ba66bd18" name="Url_path" label="Url_path : String" kind="Persistent" fieldName="_url_path" />
+      <Property Id="8743bd66-5d80-4cef-82a4-27ffab52cf82" name="User_id" type="Int64" label="User_id : Int64" nullable="true" kind="Persistent" fieldName="_user_id" />
+      <AssociationTargets>
+        <Association Id="417dfb9b-1bc3-4cf1-b11c-9f7022d1e587" SourceMultiplicity="ZeroOne" name="EF_PublicationHasEF_SMI">
+          <DomainClassMoniker name="/EntitiesModel/EF_SMI" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="27393d74-aca7-4b01-8208-4ddeca757d61">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_SMI/EF_Publications" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="286d9925-1977-41b4-986f-59fe025effa0">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Publication/EF_SMI" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="400aaae7-4c9f-409e-97a8-6d1c8a58a6c7" SourceMultiplicity="ZeroOne" name="EF_PublicationHasEF_Exclusivity">
+          <DomainClassMoniker name="/EntitiesModel/EF_Exclusivity" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="f50e45a7-ec5c-4078-b29c-44f87cba2f22">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Exclusivity/EF_Publications" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="9eb006fd-857a-4468-9c9e-fcad037d6dd8">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Publication/EF_Exclusivity" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="d1e1bc16-cd4f-4618-9a30-558ba725b3ba" SourceMultiplicity="ZeroOne" name="EF_PublicationHasEF_Initiated">
+          <DomainClassMoniker name="/EntitiesModel/EF_Initiated" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="0e5c9764-0424-4c83-921c-917a3b511a58">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Initiated/EF_Publications" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="69adc284-1ecd-4147-ae88-545a8dac3c11">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Publication/EF_Initiated" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="2ba658b1-537f-47f9-b5d0-36d6279f7127" SourceMultiplicity="ZeroOne" name="EF_PublicationHasEF_Planed">
+          <DomainClassMoniker name="/EntitiesModel/EF_Planed" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="f50333d0-062c-4b9f-abd5-7e1749919517">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Planed/EF_Publications" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="ccbba27f-8897-41e9-8ba9-2c1e70158193">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Publication/EF_Planed" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="8096209c-66f6-4e84-bca2-b0fe7b1ac785" SourceMultiplicity="ZeroOne" name="EF_PublicationHasEF_Photo">
+          <DomainClassMoniker name="/EntitiesModel/EF_Photo" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="0bcbbb9d-d0f1-4a3b-a5dd-ce5a3241779e">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Photo/EF_Publications" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="04c15895-e0a6-4be1-bcb0-3a72c0647ad2">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Publication/EF_Photo" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="c56cf922-c688-4d24-9d9d-c721433b99a6" SourceMultiplicity="ZeroOne" name="EF_PublicationHasEF_Project">
+          <DomainClassMoniker name="/EntitiesModel/EF_Project" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="3266c832-c05b-4a6f-a368-80cf910d96f9">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Project/EF_Publications" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="7440e263-7dda-422b-af9a-d73e36699a43">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Publication/EF_Project" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="f766b4a9-3244-4bbb-9106-3760bb56356e" SourceMultiplicity="ZeroOne" name="EF_PublicationHasEF_SMI_priority">
+          <DomainClassMoniker name="/EntitiesModel/EF_SMI_priority" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="fe056f5b-78fd-4246-b800-2edf4419de29">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_SMI_priority/EF_Publications" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="e17616bf-8ef4-4685-aa6f-ee4b720ee8c9">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Publication/EF_SMI_priority" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="25ae6e19-bd04-40fd-816c-89e6a935d99c" SourceMultiplicity="ZeroOne" name="EF_PublicationHasEF_Tonality">
+          <DomainClassMoniker name="/EntitiesModel/EF_Tonality" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="8ffab45b-376b-4ead-afb4-241f34c568f7">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Tonality/EF_Publications" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="febfb7ec-ceff-48e8-8f2f-e30a302309e3">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Publication/EF_Tonality" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="37a39716-f762-492f-bfd0-af8eb9688fc6" SourceMultiplicity="ZeroOne" name="EF_PublicationHasEF_Department">
+          <DomainClassMoniker name="/EntitiesModel/EF_Department" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="26527b45-0628-49f6-bf4c-b8a36c5f58da">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Department/EF_Publications" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="b715b401-0f86-4627-aeef-6f72df8a0a39">
+              <NavigationalPropertyMoniker name="/EntitiesModel/EF_Publication/EF_Department" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="feba6459-4134-4319-b0bd-e081400a0f90">
+          <NavigationalProperty Id="9c3e980e-a7ad-47a9-a046-350e5363c928" name="EF_SMI" type="EF_SMI" label="EF_SMI : EF_SMI" nullable="true" kind="Persistent" fieldName="_eF_SMI" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="dca5e4c5-598a-4ec8-a718-5858056ea253">
+          <NavigationalProperty Id="7a2d2f84-5897-48ab-a880-f2b876923de9" name="EF_Exclusivity" type="EF_Exclusivity" label="EF_Exclusivity : EF_Exclusivity" nullable="true" kind="Persistent" fieldName="_eF_Exclusivity" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="16350305-a6e6-4d4c-b007-a0413302b51f">
+          <NavigationalProperty Id="ca960d04-d0da-44b2-aef3-2ac5ff2166f2" name="EF_Initiated" type="EF_Initiated" label="EF_Initiated : EF_Initiated" nullable="true" kind="Persistent" fieldName="_eF_Initiated" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="4a80a471-8b31-4be5-b349-5bd678a54880">
+          <NavigationalProperty Id="40c1c72f-658d-4fb9-81d6-bf87237bce18" name="EF_Planed" type="EF_Planed" label="EF_Planed : EF_Planed" nullable="true" kind="Persistent" fieldName="_eF_Planed" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="a739ad70-6471-4d9a-ab58-cf033cded443">
+          <NavigationalProperty Id="d011a31d-7be8-42fb-83d8-099d2692ed3d" name="EF_Photo" type="EF_Photo" label="EF_Photo : EF_Photo" nullable="true" kind="Persistent" fieldName="_eF_Photo" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="3032ed1f-345e-4683-b05a-b75429a2ecb3">
+          <NavigationalProperty Id="211d78ba-8beb-4313-8e58-4e4e5e02adc1" name="EF_Project" type="EF_Project" label="EF_Project : EF_Project" nullable="true" kind="Persistent" fieldName="_eF_Project" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="6619d2f6-12ec-408f-8d23-3967993b8f9e">
+          <NavigationalProperty Id="4763e706-dc5e-4037-9f66-e1b5a7928d0b" name="EF_SMI_priority" type="EF_SMI_priority" label="EF_SMI_priority : EF_SMI_priority" nullable="true" kind="Persistent" fieldName="_eF_SMI_priority" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="c9ce2ad4-c748-466d-b4f2-a6edb189d1a9">
+          <NavigationalProperty Id="4bcb4ade-90c2-4f18-9683-a82693d7e326" name="EF_Tonality" type="EF_Tonality" label="EF_Tonality : EF_Tonality" nullable="true" kind="Persistent" fieldName="_eF_Tonality" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="a8104b51-72bd-4f0b-8e01-4da70ea3b062">
+          <NavigationalProperty Id="35b984a9-b007-4778-9ea0-8f95463afa15" name="EF_Department" type="EF_Department" label="EF_Department : EF_Department" nullable="true" kind="Persistent" fieldName="_eF_Department" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="c47f04c0-c878-48b2-b964-f62f3a33757b" name="EF_Project" namespace="EffixReportSystem" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="58886e2b-ab3b-414c-a0a6-09bdf1a94465" name="Project_id" type="Int64" label="Project_id : Int64" kind="Persistent" identity="true" fieldName="_project_id" />
+      <Property Id="3b028bc8-d099-4c8f-a492-4950fb62be44" name="Project_descr" label="Project_descr : String" kind="Persistent" fieldName="_project_descr" />
+      <Property Id="91fb6aea-6ced-4394-be00-08ee846bd1a4" name="Project_name" label="Project_name : String" kind="Persistent" fieldName="_project_name" />
+      <Property Id="7cab7937-b1ad-4d47-b4f2-f417b0abf962" name="User_id" type="Int64" label="User_id : Int64" nullable="true" kind="Persistent" fieldName="_user_id" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="cd453096-1e9a-4f4f-be65-e381c9df9771">
+          <NavigationalProperty Id="ba443798-02d5-43af-812a-e743feaccef3" name="EF_Publications" type="IList&lt;EF_Publication&gt;" label="EF_Publications : IList&lt;EF_Publication&gt;" nullable="true" kind="Persistent" fieldName="_eF_Publications" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="6c7cf12c-fb04-4f52-9a71-0584f635f55a" name="EF_Planed" namespace="EffixReportSystem" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="fd4221d0-fca7-444c-98f1-31e3b0dc4676" name="ID" type="Int32" label="ID : Int32" kind="Persistent" identity="true" fieldName="_iD" />
+      <Property Id="34809864-e462-4d06-9567-6587c109900f" name="IsPlaned" label="IsPlaned : String" kind="Persistent" fieldName="_isPlaned" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="a2c55aa5-b208-4c01-a9b1-6de2de70cc2a">
+          <NavigationalProperty Id="f062781d-57a3-4c8d-92bb-8f8c3ebfd003" name="EF_Publications" type="IList&lt;EF_Publication&gt;" label="EF_Publications : IList&lt;EF_Publication&gt;" nullable="true" kind="Persistent" fieldName="_eF_Publications" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="5e879f4a-74b4-4f26-96f2-dc70c1d6d232" name="EF_Photo" namespace="EffixReportSystem" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="27bba861-ed14-463c-a604-a0dc8acf70ab" name="ID" type="Int32" label="ID : Int32" kind="Persistent" identity="true" fieldName="_iD" />
+      <Property Id="2c56720c-a188-4367-a247-4d4c914aa971" name="HasPhoto" label="HasPhoto : String" kind="Persistent" fieldName="_hasPhoto" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="8c1616e1-2a66-44fe-a6bf-d29f5bb7acba">
+          <NavigationalProperty Id="6c918395-0001-4f46-a5a4-6ad46c1d69c3" name="EF_Publications" type="IList&lt;EF_Publication&gt;" label="EF_Publications : IList&lt;EF_Publication&gt;" nullable="true" kind="Persistent" fieldName="_eF_Publications" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="28b8f1bc-2af1-4a33-9572-7ec68306ab62" name="EF_Person" namespace="EffixReportSystem" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="cc50e815-6a6e-44c9-a2c2-13967fe5cb8b" name="Person_id" type="Int64" label="Person_id : Int64" kind="Persistent" identity="true" fieldName="_person_id" />
+      <Property Id="958e57ba-f9cb-47b3-95d3-20fabcd42afb" name="Employment_name" label="Employment_name : String" kind="Persistent" fieldName="_employment_name" />
+      <Property Id="3b6741ca-0fc2-4c35-849b-53ec405afa32" name="Firstname" label="Firstname : String" kind="Persistent" fieldName="_firstname" />
+      <Property Id="47fac681-c6b9-4e55-85bc-209af68ab0a0" name="Lastname" label="Lastname : String" kind="Persistent" fieldName="_lastname" />
+      <Property Id="cc14a108-78f1-481d-a984-403a92d235a1" name="Midname" label="Midname : String" kind="Persistent" fieldName="_midname" />
+      <Property Id="5fead713-2964-4930-aa2c-07f87fea041a" name="Notes" label="Notes : String" kind="Persistent" fieldName="_notes" />
+      <Property Id="5aaa4809-ee26-478a-9364-1fe7183d5959" name="Smi_id" type="Int64" label="Smi_id : Int64" nullable="true" kind="Persistent" fieldName="_smi_id" />
+    </DomainClass>
+    <DomainClass Id="3f76ab0e-d5bc-47a3-bfeb-7b51525ecfff" name="EF_MassMedia" namespace="EffixReportSystem" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="30905241-a9a2-46f4-a473-60ab199f56a1" name="Mass_media_type_id" type="Int64" label="Mass_media_type_id : Int64" kind="Persistent" identity="true" fieldName="_mass_media_type_id" />
+      <Property Id="27f232d7-6583-4261-b2c0-40e3eb1da487" name="Mass_media_type_descr" label="Mass_media_type_descr : String" kind="Persistent" fieldName="_mass_media_type_descr" />
+      <Property Id="b99b1710-0192-4cf1-8454-5e3dcdecf838" name="Mass_media_type_name" label="Mass_media_type_name : String" kind="Persistent" fieldName="_mass_media_type_name" />
+      <Property Id="e5c4b5a1-dfdf-44fb-9c0c-a75dffaeb61e" name="Parent_type_id" type="Int64" label="Parent_type_id : Int64" nullable="true" kind="Persistent" fieldName="_parent_type_id" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="5336d074-5f0f-4239-bd0b-8ee7362dd7a4">
+          <NavigationalProperty Id="1fa0c717-36aa-4eda-9e68-0b9d664695bf" name="EF_SMIs" type="IList&lt;EF_SMI&gt;" label="EF_SMIs : IList&lt;EF_SMI&gt;" nullable="true" kind="Persistent" fieldName="_eF_SMIs" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="652fc509-a7fb-445f-9d6b-78c6763b3c00" name="EF_Initiated" namespace="EffixReportSystem" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="e93f1cc7-0db9-4155-87fc-2a8a75937547" name="ID" type="Int32" label="ID : Int32" kind="Persistent" identity="true" fieldName="_iD" />
+      <Property Id="0edb5171-f105-4402-b50d-5aa6d234afba" name="IsInitiated" label="IsInitiated : String" kind="Persistent" fieldName="_isInitiated" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="908d3ef9-6055-4223-b75f-0cd0aa67647d">
+          <NavigationalProperty Id="c1ea7dc1-80e8-4c36-83c6-86f394082a5d" name="EF_Publications" type="IList&lt;EF_Publication&gt;" label="EF_Publications : IList&lt;EF_Publication&gt;" nullable="true" kind="Persistent" fieldName="_eF_Publications" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="fe249c4a-bbb8-4444-b750-ca06670f41b4" name="EF_Field_Name" namespace="EffixReportSystem" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="f07fa602-7e93-484a-a03f-7ac3123f0c87" name="Field_name_id" type="Int64" label="Field_name_id : Int64" kind="Persistent" identity="true" fieldName="_field_name_id" />
+      <Property Id="e58f28c6-e699-4f69-9c1b-e5fce3f1a6b1" name="Field_type_id" type="Int64" label="Field_type_id : Int64" kind="Persistent" fieldName="_field_type_id" />
+      <Property Id="5edf97f5-886b-40db-8a30-5382e8d53bf4" name="Name" label="Name : String" kind="Persistent" fieldName="_name" />
+    </DomainClass>
+    <DomainClass Id="750c41f7-06c0-4ce6-aacd-f82376a89ba6" name="EF_Exclusivity" namespace="EffixReportSystem" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="cb1fdb03-6bb5-47d0-bd52-9116fdd6e462" name="Exclusivity_id" type="Int64" label="Exclusivity_id : Int64" kind="Persistent" identity="true" fieldName="_exclusivity_id" />
+      <Property Id="508961ec-12e3-475e-85ad-c526997e11fa" name="Name" label="Name : String" kind="Persistent" fieldName="_name" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="1cd7329c-7efc-4a17-a7dc-a29511557c91">
+          <NavigationalProperty Id="23c83548-4308-4caf-91e7-419984aec7db" name="EF_Publications" type="IList&lt;EF_Publication&gt;" label="EF_Publications : IList&lt;EF_Publication&gt;" nullable="true" kind="Persistent" fieldName="_eF_Publications" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="019093ac-7a8a-412d-b132-7d8f20af291e" name="EF_Edition" namespace="EffixReportSystem" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="22aa23a8-1c6a-43aa-a32c-ece4f7900acf" name="ID" type="Int32" label="ID : Int32" kind="Persistent" identity="true" fieldName="_iD" />
+      <Property Id="6ba5625d-f9b5-4dcd-accc-fbb801f4cb06" name="Edition_name" label="Edition_name : String" kind="Persistent" fieldName="_edition_name" />
+      <Property Id="2b536b52-6399-4a06-ab36-12b51943b91c" name="Edition_value" label="Edition_value : String" kind="Persistent" fieldName="_edition_value" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="914e7832-e474-470c-80ab-84b68d20fd1a">
+          <NavigationalProperty Id="ab54e966-51e1-4570-ba13-a89343d13493" name="EF_SMIs" type="IList&lt;EF_SMI&gt;" label="EF_SMIs : IList&lt;EF_SMI&gt;" nullable="true" kind="Persistent" fieldName="_eF_SMIs" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="d9e8fa56-ed3a-492e-b25f-460416b0ea0f" name="EF_Department" namespace="EffixReportSystem" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="74af8b8e-0f9a-431c-b1e3-81853df4dbbe" name="Department_id" type="Int64" label="Department_id : Int64" kind="Persistent" identity="true" fieldName="_department_id" />
+      <Property Id="704ce781-246d-4aee-9dd2-5057ecaca5d3" name="Department_description" label="Department_description : String" kind="Persistent" fieldName="_department_description" />
+      <Property Id="bf397631-08f8-47e4-8a23-08a5d66eb007" name="Department_name" label="Department_name : String" kind="Persistent" fieldName="_department_name" />
+      <Property Id="19520a4b-c269-4a6d-b3cb-5099ec602af6" name="Department_parent_id" type="Int64" label="Department_parent_id : Int64" nullable="true" kind="Persistent" fieldName="_department_parent_id" />
+      <Property Id="68c49617-b5f3-4fd1-9692-2e57e1eb76f8" name="Department_project_id" type="Int64" label="Department_project_id : Int64" nullable="true" kind="Persistent" fieldName="_department_project_id" />
+      <Property Id="cfe91482-4367-4d9f-b5aa-2e1c0eed366d" name="Department_type" label="Department_type : String" kind="Persistent" fieldName="_department_type" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="3ff407be-ffba-4b93-b1a2-e33a2f458308">
+          <NavigationalProperty Id="bf44d23d-cc71-498c-93bd-8330e10be934" name="EF_Publications" type="IList&lt;EF_Publication&gt;" label="EF_Publications : IList&lt;EF_Publication&gt;" nullable="true" kind="Persistent" fieldName="_eF_Publications" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="4d3f3b66-917d-4878-aedd-85fcba0383ca" name="EF_Contact_Field_Type" namespace="EffixReportSystem" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="8c1556b9-90c0-4972-89b6-6c3eff2a63f3" name="Field_type_id" type="Int64" label="Field_type_id : Int64" kind="Persistent" identity="true" fieldName="_field_type_id" />
+      <Property Id="10b59f61-3d6d-472a-b0a0-3eb821794834" name="Field_type_name" label="Field_type_name : String" kind="Persistent" fieldName="_field_type_name" />
+      <Property Id="29549ae5-8552-417a-8145-e56da0750d65" name="Value_type" label="Value_type : String" kind="Persistent" fieldName="_value_type" />
+    </DomainClass>
+    <DomainClass Id="2a278715-504e-4e3b-9126-fa6014c0399b" name="EF_Contact_Attribute" namespace="EffixReportSystem" showPropertiesCompartment="true" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true">
+      <Property Id="c532eda8-0ee9-45d4-9c6d-acc3453cc1f4" name="Person_id" type="Int64" label="Person_id : Int64" kind="Persistent" identity="true" fieldName="_person_id" />
+      <Property Id="f67e0d39-730e-4d52-a9fb-17482ab2f7d5" name="Field_name_id" type="Int64" label="Field_name_id : Int64" kind="Persistent" fieldName="_field_name_id" />
+      <Property Id="afc83286-73aa-42c4-9d7b-8fe043d23bd2" name="List_index" type="Int32" label="List_index : Int32" nullable="true" kind="Persistent" fieldName="_list_index" />
+      <Property Id="1272e89b-11fb-4628-b85e-48b4ded7078f" name="Value" label="Value : String" kind="Persistent" fieldName="_value" />
+    </DomainClass>
+  </Types>
+  <domainContext>
+    <domainModelHasDomainContext Id="1097aec6-1e19-4336-abb7-fee474ae7263">
+      <domainContainer name="EntitiesModel" namespace="EffixReportSystem" showPropertiesCompartment="true">
+        <entitySetProperty name="EF_Users" namespace="EffixReportSystem" type="EF_User" label="EF_Users : IQueryable&lt;EffixReportSystem.EF_User&gt;" />
+        <entitySetProperty name="EF_User_Activities" namespace="EffixReportSystem" type="EF_User_Activity" label="EF_User_Activities : IQueryable&lt;EffixReportSystem.EF_User_Activity&gt;" />
+        <entitySetProperty name="EF_Tonalities" namespace="EffixReportSystem" type="EF_Tonality" label="EF_Tonalities : IQueryable&lt;EffixReportSystem.EF_Tonality&gt;" />
+        <entitySetProperty name="EF_SMI_Types" namespace="EffixReportSystem" type="EF_SMI_Type" label="EF_SMI_Types : IQueryable&lt;EffixReportSystem.EF_SMI_Type&gt;" />
+        <entitySetProperty name="EF_SMI_priorities" namespace="EffixReportSystem" type="EF_SMI_priority" label="EF_SMI_priorities : IQueryable&lt;EffixReportSystem.EF_SMI_priority&gt;" />
+        <entitySetProperty name="EF_SMIs" namespace="EffixReportSystem" type="EF_SMI" label="EF_SMIs : IQueryable&lt;EffixReportSystem.EF_SMI&gt;" />
+        <entitySetProperty name="EF_Publications" namespace="EffixReportSystem" type="EF_Publication" label="EF_Publications : IQueryable&lt;EffixReportSystem.EF_Publication&gt;" />
+        <entitySetProperty name="EF_Projects" namespace="EffixReportSystem" type="EF_Project" label="EF_Projects : IQueryable&lt;EffixReportSystem.EF_Project&gt;" />
+        <entitySetProperty name="EF_Planeds" namespace="EffixReportSystem" type="EF_Planed" label="EF_Planeds : IQueryable&lt;EffixReportSystem.EF_Planed&gt;" />
+        <entitySetProperty name="EF_Photos" namespace="EffixReportSystem" type="EF_Photo" label="EF_Photos : IQueryable&lt;EffixReportSystem.EF_Photo&gt;" />
+        <entitySetProperty name="EF_People" namespace="EffixReportSystem" type="EF_Person" label="EF_People : IQueryable&lt;EffixReportSystem.EF_Person&gt;" />
+        <entitySetProperty name="EF_MassMedias" namespace="EffixReportSystem" type="EF_MassMedia" label="EF_MassMedias : IQueryable&lt;EffixReportSystem.EF_MassMedia&gt;" />
+        <entitySetProperty name="EF_Initiateds" namespace="EffixReportSystem" type="EF_Initiated" label="EF_Initiateds : IQueryable&lt;EffixReportSystem.EF_Initiated&gt;" />
+        <entitySetProperty name="EF_Field_Names" namespace="EffixReportSystem" type="EF_Field_Name" label="EF_Field_Names : IQueryable&lt;EffixReportSystem.EF_Field_Name&gt;" />
+        <entitySetProperty name="EF_Exclusivities" namespace="EffixReportSystem" type="EF_Exclusivity" label="EF_Exclusivities : IQueryable&lt;EffixReportSystem.EF_Exclusivity&gt;" />
+        <entitySetProperty name="EF_Editions" namespace="EffixReportSystem" type="EF_Edition" label="EF_Editions : IQueryable&lt;EffixReportSystem.EF_Edition&gt;" />
+        <entitySetProperty name="EF_Departments" namespace="EffixReportSystem" type="EF_Department" label="EF_Departments : IQueryable&lt;EffixReportSystem.EF_Department&gt;" />
+        <entitySetProperty name="EF_Contact_Field_Types" namespace="EffixReportSystem" type="EF_Contact_Field_Type" label="EF_Contact_Field_Types : IQueryable&lt;EffixReportSystem.EF_Contact_Field_Type&gt;" />
+        <entitySetProperty name="EF_Contact_Attributes" namespace="EffixReportSystem" type="EF_Contact_Attribute" label="EF_Contact_Attributes : IQueryable&lt;EffixReportSystem.EF_Contact_Attribute&gt;" />
+      </domainContainer>
+    </domainModelHasDomainContext>
+  </domainContext>
+</DomainModel>

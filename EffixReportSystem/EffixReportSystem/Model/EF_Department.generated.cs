@@ -25,99 +25,99 @@ namespace EffixReportSystem
 {
 	public partial class EF_Department : INotifyPropertyChanged
 	{
-		private long _department_Id;
+		private long _department_id;
 		public virtual long Department_id
 		{
 		   get
 		   {
-		       return this._department_Id;
+		       return this._department_id;
 		   }
 		   set
 		   {
 		       if( Department_id == value )
 		  return;
 		 
-		  _department_Id = value;
+		  _department_id = value;
 		  this.OnPropertyChanged("Department_id");
 		   }
 		}
-		private long? _department_Parent_Id;
+		private long? _department_parent_id;
 		public virtual long? Department_parent_id
 		{
 		   get
 		   {
-		       return this._department_Parent_Id;
+		       return this._department_parent_id;
 		   }
 		   set
 		   {
 		       if( Department_parent_id == value )
 		  return;
 		 
-		  _department_Parent_Id = value;
+		  _department_parent_id = value;
 		  this.OnPropertyChanged("Department_parent_id");
 		   }
 		}
-		private string _department_Name;
+		private string _department_name;
 		public virtual string Department_name
 		{
 		   get
 		   {
-		       return this._department_Name;
+		       return this._department_name;
 		   }
 		   set
 		   {
 		       if( Department_name == value )
 		  return;
 		 
-		  _department_Name = value;
+		  _department_name = value;
 		  this.OnPropertyChanged("Department_name");
 		   }
 		}
-		private string _department_Type;
+		private string _department_type;
 		public virtual string Department_type
 		{
 		   get
 		   {
-		       return this._department_Type;
+		       return this._department_type;
 		   }
 		   set
 		   {
 		       if( Department_type == value )
 		  return;
 		 
-		  _department_Type = value;
+		  _department_type = value;
 		  this.OnPropertyChanged("Department_type");
 		   }
 		}
-		private string _department_Description;
+		private string _department_description;
 		public virtual string Department_description
 		{
 		   get
 		   {
-		       return this._department_Description;
+		       return this._department_description;
 		   }
 		   set
 		   {
 		       if( Department_description == value )
 		  return;
 		 
-		  _department_Description = value;
+		  _department_description = value;
 		  this.OnPropertyChanged("Department_description");
 		   }
 		}
-		private long? _department_Project_Id;
+		private long? _department_project_id;
 		public virtual long? Department_project_id
 		{
 		   get
 		   {
-		       return this._department_Project_Id;
+		       return this._department_project_id;
 		   }
 		   set
 		   {
 		       if( Department_project_id == value )
 		  return;
 		 
-		  _department_Project_Id = value;
+		  _department_project_id = value;
 		  this.OnPropertyChanged("Department_project_id");
 		   }
 		}

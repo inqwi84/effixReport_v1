@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CommonLibraries.Log;
+using EffixReportSystem.Helper.Classes;
 using EffixReportSystem.Views.Publication.Controls;
 using EffixReportSystem.Views.Publication.ViewModels;
 using Telerik.Windows.Controls;
@@ -72,7 +73,9 @@ namespace EffixReportSystem.Views.Publication.Views
                 if (ctx == null) return;
                 (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[2];
                 var newPublicationViewModel = ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as NewPublicationViewModel);
+                newPublicationViewModel.GetData();
                 newPublicationViewModel.CurrentDepartment = ctx.CurrentDepartment;
+                newPublicationViewModel.ImageTileList=new ObservableCollection<DataHelper.ImageTile>();
                 newPublicationViewModel.CurrentPublication = new EF_Publication(ctx.CurrentDepartment);
                 newPublicationViewModel.CurrentProjectName = ctx.CurrentProjectName;
                 newPublicationViewModel.CurrentProject = ctx.CurrentProject;

@@ -25,355 +25,355 @@ namespace EffixReportSystem
 {
 	public partial class EF_Publication : INotifyPropertyChanged
 	{
-		private long _publication_Id;
+		private long _publication_id;
 		public virtual long Publication_id
 		{
 		   get
 		   {
-		       return this._publication_Id;
+		       return this._publication_id;
 		   }
 		   set
 		   {
 		       if( Publication_id == value )
 		  return;
 		 
-		  _publication_Id = value;
+		  _publication_id = value;
 		  this.OnPropertyChanged("Publication_id");
 		   }
 		}
-		private long? _tonality_Id;
+		private long? _tonality_id;
 		public virtual long? Tonality_id
 		{
 		   get
 		   {
-		       return this._tonality_Id;
+		       return this._tonality_id;
 		   }
 		   set
 		   {
 		       if( Tonality_id == value )
 		  return;
 		 
-		  _tonality_Id = value;
+		  _tonality_id = value;
 		  this.OnPropertyChanged("Tonality_id");
 		   }
 		}
-		private string _publication_Name;
+		private string _publication_name;
 		public virtual string Publication_name
 		{
 		   get
 		   {
-		       return this._publication_Name;
+		       return this._publication_name;
 		   }
 		   set
 		   {
 		       if( Publication_name == value )
 		  return;
 		 
-		  _publication_Name = value;
+		  _publication_name = value;
 		  this.OnPropertyChanged("Publication_name");
 		   }
 		}
-		private long? _smi_Id;
+		private long? _smi_id;
 		public virtual long? Smi_id
 		{
 		   get
 		   {
-		       return this._smi_Id;
+		       return this._smi_id;
 		   }
 		   set
 		   {
 		       if( Smi_id == value )
 		  return;
 		 
-		  _smi_Id = value;
+		  _smi_id = value;
 		  this.OnPropertyChanged("Smi_id");
 		   }
 		}
-		private int? _has_Photo;
+		private int? _has_photo;
 		public virtual int? Has_photo
 		{
 		   get
 		   {
-		       return this._has_Photo;
+		       return this._has_photo;
 		   }
 		   set
 		   {
 		       if( Has_photo == value )
 		  return;
 		 
-		  _has_Photo = value;
+		  _has_photo = value;
 		  this.OnPropertyChanged("Has_photo");
 		   }
 		}
-		private long? _exclusivity_Id;
+		private long? _exclusivity_id;
 		public virtual long? Exclusivity_id
 		{
 		   get
 		   {
-		       return this._exclusivity_Id;
+		       return this._exclusivity_id;
 		   }
 		   set
 		   {
 		       if( Exclusivity_id == value )
 		  return;
 		 
-		  _exclusivity_Id = value;
+		  _exclusivity_id = value;
 		  this.OnPropertyChanged("Exclusivity_id");
 		   }
 		}
-		private long? _project_Id;
+		private long? _project_id;
 		public virtual long? Project_id
 		{
 		   get
 		   {
-		       return this._project_Id;
+		       return this._project_id;
 		   }
 		   set
 		   {
 		       if( Project_id == value )
 		  return;
 		 
-		  _project_Id = value;
+		  _project_id = value;
 		  this.OnPropertyChanged("Project_id");
 		   }
 		}
-		private DateTime? _ceation_Date;
+		private DateTime? _ceation_date;
 		public virtual DateTime? Ceation_date
 		{
 		   get
 		   {
-		       return this._ceation_Date;
+		       return this._ceation_date;
 		   }
 		   set
 		   {
 		       if( Ceation_date == value )
 		  return;
 		 
-		  _ceation_Date = value;
+		  _ceation_date = value;
 		  this.OnPropertyChanged("Ceation_date");
 		   }
 		}
-		private DateTime? _publication_Date;
+		private DateTime? _publication_date;
 		public virtual DateTime? Publication_date
 		{
 		   get
 		   {
-		       return this._publication_Date;
+		       return this._publication_date;
 		   }
 		   set
 		   {
 		       if( Publication_date == value )
 		  return;
 		 
-		  _publication_Date = value;
+		  _publication_date = value;
 		  this.OnPropertyChanged("Publication_date");
 		   }
 		}
-		private int? _is_Initiated;
+		private int? _is_initiated;
 		public virtual int? Is_initiated
 		{
 		   get
 		   {
-		       return this._is_Initiated;
+		       return this._is_initiated;
 		   }
 		   set
 		   {
 		       if( Is_initiated == value )
 		  return;
 		 
-		  _is_Initiated = value;
+		  _is_initiated = value;
 		  this.OnPropertyChanged("Is_initiated");
 		   }
 		}
-		private int? _is_Planed;
+		private int? _is_planed;
 		public virtual int? Is_planed
 		{
 		   get
 		   {
-		       return this._is_Planed;
+		       return this._is_planed;
 		   }
 		   set
 		   {
 		       if( Is_planed == value )
 		  return;
 		 
-		  _is_Planed = value;
+		  _is_planed = value;
 		  this.OnPropertyChanged("Is_planed");
 		   }
 		}
-		private string _screenshot_Path;
+		private string _screenshot_path;
 		public virtual string Screenshot_path
 		{
 		   get
 		   {
-		       return this._screenshot_Path;
+		       return this._screenshot_path;
 		   }
 		   set
 		   {
 		       if( Screenshot_path == value )
 		  return;
 		 
-		  _screenshot_Path = value;
+		  _screenshot_path = value;
 		  this.OnPropertyChanged("Screenshot_path");
 		   }
 		}
-		private long? _priority_Id;
+		private long? _priority_id;
 		public virtual long? Priority_id
 		{
 		   get
 		   {
-		       return this._priority_Id;
+		       return this._priority_id;
 		   }
 		   set
 		   {
 		       if( Priority_id == value )
 		  return;
 		 
-		  _priority_Id = value;
+		  _priority_id = value;
 		  this.OnPropertyChanged("Priority_id");
 		   }
 		}
-		private string _url_Path;
+		private string _url_path;
 		public virtual string Url_path
 		{
 		   get
 		   {
-		       return this._url_Path;
+		       return this._url_path;
 		   }
 		   set
 		   {
 		       if( Url_path == value )
 		  return;
 		 
-		  _url_Path = value;
+		  _url_path = value;
 		  this.OnPropertyChanged("Url_path");
 		   }
 		}
-		private long? _user_Id;
+		private long? _user_id;
 		public virtual long? User_id
 		{
 		   get
 		   {
-		       return this._user_Id;
+		       return this._user_id;
 		   }
 		   set
 		   {
 		       if( User_id == value )
 		  return;
 		 
-		  _user_Id = value;
+		  _user_id = value;
 		  this.OnPropertyChanged("User_id");
 		   }
 		}
-		private string _blob_Path;
+		private string _blob_path;
 		public virtual string Blob_path
 		{
 		   get
 		   {
-		       return this._blob_Path;
+		       return this._blob_path;
 		   }
 		   set
 		   {
 		       if( Blob_path == value )
 		  return;
 		 
-		  _blob_Path = value;
+		  _blob_path = value;
 		  this.OnPropertyChanged("Blob_path");
 		   }
 		}
-		private int? _image_Count;
+		private int? _image_count;
 		public virtual int? Image_count
 		{
 		   get
 		   {
-		       return this._image_Count;
+		       return this._image_count;
 		   }
 		   set
 		   {
 		       if( Image_count == value )
 		  return;
 		 
-		  _image_Count = value;
+		  _image_count = value;
 		  this.OnPropertyChanged("Image_count");
 		   }
 		}
-		private string _p_Year;
+		private string _p_year;
 		public virtual string P_year
 		{
 		   get
 		   {
-		       return this._p_Year;
+		       return this._p_year;
 		   }
 		   set
 		   {
 		       if( P_year == value )
 		  return;
 		 
-		  _p_Year = value;
+		  _p_year = value;
 		  this.OnPropertyChanged("P_year");
 		   }
 		}
-		private string _p_Month;
+		private string _p_month;
 		public virtual string P_month
 		{
 		   get
 		   {
-		       return this._p_Month;
+		       return this._p_month;
 		   }
 		   set
 		   {
 		       if( P_month == value )
 		  return;
 		 
-		  _p_Month = value;
+		  _p_month = value;
 		  this.OnPropertyChanged("P_month");
 		   }
 		}
-		private string _p_Day;
+		private string _p_day;
 		public virtual string P_day
 		{
 		   get
 		   {
-		       return this._p_Day;
+		       return this._p_day;
 		   }
 		   set
 		   {
 		       if( P_day == value )
 		  return;
 		 
-		  _p_Day = value;
+		  _p_day = value;
 		  this.OnPropertyChanged("P_day");
 		   }
 		}
-		private string _project_Name;
+		private string _project_name;
 		public virtual string Project_name
 		{
 		   get
 		   {
-		       return this._project_Name;
+		       return this._project_name;
 		   }
 		   set
 		   {
 		       if( Project_name == value )
 		  return;
 		 
-		  _project_Name = value;
+		  _project_name = value;
 		  this.OnPropertyChanged("Project_name");
 		   }
 		}
-		private long? _department_Id;
+		private long? _department_id;
 		public virtual long? Department_id
 		{
 		   get
 		   {
-		       return this._department_Id;
+		       return this._department_id;
 		   }
 		   set
 		   {
 		       if( Department_id == value )
 		  return;
 		 
-		  _department_Id = value;
+		  _department_id = value;
 		  this.OnPropertyChanged("Department_id");
 		   }
 		}
@@ -473,19 +473,19 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("EF_Project");
 		   }
 		}
-		private EF_SMI_priority _eF_SMI_Priority;
+		private EF_SMI_priority _eF_SMI_priority;
 		public virtual EF_SMI_priority EF_SMI_priority
 		{
 		   get
 		   {
-		       return this._eF_SMI_Priority;
+		       return this._eF_SMI_priority;
 		   }
 		   set
 		   {
 		       if( EF_SMI_priority == value )
 		  return;
 		 
-		  _eF_SMI_Priority = value;
+		  _eF_SMI_priority = value;
 		  this.OnPropertyChanged("EF_SMI_priority");
 		   }
 		}

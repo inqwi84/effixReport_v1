@@ -25,35 +25,35 @@ namespace EffixReportSystem
 {
 	public partial class EF_SMI_priority : INotifyPropertyChanged
 	{
-		private long _priority_Id;
+		private long _priority_id;
 		public virtual long Priority_id
 		{
 		   get
 		   {
-		       return this._priority_Id;
+		       return this._priority_id;
 		   }
 		   set
 		   {
 		       if( Priority_id == value )
 		  return;
 		 
-		  _priority_Id = value;
+		  _priority_id = value;
 		  this.OnPropertyChanged("Priority_id");
 		   }
 		}
-		private string _priority_Name;
+		private string _priority_name;
 		public virtual string Priority_name
 		{
 		   get
 		   {
-		       return this._priority_Name;
+		       return this._priority_name;
 		   }
 		   set
 		   {
 		       if( Priority_name == value )
 		  return;
 		 
-		  _priority_Name = value;
+		  _priority_name = value;
 		  this.OnPropertyChanged("Priority_name");
 		   }
 		}

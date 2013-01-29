@@ -25,51 +25,51 @@ namespace EffixReportSystem
 {
 	public partial class EF_SMI_Type : INotifyPropertyChanged
 	{
-		private long _smi_Type_Id;
+		private long _smi_type_id;
 		public virtual long Smi_type_id
 		{
 		   get
 		   {
-		       return this._smi_Type_Id;
+		       return this._smi_type_id;
 		   }
 		   set
 		   {
 		       if( Smi_type_id == value )
 		  return;
 		 
-		  _smi_Type_Id = value;
+		  _smi_type_id = value;
 		  this.OnPropertyChanged("Smi_type_id");
 		   }
 		}
-		private string _smi_Type_Name;
+		private string _smi_type_name;
 		public virtual string Smi_type_name
 		{
 		   get
 		   {
-		       return this._smi_Type_Name;
+		       return this._smi_type_name;
 		   }
 		   set
 		   {
 		       if( Smi_type_name == value )
 		  return;
 		 
-		  _smi_Type_Name = value;
+		  _smi_type_name = value;
 		  this.OnPropertyChanged("Smi_type_name");
 		   }
 		}
-		private string _smi_Type_Descr;
+		private string _smi_type_descr;
 		public virtual string Smi_type_descr
 		{
 		   get
 		   {
-		       return this._smi_Type_Descr;
+		       return this._smi_type_descr;
 		   }
 		   set
 		   {
 		       if( Smi_type_descr == value )
 		  return;
 		 
-		  _smi_Type_Descr = value;
+		  _smi_type_descr = value;
 		  this.OnPropertyChanged("Smi_type_descr");
 		   }
 		}

@@ -24,35 +24,35 @@ namespace EffixReportSystem
 {
 	public partial class EF_User : INotifyPropertyChanged
 	{
-		private long _usr_Id;
+		private long _usr_id;
 		public virtual long Usr_id
 		{
 		   get
 		   {
-		       return this._usr_Id;
+		       return this._usr_id;
 		   }
 		   set
 		   {
 		       if( Usr_id == value )
 		  return;
 		 
-		  _usr_Id = value;
+		  _usr_id = value;
 		  this.OnPropertyChanged("Usr_id");
 		   }
 		}
-		private string _usr_Login;
+		private string _usr_login;
 		public virtual string Usr_login
 		{
 		   get
 		   {
-		       return this._usr_Login;
+		       return this._usr_login;
 		   }
 		   set
 		   {
 		       if( Usr_login == value )
 		  return;
 		 
-		  _usr_Login = value;
+		  _usr_login = value;
 		  this.OnPropertyChanged("Usr_login");
 		   }
 		}
@@ -120,99 +120,99 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("Mname");
 		   }
 		}
-		private string _usr_Position;
+		private string _usr_position;
 		public virtual string Usr_position
 		{
 		   get
 		   {
-		       return this._usr_Position;
+		       return this._usr_position;
 		   }
 		   set
 		   {
 		       if( Usr_position == value )
 		  return;
 		 
-		  _usr_Position = value;
+		  _usr_position = value;
 		  this.OnPropertyChanged("Usr_position");
 		   }
 		}
-		private string _s_Tel;
+		private string _s_tel;
 		public virtual string S_tel
 		{
 		   get
 		   {
-		       return this._s_Tel;
+		       return this._s_tel;
 		   }
 		   set
 		   {
 		       if( S_tel == value )
 		  return;
 		 
-		  _s_Tel = value;
+		  _s_tel = value;
 		  this.OnPropertyChanged("S_tel");
 		   }
 		}
-		private string _m_Tel;
+		private string _m_tel;
 		public virtual string M_tel
 		{
 		   get
 		   {
-		       return this._m_Tel;
+		       return this._m_tel;
 		   }
 		   set
 		   {
 		       if( M_tel == value )
 		  return;
 		 
-		  _m_Tel = value;
+		  _m_tel = value;
 		  this.OnPropertyChanged("M_tel");
 		   }
 		}
-		private string _post_Address;
+		private string _post_address;
 		public virtual string Post_address
 		{
 		   get
 		   {
-		       return this._post_Address;
+		       return this._post_address;
 		   }
 		   set
 		   {
 		       if( Post_address == value )
 		  return;
 		 
-		  _post_Address = value;
+		  _post_address = value;
 		  this.OnPropertyChanged("Post_address");
 		   }
 		}
-		private int _usr_Priority;
+		private int _usr_priority;
 		public virtual int Usr_priority
 		{
 		   get
 		   {
-		       return this._usr_Priority;
+		       return this._usr_priority;
 		   }
 		   set
 		   {
 		       if( Usr_priority == value )
 		  return;
 		 
-		  _usr_Priority = value;
+		  _usr_priority = value;
 		  this.OnPropertyChanged("Usr_priority");
 		   }
 		}
-		private int? _usr_Type;
+		private int? _usr_type;
 		public virtual int? Usr_type
 		{
 		   get
 		   {
-		       return this._usr_Type;
+		       return this._usr_type;
 		   }
 		   set
 		   {
 		       if( Usr_type == value )
 		  return;
 		 
-		  _usr_Type = value;
+		  _usr_type = value;
 		  this.OnPropertyChanged("Usr_type");
 		   }
 		}
@@ -248,19 +248,19 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("Email");
 		   }
 		}
-		private long? _department_Id;
+		private long? _department_id;
 		public virtual long? Department_id
 		{
 		   get
 		   {
-		       return this._department_Id;
+		       return this._department_id;
 		   }
 		   set
 		   {
 		       if( Department_id == value )
 		  return;
 		 
-		  _department_Id = value;
+		  _department_id = value;
 		  this.OnPropertyChanged("Department_id");
 		   }
 		}
@@ -280,19 +280,19 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("Cert");
 		   }
 		}
-		private System.Nullable<System.DateTimeOffset> _lock_Period;
+		private System.Nullable<System.DateTimeOffset> _lock_period;
 		public virtual System.Nullable<System.DateTimeOffset> Lock_period
 		{
 		   get
 		   {
-		       return this._lock_Period;
+		       return this._lock_period;
 		   }
 		   set
 		   {
 		       if( Lock_period == value )
 		  return;
 		 
-		  _lock_Period = value;
+		  _lock_period = value;
 		  this.OnPropertyChanged("Lock_period");
 		   }
 		}

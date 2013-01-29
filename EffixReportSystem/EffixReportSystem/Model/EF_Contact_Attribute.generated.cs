@@ -18,51 +18,74 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using System.ComponentModel;
-using EffixReportSystem;
 
 
 namespace EffixReportSystem	
 {
-	public partial class EF_Tonality : INotifyPropertyChanged
+	public partial class EF_Contact_Attribute : INotifyPropertyChanged
 	{
-		private long _tonality_id;
-		public virtual long Tonality_id
+		private long _person_id;
+		public virtual long Person_id
 		{
 		   get
 		   {
-		       return this._tonality_id;
+		       return this._person_id;
 		   }
 		   set
 		   {
-		       if( Tonality_id == value )
+		       if( Person_id == value )
 		  return;
 		 
-		  _tonality_id = value;
-		  this.OnPropertyChanged("Tonality_id");
+		  _person_id = value;
+		  this.OnPropertyChanged("Person_id");
 		   }
 		}
-		private string _name;
-		public virtual string Name
+		private long _field_name_id;
+		public virtual long Field_name_id
 		{
 		   get
 		   {
-		       return this._name;
+		       return this._field_name_id;
 		   }
 		   set
 		   {
-		       if( Name == value )
+		       if( Field_name_id == value )
 		  return;
 		 
-		  _name = value;
-		  this.OnPropertyChanged("Name");
+		  _field_name_id = value;
+		  this.OnPropertyChanged("Field_name_id");
 		   }
 		}
-		private IList<EF_Publication> _eF_Publications = new List<EF_Publication>();
-		public virtual IList<EF_Publication> EF_Publications
+		private string _value;
+		public virtual string Value
 		{
 		   get
 		   {
-		       return this._eF_Publications;
+		       return this._value;
+		   }
+		   set
+		   {
+		       if( Value == value )
+		  return;
+		 
+		  _value = value;
+		  this.OnPropertyChanged("Value");
+		   }
+		}
+		private int? _list_index;
+		public virtual int? List_index
+		{
+		   get
+		   {
+		       return this._list_index;
+		   }
+		   set
+		   {
+		       if( List_index == value )
+		  return;
+		 
+		  _list_index = value;
+		  this.OnPropertyChanged("List_index");
 		   }
 		}
 		public event PropertyChangedEventHandler PropertyChanged;

@@ -25,67 +25,67 @@ namespace EffixReportSystem
 {
 	public partial class EF_MassMedia : INotifyPropertyChanged
 	{
-		private long? _parent_Type_Id;
-		public virtual long? Parent_type_id
-		{
-		   get
-		   {
-		       return this._parent_Type_Id;
-		   }
-		   set
-		   {
-		       if( Parent_type_id == value )
-		  return;
-		 
-		  _parent_Type_Id = value;
-		  this.OnPropertyChanged("Parent_type_id");
-		   }
-		}
-		private string _mass_Media_Type_Name;
-		public virtual string Mass_media_type_name
-		{
-		   get
-		   {
-		       return this._mass_Media_Type_Name;
-		   }
-		   set
-		   {
-		       if( Mass_media_type_name == value )
-		  return;
-		 
-		  _mass_Media_Type_Name = value;
-		  this.OnPropertyChanged("Mass_media_type_name");
-		   }
-		}
-		private long _mass_Media_Type_Id;
+		private long _mass_media_type_id;
 		public virtual long Mass_media_type_id
 		{
 		   get
 		   {
-		       return this._mass_Media_Type_Id;
+		       return this._mass_media_type_id;
 		   }
 		   set
 		   {
 		       if( Mass_media_type_id == value )
 		  return;
 		 
-		  _mass_Media_Type_Id = value;
+		  _mass_media_type_id = value;
 		  this.OnPropertyChanged("Mass_media_type_id");
 		   }
 		}
-		private string _mass_Media_Type_Descr;
+		private long? _parent_type_id;
+		public virtual long? Parent_type_id
+		{
+		   get
+		   {
+		       return this._parent_type_id;
+		   }
+		   set
+		   {
+		       if( Parent_type_id == value )
+		  return;
+		 
+		  _parent_type_id = value;
+		  this.OnPropertyChanged("Parent_type_id");
+		   }
+		}
+		private string _mass_media_type_name;
+		public virtual string Mass_media_type_name
+		{
+		   get
+		   {
+		       return this._mass_media_type_name;
+		   }
+		   set
+		   {
+		       if( Mass_media_type_name == value )
+		  return;
+		 
+		  _mass_media_type_name = value;
+		  this.OnPropertyChanged("Mass_media_type_name");
+		   }
+		}
+		private string _mass_media_type_descr;
 		public virtual string Mass_media_type_descr
 		{
 		   get
 		   {
-		       return this._mass_Media_Type_Descr;
+		       return this._mass_media_type_descr;
 		   }
 		   set
 		   {
 		       if( Mass_media_type_descr == value )
 		  return;
 		 
-		  _mass_Media_Type_Descr = value;
+		  _mass_media_type_descr = value;
 		  this.OnPropertyChanged("Mass_media_type_descr");
 		   }
 		}

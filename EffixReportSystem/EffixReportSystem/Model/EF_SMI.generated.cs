@@ -25,147 +25,147 @@ namespace EffixReportSystem
 {
 	public partial class EF_SMI : INotifyPropertyChanged
 	{
-		private long _smi_Id;
+		private long _smi_id;
 		public virtual long Smi_id
 		{
 		   get
 		   {
-		       return this._smi_Id;
+		       return this._smi_id;
 		   }
 		   set
 		   {
 		       if( Smi_id == value )
 		  return;
 		 
-		  _smi_Id = value;
+		  _smi_id = value;
 		  this.OnPropertyChanged("Smi_id");
 		   }
 		}
-		private string _smi_Name;
+		private string _smi_name;
 		public virtual string Smi_name
 		{
 		   get
 		   {
-		       return this._smi_Name;
+		       return this._smi_name;
 		   }
 		   set
 		   {
 		       if( Smi_name == value )
 		  return;
 		 
-		  _smi_Name = value;
+		  _smi_name = value;
 		  this.OnPropertyChanged("Smi_name");
 		   }
 		}
-		private long? _smi_Type_Id;
+		private long? _smi_type_id;
 		public virtual long? Smi_type_id
 		{
 		   get
 		   {
-		       return this._smi_Type_Id;
+		       return this._smi_type_id;
 		   }
 		   set
 		   {
 		       if( Smi_type_id == value )
 		  return;
 		 
-		  _smi_Type_Id = value;
+		  _smi_type_id = value;
 		  this.OnPropertyChanged("Smi_type_id");
 		   }
 		}
-		private string _smi_Descr;
+		private string _smi_descr;
 		public virtual string Smi_descr
 		{
 		   get
 		   {
-		       return this._smi_Descr;
+		       return this._smi_descr;
 		   }
 		   set
 		   {
 		       if( Smi_descr == value )
 		  return;
 		 
-		  _smi_Descr = value;
+		  _smi_descr = value;
 		  this.OnPropertyChanged("Smi_descr");
 		   }
 		}
-		private string _smi_Edition;
+		private string _smi_edition;
 		public virtual string Smi_edition
 		{
 		   get
 		   {
-		       return this._smi_Edition;
+		       return this._smi_edition;
 		   }
 		   set
 		   {
 		       if( Smi_edition == value )
 		  return;
 		 
-		  _smi_Edition = value;
+		  _smi_edition = value;
 		  this.OnPropertyChanged("Smi_edition");
 		   }
 		}
-		private string _smi_Edition_Descr;
+		private string _smi_edition_descr;
 		public virtual string Smi_edition_descr
 		{
 		   get
 		   {
-		       return this._smi_Edition_Descr;
+		       return this._smi_edition_descr;
 		   }
 		   set
 		   {
 		       if( Smi_edition_descr == value )
 		  return;
 		 
-		  _smi_Edition_Descr = value;
+		  _smi_edition_descr = value;
 		  this.OnPropertyChanged("Smi_edition_descr");
 		   }
 		}
-		private int? _smi_Url;
-		public virtual int? Smi_url
+		private string _smi_url;
+		public virtual string Smi_url
 		{
 		   get
 		   {
-		       return this._smi_Url;
+		       return this._smi_url;
 		   }
 		   set
 		   {
 		       if( Smi_url == value )
 		  return;
 		 
-		  _smi_Url = value;
+		  _smi_url = value;
 		  this.OnPropertyChanged("Smi_url");
 		   }
 		}
-		private int? _smi_Edition_Id;
+		private int? _smi_edition_id;
 		public virtual int? Smi_edition_id
 		{
 		   get
 		   {
-		       return this._smi_Edition_Id;
+		       return this._smi_edition_id;
 		   }
 		   set
 		   {
 		       if( Smi_edition_id == value )
 		  return;
 		 
-		  _smi_Edition_Id = value;
+		  _smi_edition_id = value;
 		  this.OnPropertyChanged("Smi_edition_id");
 		   }
 		}
-		private long? _mass_Media_Id;
+		private long? _mass_media_id;
 		public virtual long? Mass_media_id
 		{
 		   get
 		   {
-		       return this._mass_Media_Id;
+		       return this._mass_media_id;
 		   }
 		   set
 		   {
 		       if( Mass_media_id == value )
 		  return;
 		 
-		  _mass_Media_Id = value;
+		  _mass_media_id = value;
 		  this.OnPropertyChanged("Mass_media_id");
 		   }
 		}

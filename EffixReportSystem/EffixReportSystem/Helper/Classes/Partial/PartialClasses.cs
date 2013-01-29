@@ -38,8 +38,8 @@ namespace EffixReportSystem
         public EF_Publication(EF_Department department)
         {
             var currentProject = DataHelper.GetParentProject(department.Department_id);
-            _project_Id = currentProject.Department_id;
-            _project_Name = currentProject.Department_description;
+            _project_id = currentProject.Department_id;
+            _project_name = currentProject.Department_description;
         }
 
         public EF_Publication()

@@ -18,51 +18,58 @@ using Telerik.OpenAccess.Metadata;
 using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using System.ComponentModel;
-using EffixReportSystem;
 
 
 namespace EffixReportSystem	
 {
-	public partial class EF_Tonality : INotifyPropertyChanged
+	public partial class EF_Contact_Field_Type : INotifyPropertyChanged
 	{
-		private long _tonality_id;
-		public virtual long Tonality_id
+		private long _field_type_id;
+		public virtual long Field_type_id
 		{
 		   get
 		   {
-		       return this._tonality_id;
+		       return this._field_type_id;
 		   }
 		   set
 		   {
-		       if( Tonality_id == value )
+		       if( Field_type_id == value )
 		  return;
 		 
-		  _tonality_id = value;
-		  this.OnPropertyChanged("Tonality_id");
+		  _field_type_id = value;
+		  this.OnPropertyChanged("Field_type_id");
 		   }
 		}
-		private string _name;
-		public virtual string Name
+		private string _field_type_name;
+		public virtual string Field_type_name
 		{
 		   get
 		   {
-		       return this._name;
+		       return this._field_type_name;
 		   }
 		   set
 		   {
-		       if( Name == value )
+		       if( Field_type_name == value )
 		  return;
 		 
-		  _name = value;
-		  this.OnPropertyChanged("Name");
+		  _field_type_name = value;
+		  this.OnPropertyChanged("Field_type_name");
 		   }
 		}
-		private IList<EF_Publication> _eF_Publications = new List<EF_Publication>();
-		public virtual IList<EF_Publication> EF_Publications
+		private string _value_type;
+		public virtual string Value_type
 		{
 		   get
 		   {
-		       return this._eF_Publications;
+		       return this._value_type;
+		   }
+		   set
+		   {
+		       if( Value_type == value )
+		  return;
+		 
+		  _value_type = value;
+		  this.OnPropertyChanged("Value_type");
 		   }
 		}
 		public event PropertyChangedEventHandler PropertyChanged;

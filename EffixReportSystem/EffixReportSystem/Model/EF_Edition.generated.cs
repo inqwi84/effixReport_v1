@@ -41,35 +41,35 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("ID");
 		   }
 		}
-		private string _edition_Name;
+		private string _edition_name;
 		public virtual string Edition_name
 		{
 		   get
 		   {
-		       return this._edition_Name;
+		       return this._edition_name;
 		   }
 		   set
 		   {
 		       if( Edition_name == value )
 		  return;
 		 
-		  _edition_Name = value;
+		  _edition_name = value;
 		  this.OnPropertyChanged("Edition_name");
 		   }
 		}
-		private string _edition_Value;
+		private string _edition_value;
 		public virtual string Edition_value
 		{
 		   get
 		   {
-		       return this._edition_Value;
+		       return this._edition_value;
 		   }
 		   set
 		   {
 		       if( Edition_value == value )
 		  return;
 		 
-		  _edition_Value = value;
+		  _edition_value = value;
 		  this.OnPropertyChanged("Edition_value");
 		   }
 		}

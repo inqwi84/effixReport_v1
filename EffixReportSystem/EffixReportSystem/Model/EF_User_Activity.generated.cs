@@ -24,35 +24,35 @@ namespace EffixReportSystem
 {
 	public partial class EF_User_Activity : INotifyPropertyChanged
 	{
-		private long _user_Id;
+		private long _user_id;
 		public virtual long User_id
 		{
 		   get
 		   {
-		       return this._user_Id;
+		       return this._user_id;
 		   }
 		   set
 		   {
 		       if( User_id == value )
 		  return;
 		 
-		  _user_Id = value;
+		  _user_id = value;
 		  this.OnPropertyChanged("User_id");
 		   }
 		}
-		private string _session_Id;
+		private string _session_id;
 		public virtual string Session_id
 		{
 		   get
 		   {
-		       return this._session_Id;
+		       return this._session_id;
 		   }
 		   set
 		   {
 		       if( Session_id == value )
 		  return;
 		 
-		  _session_Id = value;
+		  _session_id = value;
 		  this.OnPropertyChanged("Session_id");
 		   }
 		}

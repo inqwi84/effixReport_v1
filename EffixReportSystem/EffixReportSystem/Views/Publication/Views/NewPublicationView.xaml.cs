@@ -233,6 +233,7 @@ namespace EffixReportSystem.Views.Publication.Views
                                     ctx.CurrentPublication.Blob_path = filePath;
                                 }
                             }
+                            ctx.CurrentPublication.Url_path = UrlTextBox.Text;
                             ctx.CurrentPublication.Image_count = index;
                             ctx.SaveCurrentPublication();
                             (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =

@@ -25,19 +25,19 @@ namespace EffixReportSystem
 {
 	public partial class EF_Exclusivity : INotifyPropertyChanged
 	{
-		private long _exclusivity_Id;
+		private long _exclusivity_id;
 		public virtual long Exclusivity_id
 		{
 		   get
 		   {
-		       return this._exclusivity_Id;
+		       return this._exclusivity_id;
 		   }
 		   set
 		   {
 		       if( Exclusivity_id == value )
 		  return;
 		 
-		  _exclusivity_Id = value;
+		  _exclusivity_id = value;
 		  this.OnPropertyChanged("Exclusivity_id");
 		   }
 		}

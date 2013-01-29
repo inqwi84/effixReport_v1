@@ -200,13 +200,29 @@ namespace EffixReportSystem.Views.MassMedia.ViewModels
         }
         public void SaveSmi()
         {
+            try
+            {
                 _model.Add(CurrentSmi);
                 _model.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
         public void SaveNewSmi()
         {
-            _model.Add(CurrentSmi);
-            _model.SaveChanges();
+            try
+            {
+                _model.Add(CurrentSmi);
+                _model.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
         public void RestoreSmi()
         {
@@ -236,7 +252,8 @@ namespace EffixReportSystem.Views.MassMedia.ViewModels
                 var hierarchicalList = model.EF_MassMedias.ToList().Select(flatItem =>
                                                                             new EF_MassMedia
                                                                             {
-                                                                                Mass_media_type_name = 
+
+                                                                                Mass_media_type_name =
                                                                                     flatItem
                                                                                     .
                                                                                     Mass_media_type_name,

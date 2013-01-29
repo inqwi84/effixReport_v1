@@ -213,55 +213,67 @@
     <Compile Include="Helper\Classes\Partial\PartialClasses.cs" />
     <Compile Include="Helper\Interfaces\IPageViewModel.cs" />
     <Compile Include="Helper\Classes\Win32.cs" />
+    <Compile Include="Model\EF_Contact_Attribute.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF_Contact_Field_Type.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
     <Compile Include="Model\EF_Department.generated.cs">
-      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Model\EF_Edition.generated.cs">
-      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Model\EF_Exclusivity.generated.cs">
-      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF_Field_Name.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Model\EF_Initiated.generated.cs">
-      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Model\EF_MassMedia.generated.cs">
-      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EF_Person.generated.cs">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Model\EF_Photo.generated.cs">
-      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Model\EF_Planed.generated.cs">
-      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Model\EF_Project.generated.cs">
-      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Model\EF_Publication.generated.cs">
-      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Model\EF_SMI.generated.cs">
-      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Model\EF_SMI_priority.generated.cs">
-      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Model\EF_SMI_Type.generated.cs">
-      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Model\EF_Tonality.generated.cs">
-      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Model\EF_User.generated.cs">
-      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Model\EF_User_Activity.generated.cs">
-      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
-    <Compile Include="Model\EntityDiagrams1.cs">
+    <Compile Include="Model\EntitiesModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </Compile>
     <Compile Include="Views\Authorization\LoginWindow.xaml.cs" />
     <Compile Include="Views\MassMedia\Controls\AddMassMediaWindow.xaml.cs">
@@ -496,12 +508,12 @@
       <DependentUpon>HeadReport.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <OpenAccessDeploy Include="Model\EntityDiagrams1.rlinq">
+    <OpenAccessDeploy Include="Model\EntitiesModel.rlinq">
       <Generator>MetaModelCodeGenerator</Generator>
-      <LastGenOutput>EntityDiagrams1.cs</LastGenOutput>
+      <LastGenOutput>EntitiesModel.cs</LastGenOutput>
     </OpenAccessDeploy>
-    <None Include="Model\EntityDiagrams1.rlinq.diagram">
-      <DependentUpon>EntityDiagrams1.rlinq</DependentUpon>
+    <None Include="Model\EntitiesModel.rlinq.diagram">
+      <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </None>
     <None Include="OpenAccessTemplates\Includes\General.ttinclude" />
     <None Include="OpenAccessTemplates\Includes\Specific.ttinclude" />
@@ -609,82 +621,82 @@
   <ItemGroup>
     <PublishFile Include="EnvDTE">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="EnvDTE80">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Telerik.Reporting">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Telerik.Reporting.Adomd">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Telerik.Reporting.Adomd.pdb">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Telerik.Reporting.Cache.Database">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
     <PublishFile Include="Telerik.Reporting.Cache.Database.pdb">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Telerik.Reporting.OpenXmlRendering">
       <Visible>False</Visible>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
       <FileType>Assembly</FileType>
     </PublishFile>
   </ItemGroup>
