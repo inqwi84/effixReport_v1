@@ -164,6 +164,7 @@ namespace EffixReportSystem.Views.Publication.Views
             {
                 var ctx = DataContext as NewPublicationViewModel;
                 ctx.ImageTileList.Clear();
+                ctx.CurrentImageTile = null;
                 var dir = new DirectoryInfo(Properties.Settings.Default.TempDirectory);
                 foreach (var file in dir.GetFiles("*.*"))
                 {
@@ -553,16 +554,25 @@ namespace EffixReportSystem.Views.Publication.Views
                 }
                 foreach (var filepath in dlg.FileNames)
                 {
-                    var file = new FileInfo(filepath);
-                    var newFile = tempDirectory + "\\" + "_" + index + file.Extension;
-                    file.CopyTo(newFile,true);
-                    ctx.ImageTileList.Add(new DataHelper.ImageTile
+                    using (var stream = new FileStream(filepath,FileMode.Open))
                     {
-                        Image = new BitmapImage(new Uri(newFile)),
-                        ImageName = "_" + index + file.Extension,
-                        ImagePath = newFile
-                    });
-                    index++;
+                        var ms = new MemoryStream();
+                        stream.CopyTo(ms);
+                        var extension = "." + filepath.Split('\\').LastOrDefault().Split('.').LastOrDefault();
+                        var newFile = tempDirectory + "\\" + "_" + index + extension;
+                        
+                        var tmpBitmap = new Bitmap(ms);
+                        var bitmapImage = Bitmap2BitmapImage(tmpBitmap);
+                        ctx.ImageTileList.Add(new DataHelper.ImageTile
+                        {
+                            Image = bitmapImage,
+                            ImageName = "_" + index + extension,
+                            ImagePath = newFile
+                        });
+                        index++;
+                        SaveMemoryStream(ms, newFile);
+                        ms.Close();
+                    }
                 }
             }
             catch (Exception ex)
@@ -570,6 +580,13 @@ namespace EffixReportSystem.Views.Publication.Views
                 MessageBox.Show(ex.Message);
                 Logger.TraceError(ex.Message);
             }
+        }
+        public static void SaveMemoryStream(MemoryStream ms, string fileName)
+        {
+            FileStream outStream = File.OpenWrite(fileName);
+            ms.WriteTo(outStream);
+            outStream.Flush();
+            outStream.Close();
         }
     }
 }
