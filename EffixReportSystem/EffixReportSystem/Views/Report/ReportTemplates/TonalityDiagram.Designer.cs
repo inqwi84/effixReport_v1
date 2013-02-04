@@ -30,7 +30,7 @@
             this.chart1.ChartTitle.Appearance.FillStyle.MainColor = System.Drawing.Color.Empty;
             this.chart1.ChartTitle.TextBlock.Appearance.TextProperties.Color = System.Drawing.Color.Black;
             this.chart1.ChartTitle.TextBlock.Appearance.TextProperties.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.chart1.ChartTitle.TextBlock.Text = "Инициированные";
+            this.chart1.ChartTitle.TextBlock.Text = "Тональность";
             this.chart1.DefaultType = Telerik.Reporting.Charting.ChartSeriesType.Pie;
             this.chart1.ImageFormat = System.Drawing.Imaging.ImageFormat.Emf;
             chartMargins1.Right = new Telerik.Reporting.Charting.Styles.Unit(2D, Telerik.Reporting.Charting.Styles.UnitType.Percentage);
@@ -65,7 +65,7 @@
             this.chart1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(6.1000003814697266D), Telerik.Reporting.Drawing.Unit.Inch(4.4999213218688965D));
             this.chart1.Skin = "Office2007";
             // 
-            // DiagramReport
+            // TonalityReport
             // 
             this.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
             this.detail});
