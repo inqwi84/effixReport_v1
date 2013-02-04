@@ -65,6 +65,15 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
             {
 
             }
+            try
+            {
+                UrlTextBox.Value = publication.Url_path.Trim();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         
             //  detail.Items.Add(new Telerik.Reporting.PictureBox { Value = image });
         }

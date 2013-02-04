@@ -35,7 +35,7 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
                 var serie = new ChartSeries();
                 serie.Type = ChartSeriesType.Pie;
                 serie.Clear();
-                serie.Appearance.LegendDisplayMode = Telerik.Reporting.Charting.ChartSeriesLegendDisplayMode.ItemLabels;
+                serie.Appearance.LegendDisplayMode = ChartSeriesLegendDisplayMode.ItemLabels;
 
                     var item = new ChartSeriesItem
                         {

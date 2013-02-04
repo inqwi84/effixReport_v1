@@ -10,6 +10,7 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClippingReport_v2));
+            Telerik.Reporting.NavigateToUrlAction navigateToUrlAction1 = new Telerik.Reporting.NavigateToUrlAction();
             Telerik.Reporting.Drawing.StyleRule styleRule1 = new Telerik.Reporting.Drawing.StyleRule();
             this.pageHeaderSection1 = new Telerik.Reporting.PageHeaderSection();
             this.shape1 = new Telerik.Reporting.Shape();
@@ -19,6 +20,8 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
             this.pictureBox1 = new Telerik.Reporting.PictureBox();
             this.pageFooterSection1 = new Telerik.Reporting.PageFooterSection();
             this.pictureBox2 = new Telerik.Reporting.PictureBox();
+            this.reportFooterSection1 = new Telerik.Reporting.ReportFooterSection();
+            this.UrlTextBox = new Telerik.Reporting.HtmlTextBox();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // pageHeaderSection1
@@ -42,7 +45,7 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
             // MassMediaNameTextBox
             // 
             this.MassMediaNameTextBox.Anchoring = Telerik.Reporting.AnchoringStyles.Right;
-            this.MassMediaNameTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.3751583099365234D), Telerik.Reporting.Drawing.Unit.Inch(0D));
+            this.MassMediaNameTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.5751705169677734D), Telerik.Reporting.Drawing.Unit.Inch(0D));
             this.MassMediaNameTextBox.Name = "MassMediaNameTextBox";
             this.MassMediaNameTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(5.5917458534240723D), Telerik.Reporting.Drawing.Unit.Inch(0.29992136359214783D));
             this.MassMediaNameTextBox.Style.Font.Name = "Calibri";
@@ -53,7 +56,7 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
             // PublicationDateTextBox
             // 
             this.PublicationDateTextBox.Anchoring = Telerik.Reporting.AnchoringStyles.Right;
-            this.PublicationDateTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.35861074924469D), Telerik.Reporting.Drawing.Unit.Inch(0.40000000596046448D));
+            this.PublicationDateTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(1.55862295627594D), Telerik.Reporting.Drawing.Unit.Inch(0.40000000596046448D));
             this.PublicationDateTextBox.Name = "PublicationDateTextBox";
             this.PublicationDateTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(5.6082935333251953D), Telerik.Reporting.Drawing.Unit.Inch(0.1789696216583252D));
             this.PublicationDateTextBox.Style.Font.Name = "Calibri";
@@ -92,12 +95,30 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
             this.pictureBox2.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.ScaleProportional;
             this.pictureBox2.Value = ((object)(resources.GetObject("pictureBox2.Value")));
             // 
+            // reportFooterSection1
+            // 
+            this.reportFooterSection1.Height = Telerik.Reporting.Drawing.Unit.Inch(0.39999961853027344D);
+            this.reportFooterSection1.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
+            this.UrlTextBox});
+            this.reportFooterSection1.Name = "reportFooterSection1";
+            // 
+            // UrlTextBox
+            // 
+            navigateToUrlAction1.Url = null;
+            this.UrlTextBox.Action = navigateToUrlAction1;
+            this.UrlTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.5D), Telerik.Reporting.Drawing.Unit.Inch(0.099960960447788239D));
+            this.UrlTextBox.Name = "UrlTextBox";
+            this.UrlTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(6.4669051170349121D), Telerik.Reporting.Drawing.Unit.Inch(0.20003890991210938D));
+            this.UrlTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
+            this.UrlTextBox.Value = "";
+            // 
             // ClippingReport_v2
             // 
             this.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
             this.pageHeaderSection1,
             this.detail,
-            this.pageFooterSection1});
+            this.pageFooterSection1,
+            this.reportFooterSection1});
             this.Name = "ClippingReport_v2";
             this.PageSettings.Landscape = false;
             this.PageSettings.Margins.Bottom = Telerik.Reporting.Drawing.Unit.Cm(1D);
@@ -113,7 +134,7 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
             styleRule1.Style.Padding.Right = Telerik.Reporting.Drawing.Unit.Point(2D);
             this.StyleSheet.AddRange(new Telerik.Reporting.Drawing.StyleRule[] {
             styleRule1});
-            this.Width = Telerik.Reporting.Drawing.Unit.Inch(7.0834522247314453D);
+            this.Width = Telerik.Reporting.Drawing.Unit.Inch(7.2834644317626953D);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }
@@ -127,5 +148,7 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
         private Telerik.Reporting.Shape shape1;
         private Telerik.Reporting.HtmlTextBox MassMediaNameTextBox;
         private Telerik.Reporting.HtmlTextBox PublicationDateTextBox;
+        private Telerik.Reporting.ReportFooterSection reportFooterSection1;
+        private Telerik.Reporting.HtmlTextBox UrlTextBox;
     }
 }
