@@ -210,27 +210,27 @@ namespace EffixReportSystem.Views.Report.Views
                             item =>
                             item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
                             item.Publication_date <= endPeriod), "", "", ""));
-                //////Инициированные
-                ////rBook.Reports.Add(
-                ////    new DiagramReport(
-                ////        model.EF_Publications.Where(
-                ////            item =>
-                ////            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
-                ////            item.Publication_date <= endPeriod), "", "", ""));
-                //////Запланированные
-                ////rBook.Reports.Add(
-                ////    new DiagramReport(
-                ////        model.EF_Publications.Where(
-                ////            item =>
-                ////            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
-                ////            item.Publication_date <= endPeriod), "", "", ""));
-                //////Приоритет
-                ////rBook.Reports.Add(
-                ////    new DiagramReport(
-                ////        model.EF_Publications.Where(
-                ////            item =>
-                ////            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
-                ////            item.Publication_date <= endPeriod), "", "", ""));
+                //Инициированные
+                rBook.Reports.Add(
+                    new InitiatedReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod)));;
+                //Запланированные
+                rBook.Reports.Add(
+                    new PlannedReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod)));
+                //Приоритет
+                rBook.Reports.Add(
+                    new PriorityReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod)));
             }
             //rBook.Reports.Add(new DiagramReport());
             //rBook.Reports.Add(new DiagramReport());

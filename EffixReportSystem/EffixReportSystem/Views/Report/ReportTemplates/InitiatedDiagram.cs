@@ -18,19 +18,15 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
     public partial class InitiatedReport : Report
     {
         private ObservableCollection<EF_Publication> _pList=new ObservableCollection<EF_Publication>();
-        private string _firstLabel;
-        private string _secondLabel;
         public InitiatedReport()
         {
             InitializeComponent();
             chart1.NeedDataSource += DiagramReport_NeedDataSource;
         }
 
-        public InitiatedReport(IEnumerable<EF_Publication> list, string param, string firstLabel, string secondLabel)
+        public InitiatedReport(IEnumerable<EF_Publication> list)
         {
             InitializeComponent();
-            _firstLabel = firstLabel;
-            _secondLabel = secondLabel;
             _pList=new ObservableCollection<EF_Publication>(list);
             chart1.NeedDataSource += DiagramReport_NeedDataSource;
         }
@@ -39,34 +35,27 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
         {
             using (var model = new EntitiesModel())
             {
-              //  var products = _pList;
-                var first = _pList.Count(item1 => item1.Is_initiated == 1);
-                var second = _pList.Count(item1 => item1.Is_initiated == 0);
-                var procChart = (Telerik.Reporting.Processing.Chart) sender;
-                var defChart = (Chart) procChart.ItemDefinition;
+                var initiatedList = model.EF_Initiateds;
+                var procChart = (Telerik.Reporting.Processing.Chart)sender;
+                var defChart = (Chart)procChart.ItemDefinition;
                 defChart.IntelligentLabelsEnabled = false;
                 var serie = new ChartSeries();
                 serie.Type = ChartSeriesType.Pie;
                 serie.Clear();
                 serie.Appearance.LegendDisplayMode = ChartSeriesLegendDisplayMode.ItemLabels;
-
-                    var item = new ChartSeriesItem
-                        {
-                            YValue = (double) first, 
-                            Name = _firstLabel+"  "+first.ToString()};
-                item.Appearance.Exploded = true;
-                item.Label.TextBlock.Text = first.ToString() + " - #%";
-
-                var item2 = new ChartSeriesItem
+                foreach (var item in initiatedList)
                 {
-                    YValue = (double)second,
-                    Name = _secondLabel+" " + second.ToString()
-                };
-                item2.Appearance.Exploded = true;
-                item2.Label.TextBlock.Text = second.ToString() + " - #%";
-
-                    serie.Items.Add(item);
-                    serie.Items.Add(item2);
+                    var listItem = item.ID;
+                    var count = _pList.Count(item1 => item1.Is_initiated == listItem);
+                    var chartS = new ChartSeriesItem
+                    {
+                        YValue = (double)count,
+                        Name = item.IsInitiated + "  " + count.ToString()
+                    };
+                    chartS.Appearance.Exploded = true;
+                    chartS.Label.TextBlock.Text = count.ToString() + " - #%";
+                    serie.Items.Add(chartS);
+                }
                 defChart.Series.Add(serie);
             }
         }
