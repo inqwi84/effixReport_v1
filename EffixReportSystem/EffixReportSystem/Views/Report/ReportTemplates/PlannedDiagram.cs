@@ -15,18 +15,18 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
     /// <summary>
     /// Summary description for SnapshotReport.
     /// </summary>
-    public partial class DiagramReport : Report
+    public partial class PlannedReport : Report
     {
         private ObservableCollection<EF_Publication> _pList=new ObservableCollection<EF_Publication>();
         private string _firstLabel;
         private string _secondLabel;
-        public DiagramReport()
+        public PlannedReport()
         {
             InitializeComponent();
             chart1.NeedDataSource += DiagramReport_NeedDataSource;
         }
 
-        public DiagramReport(IEnumerable<EF_Publication> list, string param, string firstLabel, string secondLabel)
+        public PlannedReport(IEnumerable<EF_Publication> list, string param, string firstLabel, string secondLabel)
         {
             InitializeComponent();
             _firstLabel = firstLabel;

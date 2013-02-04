@@ -1,6 +1,6 @@
 ﻿namespace EffixReportSystem.Views.Report.ReportTemplates
 {
-    partial class DiagramReport
+    partial class TonalityReport
     {
         #region Component Designer generated code
         /// <summary>

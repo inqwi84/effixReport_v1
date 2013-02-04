@@ -339,6 +339,42 @@
     <Compile Include="Views\Report\ReportTemplates\ClippingReport_v2.Designer.cs">
       <DependentUpon>ClippingReport_v2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Report\ReportTemplates\TonalityDiagram.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\TonalityDiagram.Designer.cs">
+      <DependentUpon>TonalityDiagram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\ExclusivityDiagram.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\ExclusivityDiagram.Designer.cs">
+      <DependentUpon>ExclusivityDiagram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\HasPhotoDiagram.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\HasPhotoDiagram.Designer.cs">
+      <DependentUpon>HasPhotoDiagram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\PlannedDiagram.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\PlannedDiagram.Designer.cs">
+      <DependentUpon>PlannedDiagram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\InitiatedDiagram.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\InitiatedDiagram.Designer.cs">
+      <DependentUpon>InitiatedDiagram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\PriorityDiagram.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\PriorityDiagram.Designer.cs">
+      <DependentUpon>PriorityDiagram.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Report\ReportTemplates\HeadReport.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -500,6 +536,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Report\ReportTemplates\ClippingReport_v2.resx">
       <DependentUpon>ClippingReport_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ReportTemplates\TonalityDiagram.resx">
+      <DependentUpon>TonalityDiagram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ReportTemplates\ExclusivityDiagram.resx">
+      <DependentUpon>ExclusivityDiagram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ReportTemplates\HasPhotoDiagram.resx">
+      <DependentUpon>HasPhotoDiagram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ReportTemplates\PlannedDiagram.resx">
+      <DependentUpon>PlannedDiagram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ReportTemplates\InitiatedDiagram.resx">
+      <DependentUpon>InitiatedDiagram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ReportTemplates\PriorityDiagram.resx">
+      <DependentUpon>PriorityDiagram.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Report\ReportTemplates\DiagramReport.resx">
       <DependentUpon>DiagramReport.cs</DependentUpon>

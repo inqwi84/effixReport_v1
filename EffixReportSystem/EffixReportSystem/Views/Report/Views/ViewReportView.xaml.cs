@@ -167,22 +167,73 @@ namespace EffixReportSystem.Views.Report.Views
         private ReportBook MakeReport(string projName, DateTime beginPeriod, DateTime endPeriod)
         {
             var rBook = new ReportBook();
-            using (var model=new EntitiesModel())
+            using (var model = new EntitiesModel())
             {
                 var report1 = new HeadReport(projName, beginPeriod, endPeriod);
                 rBook.Reports.Add(report1);
-                foreach (var item in model.EF_Publications.Where(item => item.Project_name.Equals(projName)&&item.Publication_date>=beginPeriod&&item.Publication_date<=endPeriod).OrderBy(dt=>dt.Publication_date).ThenBy(nm=>nm.EF_SMI.Smi_name))
+                foreach (
+                    var item in
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod)
+                             .OrderBy(dt => dt.Publication_date)
+                             .ThenBy(nm => nm.EF_SMI.Smi_name))
                 {
-                    var imageColl= new ObservableCollection<Bitmap>();
+                    var imageColl = new ObservableCollection<Bitmap>();
                     imageColl = GetImageCollection(item);
                     foreach (var bitmapImage in imageColl)
                     {
-                        var rpr = new ClippingReport_v2(bitmapImage,item);
+                        var rpr = new ClippingReport_v2(bitmapImage, item);
                         rBook.Reports.Add(rpr);
                     }
                 }
+
+                //Тональность //1
+                rBook.Reports.Add(
+                    new ExclusivityReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod)));;
+                //Эксклюзивность
+                rBook.Reports.Add(
+                    new HasPhotoReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod)));;
+                //Фотография
+                rBook.Reports.Add(
+                    new DiagramReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod), "", "", ""));
+                //////Инициированные
+                ////rBook.Reports.Add(
+                ////    new DiagramReport(
+                ////        model.EF_Publications.Where(
+                ////            item =>
+                ////            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                ////            item.Publication_date <= endPeriod), "", "", ""));
+                //////Запланированные
+                ////rBook.Reports.Add(
+                ////    new DiagramReport(
+                ////        model.EF_Publications.Where(
+                ////            item =>
+                ////            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                ////            item.Publication_date <= endPeriod), "", "", ""));
+                //////Приоритет
+                ////rBook.Reports.Add(
+                ////    new DiagramReport(
+                ////        model.EF_Publications.Where(
+                ////            item =>
+                ////            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                ////            item.Publication_date <= endPeriod), "", "", ""));
             }
-            rBook.Reports.Add(new DiagramReport());
+            //rBook.Reports.Add(new DiagramReport());
+            //rBook.Reports.Add(new DiagramReport());
            // reportViewer.ReportSource = rBook;
             return rBook;
         }
