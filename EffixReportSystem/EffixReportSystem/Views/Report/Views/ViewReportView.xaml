@@ -19,6 +19,7 @@
                 <ComboBoxItem>Артекс Hyundai</ComboBoxItem>
                 <ComboBoxItem>Авторусь</ComboBoxItem>
                 <ComboBoxItem>АвтоАЛЕА Honda</ComboBoxItem>
+                <ComboBoxItem>АвтоАЛЕА Jaguar</ComboBoxItem>
             </ComboBox>
             <Label Margin="5" VerticalAlignment="Center">Начало периода</Label>
             <DatePicker x:Name="BeginPeriod" Margin="5" VerticalAlignment="Center"></DatePicker>

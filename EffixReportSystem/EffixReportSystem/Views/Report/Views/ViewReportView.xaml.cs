@@ -75,6 +75,9 @@ namespace EffixReportSystem.Views.Report.Views
                 case 5:
                     rootBook = MakeReport("avtoalea-honda", bDate, eDate);
                     break;
+                case 6:
+                    rootBook = MakeReport("avtoalea-jaguar", bDate, eDate);
+                    break;
             }
             //var rBook = new ReportBook();
             //var report1 = new HeadReport();
@@ -159,60 +162,6 @@ namespace EffixReportSystem.Views.Report.Views
                 eDate = EndPeriod.SelectedDate.Value;
                 bw.RunWorkerAsync();
             }
-            //var rBook = new ReportBook();
-            //var report1 =new HeadReport();
-            //rBook.Reports.Add(report1);
-            //using (var model=new EntitiesModel())
-            //{
-            //    foreach (var report in model.EF_Publications.Select(publication => new ClippingReport(publication)))
-            //    {
-            //        rBook.Reports.Add(report);
-            //    }
-            //}
-            //rBook.Reports.Add(new DiagramReport());
-            //reportViewer.ReportSource = rBook;
-            //switch (ProjectsComboBox.SelectedIndex)
-            //{
-            //        //не выбрано
-            //    case 0:
-            //        MessageBox.Show("Не выбран проект");
-            //        break;
-            //        //лифан
-            //    case 1:
-            //        Task.Factory.StartNew(() =>
-            //            {
-            //                MakeReport("lifan", BeginPeriod.SelectedDate.Value, EndPeriod.SelectedDate.Value);
-            //            });
-            //        break;
-            //        //артекс ягуар
-            //    case 2:
-            //        Task.Factory.StartNew(() =>
-            //        {
-            //            MakeReport("arteks-jaguar", BeginPeriod.SelectedDate.Value, EndPeriod.SelectedDate.Value);
-            //        });
-            //        break;
-            //        //артекс хюндай
-            //    case 3:
-            //        Task.Factory.StartNew(() =>
-            //        {
-            //            MakeReport("arteks-hyundai", BeginPeriod.SelectedDate.Value, EndPeriod.SelectedDate.Value);
-            //        });
-            //        break;
-            //        //авторусь
-            //    case 4:
-            //        Task.Factory.StartNew(() =>
-            //        {
-            //            MakeReport("avtorus", BeginPeriod.SelectedDate.Value, EndPeriod.SelectedDate.Value);
-            //        });
-            //        break;
-            //        //автоалея ХОнда
-            //    case 5:
-            //        Task.Factory.StartNew(() =>
-            //        {
-            //            MakeReport("avtoalea-honda", BeginPeriod.SelectedDate.Value, EndPeriod.SelectedDate.Value);
-            //        });
-            //        break;
-            //}
         }
 
         private ReportBook MakeReport(string projName, DateTime beginPeriod, DateTime endPeriod)
