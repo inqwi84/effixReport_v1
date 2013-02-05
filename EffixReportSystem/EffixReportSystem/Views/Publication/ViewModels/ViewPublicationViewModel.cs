@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ using System.Windows.Data;
 using CommonLibraries.Log;
 using EffixReportSystem.Helper.Classes;
 using EffixReportSystem.Helper.Interfaces;
+using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.StorageClient;
 
 namespace EffixReportSystem.Views.Publication.ViewModels
 {
@@ -342,12 +345,67 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                               model.SaveChanges();
                           }
                       });
+              RemoveImageFromBlob(CurrentPublication.Project_name,CurrentPublication.Blob_path,CurrentPublication.Image_count);
                   PublicationList.Remove(
                       PublicationList.FirstOrDefault(item => item.Publication_id == CurrentPublication.Publication_id));
               //удалить блобы из азуре
 
           }
 
+        private void RemoveImageFromBlob(string projectName,string filePath,int? fileCount)
+        {
+            //var cloudStorageAccount = CloudStorageAccount.Parse(
+            //    "DefaultEndpointsProtocol=http;AccountName=ctx;AccountKey=rCaek5ugmLbIaL2mXk3gaqMF4mzqPrUu6CXBUsXn1yrTdWBBTBsQpA2bDuyDC6BQx1NCeUhEl6p0vWT69ZNF+Q==");
+            //var blobClient = cloudStorageAccount.CreateCloudBlobClient();
+
+            //// Get a reference to the container.
+            //CloudBlobContainer container = blobClient.GetContainerReference(projectName);
+
+            //// Indicate that any snapshots should be deleted.
+            //BlobRequestOptions options = new BlobRequestOptions();
+            //options.DeleteSnapshotsOption = DeleteSnapshotsOption.IncludeSnapshots;
+
+            //// Specify a flat blob listing, so that only CloudBlob objects will be returned.
+            //// The Delete method exists only on CloudBlob, not on IListBlobItem.
+            //options.UseFlatBlobListing = true;
+
+            //// Enumerate through the blobs in the container, deleting both blobs and their snapshots.
+            //for (int i = 0; i < fileCount; i++)
+            //{
+                
+            //}
+            //foreach (CloudBlob blob in container.ListBlobs(options))
+            //{
+            //    blob.Uri
+            //    Console.WriteLine(blob.Uri);
+            //    blob.DeleteIfExists(options);
+            //}
+
+            //////var nameArray = filePath.Split(Convert.ToChar("\\"));
+            //////var projectNameContainer = nameArray[2];
+            //////// var fileName = filePath.Replace("c:\\storage\\" + projectNameContainer, String.Empty);
+            //////var fileName = filePath.Replace(Properties.Settings.Default.BaseDirectory + "\\" + projectNameContainer, String.Empty);
+            //////try
+            //////{
+            //////    var cloudStorageAccount = CloudStorageAccount.Parse(
+            //////        "DefaultEndpointsProtocol=http;AccountName=ctx;AccountKey=rCaek5ugmLbIaL2mXk3gaqMF4mzqPrUu6CXBUsXn1yrTdWBBTBsQpA2bDuyDC6BQx1NCeUhEl6p0vWT69ZNF+Q==");
+            //////    var blobClient = cloudStorageAccount.CreateCloudBlobClient();
+            //////    var blobContainer = blobClient.GetContainerReference(projectNameContainer);
+            //////    var blob = blobContainer.GetBlobReference(fileName);
+            //////    var fileStream = File.OpenRead(filePath);
+
+            //////    var byteArray = new byte[fileStream.Length];
+            //////    fileStream.Read(byteArray, 0, byteArray.Length);
+            //////    blob.UploadByteArray(byteArray);
+            //////    fileStream.Close();
+            //////}
+            //////catch (StorageClientException e)
+            //////{
+            //////}
+            //////catch (Exception e)
+            //////{
+            //////}
+        }
         public void ReloadDepartments()
         {
              using (var model = new EntitiesModel())

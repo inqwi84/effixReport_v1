@@ -602,14 +602,14 @@ namespace EffixReportSystem.Views.Publication.Views
                         var ms = new MemoryStream();
                         stream.CopyTo(ms);
                         var extension = "." + filepath.Split('\\').LastOrDefault().Split('.').LastOrDefault();
-                        var newFile = tempDirectory + "\\" + "_" + index + extension;
+                        var newFile = tempDirectory + "\\" + "_" + index + ".png";
                         
                         var tmpBitmap = new Bitmap(ms);
                         var bitmapImage = Bitmap2BitmapImage(tmpBitmap);
                         ctx.ImageTileList.Add(new DataHelper.ImageTile
                         {
                             Image = bitmapImage,
-                            ImageName = "_" + index + extension,
+                            ImageName = "_" + index + ".png",
                             ImagePath = newFile
                         });
                         index++;
