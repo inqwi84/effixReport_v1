@@ -286,7 +286,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
         {
                 try
                 {
-                    Smi = new List<EF_SMI>(model.EF_SMIs);
+                    Smi = new List<EF_SMI>(model.EF_SMIs.OrderBy(item=>item.Smi_name));
                     Tonalities = new List<EF_Tonality>(model.EF_Tonalities);
                     SmiTypes = new List<EF_SMI_Type>(model.EF_SMI_Types);
                     Exclusivities = new List<EF_Exclusivity>(model.EF_Exclusivities);

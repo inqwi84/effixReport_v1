@@ -20,10 +20,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
         private readonly EntitiesModel _model = new EntitiesModel();
         private readonly string _tempDirectory = String.Empty;
         private string _baseDirectory = String.Empty;
-        public List<EF_SMI> Smi
-        {
-            get { return _model.EF_SMIs.ToList(); }
-        }
+        public List<EF_SMI> Smi { set; get; }
         public List<EF_Tonality> Tonalities { get; set; }
         public List<EF_SMI_Type> SmiTypes { get; set; }
         public List<EF_Exclusivity> Exclusivities { get; set; }
@@ -338,6 +335,25 @@ namespace EffixReportSystem.Views.Publication.ViewModels
             CurrentImageTile = tile;
             //Process.Start("C:\\Program Files (x86)\\PhotoshopPortable\\PhotoshopCS4Portable.exe", CurrentImageTile.ImagePath);
             Process.Start(Properties.Settings.Default.PhotoshopExecutable, CurrentImageTile.ImagePath);
+        }
+        public void GetData()
+        {
+            try
+            {
+                Smi = new List<EF_SMI>(_model.EF_SMIs.OrderBy(item => item.Smi_name));
+                Tonalities = new List<EF_Tonality>(_model.EF_Tonalities);
+                SmiTypes = new List<EF_SMI_Type>(_model.EF_SMI_Types);
+                Exclusivities = new List<EF_Exclusivity>(_model.EF_Exclusivities);
+                Priorities = new List<EF_SMI_priority>(_model.EF_SMI_priorities);
+                Initiated = new List<EF_Initiated>(_model.EF_Initiateds);
+                Planed = new List<EF_Planed>(_model.EF_Planeds);
+                Photo = new List<EF_Photo>(_model.EF_Photos);
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
     }
 }

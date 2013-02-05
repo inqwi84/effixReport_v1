@@ -45,6 +45,7 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
                 serie.Appearance.LegendDisplayMode = ChartSeriesLegendDisplayMode.ItemLabels;
                 foreach (var item in priorityList)
                 {
+                    if (item.Priority_name.Contains("выбрано")) continue;
                     var listItem = item.Priority_id;
                     var count = _pList.Count(item1 => item1.Priority_id == listItem);
                     var chartS = new ChartSeriesItem

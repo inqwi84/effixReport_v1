@@ -45,16 +45,17 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
                serie.Appearance.LegendDisplayMode = ChartSeriesLegendDisplayMode.ItemLabels;
                 foreach (var item in exclusivityList)
                 {
+                    if (item.Name.Contains("выбрано")) continue;
                     var listItem = item.Exclusivity_id;
                     var count = _pList.Count(item1 => item1.Exclusivity_id == listItem);
-                    var chartS= new ChartSeriesItem
+                    var chartS = new ChartSeriesItem
                         {
-                            YValue = (double)count,
+                            YValue = (double) count,
                             Name = item.Name + "  " + count.ToString()
                         };
-                chartS.Appearance.Exploded = true;
-                chartS.Label.TextBlock.Text = count.ToString() + " - #%";
-                serie.Items.Add(chartS);
+                    chartS.Appearance.Exploded = true;
+                    chartS.Label.TextBlock.Text = count.ToString() + " - #%";
+                    serie.Items.Add(chartS);
                 }
                 defChart.Series.Add(serie);
             }

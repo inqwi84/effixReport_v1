@@ -183,9 +183,50 @@ namespace EffixReportSystem.Views.Publication.Views
 
         private void DoneButton_Click(object sender, RoutedEventArgs e)
         {
+            var ctx = DataContext as NewPublicationViewModel;
             try
             {
-                var ctx = DataContext as NewPublicationViewModel;
+                if (ctx.CurrentPublication.Publication_name == null)
+                {
+                    MessageBox.Show("Вы не ввели наименование публикации");
+                    return;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Вы не ввели наименование публикации");
+                return;
+            }
+            try
+            {
+                if (ctx.CurrentPublication.EF_SMI == null)
+                {
+                    MessageBox.Show("Вы не выбрали СМИ");
+                    return;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Вы не выбрали СМИ");
+                return;
+            }
+            try
+            {
+                if (ctx.CurrentPublication.Publication_date == null)
+                {
+                    MessageBox.Show("Вы не ввели дату публикации");
+                    return;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Вы не ввели дату публикации");
+                return;
+            }
+
+
+            try
+            {
                 var date = ctx.CurrentPublication.Publication_date.Value;
                 // проверка, если больше нет такой записи в БД!
                 var alreadyExists = DataHelper.CheckIfPublicationExists((long)ctx.CurrentPublication.Project_id,
@@ -543,8 +584,10 @@ namespace EffixReportSystem.Views.Publication.Views
                     Multiselect = true,
                     Title = "Select configuration",
                     DefaultExt = ".png",
-                    Filter = "PNG-file (.png)|*.png|JPEG-file (.jpg)|*.jpg|BMP-file (.bmp)|*.bmp",
-                    CheckFileExists = true
+                   // Filter = "PNG-file (.png)|*.png|JPEG-file (.jpg)|*.jpg|BMP-file (.bmp)|*.bmp",
+                   Filter = "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|"
+       + "Все типы изображений|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff",
+                    CheckFileExists = true,FilterIndex = 6
                 };
                 if (dlg.ShowDialog() != true) return;
                 var index = 0;

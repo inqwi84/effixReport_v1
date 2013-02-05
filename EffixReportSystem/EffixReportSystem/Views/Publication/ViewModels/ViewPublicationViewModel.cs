@@ -344,6 +344,8 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                       });
                   PublicationList.Remove(
                       PublicationList.FirstOrDefault(item => item.Publication_id == CurrentPublication.Publication_id));
+              //удалить блобы из азуре
+
           }
 
         public void ReloadDepartments()

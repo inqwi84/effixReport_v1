@@ -401,7 +401,7 @@
                                     <classes:DockPanelSplitter x:Name="LeftSplitter" DockPanel.Dock="Left" Width="2" ProportionalResize="True" Background="Red" />
                                     <Grid DockPanel.Dock="Right" MinWidth="5"></Grid>
                                     <classes:DockPanelSplitter x:Name="RightSplitter"  ProportionalResize="True" DockPanel.Dock="Right" Width="2"  Background="Red"/>
-                                    <Grid x:Name="TopSplitter1before" DockPanel.Dock="Top"  MinHeight="10">
+                                    <Grid x:Name="TopSplitter1before" DockPanel.Dock="Top"  MinHeight="2">
                                     </Grid>
                                     <classes:DockPanelSplitter x:Name="TopSplitter1" ProportionalResize="True" DockPanel.Dock="Top" Background="Black"/>
                                     <Grid x:Name="TopSplitter1after" DockPanel.Dock="Top"  MinHeight="10">
