@@ -88,6 +88,17 @@ namespace EffixReportSystem.Helper.Classes.Report
             }
             return result;
         }
+         [System.ComponentModel.DataObjectMethod(System.ComponentModel.DataObjectMethodType.Select)]
+         public List<ReportRS> GetSelectedReports(List<EF_Publication> list,int index)
+         {
+             var result = new List<ReportRS>();
+             foreach (var efPublication in list)
+             {
+                 result.Add(new ReportRS(efPublication, index));
+                 index++;
+             }
+             return result;
+         }
     }
                    
 

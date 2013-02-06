@@ -339,6 +339,18 @@
     <Compile Include="Views\Report\ReportTemplates\ClippingReport_v2.Designer.cs">
       <DependentUpon>ClippingReport_v2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Report\ReportTemplates\AvtoAleaJLRHeadReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\AvtoAleaJLRHeadReport.Designer.cs">
+      <DependentUpon>AvtoAleaJLRHeadReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\GroupPageReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\GroupPageReport.Designer.cs">
+      <DependentUpon>GroupPageReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Report\ReportTemplates\TonalityDiagram.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -536,6 +548,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Report\ReportTemplates\ClippingReport_v2.resx">
       <DependentUpon>ClippingReport_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ReportTemplates\AvtoAleaJLRHeadReport.resx">
+      <DependentUpon>AvtoAleaJLRHeadReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ReportTemplates\GroupPageReport.resx">
+      <DependentUpon>GroupPageReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Report\ReportTemplates\TonalityDiagram.resx">
       <DependentUpon>TonalityDiagram.cs</DependentUpon>
