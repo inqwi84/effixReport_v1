@@ -57,7 +57,7 @@ namespace EffixReportSystem.Views.Report.Views
                     break;
                 //лифан
                 case 1:
-                 rootBook= MakeReport("lifan", bDate, eDate);
+                    rootBook = MakeLifan_Report("lifan", bDate, eDate);
                     break;
                 //артекс ягуар
                 case 2:
@@ -221,6 +221,144 @@ namespace EffixReportSystem.Views.Report.Views
                         }
                     }
                 }
+
+                //Тональность //1
+                rBook.Reports.Add(
+                    new ExclusivityReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod))); ;
+                //Эксклюзивность
+                rBook.Reports.Add(
+                    new HasPhotoReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod))); ;
+                //Фотография
+                rBook.Reports.Add(
+                    new DiagramReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod), "", "", ""));
+                //Инициированные
+                rBook.Reports.Add(
+                    new InitiatedReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod))); ;
+                //Запланированные
+                rBook.Reports.Add(
+                    new PlannedReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod)));
+                //Приоритет
+                if (projName.Contains("arteks"))
+                {
+                    rBook.Reports.Add(
+                        new PriorityReport(
+                            model.EF_Publications.Where(
+                                item =>
+                                item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                                item.Publication_date <= endPeriod)));
+                }
+            }
+            return rBook;
+        }
+        private ReportBook MakeLifan_Report(string projName, DateTime beginPeriod, DateTime endPeriod)
+        {
+            var rBook = new ReportBook();
+            using (var model = new EntitiesModel())
+            {
+                    var allList = model.EF_Publications.Where(
+                    item =>
+                    item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                    item.Publication_date <= endPeriod);
+
+
+               var samIzdatList = allList.Where(item => item.EF_SMI.EF_MassMedium.Mass_media_type_name == "Самиздат").ToList();
+               var initiatedGroups = allList.Where(item => item.Is_initiated == 1).OrderBy(item => item.Publication_date)
+                                     .ThenBy(item => item.EF_SMI.Smi_name)
+                           .GroupBy(item => item.EF_SMI.EF_MassMedium.Mass_media_type_name).OrderBy(item => item.Key);
+               var nonInitiatedGroups =
+                   allList.Where(item => item.Is_initiated == 0).OrderBy(item => item.Publication_date)
+                                     .ThenBy(item => item.EF_SMI.Smi_name)
+                           .GroupBy(item => item.EF_SMI.EF_MassMedium.Mass_media_type_name).OrderBy(item => item.Key);
+
+                int idx = 1;
+                foreach (var nonInitiatedGroup in nonInitiatedGroups)
+                {
+                        var report1 = new LifanHeadReport(nonInitiatedGroup.Key, nonInitiatedGroup.ToList(), idx);
+                        rBook.Reports.Add(report1);
+                        idx+=nonInitiatedGroup.Count();
+                }
+                foreach (var initiatedGroup in initiatedGroups)
+                {
+                    var report1 = new LifanHeadReport(initiatedGroup.Key, initiatedGroup.ToList(), idx);
+                        rBook.Reports.Add(report1);
+                        idx += initiatedGroup.Count();
+                }
+                var report12 = new LifanHeadReport("Самиздат", samIzdatList, idx);
+                    rBook.Reports.Add(report12);
+
+
+                    foreach (var nonInitiatedGroup in nonInitiatedGroups)
+                    {
+                        rBook.Reports.Add(new GroupPageReport(nonInitiatedGroup.Key));
+                        foreach (var efPublication in nonInitiatedGroup)
+                        {
+                            {
+                                var imageColl = new ObservableCollection<Bitmap>();
+                                imageColl = GetImageCollection(efPublication);
+                                int index = 1;
+                                foreach (var bitmapImage in imageColl)
+                                {
+                                    if (index == imageColl.Count)
+                                    {
+                                        var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
+                                        rBook.Reports.Add(rpr);
+                                    }
+                                    else
+                                    {
+                                        var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
+                                        rBook.Reports.Add(rpr);
+                                    }
+                                    index++;
+                                }
+                            }
+                        }
+                    }
+                    foreach (var initiatedGroup in initiatedGroups)
+                    {
+                        rBook.Reports.Add(new GroupPageReport(initiatedGroup.Key));
+                        foreach (var efPublication in initiatedGroup)
+                        {
+                            {
+                                var imageColl = new ObservableCollection<Bitmap>();
+                                imageColl = GetImageCollection(efPublication);
+                                int index = 1;
+                                foreach (var bitmapImage in imageColl)
+                                {
+                                    if (index == imageColl.Count)
+                                    {
+                                        var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
+                                        rBook.Reports.Add(rpr);
+                                    }
+                                    else
+                                    {
+                                        var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
+                                        rBook.Reports.Add(rpr);
+                                    }
+                                    index++;
+                                }
+                            }
+                        }
+                    }
 
                 //Тональность //1
                 rBook.Reports.Add(

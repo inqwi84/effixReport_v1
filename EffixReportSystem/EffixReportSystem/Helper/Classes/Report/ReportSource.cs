@@ -248,7 +248,7 @@ namespace EffixReportSystem.Helper.Classes.Report
             PublicationUrl = publication.Url_path;
             PublicationTitle = publication.Publication_name;
             MassMediaType = publication.EF_SMI.EF_MassMedium.Mass_media_type_name;
-            ImageList = GetBlobFromStorage(publication.Blob_path, publication.Image_count, publication.Project_name).ToList();
+           // ImageList = GetBlobFromStorage(publication.Blob_path, publication.Image_count, publication.Project_name).ToList();
             ImagePathList = GetBlobPathFromStorage(publication.Blob_path, publication.Image_count, publication.Project_name).ToList();
             try
             {
@@ -256,7 +256,7 @@ namespace EffixReportSystem.Helper.Classes.Report
             }
             catch (Exception)
             {
-
+                TempUri = String.Empty;
             }
         }
     }
