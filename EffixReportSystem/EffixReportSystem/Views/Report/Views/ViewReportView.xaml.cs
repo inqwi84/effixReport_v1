@@ -61,19 +61,19 @@ namespace EffixReportSystem.Views.Report.Views
                     break;
                 //артекс ягуар
                 case 2:
-                    rootBook = MakeReport("arteks-jaguar", bDate, eDate);
+                    rootBook = MakeAvtoALEA_JLR_Report("arteks-jaguar", bDate, eDate);
                     break;
                 //артекс хюндай
                 case 3:
-                    rootBook = MakeReport("arteks-hyundai", bDate, eDate);
+                    rootBook = MakeAvtoALEA_JLR_Report("arteks-hyundai", bDate, eDate);
                     break;
                 //авторусь
                 case 4:
-                    rootBook = MakeReport("avtorus", bDate, eDate);
+                    rootBook = MakeAvtoALEA_JLR_Report("avtorus", bDate, eDate);
                     break;
                 //автоалея ХОнда
                 case 5:
-                    rootBook = MakeReport("avtoalea-honda", bDate, eDate);
+                    rootBook = MakeAvtoALEA_JLR_Report("avtoalea-honda", bDate, eDate);
                     break;
                 case 6:
                     rootBook = MakeAvtoALEA_JLR_Report("avtoalea-jaguar", bDate, eDate);
