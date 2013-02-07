@@ -73,10 +73,10 @@ namespace EffixReportSystem.Views.Report.Views
                     break;
                 //автоалея ХОнда
                 case 5:
-                    rootBook = MakeAvtoALEA_JLR_Report("avtoalea-honda", bDate, eDate);
+                    rootBook = MakeAvtoALEA_JLR_Report22("avtoalea-honda", bDate, eDate);
                     break;
                 case 6:
-                    rootBook = MakeAvtoALEA_JLR_Report("avtoalea-jaguar", bDate, eDate);
+                    rootBook = MakeAvtoALEA_JLR_Report22("avtoalea-jaguar", bDate, eDate);
                     break;
             }
             //var rBook = new ReportBook();
@@ -243,6 +243,114 @@ namespace EffixReportSystem.Views.Report.Views
                             item =>
                             item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
                             item.Publication_date <= endPeriod), "", "", ""));
+                //Инициированные
+                rBook.Reports.Add(
+                    new InitiatedReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod))); ;
+                //Запланированные
+                rBook.Reports.Add(
+                    new PlannedReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod)));
+                //Приоритет
+                if (projName.Contains("arteks"))
+                {
+                    rBook.Reports.Add(
+                        new PriorityReport(
+                            model.EF_Publications.Where(
+                                item =>
+                                item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                                item.Publication_date <= endPeriod)));
+                }
+            }
+            return rBook;
+        }
+        private ReportBook MakeAvtoALEA_JLR_Report22(string projName, DateTime beginPeriod, DateTime endPeriod)
+        {
+            var rBook = new ReportBook();
+            using (var model = new EntitiesModel())
+            {
+                var resultList = new List<List<EF_Publication>>();
+                var resultNameList = new List<string>();
+
+                var pList = model.EF_Publications.Where(
+                    item =>
+                    item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                    item.Publication_date <= endPeriod);
+                var pGroupList = pList.GroupBy(item => item.EF_SMI.EF_MassMedium.Mass_media_type_name);
+
+                //по каждой группе
+                foreach (var group in pGroupList)
+                {
+                    resultList.Add(group.ToList()
+                                     .OrderBy(item => item.Publication_date)
+                                     .ThenBy(item => item.EF_SMI.Smi_name).ToList());
+                    resultNameList.Add(group.Key);
+                }
+                int gIndex = 1;
+                foreach (var rst in resultList)
+                {
+                    var ind = resultList.IndexOf(rst);
+                    var report1 = new AvtoAleaJLRHeadReport(rst, resultNameList[ind], gIndex);
+                    rBook.Reports.Add(report1);
+                    gIndex += rst.Count;
+                }
+
+                foreach (var gList in resultList)
+                {
+                    var id = resultList.IndexOf(gList);
+                    rBook.Reports.Add(new GroupPageReport(resultNameList[id]));
+                    foreach (var efPublication in gList)
+                    {
+                        {
+                            var imageColl = new ObservableCollection<Bitmap>();
+                            imageColl = GetImageCollection(efPublication);
+                            int index = 1;
+                            foreach (var bitmapImage in imageColl)
+                            {
+                                if (index == imageColl.Count)
+                                {
+                                    var rpr = new ClippingReport_v22(bitmapImage, efPublication, true);
+                                    rBook.Reports.Add(rpr);
+                                }
+                                else
+                                {
+                                    var rpr = new ClippingReport_v22(bitmapImage, efPublication, false);
+                                    rBook.Reports.Add(rpr);
+                                }
+                                index++;
+                            }
+                        }
+                    }
+                }
+
+                //Тональность //1
+                rBook.Reports.Add(
+                    new ExclusivityReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod))); ;
+                //Эксклюзивность
+                rBook.Reports.Add(
+                    new HasPhotoReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod)));
+                //Фотография
+                rBook.Reports.Add(
+                    new TonalityReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod)));
+
                 //Инициированные
                 rBook.Reports.Add(
                     new InitiatedReport(

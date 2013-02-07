@@ -345,6 +345,18 @@
     <Compile Include="Views\Report\ReportTemplates\AvtoAleaJLRHeadReport.Designer.cs">
       <DependentUpon>AvtoAleaJLRHeadReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Report\ReportTemplates\AvtoAleaJLRHeadReport2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\AvtoAleaJLRHeadReport2.Designer.cs">
+      <DependentUpon>AvtoAleaJLRHeadReport2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\ClippingReport_v22.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\ClippingReport_v22.Designer.cs">
+      <DependentUpon>ClippingReport_v22.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Report\ReportTemplates\LifanHeadReport.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -557,6 +569,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Report\ReportTemplates\AvtoAleaJLRHeadReport.resx">
       <DependentUpon>AvtoAleaJLRHeadReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ReportTemplates\AvtoAleaJLRHeadReport2.resx">
+      <DependentUpon>AvtoAleaJLRHeadReport2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ReportTemplates\ClippingReport_v22.resx">
+      <DependentUpon>ClippingReport_v22.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Report\ReportTemplates\LifanHeadReport.resx">
       <DependentUpon>LifanHeadReport.cs</DependentUpon>

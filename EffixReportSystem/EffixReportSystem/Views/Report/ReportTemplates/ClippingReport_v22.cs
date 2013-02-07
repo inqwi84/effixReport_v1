@@ -12,9 +12,9 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
     /// <summary>
     /// Summary description for ClippingReport_v2.
     /// </summary>
-    public partial class ClippingReport_v2 : Telerik.Reporting.Report
+    public partial class ClippingReport_v22 : Telerik.Reporting.Report
     {
-        public ClippingReport_v2()
+        public ClippingReport_v22()
         {
             //
             // Required for telerik Reporting designer support
@@ -25,7 +25,7 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
             // TODO: Add any constructor code after InitializeComponent call
             //
         }
-        public ClippingReport_v2(Bitmap image,EF_Publication publication,bool last)
+        public ClippingReport_v22(Bitmap image,EF_Publication publication,bool last)
         {
             InitializeComponent();
 
