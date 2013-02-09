@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:telerik="clr-namespace:Telerik.ReportViewer.Wpf;assembly=Telerik.ReportViewer.Wpf"
+             xmlns:controls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls"
              mc:Ignorable="d">
     <Grid Margin="0,-50,0,0">
         <Grid.RowDefinitions>
@@ -22,12 +23,16 @@
                 <ComboBoxItem>АвтоАЛЕА Jaguar</ComboBoxItem>
             </ComboBox>
             <Label Margin="5" VerticalAlignment="Center">Начало периода</Label>
-            <DatePicker x:Name="BeginPeriod" Margin="5" VerticalAlignment="Center"></DatePicker>
+            <DatePicker x:Name="BeginPeriod" Margin="5" VerticalAlignment="Center" SelectedDate="{Binding BeginDate,Mode=TwoWay}" SelectedDateFormat="Short" ></DatePicker>
             <Label Margin="5" VerticalAlignment="Center">Конец периода</Label>
-            <DatePicker x:Name="EndPeriod" Margin="5" VerticalAlignment="Center"></DatePicker>
+            <DatePicker x:Name="EndPeriod" Margin="5" VerticalAlignment="Center" SelectedDate="{Binding EndDate,Mode=TwoWay}" SelectedDateFormat="Short"></DatePicker>
             <Button Margin="5" VerticalAlignment="Center" Click="Button_Click_1" Width="120"  Style="{DynamicResource stlButton}">Отчет</Button>
             <Button Visibility="Collapsed" Margin="5,15" VerticalAlignment="Center" Click="Button_Click_2" Content="Сформировать отчет2"/>
         </StackPanel>
-        <telerik:ReportViewer x:Name="reportViewer" Grid.Row="1"></telerik:ReportViewer>
+
+        <controls:RadBusyIndicator x:Name="indicator"  Grid.Row="1" BusyContent="отчет формируется.ждите..." IsBusy="{Binding IsBusy}"
+				IsIndeterminate="True">
+            <telerik:ReportViewer x:Name="reportViewer"></telerik:ReportViewer>
+        </controls:RadBusyIndicator>
     </Grid>
 </UserControl>

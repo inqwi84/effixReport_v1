@@ -21,6 +21,7 @@ using CommonLibraries.Log;
 using EffixReportSystem.Helper.Classes;
 using EffixReportSystem.Helper.Classes.Report;
 using EffixReportSystem.Views.Report.ReportTemplates;
+using EffixReportSystem.Views.Report.ViewModels;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.StorageClient;
 using Telerik.Reporting;
@@ -49,6 +50,7 @@ namespace EffixReportSystem.Views.Report.Views
 
         private void bw_DoWork(object sender, DoWorkEventArgs e)
         {
+          Dispatcher.BeginInvoke(new Func<bool>(()=> indicator.IsBusy = true));
             switch (index)
             {
                 //не выбрано
@@ -132,6 +134,7 @@ namespace EffixReportSystem.Views.Report.Views
         }
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            Dispatcher.BeginInvoke(new Func<bool>(() => indicator.IsBusy = false));
             reportViewer.ReportSource = rootBook;
             if ((e.Cancelled == true))
             {
@@ -162,7 +165,12 @@ namespace EffixReportSystem.Views.Report.Views
                 eDate = EndPeriod.SelectedDate.Value;
                 bw.RunWorkerAsync();
             }
+            //var ctx = DataContext as ViewReportViewModel;
+            //ctx.SetProjectIndex(ProjectsComboBox.SelectedIndex);
+            //ctx.IsBusy = true;
         }
+
+
         private ReportBook MakeAvtoALEA_JLR_Report(string projName, DateTime beginPeriod, DateTime endPeriod)
         {
             var rBook = new ReportBook();
@@ -647,7 +655,6 @@ namespace EffixReportSystem.Views.Report.Views
             // Retrieve storage account from connection string.
             return result;
         }
-
         public BitmapImage ImageFromBuffer(Byte[] bytes)
         {
             var stream = new MemoryStream(bytes);
@@ -657,6 +664,7 @@ namespace EffixReportSystem.Views.Report.Views
             image.EndInit();
             return image;
         }
+
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             if (bw.IsBusy != true)

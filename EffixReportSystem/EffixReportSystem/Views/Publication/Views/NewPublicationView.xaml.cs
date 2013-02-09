@@ -557,6 +557,9 @@ namespace EffixReportSystem.Views.Publication.Views
                     transform.ScaleY *= 1.25;
                     transform.CenterX = 0;
                     transform.CenterY = 0;
+                    hruler.Zoom *= 1.25;
+                    vruler.Zoom *= 1.25;
+                    vruler.Chip *= 1.25;
                 }
                 if ((Keyboard.Modifiers != ModifierKeys.Control || (e.Key != Key.Subtract)) && (e.Key != Key.OemMinus))
                     return;
@@ -564,6 +567,9 @@ namespace EffixReportSystem.Views.Publication.Views
                 transform.ScaleY /= 1.25;
                 transform.CenterX = 0;
                 transform.CenterY = 0;
+                hruler.Zoom /= 1.25;
+                vruler.Zoom /= 1.25;
+                vruler.Chip /= 1.25;
             }
             catch (Exception ex)
             {
