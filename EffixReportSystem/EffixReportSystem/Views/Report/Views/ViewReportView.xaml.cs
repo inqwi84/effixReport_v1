@@ -398,34 +398,50 @@ namespace EffixReportSystem.Views.Report.Views
 
 
                var samIzdatList = allList.Where(item => item.EF_SMI.EF_MassMedium.Mass_media_type_name == "Самиздат").ToList();
-               var initiatedGroups = allList.Where(item => item.Is_initiated == 1).OrderBy(item => item.Publication_date)
+              //1 инициированные
+                var initiatedGroups = allList.Where(item => item.Is_initiated == 1).OrderBy(item => item.Publication_date)
                                      .ThenBy(item => item.EF_SMI.Smi_name)
-                           .GroupBy(item => item.EF_SMI.EF_MassMedium.Mass_media_type_name).OrderBy(item => item.Key);
-               var nonInitiatedGroups =
-                   allList.Where(item => item.Is_initiated == 0).OrderBy(item => item.Publication_date)
+                           .GroupBy(item => item.EF_SMI.EF_MassMedium.Parent_type_id).OrderBy(item => item.Key);
+                //2 неинециированные
+               var nonInitiatedGroups =allList.Where(item => item.Is_initiated == 2).OrderBy(item => item.Publication_date)
                                      .ThenBy(item => item.EF_SMI.Smi_name)
-                           .GroupBy(item => item.EF_SMI.EF_MassMedium.Mass_media_type_name).OrderBy(item => item.Key);
+                            .GroupBy(item => item.EF_SMI.EF_MassMedium.Parent_type_id).OrderBy(item => item.Key);
 
                 int idx = 1;
-                foreach (var nonInitiatedGroup in nonInitiatedGroups)
+                try
                 {
-                        var report1 = new LifanHeadReport(nonInitiatedGroup.Key, nonInitiatedGroup.ToList(), idx);
-                        rBook.Reports.Add(report1);
-                        idx+=nonInitiatedGroup.Count();
-                }
-                foreach (var initiatedGroup in initiatedGroups)
-                {
-                    var report1 = new LifanHeadReport(initiatedGroup.Key, initiatedGroup.ToList(), idx);
-                        rBook.Reports.Add(report1);
-                        idx += initiatedGroup.Count();
-                }
-                var report12 = new LifanHeadReport("Самиздат", samIzdatList, idx);
-                    rBook.Reports.Add(report12);
-
-
                     foreach (var nonInitiatedGroup in nonInitiatedGroups)
                     {
-                        rBook.Reports.Add(new GroupPageReport(nonInitiatedGroup.Key));
+                        var smiType =
+                            model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == nonInitiatedGroup.Key);
+                        var report1 = new LifanHeadReport(smiType.Mass_media_type_name, nonInitiatedGroup.ToList(), idx);
+                        rBook.Reports.Add(report1);
+                        idx += nonInitiatedGroup.Count();
+                    }
+                    foreach (var initiatedGroup in initiatedGroups)
+                    {
+                        var smiType =
+                            model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == initiatedGroup.Key);
+                        var report1 = new LifanHeadReport(smiType.Mass_media_type_name, initiatedGroup.ToList(), idx);
+                        rBook.Reports.Add(report1);
+                        idx += initiatedGroup.Count();
+                    }
+                    var report12 = new LifanHeadReport("Самиздат", samIzdatList, idx);
+                    rBook.Reports.Add(report12);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+
+                try
+                {
+                    foreach (var nonInitiatedGroup in nonInitiatedGroups)
+                    {
+                        var smiType =
+    model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == nonInitiatedGroup.Key);
+                        rBook.Reports.Add(new GroupPageReport(smiType.Mass_media_type_name));
                         foreach (var efPublication in nonInitiatedGroup)
                         {
                             {
@@ -449,9 +465,21 @@ namespace EffixReportSystem.Views.Report.Views
                             }
                         }
                     }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                   
+                try
+                {
                     foreach (var initiatedGroup in initiatedGroups)
                     {
-                        rBook.Reports.Add(new GroupPageReport(initiatedGroup.Key));
+                        var smiType =
+model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == initiatedGroup.Key);
+                        rBook.Reports.Add(new GroupPageReport(smiType.Mass_media_type_name));
+                        //var name = String.Empty;
+                        //rBook.Reports.Add(new GroupPageReport(name));
                         foreach (var efPublication in initiatedGroup)
                         {
                             {
@@ -475,6 +503,12 @@ namespace EffixReportSystem.Views.Report.Views
                             }
                         }
                     }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                    
 
                 //Тональность //1
                 rBook.Reports.Add(
