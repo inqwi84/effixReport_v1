@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -13,8 +17,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CommonLibraries.Log;
 using EffixReportSystem.Helper.Classes;
+using EffixReportSystem.Helper.Classes.Enums;
 using EffixReportSystem.Views.Publication.ViewModels;
 using Telerik.Windows.Controls;
+using Image = System.Windows.Controls.Image;
 
 namespace EffixReportSystem.Views.Publication.Views
 {
@@ -23,6 +29,9 @@ namespace EffixReportSystem.Views.Publication.Views
     /// </summary>
     public partial class EditPublicationView : UserControl
     {
+        private readonly string _tempDirectory = Properties.Settings.Default.TempDirectory;
+        private readonly string _baseDirectory = Properties.Settings.Default.BaseDirectory;
+
         public EditPublicationView()
         {
             InitializeComponent();
@@ -84,6 +93,81 @@ namespace EffixReportSystem.Views.Publication.Views
         {
             var tile = DataHelper.FindAncestor(sender as Image, typeof(RadTileViewItem));
             (tile as RadTileViewItem).TileState=TileViewItemState.Maximized;
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var ctx = DataContext as EditPublicationViewModel;
+                if (ctx.ImageTileList == null)
+                {
+                    ctx.ImageTileList = new ObservableCollection<DataHelper.ImageTile>();
+                }
+                
+                var tempDirectory = new DirectoryInfo(_tempDirectory);
+                var dlg = new Microsoft.Win32.OpenFileDialog
+                {
+                    Multiselect = true,
+                    Title = "Select configuration",
+                    DefaultExt = ".png",
+                    // Filter = "PNG-file (.png)|*.png|JPEG-file (.jpg)|*.jpg|BMP-file (.bmp)|*.bmp",
+                    Filter = "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|"
+        + "Все типы изображений|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff",
+                    CheckFileExists = true,
+                    FilterIndex = 6
+                };
+                if (dlg.ShowDialog() != true) return;
+                var index = tempDirectory.GetFiles("*.*").Count();
+                foreach (var filepath in dlg.FileNames)
+                {
+                    using (var stream = new FileStream(filepath, FileMode.Open))
+                    {
+                        var ms = new MemoryStream();
+                        stream.CopyTo(ms);
+                        var newFile = tempDirectory + "\\" + index + ".png";
+
+                        var tmpBitmap = new Bitmap(ms);
+                        var bitmapImage = Bitmap2BitmapImage(tmpBitmap);
+                        ctx.ImageTileList.Add(new DataHelper.ImageTile
+                        {
+                            Image = bitmapImage,
+                            ImageName = "_" + index + ".png",
+                            ImagePath = newFile
+                        });
+                        index++;
+                        SaveMemoryStream(ms, newFile);
+                        ms.Close();
+                    }
+                }
+                ctx.CurrentPublication.Image_count = index;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Logger.TraceError(ex.Message);
+            }
+        }
+        public static void SaveMemoryStream(MemoryStream ms, string fileName)
+        {
+            FileStream outStream = File.OpenWrite(fileName);
+            ms.WriteTo(outStream);
+            outStream.Flush();
+            outStream.Close();
+        }
+
+        public static BitmapImage Bitmap2BitmapImage(Bitmap bitmap)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                bitmap.Save(ms, ImageFormat.Png);
+                ms.Position = 0;
+                BitmapImage bi = new BitmapImage();
+                bi.BeginInit();
+                bi.StreamSource = ms;
+                bi.EndInit();
+                return bi;
+            }
         }
     }
 }

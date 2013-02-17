@@ -19,8 +19,9 @@
     <system:String x:Uid="ProjectsLabelCtrl" x:Key="ProjectsLabelCtrl">Дерево проектов</system:String>
     <system:String x:Uid="PublicationsLabelCtrl" x:Key="PublicationsLabelCtrl">Список публикаций</system:String>
     <system:String x:Uid="PublicationInfoCtrl" x:Key="PublicationInfoCtrl">Информация о публикации</system:String>
+    <system:String x:Uid="SMSLengthCtrl" x:Key="AddWhenEdit">Добавить скриншот</system:String>
     
-   <system:String x:Uid="SubstitutionListCtrl" x:Key="SubstitutionListCtrl">Список замещения</system:String>
+    <system:String x:Uid="SubstitutionListCtrl" x:Key="SubstitutionListCtrl">Список замещения</system:String>
    <system:String x:Uid="SubstitutionEmploymentsCtrl" x:Key="SubstitutionEmploymentsCtrl">Замещающие лица</system:String>
    <system:String x:Uid="EmploymentInfoCtrl" x:Key="EmploymentInfoCtrl">Информация о должности</system:String>
    <system:String x:Uid="ContactInfoCtrl" x:Key="ContactInfoCtrl">Информация о контакте</system:String>

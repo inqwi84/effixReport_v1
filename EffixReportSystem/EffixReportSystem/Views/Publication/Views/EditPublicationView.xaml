@@ -381,5 +381,6 @@
             <Button Name="DoneButton" Style="{DynamicResource stlButton}" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="DoneButton_Click" Margin="0,0,10,0"   Content="{DynamicResource DoneButtonCtrl}" ></Button>
             <Button Name="CancelButton" Style="{DynamicResource stlButton}" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="CancelButton_Click" Margin="0,0,10,0"   Content="{DynamicResource CancelButtonCtrl}"></Button>
         </StackPanel>
+        <Button Name="AddButton" Grid.Row="2" Style="{DynamicResource stlButton}" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="AddButton_Click"  Content="{DynamicResource AddWhenEdit}"></Button>
     </Grid>
 </UserControl>
