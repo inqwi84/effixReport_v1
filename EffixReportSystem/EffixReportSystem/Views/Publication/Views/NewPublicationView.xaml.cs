@@ -229,7 +229,7 @@ namespace EffixReportSystem.Views.Publication.Views
             {
                 var date = ctx.CurrentPublication.Publication_date.Value;
                 // проверка, если больше нет такой записи в БД!
-                var alreadyExists = DataHelper.CheckIfPublicationExists((long)ctx.CurrentPublication.Project_id,
+                var alreadyExists = DataHelper.CheckIfPublicationExists(ctx.CurrentPublication.Project_name,
                                                                         ctx.CurrentPublication.EF_SMI.Smi_id,
                                                                         date.Year,
                                                                         date.Month,
@@ -256,7 +256,10 @@ namespace EffixReportSystem.Views.Publication.Views
                             var sourceDirectory = new DirectoryInfo(_tempDirectory);
 
                             var files = sourceDirectory.GetFiles("*.*");
-
+                                                        ctx.CurrentPublication.Url_path = UrlTextBox.Text;
+                                                        ctx.CurrentPublication.Image_count = files.Count();
+                                                        ctx.CurrentPublication.Ceation_date = DateTime.Now;
+                            ctx.SaveCurrentPublication();
                             var index = 0;
                             foreach (var fileInfo in files)
                             {
@@ -264,7 +267,7 @@ namespace EffixReportSystem.Views.Publication.Views
                                 {
                                     destinationDirectory.Create();
                                 }
-                                var filePath = destinationDirectory + "\\(v2)" +
+                                var filePath = destinationDirectory + "\\"+ctx.CurrentPublication.Publication_id +
                                                ctx.CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') +
                                                fileInfo.Name.Replace(" ", "_");
                                 fileInfo.MoveTo(filePath);
@@ -275,9 +278,7 @@ namespace EffixReportSystem.Views.Publication.Views
                                     ctx.CurrentPublication.Blob_path = filePath;
                                 }
                             }
-                            ctx.CurrentPublication.Url_path = UrlTextBox.Text;
-                            ctx.CurrentPublication.Image_count = index;
-                            ctx.SaveCurrentPublication();
+                            ctx.UpdateCurrentPublication();
                             (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
                                 (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
 
@@ -302,7 +303,9 @@ namespace EffixReportSystem.Views.Publication.Views
                         var sourceDirectory = new DirectoryInfo(_tempDirectory);
 
                         var files = sourceDirectory.GetFiles("*.*");
-
+                        ctx.CurrentPublication.Ceation_date = DateTime.Now;
+                        ctx.CurrentPublication.Image_count = files.Count();
+                        ctx.SaveCurrentPublication();
                         var index = 0;
                         foreach (var fileInfo in files)
                         {
@@ -310,7 +313,7 @@ namespace EffixReportSystem.Views.Publication.Views
                             {
                                 destinationDirectory.Create();
                             }
-                            var filePath = destinationDirectory + "\\" +
+                            var filePath = destinationDirectory + "\\" +ctx.CurrentPublication.Publication_id+
                                            ctx.CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') +
                                            fileInfo.Name.Replace(" ", "_");
                             fileInfo.MoveTo(filePath);
@@ -321,8 +324,7 @@ namespace EffixReportSystem.Views.Publication.Views
                                 ctx.CurrentPublication.Blob_path = filePath;
                             }
                         }
-                        ctx.CurrentPublication.Image_count = index;
-                        ctx.SaveCurrentPublication();
+                        ctx.UpdateCurrentPublication();
                         (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
                             (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
                         ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
@@ -341,13 +343,16 @@ namespace EffixReportSystem.Views.Publication.Views
                         var sourceDirectory = new DirectoryInfo(_tempDirectory);
                         var files = sourceDirectory.GetFiles("*.*");
                         var index = 0;
+                        ctx.CurrentPublication.Image_count = files.Count();
+                        ctx.CurrentPublication.Ceation_date = DateTime.Now;
+                        ctx.SaveCurrentPublication();
                         foreach (var fileInfo in files)
                         {
                             if (!destinationDirectory.Exists)
                             {
                                 destinationDirectory.Create();
                             }
-                            var filePath = destinationDirectory + "\\" +
+                            var filePath = destinationDirectory + "\\" +ctx.CurrentPublication.Publication_id+
                                            ctx.CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') +
                                            fileInfo.Name.Replace(" ", "_");
                             fileInfo.CopyTo(filePath);
@@ -358,8 +363,7 @@ namespace EffixReportSystem.Views.Publication.Views
                                 ctx.CurrentPublication.Blob_path = filePath;
                             }
                         }
-                        ctx.CurrentPublication.Image_count = index;
-                        ctx.SaveCurrentPublication();
+                        ctx.UpdateCurrentPublication();
                         (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
                             (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
                         ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)

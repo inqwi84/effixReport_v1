@@ -140,13 +140,13 @@ namespace EffixReportSystem.Helper.Classes
             return result.Traverse();
         }
 
-        public static bool CheckIfPublicationExists(long projectId, long smiID, int pYear, int pMonth, int pDay)
+        public static bool CheckIfPublicationExists(string projectName, long smiID, int pYear, int pMonth, int pDay)
         {
             try
             {
                 using (var model = new EntitiesModel())
                 {
-                    var publication = model.EF_Publications.FirstOrDefault(pub => pub.Project_id == projectId &&
+                    var publication = model.EF_Publications.FirstOrDefault(pub => pub.Project_name == projectName &&
                                                                    pub.Smi_id == smiID &&
                                                                    pub.Publication_date.Value.Year == pYear &&
                                                                    pub.Publication_date.Value.Month == pMonth &&

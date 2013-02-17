@@ -165,6 +165,9 @@
         <orm:field name="_mass_media_id" property="Mass_media_id" behavior="readwrite" uniqueId="0b558bc9-a1c1-4319-88ab-04d94cc621ce" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="mass_media_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
         </orm:field>
+        <orm:field name="_is_deleted" property="Is_deleted" behavior="readwrite" uniqueId="a49458bd-0e2c-4700-a232-0609ce8e50c8" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column nullable="true" length="0" name="is_deleted" scale="0" sql-type="int" ado-type="Int32" />
+        </orm:field>
         <orm:field name="_eF_SMI_Type" property="EF_SMI_Type" behavior="readwrite" uniqueId="da51f486-9850-418b-87b3-fa89f0a6b292" type="EffixReportSystem.EF_SMI_Type">
           <orm:reference uniqueId="d776273d-f2c9-44fa-8791-f4c27d6644c9">
             <orm:sharedfield name="_smi_type_id" target-class="EffixReportSystem.EF_SMI_Type" target-field="_smi_type_id" />
@@ -259,6 +262,9 @@
         </orm:field>
         <orm:field name="_department_id" property="Department_id" behavior="readwrite" uniqueId="79f2c069-8e0a-481f-96fd-61ad066244dc" type="System.Nullable`1[[System.Int64, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
           <orm:column name="department_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        </orm:field>
+        <orm:field name="_is_deleted" property="Is_deleted" behavior="readwrite" uniqueId="8a19d494-b76e-4489-8531-6641ae394d8f" type="System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column nullable="true" length="0" name="is_deleted" scale="0" sql-type="int" ado-type="Int32" />
         </orm:field>
         <orm:field name="_eF_SMI" property="EF_SMI" behavior="readwrite" uniqueId="9c3e980e-a7ad-47a9-a046-350e5363c928" type="EffixReportSystem.EF_SMI">
           <orm:reference uniqueId="417dfb9b-1bc3-4cf1-b11c-9f7022d1e587">
@@ -602,6 +608,7 @@
         <orm:column name="smi_url" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
         <orm:column name="smi_edition_id" sql-type="int" nullable="true" length="0" scale="0" ado-type="Int32" />
         <orm:column name="mass_media_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        <orm:column nullable="true" length="0" name="is_deleted" scale="0" sql-type="int" ado-type="Int32" />
         <orm:constraint name="FK_EF_SMI_0" destination-table="EF_SMI_Type">
           <orm:column name="smi_type_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
         </orm:constraint>
@@ -635,6 +642,7 @@
         <orm:column name="p_day" sql-type="nvarchar" nullable="true" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
         <orm:column name="project_name" sql-type="nvarchar(max)" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
         <orm:column name="department_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
+        <orm:column nullable="true" length="0" name="is_deleted" scale="0" sql-type="int" ado-type="Int32" />
         <orm:constraint name="FK_EF_Publication_0" destination-table="EF_SMI">
           <orm:column name="smi_id" sql-type="bigint" nullable="true" length="0" scale="0" ado-type="Int64" />
         </orm:constraint>
@@ -826,6 +834,7 @@
       <Property Id="ddc5d79b-ea87-4309-8b9d-e9392ec13f71" name="Smi_name" label="Smi_name : String" kind="Persistent" fieldName="_smi_name" />
       <Property Id="b37500ac-ea33-49a1-938b-39d39f8dae99" name="Smi_type_id" type="Int64" label="Smi_type_id : Int64" nullable="true" kind="Persistent" fieldName="_smi_type_id" />
       <Property Id="69fb7124-d2e8-4ea3-b490-58584d228d9b" name="Smi_url" label="Smi_url : String" kind="Persistent" fieldName="_smi_url" />
+      <Property Id="a49458bd-0e2c-4700-a232-0609ce8e50c8" name="Is_deleted" type="Int32" label="Is_deleted : Int32" nullable="true" kind="Persistent" fieldName="_is_deleted" />
       <AssociationTargets>
         <Association Id="d776273d-f2c9-44fa-8791-f4c27d6644c9" SourceMultiplicity="ZeroOne" name="EF_SMIHasEF_SMI_Type">
           <DomainClassMoniker name="/EntitiesModel/EF_SMI_Type" />
@@ -905,6 +914,7 @@
       <Property Id="2201e03f-7d70-4845-96e2-c090bd00b6df" name="Tonality_id" type="Int64" label="Tonality_id : Int64" nullable="true" kind="Persistent" fieldName="_tonality_id" />
       <Property Id="8f864461-646d-4194-9e2f-d067ba66bd18" name="Url_path" label="Url_path : String" kind="Persistent" fieldName="_url_path" />
       <Property Id="8743bd66-5d80-4cef-82a4-27ffab52cf82" name="User_id" type="Int64" label="User_id : Int64" nullable="true" kind="Persistent" fieldName="_user_id" />
+      <Property Id="8a19d494-b76e-4489-8531-6641ae394d8f" name="Is_deleted" type="Int32" label="Is_deleted : Int32" nullable="true" kind="Persistent" fieldName="_is_deleted" />
       <AssociationTargets>
         <Association Id="417dfb9b-1bc3-4cf1-b11c-9f7022d1e587" SourceMultiplicity="ZeroOne" name="EF_PublicationHasEF_SMI">
           <DomainClassMoniker name="/EntitiesModel/EF_SMI" />

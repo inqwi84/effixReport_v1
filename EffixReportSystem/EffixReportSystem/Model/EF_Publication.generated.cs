@@ -377,6 +377,22 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("Department_id");
 		   }
 		}
+		private int? _is_deleted;
+		public virtual int? Is_deleted
+		{
+		   get
+		   {
+		       return this._is_deleted;
+		   }
+		   set
+		   {
+		       if( Is_deleted == value )
+		  return;
+		 
+		  _is_deleted = value;
+		  this.OnPropertyChanged("Is_deleted");
+		   }
+		}
 		private EF_SMI _eF_SMI;
 		public virtual EF_SMI EF_SMI
 		{

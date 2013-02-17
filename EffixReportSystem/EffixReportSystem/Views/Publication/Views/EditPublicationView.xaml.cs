@@ -31,6 +31,12 @@ namespace EffixReportSystem.Views.Publication.Views
         private void DoneButton_Click(object sender, RoutedEventArgs e)
         {
             var ctx = DataContext as EditPublicationViewModel;
+            //проверить, если изменилась дата публикации
+            if (ctx.CurrentPublication.Publication_date != ctx.GetOldPublicationDate())
+            {
+                ctx.DeleteBlobFiles();
+
+            }
             try
             {
                 ctx.SaveCurrentPublication();

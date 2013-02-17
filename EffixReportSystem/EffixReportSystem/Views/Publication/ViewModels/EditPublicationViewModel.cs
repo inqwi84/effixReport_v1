@@ -16,6 +16,19 @@ namespace EffixReportSystem.Views.Publication.ViewModels
 {
     class EditPublicationViewModel:ObservableObject, IPageViewModel
     {
+        private ObservableCollection<EF_Department> _departments;
+        public ObservableCollection<EF_Department> Departments
+        {
+            get { return _departments; }
+            set
+            {
+                if (Departments == value)
+                    return;
+
+                _departments = value;
+                this.OnPropertyChanged("Departments");
+            }
+        }
         private long _publicationId;
         private readonly EntitiesModel _model = new EntitiesModel();
         private readonly string _tempDirectory = String.Empty;
@@ -28,6 +41,17 @@ namespace EffixReportSystem.Views.Publication.ViewModels
         public List<EF_Initiated> Initiated { get; set; }
         public List<EF_Planed> Planed { get; set; }
         public List<EF_Photo> Photo { get; set; }
+
+        public void DeleteBlobFiles()
+        {
+            
+        }
+        public DateTime GetOldPublicationDate()
+        {
+            var firstOrDefault = _model.EF_Publications.FirstOrDefault(item => item.Publication_id == CurrentPublication.Publication_id);
+                return (DateTime) firstOrDefault
+                                     .Publication_date;
+        }
 
         public void SetCurrentPublication(long publicationId)
         {
@@ -120,7 +144,23 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                                           date.Year + "\\" +
                                           date.Month + "\\" +
                                           date.Day);
+                    try
+                    {
+                        var tmpProject =
+                            Departments.FirstOrDefault().Children.FirstOrDefault(item=>item.Department_description==CurrentPublication.Project_name);
+                        var tmpYear =
+                            tmpProject.Children.SingleOrDefault(item => item.Department_name == date.Year.ToString());
+                        var tmpMonth =
+                            tmpYear.Children.SingleOrDefault(item => item.Department_name == date.Month.ToString());
+                        var tmpDay =
+    tmpMonth.Children.SingleOrDefault(item => item.Department_name == date.Day.ToString());
+                        //   Departments.FirstOrDefault(item=>item.)
+                        CurrentPublication.Department_id = tmpDay.Department_id;
+                    }
+                    catch (Exception)
+                    {
 
+                    }
 
                     var sourceDirectory = new DirectoryInfo(_tempDirectory);
 
@@ -133,7 +173,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                         {
                             destinationDirectory.Create();
                         }
-                        var filePath = destinationDirectory + "\\" + CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') +
+                        var filePath = destinationDirectory + "\\"+CurrentPublication.Publication_id + CurrentPublication.EF_SMI.Smi_descr.Replace('.', '_') +
                                        "_" +
                                        fileInfo.Name;
                         var fInfo = new FileInfo(filePath);
@@ -153,6 +193,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                 }
                 catch (Exception)
                 {
+                    
                 }
            
                try
@@ -329,6 +370,49 @@ namespace EffixReportSystem.Views.Publication.ViewModels
             Photo =
                 new List<EF_Photo>(
                     _model.EF_Photos);
+            var hierarchicalList = _model.EF_Departments.ToList().Select(flatItem =>
+                                                                          new EF_Department
+                                                                          {
+                                                                              Department_project_id = flatItem.Department_project_id,
+                                                                              Department_type = flatItem.Department_type,
+                                                                              Department_name
+                                                                                  =
+                                                                                  flatItem
+                                                                                  .
+                                                                                  Department_name,
+                                                                              Department_description = flatItem.Department_description,
+
+                                                                              Department_id
+                                                                                  =
+                                                                                  flatItem
+                                                                                  .
+                                                                                  Department_id,
+                                                                              Department_parent_id
+                                                                                  =
+                                                                                  flatItem
+                                                                                  .
+                                                                                  Department_parent_id,
+                                                                          }).ToList();
+
+
+            Departments =
+                new ObservableCollection<EF_Department>(
+                    hierarchicalList.GroupJoin(hierarchicalList,
+                                               parentItem =>
+                                               parentItem.Department_id,
+                                               childItem =>
+                                               childItem.Department_parent_id,
+                                               (parent, children) =>
+                                               {
+                                                   parent.Children
+                                                       =
+                                                       children.
+                                                           ToList();
+                                                   return parent;
+                                               }).Where(
+                                                       item =>
+                                                       item.Department_parent_id ==
+                                                       null).ToList());
         }
         public void OpenInPaint(DataHelper.ImageTile tile)
         {

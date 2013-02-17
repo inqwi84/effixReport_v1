@@ -169,6 +169,22 @@ namespace EffixReportSystem
 		  this.OnPropertyChanged("Mass_media_id");
 		   }
 		}
+		private int? _is_deleted;
+		public virtual int? Is_deleted
+		{
+		   get
+		   {
+		       return this._is_deleted;
+		   }
+		   set
+		   {
+		       if( Is_deleted == value )
+		  return;
+		 
+		  _is_deleted = value;
+		  this.OnPropertyChanged("Is_deleted");
+		   }
+		}
 		private EF_SMI_Type _eF_SMI_Type;
 		public virtual EF_SMI_Type EF_SMI_Type
 		{

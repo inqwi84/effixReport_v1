@@ -168,6 +168,12 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                 model.SaveChanges();
             }
 
+        public void UpdateCurrentPublication()
+        {
+            model.Add(CurrentPublication);
+            model.SaveChanges();
+        }
+
         private EF_Project _currentProject;
         public EF_Project CurrentProject
         {

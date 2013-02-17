@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Button Click="ButtonBase_OnClick" Margin="303,126,67,164">ddd</Button>
+        <Button Click="ButtonBase_OnClick" Margin="287,60,83,230">ddd</Button>
+        <Button Click="SMIBase_OnClick" Margin="287,151,83,139" Content="Import_SMI"/>
     </Grid>
 </Window>

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.SqlClient;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
@@ -114,6 +116,97 @@ namespace WpfTEST
 
             return jpgArray;
         }
-    }
 
+        private void SMIBase_OnClick(object sender, RoutedEventArgs e)
+        {
+           var smiColl= GetSmiColl();
+           using (var conn = new SqlConnection("server=tcp:m6ufktgcjh.database.windows.net,1433;database=Effix;user id=EF_Admin@m6ufktgcjh;password=Effix1984"))
+            {
+                conn.Open();
+                foreach (var smi in smiColl)
+                {
+                    var command = conn.CreateCommand();
+                    command.CommandText = "Update EF_Smi set mass_media_id="+smi.SmiType+" where smi_id="+smi.Id;
+                    command.ExecuteNonQuery();
+                }
+               conn.Close();
+            }
+
+        }
+
+        private ObservableCollection<Smi> GetSmiColl()
+        {
+            var result = new ObservableCollection<Smi>();
+            var sr = new StreamReader("G:\\LoadSMI.csv", new UnicodeEncoding());
+            while (!sr.EndOfStream)
+            {
+                result.Add(new Smi(sr.ReadLine()));
+            }
+            return result;
+        }
+    }
+    public class Smi
+    {
+        public long Id { get; set; }
+        public string FirstName { get; set; }
+        public string SecondName { get; set; }
+        public  long SmiType { get; set; }
+
+        public Smi(string str)
+        {
+            var tmp = str.Split(';');
+                Id = long.Parse(tmp[0]);
+                FirstName = tmp[1].Trim();
+                SecondName=tmp[2].Trim();
+            if (SecondName.Length == 0)
+            {
+                switch (FirstName)
+                {
+                    case "Автомобильные Интернет СМИ":
+                        SmiType = 100;
+                        break;
+                    case "Информационные Интернет СМИ":
+                        SmiType = 101;
+                        break;
+                    case "Самиздат":
+                        SmiType = 102;
+                        break;
+                    case "Печатные СМИ":
+                        SmiType = 103;
+                        break;
+                    case "Информационные порталы":
+                        SmiType = 104;
+                        break;
+                    case "Печатные издания":
+                        SmiType = 103;
+                        break;
+                }
+            }
+            else
+            {
+                switch (SecondName)
+                {
+                    case "Автомобильные Интернет СМИ":
+                        SmiType = 100;
+                        break;
+                    case "Информационные Интернет СМИ":
+                        SmiType = 101;
+                        break;
+                    case "Самиздат":
+                        SmiType = 102;
+                        break;
+                    case "Печатные СМИ":
+                        SmiType = 103;
+                        break;
+                    case "Информационные порталы":
+                        SmiType = 104;
+                        break;
+                    case "Печатные издания":
+                        SmiType = 103;
+                        break;
+                }
+            }
+
+        }
+    }
 }
