@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EffixReportSystem", "EffixReportSystem.csproj", "{0E3A0E28-CEFB-4691-8954-25F8D24138A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTEST", "..\WpfTEST\WpfTEST.csproj", "{9FA9164F-AE3B-49F1-A45A-6045168AA782}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,12 @@ Global
 		{0E3A0E28-CEFB-4691-8954-25F8D24138A0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0E3A0E28-CEFB-4691-8954-25F8D24138A0}.Release|x86.ActiveCfg = Release|x86
 		{0E3A0E28-CEFB-4691-8954-25F8D24138A0}.Release|x86.Build.0 = Release|x86
+		{9FA9164F-AE3B-49F1-A45A-6045168AA782}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FA9164F-AE3B-49F1-A45A-6045168AA782}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FA9164F-AE3B-49F1-A45A-6045168AA782}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9FA9164F-AE3B-49F1-A45A-6045168AA782}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FA9164F-AE3B-49F1-A45A-6045168AA782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FA9164F-AE3B-49F1-A45A-6045168AA782}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

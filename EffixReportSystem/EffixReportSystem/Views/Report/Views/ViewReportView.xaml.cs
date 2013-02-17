@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +25,8 @@ using EffixReportSystem.Views.Report.ViewModels;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.StorageClient;
 using Telerik.Reporting;
+using Encoder = System.Text.Encoder;
+using Image = System.Drawing.Image;
 
 namespace EffixReportSystem.Views.Report.Views
 {
@@ -38,6 +40,13 @@ namespace EffixReportSystem.Views.Report.Views
         private DateTime eDate;
         private BackgroundWorker bw = new BackgroundWorker();
         ReportBook rootBook = new ReportBook();
+
+
+        ReportBook headBook = new ReportBook();
+        ReportBook initiatedBook = new ReportBook();
+        ReportBook notInitiatedBook = new ReportBook();
+        ReportBook diagramBook = new ReportBook();
+       ObservableCollection<ReportBook> bookColl= new ObservableCollection<ReportBook>(); 
         public ViewReportView()
         {
             InitializeComponent();
@@ -135,7 +144,7 @@ namespace EffixReportSystem.Views.Report.Views
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Dispatcher.BeginInvoke(new Func<bool>(() => indicator.IsBusy = false));
-            reportViewer.ReportSource = rootBook;
+           // reportViewer.ReportSource = rootBook;
             if ((e.Cancelled == true))
             {
                // this.tbProgress.Text = "Canceled!";
@@ -193,15 +202,15 @@ namespace EffixReportSystem.Views.Report.Views
                                     .ThenBy(item => item.EF_SMI.Smi_name).ToList());
                    resultNameList.Add(group.Key);
                 }
+                GC.Collect();
                 int gIndex = 1;
                 foreach (var rst in resultList)
                 {
                     var ind = resultList.IndexOf(rst);
                     var report1 = new AvtoAleaJLRHeadReport(rst, resultNameList[ind],gIndex);
                     rBook.Reports.Add(report1);
-                    gIndex += rst.Count;
                 }
-
+                GC.Collect();
                 foreach (var gList in resultList)
                 {
                     var id = resultList.IndexOf(gList);
@@ -218,18 +227,20 @@ namespace EffixReportSystem.Views.Report.Views
                                 {
                                     var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
                                     rBook.Reports.Add(rpr);
+                                    GC.Collect();
                                 }
                                 else
                                 {
                                     var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
                                     rBook.Reports.Add(rpr);
+                                    GC.Collect();
                                 }
                                 index++;
                             }
                         }
                     }
                 }
-
+                GC.Collect();
                 //Тональность //1
                 rBook.Reports.Add(
                     new ExclusivityReport(
@@ -401,11 +412,11 @@ namespace EffixReportSystem.Views.Report.Views
               //1 инициированные
                 var initiatedGroups = allList.Where(item => item.Is_initiated == 1).OrderBy(item => item.Publication_date)
                                      .ThenBy(item => item.EF_SMI.Smi_name)
-                           .GroupBy(item => item.EF_SMI.EF_MassMedium.Parent_type_id).OrderBy(item => item.Key);
+                           .GroupBy(item => item.EF_SMI.EF_MassMedium.Parent_type_id).OrderByDescending(item => item.Key);
                 //2 неинециированные
                var nonInitiatedGroups =allList.Where(item => item.Is_initiated == 2).OrderBy(item => item.Publication_date)
                                      .ThenBy(item => item.EF_SMI.Smi_name)
-                            .GroupBy(item => item.EF_SMI.EF_MassMedium.Parent_type_id).OrderBy(item => item.Key);
+                            .GroupBy(item => item.EF_SMI.EF_MassMedium.Parent_type_id).OrderByDescending(item => item.Key);
 
                 int idx = 1;
                 try
@@ -416,18 +427,23 @@ namespace EffixReportSystem.Views.Report.Views
                             model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == nonInitiatedGroup.Key);
                         var report1 = new LifanHeadReport(smiType.Mass_media_type_name, nonInitiatedGroup.ToList(), idx);
                         rBook.Reports.Add(report1);
+                        headBook.Reports.Add(report1);
                         idx += nonInitiatedGroup.Count();
                     }
+                    GC.Collect();
                     foreach (var initiatedGroup in initiatedGroups)
                     {
                         var smiType =
                             model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == initiatedGroup.Key);
                         var report1 = new LifanHeadReport(smiType.Mass_media_type_name, initiatedGroup.ToList(), idx);
                         rBook.Reports.Add(report1);
+                        headBook.Reports.Add(report1);
                         idx += initiatedGroup.Count();
                     }
+                    GC.Collect();
                     var report12 = new LifanHeadReport("Самиздат", samIzdatList, idx);
                     rBook.Reports.Add(report12);
+                    headBook.Reports.Add(report12);
                 }
                 catch (Exception ex)
                 {
@@ -442,6 +458,7 @@ namespace EffixReportSystem.Views.Report.Views
                         var smiType =
     model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == nonInitiatedGroup.Key);
                         rBook.Reports.Add(new GroupPageReport(smiType.Mass_media_type_name));
+                        notInitiatedBook.Reports.Add(new GroupPageReport(smiType.Mass_media_type_name));
                         foreach (var efPublication in nonInitiatedGroup)
                         {
                             {
@@ -454,23 +471,28 @@ namespace EffixReportSystem.Views.Report.Views
                                     {
                                         var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
                                         rBook.Reports.Add(rpr);
+                                        notInitiatedBook.Reports.Add(rpr);
+                                        GC.Collect();
                                     }
                                     else
                                     {
                                         var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
                                         rBook.Reports.Add(rpr);
+                                        notInitiatedBook.Reports.Add(rpr);
+                                        GC.Collect();
                                     }
                                     index++;
                                 }
                             }
                         }
+                        GC.Collect();
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-                   
+                GC.Collect();
                 try
                 {
                     foreach (var initiatedGroup in initiatedGroups)
@@ -478,6 +500,7 @@ namespace EffixReportSystem.Views.Report.Views
                         var smiType =
 model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == initiatedGroup.Key);
                         rBook.Reports.Add(new GroupPageReport(smiType.Mass_media_type_name));
+                        initiatedBook.Reports.Add(new GroupPageReport(smiType.Mass_media_type_name));
                         //var name = String.Empty;
                         //rBook.Reports.Add(new GroupPageReport(name));
                         foreach (var efPublication in initiatedGroup)
@@ -492,40 +515,62 @@ model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == initiatedG
                                     {
                                         var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
                                         rBook.Reports.Add(rpr);
+                                        initiatedBook.Reports.Add(rpr);
+                                        GC.Collect();
                                     }
                                     else
                                     {
                                         var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
                                         rBook.Reports.Add(rpr);
+                                        initiatedBook.Reports.Add(rpr);
+                                        GC.Collect();
                                     }
                                     index++;
                                 }
                             }
                         }
+                        GC.Collect();
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-                    
 
+                GC.Collect();
                 //Тональность //1
                 rBook.Reports.Add(
                     new ExclusivityReport(
                         model.EF_Publications.Where(
                             item =>
                             item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
-                            item.Publication_date <= endPeriod))); ;
+                            item.Publication_date <= endPeriod)));
+                diagramBook.Reports.Add(
+                    new ExclusivityReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod)));
                 //Эксклюзивность
                 rBook.Reports.Add(
                     new HasPhotoReport(
                         model.EF_Publications.Where(
                             item =>
                             item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
-                            item.Publication_date <= endPeriod))); ;
+                            item.Publication_date <= endPeriod)));
+                diagramBook.Reports.Add(new HasPhotoReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod))); 
                 //Фотография
                 rBook.Reports.Add(
+                    new DiagramReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod), "", "", ""));
+                diagramBook.Reports.Add(
                     new DiagramReport(
                         model.EF_Publications.Where(
                             item =>
@@ -537,7 +582,12 @@ model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == initiatedG
                         model.EF_Publications.Where(
                             item =>
                             item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
-                            item.Publication_date <= endPeriod))); ;
+                            item.Publication_date <= endPeriod)));
+                diagramBook.Reports.Add(new InitiatedReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod)));
                 //Запланированные
                 rBook.Reports.Add(
                     new PlannedReport(
@@ -545,6 +595,11 @@ model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == initiatedG
                             item =>
                             item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
                             item.Publication_date <= endPeriod)));
+                diagramBook.Reports.Add(new PlannedReport(
+                       model.EF_Publications.Where(
+                           item =>
+                           item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                           item.Publication_date <= endPeriod)));
                 //Приоритет
                 if (projName.Contains("arteks"))
                 {
@@ -652,6 +707,61 @@ model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == initiatedG
             var result = GetBlobFromStorage(publication.Blob_path,publication.Image_count.Value,publication.Project_name);
             return result;
         }
+
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
+        }
+        private string SetQualityLevel(string path,string outPath)
+        {
+            var result = String.Empty;
+            try
+            {
+                // Get a bitmap.
+                Bitmap bmp1 = new Bitmap(path);
+                ImageCodecInfo jgpEncoder = GetEncoder(ImageFormat.Jpeg);
+
+                // Create an Encoder object based on the GUID 
+                // for the Quality parameter category.
+                System.Drawing.Imaging.Encoder myEncoder =
+                    System.Drawing.Imaging.Encoder.Quality;
+
+                // Create an EncoderParameters object. 
+                // An EncoderParameters object has an array of EncoderParameter 
+
+                EncoderParameters myEncoderParameters = new EncoderParameters(1);
+                var file = new FileInfo(path);
+                if(file.Length>5088566)
+                {
+                    EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 50L);
+                    myEncoderParameters.Param[0] = myEncoderParameter;
+                    bmp1.Save(outPath.Replace(".png", ".jpg"), jgpEncoder, myEncoderParameters);  
+                }
+                else
+                {
+                    EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 70L);
+                    myEncoderParameters.Param[0] = myEncoderParameter;
+                    bmp1.Save(outPath.Replace(".png", ".jpg"), jgpEncoder, myEncoderParameters);
+                }
+                return outPath;
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return result;
+        }
         private ObservableCollection<Bitmap> GetBlobFromStorage(string blobPath, int imageCount, string projectName)
         {
             var result = new ObservableCollection<Bitmap>();
@@ -674,12 +784,27 @@ model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == initiatedG
                     // Retrieve reference to a blob named "photo1.jpg".
                     var tmpStr = filePath.Remove(0, filePath.IndexOf(projectName, StringComparison.Ordinal) + projectName.Length);
                     var blockBlob = container.GetBlockBlobReference(tmpStr);
+                    var tmpPath = "c:\\storage\\report.png";
+                    var dir = new DirectoryInfo(filePath.Remove(filePath.LastIndexOf("\\")));
+                    if (!dir.Exists)
+                    {
+                        dir.Create();
+                    }
+                    blockBlob.DownloadToFile(filePath);
+                    //using (var ms = new MemoryStream())
+                    //{
+                    //    FileStream file = new FileStream(tmpPath, FileMode.Open, FileAccess.Read);
+                    //    byte[] bytes = new byte[file.Length];
+                    //    file.Read(bytes, 0, (int) file.Length);
+                    //    ms.Write(bytes, 0, (int) file.Length);
+                    //    file.Close();
 
-                    var imageArray = blockBlob.DownloadByteArray();
-                    TypeConverter tc = TypeDescriptor.GetConverter(typeof(Bitmap));
-                    Bitmap bitmap1 = (Bitmap)tc.ConvertFrom(imageArray);
-                   // var image = ImageFromBuffer(imageArray);
-                    result.Add(bitmap1);
+                    //}
+                    var imgPath = SetQualityLevel(filePath, filePath);
+                   var bmp= Image.FromFile(imgPath);
+                   result.Add(bmp as Bitmap);
+                 //   bmp.Dispose();
+
                 }
                 catch (Exception ex)
                 {
@@ -699,12 +824,144 @@ model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == initiatedG
             return image;
         }
 
+
+        private int tmpInt = 0;
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            if (bw.IsBusy != true)
+            ctx = 1;
+            try
             {
-                bw.RunWorkerAsync();
+                tmpInt++;
+                //if (bw.IsBusy != true)
+                //{
+                //    bw.RunWorkerAsync();
+                //}
+                //bookColl.Add(headBook);
+                //bookColl.Add(initiatedBook);
+                //bookColl.Add(notInitiatedBook);
+                //bookColl.Add(diagramBook);
+                if (tmpInt == 1)
+                {
+                    GetValue(headBook,1);
+                }
+                if (tmpInt == 2)
+                {
+                    GetValue(initiatedBook,2);
+                }
+                if (tmpInt == 3)
+                {
+                    GetValue(notInitiatedBook,3);
+                } if (tmpInt == 4)
+                {
+                    GetValue(diagramBook,4);
+                    tmpInt = 0;
+                    ctx = 1;
+                }
+                //Task.Factory.StartNew(()=>GetValue(headBook));
+                //Task.Factory.StartNew(() => GetValue(initiatedBook));
+                //Task.Factory.StartNew(() => GetValue(notInitiatedBook));
+                //Task.Factory.StartNew(() => GetValue(diagramBook));
+                //  GetValue(book);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+       }
+
+        private static int ctx = 0;
+        private static void GetValue(ReportBook book,int index)
+        {
+            var count = book.Reports.Count;
+            if (count > 0)
+            {
+                var temp = SplitBooks(book.Reports);
+                foreach (var item in temp)
+                {
+                    var tmpBook = new ReportBook();
+                    foreach (var report in item)
+                    {
+                        tmpBook.Reports.Add(report);
+                    }
+                    Make50ReportsToRTF(tmpBook, ctx);
+                    ctx++;
+                }
+            }
+        }
+
+        public static List<List<Telerik.Reporting.Report>> SplitBooks(ReportCollection source)
+        {
+            return source
+                .Select((x, i) => new { Index = i, Value = x })
+                .GroupBy(x => x.Index / 20)
+                .Select(x => x.Select(v => v.Value).ToList())
+                .ToList();
+        }
+        private static void Make50ReportsToRTF(ReportBook book,int idx)
+        {
+            try
+            {
+                Telerik.Reporting.Processing.ReportProcessor reportProcessor =
+new Telerik.Reporting.Processing.ReportProcessor();
+
+                //set any deviceInfo settings if necessary
+                System.Collections.Hashtable deviceInfo =
+                    new System.Collections.Hashtable();
+
+                Telerik.Reporting.InstanceReportSource instanceReportSource =
+                    new Telerik.Reporting.InstanceReportSource();
+
+                instanceReportSource.ReportDocument = book;
+
+                Telerik.Reporting.Processing.RenderingResult result =
+                    reportProcessor.RenderReport("RTF", instanceReportSource, deviceInfo);
+
+                string fileName = result.DocumentName + idx + "." + result.Extension;
+                string path = "c:\\storage\\";
+                string filePath = System.IO.Path.Combine(path, fileName);
+
+                using (System.IO.FileStream fs = new System.IO.FileStream(filePath, System.IO.FileMode.Create))
+                {
+                    fs.Write(result.DocumentBytes, 0, result.DocumentBytes.Length);
+                }
+                MessageBox.Show("Отчёт создан");
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
+
+        private int kk = 0;
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                kk++;
+                if (kk == 1)
+                {
+                    reportViewer.ReportSource = headBook;
+                }
+                if (kk == 2)
+                {
+                    reportViewer.ReportSource = initiatedBook;
+                }
+                if (kk == 3)
+                {
+                    reportViewer.ReportSource = notInitiatedBook;
+                } if (kk == 4)
+                {
+                    reportViewer.ReportSource = diagramBook;
+                    kk = 0;
+                }
+            }
+            catch (Exception ex )
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

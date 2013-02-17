@@ -27,12 +27,13 @@
             <Label Margin="5" VerticalAlignment="Center">Конец периода</Label>
             <DatePicker x:Name="EndPeriod" Margin="5" VerticalAlignment="Center" SelectedDate="{Binding EndDate,Mode=TwoWay}" SelectedDateFormat="Short"></DatePicker>
             <Button Margin="5" VerticalAlignment="Center" Click="Button_Click_1" Width="120"  Style="{DynamicResource stlButton}">Отчет</Button>
-            <Button Visibility="Collapsed" Margin="5,15" VerticalAlignment="Center" Click="Button_Click_2" Content="Сформировать отчет2"/>
+            <Button  Margin="5,15" VerticalAlignment="Center" Click="Button_Click_2" Content="Сформировать отчет по частям"/>
+            <Button  Margin="5,15" VerticalAlignment="Center" Click="Button_Click_3" Content="Сформировать отчет по частям2222"/>
         </StackPanel>
 
         <controls:RadBusyIndicator x:Name="indicator"  Grid.Row="1" BusyContent="отчет формируется.ждите..." IsBusy="{Binding IsBusy}"
 				IsIndeterminate="True">
-            <telerik:ReportViewer x:Name="reportViewer"></telerik:ReportViewer>
+            <telerik:ReportViewer x:Name="reportViewer"  VirtualizingStackPanel.IsVirtualizing="True"></telerik:ReportViewer>
         </controls:RadBusyIndicator>
     </Grid>
 </UserControl>
