@@ -466,9 +466,11 @@ namespace EffixReportSystem.Views.Publication.Views
             {
                 var splitterName = SetLastSplitterName();
                 var gridBefore = new Grid { Name = splitterName + "before", MinHeight = 20 };
+                gridBefore.SizeChanged += gridBefore_SizeChanged;
                 DockPanel.SetDock(gridBefore, Dock.Top);
 
                 var gridAfter = new Grid { Name = splitterName + "after", MinHeight = 20 };
+                gridAfter.SizeChanged += gridAfter_SizeChanged;
                 DockPanel.SetDock(gridAfter, Dock.Top);
 
                 var split = new DockPanelSplitter { Name = splitterName };
@@ -479,12 +481,24 @@ namespace EffixReportSystem.Views.Publication.Views
                 DockPanel.Children.Add(gridBefore);
                 DockPanel.Children.Add(split);
                 DockPanel.Children.Add(gridAfter);
+
+                //Добавить вертикальную засечку
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 Logger.TraceError(ex.Message);
             }
+        }
+
+        void gridAfter_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+           vruler.RefreshVerticalChips(e.NewSize.Height);
+        }
+
+        void gridBefore_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+        
         }
 
         private string SetLastSplitterName()
@@ -640,6 +654,18 @@ namespace EffixReportSystem.Views.Publication.Views
             ms.WriteTo(outStream);
             outStream.Flush();
             outStream.Close();
+        }
+
+        private double _heigth;
+        private void TopSplitter1before_OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            _heigth = e.NewSize.Height;
+
+        }
+
+        private void TopSplitter1_OnLostMouseCapture(object sender, MouseEventArgs e)
+        {
+             vruler.RefreshVerticalChips(_heigth);
         }
     }
 }

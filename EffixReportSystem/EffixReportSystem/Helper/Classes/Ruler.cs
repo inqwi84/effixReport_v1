@@ -216,6 +216,12 @@ namespace EffixReportSystem.Helper.Classes
         #endregion
 
         #region Methods
+
+        public void RefreshVerticalChips(double height)
+        {
+            var cm = DipHelper.DipToCm(height);
+            Chip = cm+21;
+        }
         /// <summary>
         /// Participates in rendering operations.
         /// </summary>
@@ -227,9 +233,9 @@ namespace EffixReportSystem.Helper.Classes
             drawingContext.DrawRectangle(null, BorderPen, new Rect(new Point(0.0, 0.0), new Point(xDest, Height)));
             double chip = Unit == Unit.Cm ? DipHelper.CmToDip(Chip) : DipHelper.InchToDip(Chip);
            //Засечки с краю линейки
-            for (var i = 1; i < 15;i++ )
+            for (var i = 1; i < 15; i++)
             {
-                drawingContext.DrawLine(RedPen, new Point(chip*i, 0), new Point(chip*i, Height));
+                drawingContext.DrawLine(RedPen, new Point(chip * i, 0), new Point(chip * i, Height));
             }
 
 
