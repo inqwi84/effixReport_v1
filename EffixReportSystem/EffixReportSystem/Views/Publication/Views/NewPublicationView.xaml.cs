@@ -493,7 +493,7 @@ namespace EffixReportSystem.Views.Publication.Views
 
         void gridAfter_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-           vruler.RefreshVerticalChips(e.NewSize.Height);
+         //  vruler.RefreshVerticalChips(e.NewSize.Height);
         }
 
         void gridBefore_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -657,15 +657,25 @@ namespace EffixReportSystem.Views.Publication.Views
         }
 
         private double _heigth;
+        private double _width;
         private void TopSplitter1before_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             _heigth = e.NewSize.Height;
-
         }
 
         private void TopSplitter1_OnLostMouseCapture(object sender, MouseEventArgs e)
         {
-             vruler.RefreshVerticalChips(_heigth);
+             vruler.RefreshVerticalChips(_heigth,21);
+        }
+
+        private void LeftSplitter_OnLostMouseCapture(object sender, MouseEventArgs e)
+        {
+            hruler.RefreshVerticalChips(_width,16);
+        }
+
+        private void LeftGrid_OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            _width=e.NewSize.Width;
         }
     }
 }

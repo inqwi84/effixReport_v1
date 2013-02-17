@@ -398,8 +398,8 @@
                                 </Grid.RenderTransform>
                                 <Image x:Name="img" ClipToBounds="True" Margin="5,0,0,0"></Image>
                                 <DockPanel x:Name="DockPanel" LastChildFill="False">
-                                    <Grid DockPanel.Dock="Left" MinWidth="5"></Grid>
-                                    <classes:DockPanelSplitter x:Name="LeftSplitter" DockPanel.Dock="Left" Width="2" ProportionalResize="True" Background="Red" />
+                                    <Grid DockPanel.Dock="Left" MinWidth="5" SizeChanged="LeftGrid_OnSizeChanged"></Grid>
+                                    <classes:DockPanelSplitter x:Name="LeftSplitter" DockPanel.Dock="Left" Width="2" ProportionalResize="True" Background="Red"  LostMouseCapture="LeftSplitter_OnLostMouseCapture"/>
                                     <Grid DockPanel.Dock="Right" MinWidth="5"></Grid>
                                     <classes:DockPanelSplitter x:Name="RightSplitter"  ProportionalResize="True" DockPanel.Dock="Right" Width="2"  Background="Red"/>
                                     <Grid x:Name="TopSplitter1before" DockPanel.Dock="Top" SizeChanged="TopSplitter1before_OnSizeChanged" MinHeight="2">

@@ -217,10 +217,10 @@ namespace EffixReportSystem.Helper.Classes
 
         #region Methods
 
-        public void RefreshVerticalChips(double height)
+        public void RefreshVerticalChips(double height, int chip)
         {
             var cm = DipHelper.DipToCm(height);
-            Chip = cm+21;
+            Chip = cm + chip;
         }
         /// <summary>
         /// Participates in rendering operations.
