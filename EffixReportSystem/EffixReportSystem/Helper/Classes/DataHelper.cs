@@ -205,12 +205,19 @@ namespace EffixReportSystem.Helper.Classes
                             result= new ObservableCollection<EF_Publication>(model.EF_Publications.Where(item => item.Project_name == department.Department_description));
                             break;
                         case "year":
-                            result = new ObservableCollection<EF_Publication>(model.EF_Publications.Where(item => item.Project_name == department.Department_description && item.P_year == department.Department_name));
+                            var project =
+                                model.EF_Departments.FirstOrDefault(
+                                    item => item.Department_id == department.Department_parent_id);
+                            var year = model.EF_Departments.FirstOrDefault(item => item.Department_id == department.Department_id);
+                                result =new ObservableCollection<EF_Publication>(model.EF_Publications.Where(item=>item.Project_name==project.Department_description&&item.P_year==year.Department_name));
                             break;
                         case "month":
-                            var year = model.EF_Departments.FirstOrDefault(item => item.Department_id == department.Department_parent_id);
-                           // var project = model.EF_Departments.FirstOrDefault(item => item.Department_id == year.Department_parent_id);
-                            result = new ObservableCollection<EF_Publication>(model.EF_Publications.Where(item => item.Project_name == department.Department_description && item.P_year == year.Department_name && item.P_month == department.Department_name));
+                            var year2 =
+                               model.EF_Departments.FirstOrDefault(
+                                   item => item.Department_id == department.Department_parent_id);
+                            var project2 =
+                                model.EF_Departments.FirstOrDefault(item => item.Department_id == year2.Department_parent_id);
+                                result =new ObservableCollection<EF_Publication>(model.EF_Publications.Where(item=>item.Project_name==project2.Department_description&&item.P_month==department.Department_name&&item.P_year==year2.Department_name));
                             break;
                         case "day":
                             result = new ObservableCollection<EF_Publication>(model.EF_Publications.Where(item => item.Department_id==department.Department_id));

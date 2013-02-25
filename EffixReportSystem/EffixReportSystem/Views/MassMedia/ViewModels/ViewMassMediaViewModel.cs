@@ -35,8 +35,8 @@ namespace EffixReportSystem.Views.MassMedia.ViewModels
         public void RemoveMassMedia()
         {
            _model.Delete(_model.EF_MassMedias.FirstOrDefault(item=>item.Mass_media_type_id==CurrentMassMediaDepartament.Mass_media_type_id));
-            _model.SaveChanges();
-            ReloadMassMedia();
+           _model.SaveChanges();
+           ReloadMassMedia();
         }
         public void RenameMassMedia()
         {

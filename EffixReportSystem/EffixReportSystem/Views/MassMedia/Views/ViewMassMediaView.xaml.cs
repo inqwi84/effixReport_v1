@@ -150,7 +150,8 @@ namespace EffixReportSystem.Views.MassMedia.Views
 
         private void RemovePublicationButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var ctx = DataContext as ViewMassMediaViewModel;
+            ctx.RemoveMassMedia();
         }
 
         private void AddMassMediaMenuItem_Click(object sender, RoutedEventArgs e)

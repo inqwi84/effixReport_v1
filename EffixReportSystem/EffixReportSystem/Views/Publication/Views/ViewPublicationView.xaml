@@ -68,7 +68,7 @@
                 </ContextMenu>
             </telerik:RadTreeView.ContextMenu>
             <telerik:RadTreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Children, Mode=TwoWay}">
+                <HierarchicalDataTemplate  ItemsSource="{Binding Children, Mode=TwoWay}">
                     <TextBlock Text="{Binding Department_name, Mode=TwoWay}"/>
                 </HierarchicalDataTemplate>
             </telerik:RadTreeView.ItemTemplate>
