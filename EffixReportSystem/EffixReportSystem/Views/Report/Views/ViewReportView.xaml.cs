@@ -144,7 +144,7 @@ namespace EffixReportSystem.Views.Report.Views
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Dispatcher.BeginInvoke(new Func<bool>(() => indicator.IsBusy = false));
-           // reportViewer.ReportSource = rootBook;
+           reportViewer.ReportSource = rootBook;
             if ((e.Cancelled == true))
             {
                // this.tbProgress.Text = "Canceled!";
