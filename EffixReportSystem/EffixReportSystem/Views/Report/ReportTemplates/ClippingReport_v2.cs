@@ -25,7 +25,7 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
             // TODO: Add any constructor code after InitializeComponent call
             //
         }
-        public ClippingReport_v2(Bitmap image,EF_Publication publication,bool last)
+        public ClippingReport_v2(Bitmap image,EF_Publication publication,bool last,bool hideHeader)
         {
             InitializeComponent();
 
@@ -105,9 +105,19 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
             }
             catch (Exception)
             {
-                
+
             }
-        
+            try
+            {
+                if (hideHeader)
+                {
+                    pageHeaderSection1.Visible = false;
+                }
+            }
+            catch (Exception)
+            {
+
+            }
             //  detail.Items.Add(new Telerik.Reporting.PictureBox { Value = image });
         }
     }

@@ -9,7 +9,6 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClippingReport_v2));
             Telerik.Reporting.Drawing.StyleRule styleRule1 = new Telerik.Reporting.Drawing.StyleRule();
             this.pageHeaderSection1 = new Telerik.Reporting.PageHeaderSection();
             this.shape1 = new Telerik.Reporting.Shape();
@@ -18,7 +17,6 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
             this.detail = new Telerik.Reporting.DetailSection();
             this.pictureBox1 = new Telerik.Reporting.PictureBox();
             this.pageFooterSection1 = new Telerik.Reporting.PageFooterSection();
-            this.pictureBox2 = new Telerik.Reporting.PictureBox();
             this.reportFooterSection1 = new Telerik.Reporting.ReportFooterSection();
             this.UrlTextBox = new Telerik.Reporting.HtmlTextBox();
             this.reportHeaderSection1 = new Telerik.Reporting.ReportHeaderSection();
@@ -83,18 +81,7 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
             // pageFooterSection1
             // 
             this.pageFooterSection1.Height = Telerik.Reporting.Drawing.Unit.Inch(0.39162763953208923D);
-            this.pageFooterSection1.Items.AddRange(new Telerik.Reporting.ReportItemBase[] {
-            this.pictureBox2});
             this.pageFooterSection1.Name = "pageFooterSection1";
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(4.5835986137390137D), Telerik.Reporting.Drawing.Unit.Inch(0D));
-            this.pictureBox2.MimeType = "image/jpeg";
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(2.3833062648773193D), Telerik.Reporting.Drawing.Unit.Inch(0.39162763953208923D));
-            this.pictureBox2.Sizing = Telerik.Reporting.Drawing.ImageSizeMode.ScaleProportional;
-            this.pictureBox2.Value = ((object)(resources.GetObject("pictureBox2.Value")));
             // 
             // reportFooterSection1
             // 
@@ -152,7 +139,6 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
         private Telerik.Reporting.DetailSection detail;
         private Telerik.Reporting.PageFooterSection pageFooterSection1;
         private Telerik.Reporting.PictureBox pictureBox1;
-        private Telerik.Reporting.PictureBox pictureBox2;
         private Telerik.Reporting.Shape shape1;
         private Telerik.Reporting.HtmlTextBox MassMediaNameTextBox;
         private Telerik.Reporting.HtmlTextBox PublicationDateTextBox;

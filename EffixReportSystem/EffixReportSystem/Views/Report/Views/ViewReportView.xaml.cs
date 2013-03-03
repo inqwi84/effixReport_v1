@@ -192,7 +192,7 @@ namespace EffixReportSystem.Views.Report.Views
                     item =>
                     item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
                     item.Publication_date <= endPeriod);
-                var pGroupList = pList.GroupBy(item => item.EF_SMI.EF_MassMedium.Mass_media_type_name);
+                var pGroupList = pList.GroupBy(item => item.EF_SMI.EF_MassMedium.Mass_media_type_descr);
 
                 //по каждой группе
                 foreach (var group in pGroupList)
@@ -200,14 +200,16 @@ namespace EffixReportSystem.Views.Report.Views
                    resultList.Add(group.ToList()
                                     .OrderBy(item => item.Publication_date)
                                     .ThenBy(item => item.EF_SMI.Smi_name).ToList());
-                   resultNameList.Add(group.Key);
+                   resultNameList.Add(model.EF_MassMedias.FirstOrDefault(item=>item.Mass_media_type_descr==group.Key).Mass_media_type_name);
                 }
-                GC.Collect();
+
                 int gIndex = 1;
+                var tmpIdx = 1;
                 foreach (var rst in resultList)
                 {
                     var ind = resultList.IndexOf(rst);
-                    var report1 = new AvtoAleaJLRHeadReport(rst, resultNameList[ind],gIndex);
+                    var report1 = new AvtoAleaJLRHeadReport(rst, resultNameList[ind], tmpIdx);
+                    tmpIdx += rst.Count;
                     rBook.Reports.Add(report1);
                 }
                 GC.Collect();
@@ -217,30 +219,47 @@ namespace EffixReportSystem.Views.Report.Views
                     rBook.Reports.Add(new GroupPageReport(resultNameList[id]));
                     foreach (var efPublication in gList)
                     {
+                        var imageColl = new ObservableCollection<Bitmap>();
+                        imageColl = GetImageCollection(efPublication);
+                        int index = 1;
+                        foreach (var bitmapImage in imageColl)
                         {
-                            var imageColl = new ObservableCollection<Bitmap>();
-                            imageColl = GetImageCollection(efPublication);
-                            int index = 1;
-                            foreach (var bitmapImage in imageColl)
+                            //если это первая и единственная страница
+                            if (index == 1 && index == imageColl.Count)
                             {
-                                if (index == imageColl.Count)
+                                var rpr = new ClippingReport_v2(bitmapImage, efPublication, true, false);
+                                rBook.Reports.Add(rpr);
+                            }
+                            else
+                            {
+                                //если первая страница
+                                if (index == 1)
                                 {
-                                    var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
+                                    var rpr = new ClippingReport_v2(bitmapImage, efPublication, false, false);
                                     rBook.Reports.Add(rpr);
-                                    GC.Collect();
+                                    index++;
                                 }
                                 else
                                 {
-                                    var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
-                                    rBook.Reports.Add(rpr);
-                                    GC.Collect();
+                                    if (index == imageColl.Count)
+                                    {
+                                        //последняя страница
+                                        var rpr = new ClippingReport_v2(bitmapImage, efPublication, true, true);
+                                        rBook.Reports.Add(rpr);
+                                    }
+                                    else
+                                    {
+                                        //любая другая страница
+                                        var rpr = new ClippingReport_v2(bitmapImage, efPublication, false, true);
+                                        rBook.Reports.Add(rpr);
+                                    }
+                                    index++;
                                 }
-                                index++;
+
                             }
                         }
                     }
                 }
-                GC.Collect();
                 //Тональность //1
                 rBook.Reports.Add(
                     new ExclusivityReport(
@@ -301,23 +320,40 @@ namespace EffixReportSystem.Views.Report.Views
                     item =>
                     item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
                     item.Publication_date <= endPeriod);
-                var pGroupList = pList.GroupBy(item => item.EF_SMI.EF_MassMedium.Mass_media_type_name);
+                var pGroupList = pList.GroupBy(item => item.EF_SMI.EF_MassMedium.Mass_media_type_descr);
 
                 //по каждой группе
+                //foreach (var group in pGroupList)
+                //{
+                //    resultList.Add(group.ToList()
+                //                     .OrderBy(item => item.Publication_date)
+                //                     .ThenBy(item => item.EF_SMI.Smi_name).ToList());
+                //    resultNameList.Add(group.Key);
+                //}
                 foreach (var group in pGroupList)
                 {
                     resultList.Add(group.ToList()
                                      .OrderBy(item => item.Publication_date)
                                      .ThenBy(item => item.EF_SMI.Smi_name).ToList());
-                    resultNameList.Add(group.Key);
+                  //  var tttt = model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_descr == group.Key);
+                    resultNameList.Add(model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_descr == group.Key).Mass_media_type_name);
                 }
-                int gIndex = 1;
+
+                //int gIndex = 1;
+                //foreach (var rst in resultList)
+                //{
+                //    var ind = resultList.IndexOf(rst);
+                //    var report1 = new AvtoAleaJLRHeadReport(rst, resultNameList[ind], gIndex);
+                //    rBook.Reports.Add(report1);
+                //    gIndex += rst.Count;
+                //}
+                var tmpIdx = 1;
                 foreach (var rst in resultList)
                 {
                     var ind = resultList.IndexOf(rst);
-                    var report1 = new AvtoAleaJLRHeadReport(rst, resultNameList[ind], gIndex);
+                    var report1 = new AvtoAleaJLRHeadReport(rst, resultNameList[ind], tmpIdx);
+                    tmpIdx += rst.Count;
                     rBook.Reports.Add(report1);
-                    gIndex += rst.Count;
                 }
 
                 foreach (var gList in resultList)
@@ -330,19 +366,55 @@ namespace EffixReportSystem.Views.Report.Views
                             var imageColl = new ObservableCollection<Bitmap>();
                             imageColl = GetImageCollection(efPublication);
                             int index = 1;
+                            //foreach (var bitmapImage in imageColl)
+                            //{
+                            //    if (index == imageColl.Count)
+                            //    {
+                            //        var rpr = new ClippingReport_v22(bitmapImage, efPublication, true);
+                            //        rBook.Reports.Add(rpr);
+                            //    }
+                            //    else
+                            //    {
+                            //        var rpr = new ClippingReport_v22(bitmapImage, efPublication, false);
+                            //        rBook.Reports.Add(rpr);
+                            //    }
+                            //    index++;
+                            //}
                             foreach (var bitmapImage in imageColl)
                             {
-                                if (index == imageColl.Count)
+                                //если это первая и единственная страница
+                                if (index == 1 && index == imageColl.Count)
                                 {
-                                    var rpr = new ClippingReport_v22(bitmapImage, efPublication, true);
+                                    var rpr = new ClippingReport_v22(bitmapImage, efPublication, true, false);
                                     rBook.Reports.Add(rpr);
                                 }
                                 else
                                 {
-                                    var rpr = new ClippingReport_v22(bitmapImage, efPublication, false);
-                                    rBook.Reports.Add(rpr);
+                                    //если первая страница
+                                    if (index == 1)
+                                    {
+                                        var rpr = new ClippingReport_v22(bitmapImage, efPublication, false, false);
+                                        rBook.Reports.Add(rpr);
+                                        index++;
+                                    }
+                                    else
+                                    {
+                                        if (index == imageColl.Count)
+                                        {
+                                            //последняя страница
+                                            var rpr = new ClippingReport_v2(bitmapImage, efPublication, true, true);
+                                            rBook.Reports.Add(rpr);
+                                        }
+                                        else
+                                        {
+                                            //любая другая страница
+                                            var rpr = new ClippingReport_v2(bitmapImage, efPublication, false, true);
+                                            rBook.Reports.Add(rpr);
+                                        }
+                                        index++;
+                                    }
+
                                 }
-                                index++;
                             }
                         }
                     }
@@ -469,16 +541,16 @@ namespace EffixReportSystem.Views.Report.Views
                                 {
                                     if (index == imageColl.Count)
                                     {
-                                        var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
-                                        rBook.Reports.Add(rpr);
-                                        notInitiatedBook.Reports.Add(rpr);
+                                     //   var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
+                                     //   rBook.Reports.Add(rpr);
+                                     //   notInitiatedBook.Reports.Add(rpr);
                                         GC.Collect();
                                     }
                                     else
                                     {
-                                        var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
-                                        rBook.Reports.Add(rpr);
-                                        notInitiatedBook.Reports.Add(rpr);
+                                      //  var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
+                                      //  rBook.Reports.Add(rpr);
+                                      //  notInitiatedBook.Reports.Add(rpr);
                                         GC.Collect();
                                     }
                                     index++;
@@ -513,16 +585,16 @@ model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == initiatedG
                                 {
                                     if (index == imageColl.Count)
                                     {
-                                        var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
-                                        rBook.Reports.Add(rpr);
-                                        initiatedBook.Reports.Add(rpr);
+                                      //  var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
+                                       // rBook.Reports.Add(rpr);
+                                      //  initiatedBook.Reports.Add(rpr);
                                         GC.Collect();
                                     }
                                     else
                                     {
-                                        var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
-                                        rBook.Reports.Add(rpr);
-                                        initiatedBook.Reports.Add(rpr);
+                                       // var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
+                                      //  rBook.Reports.Add(rpr);
+                                      //  initiatedBook.Reports.Add(rpr);
                                         GC.Collect();
                                     }
                                     index++;
@@ -639,13 +711,13 @@ model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == initiatedG
                     {
                         if (index == imageColl.Count)
                         {
-                            var rpr = new ClippingReport_v2(bitmapImage, item, true);
-                            rBook.Reports.Add(rpr);
+                          //  var rpr = new ClippingReport_v2(bitmapImage, item, true);
+                           // rBook.Reports.Add(rpr);
                         }
                         else
                         {
-                            var rpr = new ClippingReport_v2(bitmapImage, item, false);
-                            rBook.Reports.Add(rpr);
+                          //  var rpr = new ClippingReport_v2(bitmapImage, item, false);
+                          //  rBook.Reports.Add(rpr);
                         }
                         index++;
                     }

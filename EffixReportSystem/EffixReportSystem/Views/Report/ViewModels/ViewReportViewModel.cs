@@ -232,13 +232,13 @@ namespace EffixReportSystem.Views.Report.ViewModels
                             {
                                 if (index == imageColl.Count)
                                 {
-                                    var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
-                                    rBook.Reports.Add(rpr);
+                                   // var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
+                                  //  rBook.Reports.Add(rpr);
                                 }
                                 else
                                 {
-                                    var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
-                                    rBook.Reports.Add(rpr);
+                                  //  var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
+                                  //  rBook.Reports.Add(rpr);
                                 }
                                 index++;
                             }
@@ -452,13 +452,13 @@ namespace EffixReportSystem.Views.Report.ViewModels
                             {
                                 if (index == imageColl.Count)
                                 {
-                                    var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
-                                    rBook.Reports.Add(rpr);
+                                   // var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
+                                   // rBook.Reports.Add(rpr);
                                 }
                                 else
                                 {
-                                    var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
-                                    rBook.Reports.Add(rpr);
+                                  //  var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
+                                  //  rBook.Reports.Add(rpr);
                                 }
                                 index++;
                             }
@@ -478,13 +478,13 @@ namespace EffixReportSystem.Views.Report.ViewModels
                             {
                                 if (index == imageColl.Count)
                                 {
-                                    var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
-                                    rBook.Reports.Add(rpr);
+                                    //var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
+                                   // rBook.Reports.Add(rpr);
                                 }
                                 else
                                 {
-                                    var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
-                                    rBook.Reports.Add(rpr);
+                                   // var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
+                                   // rBook.Reports.Add(rpr);
                                 }
                                 index++;
                             }
@@ -566,13 +566,13 @@ namespace EffixReportSystem.Views.Report.ViewModels
                     {
                         if (index == imageColl.Count)
                         {
-                            var rpr = new ClippingReport_v2(bitmapImage, item, true);
-                            rBook.Reports.Add(rpr);
+                         //   var rpr = new ClippingReport_v2(bitmapImage, item, true);
+                         //   rBook.Reports.Add(rpr);
                         }
                         else
                         {
-                            var rpr = new ClippingReport_v2(bitmapImage, item, false);
-                            rBook.Reports.Add(rpr);
+                         //   var rpr = new ClippingReport_v2(bitmapImage, item, false);
+                         //   rBook.Reports.Add(rpr);
                         }
                         index++;
                     }
