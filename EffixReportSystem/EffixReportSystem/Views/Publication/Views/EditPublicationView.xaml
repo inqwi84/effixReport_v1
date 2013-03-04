@@ -345,15 +345,17 @@
                 </DockPanel>
                 <DockPanel x:Name="SMIName" LastChildFill="False" Margin="0,5,0,5">
                     <TextBlock HorizontalAlignment="Left" Margin="5,0,0,0"  Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Наименование издания</TextBlock>
-                    <ComboBox SelectedValue="{Binding CurrentPublication.EF_SMI, Mode=TwoWay}" ItemsSource="{Binding Smi}"   HorizontalAlignment="Left"  Width="150" DockPanel.Dock="Right">
+                    <ComboBox TextSearch.TextPath="Smi_name"  SelectedValue="{Binding CurrentPublication.EF_SMI, Mode=TwoWay}" ItemsSource="{Binding Smi}"   HorizontalAlignment="Left"  Width="150" DockPanel.Dock="Right">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel  Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Path=Smi_name}" />
-                                    <TextBlock Text=" [" />
-                                    <TextBlock Text="{Binding EF_MassMedium.Mass_media_type_name}" />
-                                    <TextBlock Text="]" />
-                                </StackPanel>
+                                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" >
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} [{1}]">
+                                            <Binding Path="Smi_name" />
+                                            <Binding Path="EF_MassMedium.Mass_media_type_name" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
