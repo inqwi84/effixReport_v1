@@ -33,10 +33,10 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
             // 
             // shape1
             // 
-            this.shape1.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.766904354095459D), Telerik.Reporting.Drawing.Unit.Inch(0.30000004172325134D));
+            this.shape1.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(3.9418537198798731E-05D), Telerik.Reporting.Drawing.Unit.Inch(0.30000004172325134D));
             this.shape1.Name = "shape1";
             this.shape1.ShapeType = new Telerik.Reporting.Drawing.Shapes.LineShape(Telerik.Reporting.Drawing.Shapes.LineDirection.EW);
-            this.shape1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(6.2000002861022949D), Telerik.Reporting.Drawing.Unit.Inch(0.10000014305114746D));
+            this.shape1.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(7.1668376922607422D), Telerik.Reporting.Drawing.Unit.Inch(0.10000014305114746D));
             this.shape1.Style.LineStyle = Telerik.Reporting.Drawing.LineStyle.Solid;
             this.shape1.Style.LineWidth = Telerik.Reporting.Drawing.Unit.Point(2D);
             // 
@@ -96,6 +96,7 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
             this.UrlTextBox.Location = new Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Inch(0.5D), Telerik.Reporting.Drawing.Unit.Inch(0.099960960447788239D));
             this.UrlTextBox.Name = "UrlTextBox";
             this.UrlTextBox.Size = new Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Inch(6.4669051170349121D), Telerik.Reporting.Drawing.Unit.Inch(0.20003890991210938D));
+            this.UrlTextBox.Style.Font.Bold = true;
             this.UrlTextBox.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Right;
             this.UrlTextBox.Value = "";
             // 

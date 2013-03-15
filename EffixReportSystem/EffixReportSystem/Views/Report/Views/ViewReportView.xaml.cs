@@ -90,56 +90,7 @@ namespace EffixReportSystem.Views.Report.Views
                     rootBook = MakeAvtoALEA_JLR_Report22("avtoalea-jaguar", bDate, eDate);
                     break;
             }
-            //var rBook = new ReportBook();
-            //var report1 = new HeadReport();
-            //rBook.Reports.Add(report1);
-            //using (var model = new EntitiesModel())
-            //{
-            //    var initiatedPublications = model.EF_Publications.Where(item => item.Is_initiated == 1).GroupBy(gr => gr.EF_SMI.EF_SMI_Type.Smi_type_name);
-            //    var notInitiatedPublications = model.EF_Publications.Where(item => item.Is_initiated == 0).GroupBy(gr => gr.EF_SMI.EF_SMI_Type.Smi_type_name);
-            //    int init = 0;
-            //    int notInit = 0;
-            //    foreach (var grouped in initiatedPublications)
-            //    {
-            //        foreach (var efPublication in grouped)
-            //        {
-            //            if (init == 0)
-            //            {
-            //                var rpr = new ClippingReport(efPublication,
-            //                                             efPublication.EF_SMI.EF_SMI_Type.Smi_type_name);
-            //                rBook.Reports.Add(rpr);
-            //                init++;
-            //            }
-            //            else
-            //            {
-            //                var rpr = new ClippingReport(efPublication);
-            //                rBook.Reports.Add(rpr);
-            //            }
-            //        }
-            //        init = 0;
-            //    }
-            //    foreach (var grouped in notInitiatedPublications)
-            //    {
-            //        foreach (var efPublication in grouped)
-            //        {
-            //            if (notInit == 0)
-            //            {
-            //                var rpr = new ClippingReport(efPublication,
-            //                                             efPublication.EF_SMI.EF_SMI_Type.Smi_type_name);
-            //                rBook.Reports.Add(rpr);
-            //                notInit++;
-            //            }
-            //            else
-            //            {
-            //                var rpr = new ClippingReport(efPublication);
-            //                rBook.Reports.Add(rpr);
-            //            }
-            //        }
-            //        notInit = 0;
-            //    }
-            //}
-            //rBook.Reports.Add(new DiagramReport());
-            //rootBook = rBook;
+          
         }
         private void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
@@ -174,9 +125,6 @@ namespace EffixReportSystem.Views.Report.Views
                 eDate = EndPeriod.SelectedDate.Value;
                 bw.RunWorkerAsync();
             }
-            //var ctx = DataContext as ViewReportViewModel;
-            //ctx.SetProjectIndex(ProjectsComboBox.SelectedIndex);
-            //ctx.IsBusy = true;
         }
 
 
@@ -469,6 +417,7 @@ namespace EffixReportSystem.Views.Report.Views
             }
             return rBook;
         }
+       
         private ReportBook MakeLifan_Report(string projName, DateTime beginPeriod, DateTime endPeriod)
         {
             var rBook = new ReportBook();
@@ -478,26 +427,44 @@ namespace EffixReportSystem.Views.Report.Views
                     item =>
                     item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
                     item.Publication_date <= endPeriod);
-
-
-               var samIzdatList = allList.Where(item => item.EF_SMI.EF_MassMedium.Mass_media_type_name == "Самиздат").ToList();
+                    //var t1 = allList.Where(item => item.Is_initiated == 1).ToList();
+                    //var t2 = allList.Where(item => item.Is_initiated == 2).ToList();
+                    var samIzdatList = allList.Where(item => item.EF_SMI.EF_MassMedium.Mass_media_type_name == "Самиздат").OrderBy(item => item.Publication_date).ToList();
               //1 инициированные
-                var initiatedGroups = allList.Where(item => item.Is_initiated == 1).OrderBy(item => item.Publication_date)
+                var tmpInit = allList.Where(item => item.Is_initiated == 1).ToList();
+                foreach (var efPublication in samIzdatList)
+                {
+                    if (tmpInit.Any(item => item.Publication_id == efPublication.Publication_id))
+                    {
+                        tmpInit.Remove(efPublication);
+                    }
+                }
+                var initiatedGroups = tmpInit.OrderBy(item => item.Publication_date)
                                      .ThenBy(item => item.EF_SMI.Smi_name)
-                           .GroupBy(item => item.EF_SMI.EF_MassMedium.Parent_type_id).OrderByDescending(item => item.Key);
+                           .GroupBy(item => item.EF_SMI.EF_MassMedium.Mass_media_type_name).OrderBy(item => item.Key);
                 //2 неинециированные
-               var nonInitiatedGroups =allList.Where(item => item.Is_initiated == 2).OrderBy(item => item.Publication_date)
+                var tmpNonInit = allList.Where(item => item.Is_initiated == 2).ToList();
+                foreach (var efPublication in samIzdatList)
+                {
+                    if (tmpNonInit.Any(item => item.Publication_id == efPublication.Publication_id))
+                    {
+                        tmpNonInit.Remove(efPublication);
+                    }
+                }
+                var nonInitiatedGroups = tmpNonInit.OrderBy(item => item.Publication_date)
                                      .ThenBy(item => item.EF_SMI.Smi_name)
-                            .GroupBy(item => item.EF_SMI.EF_MassMedium.Parent_type_id).OrderByDescending(item => item.Key);
+                            .GroupBy(item => item.EF_SMI.EF_MassMedium.Mass_media_type_name).OrderBy(item => item.Key);
 
                 int idx = 1;
                 try
                 {
+             //     var l1= nonInitiatedGroups.ToList();
+              //    var l2 = initiatedGroups.ToList();
                     foreach (var nonInitiatedGroup in nonInitiatedGroups)
                     {
                         var smiType =
-                            model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == nonInitiatedGroup.Key);
-                        var report1 = new LifanHeadReport(smiType.Mass_media_type_name, nonInitiatedGroup.ToList(), idx);
+                            model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_name == nonInitiatedGroup.Key);
+                        var report1 = new LifanHeadReport(smiType.Mass_media_type_name+"[Неинициированные]", nonInitiatedGroup.ToList(), idx);
                         rBook.Reports.Add(report1);
                         headBook.Reports.Add(report1);
                         idx += nonInitiatedGroup.Count();
@@ -506,8 +473,8 @@ namespace EffixReportSystem.Views.Report.Views
                     foreach (var initiatedGroup in initiatedGroups)
                     {
                         var smiType =
-                            model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == initiatedGroup.Key);
-                        var report1 = new LifanHeadReport(smiType.Mass_media_type_name, initiatedGroup.ToList(), idx);
+                            model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_name== initiatedGroup.Key);
+                        var report1 = new LifanHeadReport(smiType.Mass_media_type_name + "[Инициированные]", initiatedGroup.ToList(), idx);
                         rBook.Reports.Add(report1);
                         headBook.Reports.Add(report1);
                         idx += initiatedGroup.Count();
@@ -528,34 +495,73 @@ namespace EffixReportSystem.Views.Report.Views
                     foreach (var nonInitiatedGroup in nonInitiatedGroups)
                     {
                         var smiType =
-    model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == nonInitiatedGroup.Key);
-                        rBook.Reports.Add(new GroupPageReport(smiType.Mass_media_type_name));
+    model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_name== nonInitiatedGroup.Key);
+                        rBook.Reports.Add(new GroupPageReport(smiType.Mass_media_type_name + "[Неинициированные]"));
                         notInitiatedBook.Reports.Add(new GroupPageReport(smiType.Mass_media_type_name));
                         foreach (var efPublication in nonInitiatedGroup)
                         {
+                            var imageColl = new ObservableCollection<Bitmap>();
+                            imageColl = GetImageCollection(efPublication);
+                            int index = 1;
+                            foreach (var bitmapImage in imageColl)
                             {
-                                var imageColl = new ObservableCollection<Bitmap>();
-                                imageColl = GetImageCollection(efPublication);
-                                int index = 1;
-                                foreach (var bitmapImage in imageColl)
+                                //если это первая и единственная страница
+                                if (index == 1 && index == imageColl.Count)
                                 {
-                                    if (index == imageColl.Count)
+                                    var rpr = new ClippingReport_v2(bitmapImage, efPublication, true, false);
+                                    rBook.Reports.Add(rpr);
+                                }
+                                else
+                                {
+                                    //если первая страница
+                                    if (index == 1)
                                     {
-                                     //   var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
-                                     //   rBook.Reports.Add(rpr);
-                                     //   notInitiatedBook.Reports.Add(rpr);
-                                        GC.Collect();
+                                        var rpr = new ClippingReport_v2(bitmapImage, efPublication, false, false);
+                                        rBook.Reports.Add(rpr);
+                                        index++;
                                     }
                                     else
                                     {
-                                      //  var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
-                                      //  rBook.Reports.Add(rpr);
-                                      //  notInitiatedBook.Reports.Add(rpr);
-                                        GC.Collect();
+                                        if (index == imageColl.Count)
+                                        {
+                                            //последняя страница
+                                            var rpr = new ClippingReport_v2(bitmapImage, efPublication, true, true);
+                                            rBook.Reports.Add(rpr);
+                                        }
+                                        else
+                                        {
+                                            //любая другая страница
+                                            var rpr = new ClippingReport_v2(bitmapImage, efPublication, false, true);
+                                            rBook.Reports.Add(rpr);
+                                        }
+                                        index++;
                                     }
-                                    index++;
+
                                 }
                             }
+                            //{
+                            //    var imageColl = new ObservableCollection<Bitmap>();
+                            //    imageColl = GetImageCollection(efPublication);
+                            //    int index = 1;
+                            //    foreach (var bitmapImage in imageColl)
+                            //    {
+                            //        if (index == imageColl.Count)
+                            //        {
+                            //            var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
+                            //            rBook.Reports.Add(rpr);
+                            //            notInitiatedBook.Reports.Add(rpr);
+                            //            GC.Collect();
+                            //        }
+                            //        else
+                            //        {
+                            //            var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
+                            //            rBook.Reports.Add(rpr);
+                            //            notInitiatedBook.Reports.Add(rpr);
+                            //            GC.Collect();
+                            //        }
+                            //        index++;
+                            //    }
+                            //}
                         }
                         GC.Collect();
                     }
@@ -570,36 +576,75 @@ namespace EffixReportSystem.Views.Report.Views
                     foreach (var initiatedGroup in initiatedGroups)
                     {
                         var smiType =
-model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == initiatedGroup.Key);
-                        rBook.Reports.Add(new GroupPageReport(smiType.Mass_media_type_name));
+model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_name == initiatedGroup.Key);
+                        rBook.Reports.Add(new GroupPageReport(smiType.Mass_media_type_name + "[Инициированные]"));
                         initiatedBook.Reports.Add(new GroupPageReport(smiType.Mass_media_type_name));
                         //var name = String.Empty;
                         //rBook.Reports.Add(new GroupPageReport(name));
                         foreach (var efPublication in initiatedGroup)
                         {
+                            var imageColl = new ObservableCollection<Bitmap>();
+                            imageColl = GetImageCollection(efPublication);
+                            int index = 1;
+                            foreach (var bitmapImage in imageColl)
                             {
-                                var imageColl = new ObservableCollection<Bitmap>();
-                                imageColl = GetImageCollection(efPublication);
-                                int index = 1;
-                                foreach (var bitmapImage in imageColl)
+                                //если это первая и единственная страница
+                                if (index == 1 && index == imageColl.Count)
                                 {
-                                    if (index == imageColl.Count)
+                                    var rpr = new ClippingReport_v2(bitmapImage, efPublication, true, false);
+                                    rBook.Reports.Add(rpr);
+                                }
+                                else
+                                {
+                                    //если первая страница
+                                    if (index == 1)
                                     {
-                                      //  var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
-                                       // rBook.Reports.Add(rpr);
-                                      //  initiatedBook.Reports.Add(rpr);
-                                        GC.Collect();
+                                        var rpr = new ClippingReport_v2(bitmapImage, efPublication, false, false);
+                                        rBook.Reports.Add(rpr);
+                                        index++;
                                     }
                                     else
                                     {
-                                       // var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
-                                      //  rBook.Reports.Add(rpr);
-                                      //  initiatedBook.Reports.Add(rpr);
-                                        GC.Collect();
+                                        if (index == imageColl.Count)
+                                        {
+                                            //последняя страница
+                                            var rpr = new ClippingReport_v2(bitmapImage, efPublication, true, true);
+                                            rBook.Reports.Add(rpr);
+                                        }
+                                        else
+                                        {
+                                            //любая другая страница
+                                            var rpr = new ClippingReport_v2(bitmapImage, efPublication, false, true);
+                                            rBook.Reports.Add(rpr);
+                                        }
+                                        index++;
                                     }
-                                    index++;
+
                                 }
                             }
+                            //{
+                            //    var imageColl = new ObservableCollection<Bitmap>();
+                            //    imageColl = GetImageCollection(efPublication);
+                            //    int index = 1;
+                            //    foreach (var bitmapImage in imageColl)
+                            //    {
+                            //        if (index == imageColl.Count)
+                            //        {
+                            //            var rpr = new ClippingReport_v2(bitmapImage, efPublication, true);
+                            //            rBook.Reports.Add(rpr);
+                            //            initiatedBook.Reports.Add(rpr);
+                            //            GC.Collect();
+                            //        }
+                            //        else
+                            //        {
+                            //            var rpr = new ClippingReport_v2(bitmapImage, efPublication, false);
+                            //            rBook.Reports.Add(rpr);
+                            //            initiatedBook.Reports.Add(rpr);
+                            //            GC.Collect();
+                            //        }
+                            //        index++;
+                            //    }
+                            //}
                         }
                         GC.Collect();
                     }
@@ -662,7 +707,7 @@ model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_id == initiatedG
                             item.Publication_date <= endPeriod)));
                 //Запланированные
                 rBook.Reports.Add(
-                    new PlannedReport(
+                 new PlannedReport(
                         model.EF_Publications.Where(
                             item =>
                             item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&

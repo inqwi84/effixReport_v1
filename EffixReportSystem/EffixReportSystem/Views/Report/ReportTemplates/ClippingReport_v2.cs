@@ -111,7 +111,10 @@ namespace EffixReportSystem.Views.Report.ReportTemplates
             {
                 if (hideHeader)
                 {
-                    pageHeaderSection1.Visible = false;
+                    PublicationDateTextBox.Visible = false;
+                    shape1.Visible = false;
+                    MassMediaNameTextBox.Visible = false;
+                   // pageHeaderSection1.Visible = false;
                 }
             }
             catch (Exception)
