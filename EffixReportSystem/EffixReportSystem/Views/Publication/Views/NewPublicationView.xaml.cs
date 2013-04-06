@@ -345,6 +345,7 @@ namespace EffixReportSystem.Views.Publication.Views
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 Logger.TraceError(ex.Message);
             }
 
@@ -379,6 +380,7 @@ namespace EffixReportSystem.Views.Publication.Views
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 Logger.TraceError(ex.Message);
                 return null;
             }

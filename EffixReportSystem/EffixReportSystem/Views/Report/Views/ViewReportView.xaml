@@ -21,6 +21,7 @@
                 <ComboBoxItem>Авторусь</ComboBoxItem>
                 <ComboBoxItem>АвтоАЛЕА Honda</ComboBoxItem>
                 <ComboBoxItem>АвтоАЛЕА Jaguar</ComboBoxItem>
+                <ComboBoxItem>АвтоАЛЕА Volkswagen</ComboBoxItem>
             </ComboBox>
             <Label Margin="5" VerticalAlignment="Center">Начало периода</Label>
             <DatePicker x:Name="BeginPeriod" Margin="5" VerticalAlignment="Center" SelectedDate="{Binding BeginDate,Mode=TwoWay}" SelectedDateFormat="Short" ></DatePicker>

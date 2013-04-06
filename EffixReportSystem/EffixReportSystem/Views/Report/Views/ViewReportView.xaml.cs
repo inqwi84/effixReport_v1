@@ -89,6 +89,9 @@ namespace EffixReportSystem.Views.Report.Views
                 case 6:
                     rootBook = MakeAvtoALEA_JLR_Report22("avtoalea-jaguar", bDate, eDate);
                     break;
+                case 7:
+                    rootBook = MakeAvtoALEA_JLR_Report22("avtoalea-volkswagen", bDate, eDate);
+                    break;
             }
           
         }
@@ -653,9 +656,76 @@ model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_name == initiate
                 {
                     MessageBox.Show(ex.Message);
                 }
+                //самиздат!!!!
+                //var samIzdatList = allList.Where(item => item.EF_SMI.EF_MassMedium.Mass_media_type_name == "Самиздат").OrderBy(item => item.Publication_date).ToList();
+                rBook.Reports.Add(new GroupPageReport("[Самиздат]"));
+                foreach (var efPublication in samIzdatList)
+                {
+                    var imageColl = new ObservableCollection<Bitmap>();
+                    imageColl = GetImageCollection(efPublication);
+                    int indexS = 1;
+                    foreach (var bitmapImage in imageColl)
+                    {
+                        //если это первая и единственная страница
+                        if (indexS == 1 && indexS == imageColl.Count)
+                        {
+                            var rpr = new ClippingReport_v2(bitmapImage, efPublication, true, false);
+                            rBook.Reports.Add(rpr);
+                        }
+                        else
+                        {
+                            //если первая страница
+                            if (indexS == 1)
+                            {
+                                var rpr = new ClippingReport_v2(bitmapImage, efPublication, false, false);
+                                rBook.Reports.Add(rpr);
+                                indexS++;
+                            }
+                            else
+                            {
+                                if (indexS == imageColl.Count)
+                                {
+                                    //последняя страница
+                                    var rpr = new ClippingReport_v2(bitmapImage, efPublication, true, true);
+                                    rBook.Reports.Add(rpr);
+                                }
+                                else
+                                {
+                                    //любая другая страница
+                                    var rpr = new ClippingReport_v2(bitmapImage, efPublication, false, true);
+                                    rBook.Reports.Add(rpr);
+                                }
+                                indexS++;
+                            }
+
+                        }
+                    }
+                }
 
                 GC.Collect();
-                //Тональность //1
+                //Тональность
+
+               // rBook.Reports.Add(
+    //new TonalityReport(
+    //    model.EF_Publications.Where(
+    //        item =>
+    //        item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+    //        item.Publication_date <= endPeriod)));
+
+                rBook.Reports.Add(
+    new TonalityReport(
+        model.EF_Publications.Where(
+            item =>
+            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+            item.Publication_date <= endPeriod)));
+                diagramBook.Reports.Add(
+                    new TonalityReport(
+                        model.EF_Publications.Where(
+                            item =>
+                            item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
+                            item.Publication_date <= endPeriod)));
+
+                //Эксклюзивность //1
                 rBook.Reports.Add(
                     new ExclusivityReport(
                         model.EF_Publications.Where(
@@ -668,7 +738,7 @@ model.EF_MassMedias.FirstOrDefault(item => item.Mass_media_type_name == initiate
                             item =>
                             item.Project_name.Equals(projName) && item.Publication_date >= beginPeriod &&
                             item.Publication_date <= endPeriod)));
-                //Эксклюзивность
+                //фотографии
                 rBook.Reports.Add(
                     new HasPhotoReport(
                         model.EF_Publications.Where(

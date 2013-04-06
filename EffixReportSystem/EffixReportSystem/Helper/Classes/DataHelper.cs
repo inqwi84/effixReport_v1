@@ -22,6 +22,7 @@ using System.Windows.Forms;
 using Microsoft.WindowsAzure;
 using Microsoft.WindowsAzure.StorageClient;
 using Application = System.Windows.Application;
+using MessageBox = System.Windows.MessageBox;
 using Point = System.Drawing.Point;
 using Size = System.Drawing.Size;
 
@@ -337,23 +338,29 @@ namespace EffixReportSystem.Helper.Classes
             var fileName = filePath.Replace(Properties.Settings.Default.BaseDirectory+"\\" + projectNameContainer, String.Empty);
             try
             {
+               // MessageBox.Show("saveBegin");
                 var cloudStorageAccount = CloudStorageAccount.Parse(
                     "DefaultEndpointsProtocol=http;AccountName=ctx;AccountKey=rCaek5ugmLbIaL2mXk3gaqMF4mzqPrUu6CXBUsXn1yrTdWBBTBsQpA2bDuyDC6BQx1NCeUhEl6p0vWT69ZNF+Q==");
                 var blobClient = cloudStorageAccount.CreateCloudBlobClient();
                 var blobContainer = blobClient.GetContainerReference(projectNameContainer);
                 var blob = blobContainer.GetBlobReference(fileName);
-                var fileStream = File.OpenRead(filePath);
 
+                var fileStream = File.OpenRead(filePath);
+               // MessageBox.Show(filePath);
                 var byteArray = new byte[fileStream.Length];
                 fileStream.Read(byteArray, 0, byteArray.Length);
+               // MessageBox.Show(byteArray.Length.ToString());
                 blob.UploadByteArray(byteArray);
                 fileStream.Close();
+               // MessageBox.Show("saveEnd");
             }
             catch (StorageClientException e)
             {
+                MessageBox.Show(e.Message);
             }
             catch (Exception e)
             {
+                MessageBox.Show(e.Message);
             }
         }
     }
