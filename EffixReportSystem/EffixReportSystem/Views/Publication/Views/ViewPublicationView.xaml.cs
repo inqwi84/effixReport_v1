@@ -17,6 +17,7 @@ using EffixReportSystem.Helper.Classes;
 using EffixReportSystem.Views.Publication.Controls;
 using EffixReportSystem.Views.Publication.ViewModels;
 using Telerik.Windows.Controls;
+using log4net;
 
 namespace EffixReportSystem.Views.Publication.Views
 {
@@ -25,6 +26,7 @@ namespace EffixReportSystem.Views.Publication.Views
     /// </summary>
     public partial class ViewPublicationView : UserControl
     {
+        public static readonly ILog Log = LogManager.GetLogger(typeof(ViewPublicationView));
         public ViewPublicationView()
         {
             InitializeComponent();
@@ -72,19 +74,34 @@ namespace EffixReportSystem.Views.Publication.Views
             {
                 var ctx = DataContext as ViewPublicationViewModel;
                 if (ctx == null) return;
+                if (ctx.CurrentDepartment == null)
+                {
+                    MessageBox.Show("Вы не выбрали проект");
+                    return;
+                }
+                Log.Info("NEW PUBLICATION------------------------------------------------------------------------------------------------------");
+                Log.Info("NewPublicationButton_Click Start");
+
+                Log.Info("ctx is not null");
                 (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel = (ctx.ParentViewModel as PublicationViewModel).PageViewModels[2];
                 var newPublicationViewModel = ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as NewPublicationViewModel);
                 newPublicationViewModel.GetData();
                 newPublicationViewModel.CurrentDepartment = ctx.CurrentDepartment;
+                Log.Info("newPublicationViewModel.CurrentDepartment.Department_id:" + ctx.CurrentDepartment.Department_id);
                 newPublicationViewModel.ImageTileList=new ObservableCollection<DataHelper.ImageTile>();
                 newPublicationViewModel.CurrentPublication = new EF_Publication(ctx.CurrentDepartment);
-                newPublicationViewModel.CurrentProjectName = ctx.CurrentProjectName;
-                newPublicationViewModel.CurrentProject = ctx.CurrentProject;
+                Log.Info("newPublicationViewModel.CurrentPublication.EF_Project.Name:" + newPublicationViewModel.CurrentPublication.Project_name);
+                //newPublicationViewModel.CurrentProjectName = ctx.CurrentProjectName;
+                //Log.Info(newPublicationViewModel.CurrentProjectName);
+                //newPublicationViewModel.CurrentProject = ctx.CurrentProject;
+                //Log.Info(newPublicationViewModel.CurrentProject.Name);
+                Log.Info("NewPublicationButton_Click End");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                Logger.TraceError(ex.Message);
+                Log.Info("NewPublicationButton_Click Exception");
+                MessageBox.Show("Не был выбран проект");
+                Log.Info(ex);
             }
        }
 
@@ -121,8 +138,6 @@ namespace EffixReportSystem.Views.Publication.Views
                     case "project":
                         var yearWindow = new AddYearWindow();
                         yearWindow.ShowDialog();
-                        break;
-                    default:
                         break;
                 }
             }

@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using CommonLibraries.Log;
 using EffixReportSystem.Helper.Classes;
 using EffixReportSystem.Helper.Interfaces;
+using log4net;
 
 namespace EffixReportSystem
 {
@@ -22,11 +23,13 @@ namespace EffixReportSystem
     /// </summary>
     public partial class ApplicationView : Window,IPageViewModel
     {
+        public static readonly ILog Log = LogManager.GetLogger(typeof(ApplicationView));
         public ApplicationView()
         {
             InitializeComponent();
             try
             {
+                log4net.Config.DOMConfigurator.Configure();    
                 var t = "logo.png";
                 var strUri2 = String.Format(@"pack://application:,,,/EffixReportSystem;component/Skins/Images/{0}", t);
                 imgTitle.Source = new BitmapImage(new Uri(strUri2));

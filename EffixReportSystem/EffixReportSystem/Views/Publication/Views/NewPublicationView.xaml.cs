@@ -18,6 +18,7 @@ using EffixReportSystem.Helper.Classes;
 using EffixReportSystem.Helper.Classes.Enums;
 using EffixReportSystem.Views.Publication.ViewModels;
 using Telerik.Windows.Controls;
+using log4net;
 using Brushes = System.Windows.Media.Brushes;
 using Image = System.Windows.Controls.Image;
 using Point = System.Windows.Point;
@@ -252,6 +253,7 @@ namespace EffixReportSystem.Views.Publication.Views
     /// </summary>
     public partial class NewPublicationView : UserControl
     {
+        public static readonly ILog Log = LogManager.GetLogger(typeof(NewPublicationView));
         private readonly string _tempDirectory = Properties.Settings.Default.TempDirectory;
         private readonly string _baseDirectory = Properties.Settings.Default.BaseDirectory;
 
@@ -261,6 +263,7 @@ namespace EffixReportSystem.Views.Publication.Views
             //_tempDirectory = "c:\\storage\\temp";
             //_baseDirectory = "c:\\storage";
             KeyDown += UserControl_KeyDown;
+           // Log.Info("!!");
         }
 
         private void ClearSearchTextBox(object sender, RoutedEventArgs e)
@@ -272,24 +275,27 @@ namespace EffixReportSystem.Views.Publication.Views
         {
             try
             {
+                Log.Info("Start ClearDirectory");
                 var directory = new DirectoryInfo(dirPath);
                 var files = directory.GetFiles("*.*");
                 foreach (var fileInfo in files)
                 {
                     fileInfo.Delete();
+                    Log.Info("ClearDirectory:" + fileInfo + "deleted");
                 }
             }
             catch (Exception ex)
             {
-                Logger.TraceError(ex.Message);
+                Log.Info("ClearDirectory:" + "deleted Exception"+ex);
             }
-
+            Log.Info("End ClearDirectory");
         }
 
         private void MakeSnaphotsButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                Log.Info("Start MakeSnaphotsButton_Click");
                 var ctx = DataContext as NewPublicationViewModel;
                 ctx.SnapShotMode = ViewMode.MakeSnapshot;
                 ctx.ImageTileList = new ObservableCollection<DataHelper.ImageTile>();
@@ -321,15 +327,16 @@ namespace EffixReportSystem.Views.Publication.Views
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                Logger.TraceError(ex.Message);
+                Log.Info("MakeSnaphotsButton_Click Exception:"+ex);
             }
-           
+            Log.Info("End MakeSnaphotsButton_Click");
         }
 
         private void CropImage(Bitmap img, Rectangle cropArea, string index, string dirPath)
         {
             try
             {
+                Log.Info("Start CropImage");
                 var ctx = DataContext as NewPublicationViewModel;
                 var bmpCrop = img.Clone(cropArea, img.PixelFormat);
 
@@ -346,7 +353,7 @@ namespace EffixReportSystem.Views.Publication.Views
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                Logger.TraceError(ex.Message);
+                Log.Info("Start CropImage Exception"+ex);
             }
 
         }
@@ -381,7 +388,7 @@ namespace EffixReportSystem.Views.Publication.Views
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                Logger.TraceError(ex.Message);
+                Log.Info("BitmapImage2Bitmap Exception" + ex);
                 return null;
             }
         }
@@ -390,6 +397,7 @@ namespace EffixReportSystem.Views.Publication.Views
         {
             try
             {
+                Log.Info("Start CancelButton_Click");
                 var ctx = DataContext as NewPublicationViewModel;
                 ctx.ImageTileList.Clear();
                 ctx.CurrentImageTile = null;
@@ -405,56 +413,158 @@ namespace EffixReportSystem.Views.Publication.Views
             }
             catch (Exception ex)
             {
-                Logger.TraceError(ex.Message);
+                Log.Info("End CancelButton_Click Exception"+ex);
             }
+             Log.Info("End CancelButton_Click");
+        }
+
+        private bool ValidatePublicationContext()
+        {
+            var ctx = DataContext as NewPublicationViewModel;
+            if (ctx == null)
+            {
+                Log.Info("ValidatePublicationContext - context is null");
+                return false;
+            }
+            return true;
+        }
+        private bool ValidateCurrentPublication()
+        {
+            var ctx = DataContext as NewPublicationViewModel;
+            if (ctx.CurrentPublication == null)
+            {
+                Log.Info("ValidateCurrentPublication - ctx.CurrentPublication is null");
+                return false;
+            }
+            return true;
+        }
+        private bool ValidatePublicationName()
+        {
+            var ctx = DataContext as NewPublicationViewModel;
+            if (ctx.CurrentPublication.Publication_name == null)
+            {
+                Log.Info("ValidatePublicationName - ctx.CurrentPublication.Publication_name is null");
+                return false;
+            }
+            return true;
+        }
+        private bool ValidateCurrentPublicationEF_SMI()
+        {
+            var ctx = DataContext as NewPublicationViewModel;
+            if (ctx.CurrentPublication.EF_SMI == null)
+            {
+                Log.Info("ValidateCurrentPublicationEF_SMI - ctx.CurrentPublication.EF_SMI is null");
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidateCurrentPublicationDate()
+        {
+            var ctx = DataContext as NewPublicationViewModel;
+            if (ctx.CurrentPublication.Publication_date == null)
+            {
+                Log.Info("ValidateCurrentPublicationDate - ctx.CurrentPublication.Publication_date is null");
+                return false;
+            }
+            return true;
         }
 
         private void DoneButton_Click(object sender, RoutedEventArgs e)
         {
             var ctx = DataContext as NewPublicationViewModel;
-            try
+            var canMake = false;
+            canMake = ValidatePublicationContext();
+            if (!canMake)
             {
-                if (ctx.CurrentPublication.Publication_name == null)
-                {
-                    MessageBox.Show("Вы не ввели наименование публикации");
-                    return;
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Вы не ввели наименование публикации");
+                MessageBox.Show("Несуществующий контекст");
+                Log.Info("Несуществующий контекст - ValidatePublicationContext");
                 return;
             }
-            try
+            canMake = ValidateCurrentPublication();
+            if (!canMake)
             {
-                if (ctx.CurrentPublication.EF_SMI == null)
-                {
-                    MessageBox.Show("Вы не выбрали СМИ");
-                    return;
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Вы не выбрали СМИ");
+                MessageBox.Show("Несуществующая публикация");
+                Log.Info("Несуществующая публикация- ValidateCurrentPublication");
                 return;
             }
-            try
+            canMake = ValidatePublicationName();
+            if (!canMake)
             {
-                if (ctx.CurrentPublication.Publication_date == null)
-                {
-                    MessageBox.Show("Вы не ввели дату публикации");
-                    return;
-                }
+                MessageBox.Show("Неправильное наименование публикации");
+                Log.Info("Неправильное наименование публикации - ValidatePublicationName");
+                return;
             }
-            catch (Exception)
+            canMake = ValidateCurrentPublicationEF_SMI();
+            if (!canMake)
             {
-                MessageBox.Show("Вы не ввели дату публикации");
+                MessageBox.Show("Не найдено СМИ");
+                Log.Info("Не найдено СМИ - ValidateCurrentPublicationEF_SMI");
+                return;
+            }
+            canMake = ValidateCurrentPublicationDate();
+            if (!canMake)
+            {
+                MessageBox.Show("Неправильная дата");
+                Log.Info("Неправильная дата - ValidateCurrentPublicationDate");
                 return;
             }
 
 
+            //if (ctx == null)
+            //{
+            //    MessageBox.Show("DataContext as NewPublicationViewModel is Null");
+            //    return;
+            //}
+            //if (ctx.CurrentPublication == null)
+            //{
+            //    MessageBox.Show("ctx.CurrentPublication is Null");
+            //    return;
+            //}
+            //try
+            //{
+            //    if (ctx.CurrentPublication.Publication_name == null)
+            //    {
+            //        MessageBox.Show("Вы не ввели наименование публикации");
+            //        return;
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Вы не ввели наименование публикации");
+            //    return;
+            //}
+            //try
+            //{
+            //    if (ctx.CurrentPublication.EF_SMI == null)
+            //    {
+            //        MessageBox.Show("Вы не выбрали СМИ");
+            //        return;
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Вы не выбрали СМИ");
+            //    return;
+            //}
+            //try
+            //{
+            //    if (ctx.CurrentPublication.Publication_date == null)
+            //    {
+            //        MessageBox.Show("Вы не ввели дату публикации");
+            //        return;
+            //    }
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("Вы не ввели дату публикации");
+            //    return;
+            //}
+
+
             try
             {
+                Log.Info("Все проверки пройдены начало сохранения в БД!!!!!!!!--------------------------------------");
                 var date = ctx.CurrentPublication.Publication_date.Value;
                 // проверка, если больше нет такой записи в БД!
                 var alreadyExists = DataHelper.CheckIfPublicationExists(ctx.CurrentPublication.Project_name,
@@ -466,6 +576,7 @@ namespace EffixReportSystem.Views.Publication.Views
                 //Существует
                 if (alreadyExists)
                 {
+                    Log.Info("alreadyExists");
                     var dialogResult =
                         MessageBox.Show("Публикация с данными параметрами уже существует. Сохранить публикацию как новую?",
                                         "Сохранение", MessageBoxButton.YesNoCancel);
@@ -482,13 +593,20 @@ namespace EffixReportSystem.Views.Publication.Views
 
 
                             var sourceDirectory = new DirectoryInfo(_tempDirectory);
-
+                         
                             var files = sourceDirectory.GetFiles("*.*");
-                                                        ctx.CurrentPublication.Url_path = UrlTextBox.Text;
-                                                        ctx.CurrentPublication.Image_count = files.Count();
-                                                        ctx.CurrentPublication.Ceation_date = DateTime.Now;
+                            Log.Info("Найдено файлов files -"+files.Count().ToString());
+                            ctx.CurrentPublication.Url_path = UrlTextBox.Text;
+                            Log.Info("ctx.CurrentPublication.Url_path - " + ctx.CurrentPublication.Url_path);
+                            ctx.CurrentPublication.Image_count = files.Count();
+                            Log.Info("ctx.CurrentPublication.Image_count -" + ctx.CurrentPublication.Image_count.ToString());
+                            ctx.CurrentPublication.Ceation_date = DateTime.Now;
+                            Log.Info("ctx.CurrentPublication.Ceation_date- " + ctx.CurrentPublication.Ceation_date.ToString());
+
                             ctx.SaveCurrentPublication();
+                            Log.Info("ctx.SaveCurrentPublication- Saved!");
                             var index = 0;
+                            Log.Info("Сохранение файлов в папку проекта и в хранилище данных");
                             foreach (var fileInfo in files)
                             {
                                 if (!destinationDirectory.Exists)
@@ -506,7 +624,10 @@ namespace EffixReportSystem.Views.Publication.Views
                                     ctx.CurrentPublication.Blob_path = filePath;
                                 }
                             }
+                            Log.Info("Сохранение файлов в папку проекта и в хранилище данных - ЗАВЕРШЕНО");
+
                             ctx.UpdateCurrentPublication();
+                            Log.Info("ctx.UpdateCurrentPublication(); - ЗАВЕРШЕНО");
                             (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
                                 (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
 
@@ -520,6 +641,7 @@ namespace EffixReportSystem.Views.Publication.Views
                 {
                     if (ctx.SnapShotMode == ViewMode.MakeSnapshot)
                     {
+                        Log.Info("ViewMode.MakeSnapshot");
                         var destinationDirectory =
                             new DirectoryInfo(_baseDirectory + "\\" +
                                               ctx.CurrentPublication.Project_name + "\\" +
@@ -529,12 +651,19 @@ namespace EffixReportSystem.Views.Publication.Views
 
 
                         var sourceDirectory = new DirectoryInfo(_tempDirectory);
-
+                       
+                        ctx.CurrentPublication.Url_path = UrlTextBox.Text;
+                        Log.Info("ctx.CurrentPublication.Url_path - " + ctx.CurrentPublication.Url_path);
                         var files = sourceDirectory.GetFiles("*.*");
+                        Log.Info("Найдено файлов files -" + files.Count().ToString());
                         ctx.CurrentPublication.Ceation_date = DateTime.Now;
+                        Log.Info("ctx.CurrentPublication.Ceation_date- " + ctx.CurrentPublication.Ceation_date.ToString());
                         ctx.CurrentPublication.Image_count = files.Count();
+                        Log.Info("ctx.CurrentPublication.Image_count -" + ctx.CurrentPublication.Image_count.ToString());
                         ctx.SaveCurrentPublication();
+                        Log.Info("ctx.SaveCurrentPublication- Saved!");
                         var index = 0;
+                        Log.Info("Сохранение файлов в папку проекта и в хранилище данных");
                         foreach (var fileInfo in files)
                         {
                             if (!destinationDirectory.Exists)
@@ -552,7 +681,9 @@ namespace EffixReportSystem.Views.Publication.Views
                                 ctx.CurrentPublication.Blob_path = filePath;
                             }
                         }
+                        Log.Info("Сохранение файлов в папку проекта и в хранилище данных - ЗАВЕРШЕНО");
                         ctx.UpdateCurrentPublication();
+                        Log.Info("ctx.UpdateCurrentPublication(); - ЗАВЕРШЕНО");
                         (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
                             (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
                         ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
@@ -562,6 +693,7 @@ namespace EffixReportSystem.Views.Publication.Views
                     }
                     else
                     {
+                        Log.Info(" ELSE   ViewMode.MakeSnapshot");
                         var destinationDirectory =
                             new DirectoryInfo(_baseDirectory + "\\" +
                                               ctx.CurrentPublication.Project_name + "\\" +
@@ -570,10 +702,18 @@ namespace EffixReportSystem.Views.Publication.Views
                                               date.Day);
                         var sourceDirectory = new DirectoryInfo(_tempDirectory);
                         var files = sourceDirectory.GetFiles("*.*");
+                        Log.Info("Найдено файлов files -" + files.Count().ToString());
                         var index = 0;
+
+                        ctx.CurrentPublication.Url_path = UrlTextBox.Text;
+                        Log.Info("ctx.CurrentPublication.Url_path - " + ctx.CurrentPublication.Url_path);
                         ctx.CurrentPublication.Image_count = files.Count();
+                        Log.Info("ctx.CurrentPublication.Image_count -" + ctx.CurrentPublication.Image_count.ToString());
                         ctx.CurrentPublication.Ceation_date = DateTime.Now;
+                        Log.Info("ctx.CurrentPublication.Ceation_date- " + ctx.CurrentPublication.Ceation_date.ToString());
                         ctx.SaveCurrentPublication();
+                        Log.Info("ctx.SaveCurrentPublication- Saved!");
+                        Log.Info("Сохранение файлов в папку проекта и в хранилище данных");
                         foreach (var fileInfo in files)
                         {
                             if (!destinationDirectory.Exists)
@@ -591,7 +731,9 @@ namespace EffixReportSystem.Views.Publication.Views
                                 ctx.CurrentPublication.Blob_path = filePath;
                             }
                         }
+                        Log.Info("Сохранение файлов в папку проекта и в хранилище данных - ЗАВЕРШЕНО");
                         ctx.UpdateCurrentPublication();
+                        Log.Info("ctx.UpdateCurrentPublication(); - ЗАВЕРШЕНО");
                         (ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel =
                             (ctx.ParentViewModel as PublicationViewModel).PageViewModels[0];
                         ((ctx.ParentViewModel as PublicationViewModel).CurrentPageViewModel as ViewPublicationViewModel)
@@ -600,11 +742,12 @@ namespace EffixReportSystem.Views.Publication.Views
                             .CurrentDepartment = ctx.CurrentDepartment;
                     }
                 }
+                Log.Info("Конец сохранения в БД!!!!!!!!");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                Logger.TraceError(ex.Message);
+                Log.Info("Конец сохранения в БД!!!!!!!! -Exception"+ex);
             }
         }
 

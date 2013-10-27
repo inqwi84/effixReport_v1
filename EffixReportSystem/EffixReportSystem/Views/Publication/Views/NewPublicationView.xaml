@@ -470,6 +470,18 @@
                     <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Приоритет</TextBlock>
                     <ComboBox SelectedValue="{Binding CurrentPublication.EF_SMI_priority}" ItemsSource="{Binding Priorities}" DisplayMemberPath="Priority_name" HorizontalAlignment="Left" Width="150" DockPanel.Dock="Right"></ComboBox>
                 </DockPanel>
+                <DockPanel x:Name="Town"  LastChildFill="False" Margin="0,5,0,5">
+                    <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Город/Регион</TextBlock>
+                    <ComboBox SelectedValue="{Binding CurrentPublication.EF_SMI_priority}" ItemsSource="{Binding Priorities}" DisplayMemberPath="Priority_name" HorizontalAlignment="Left" Width="150" DockPanel.Dock="Right"></ComboBox>
+                </DockPanel>
+                <DockPanel x:Name="PublicationType"  LastChildFill="False" Margin="0,5,0,5">
+                    <TextBlock DockPanel.Dock="Left" Margin="5,0,0,0" HorizontalAlignment="Left" Effect="{DynamicResource fxLightShadow}" Foreground="{DynamicResource cFontColor}" FontSize="13" FontFamily="{DynamicResource ffAlternativeFont}">Вид публикации</TextBlock>
+                    <ComboBox HorizontalAlignment="Left" Width="150" DockPanel.Dock="Right">
+                        <ComboBoxItem>Упоминание</ComboBoxItem>
+                        <ComboBoxItem>Публикация</ComboBoxItem>
+                        <ComboBoxItem>Фотография</ComboBoxItem>
+                    </ComboBox>
+                </DockPanel>
             </StackPanel>
             <ScrollViewer Grid.Row="1">
                 <telerik:RadTileView Margin="10" x:Name="myTileView" telerik:StyleManager.Theme="Metro"  ItemsSource="{Binding ImageTileList}" 
