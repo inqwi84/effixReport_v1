@@ -119,7 +119,7 @@ namespace WpfTEST
 
         private void SMIBase_OnClick(object sender, RoutedEventArgs e)
         {
-           var smiColl= GetSmiColl();
+            var smiColl = GetSmiColl("G:\\LoadSMI.csv");
            using (var conn = new SqlConnection("server=tcp:m6ufktgcjh.database.windows.net,1433;database=Effix;user id=EF_Admin@m6ufktgcjh;password=Effix1984"))
             {
                 conn.Open();
@@ -134,16 +134,46 @@ namespace WpfTEST
 
         }
 
-        private ObservableCollection<Smi> GetSmiColl()
+        private ObservableCollection<Smi> GetSmiColl(string path)
         {
             var result = new ObservableCollection<Smi>();
-            var sr = new StreamReader("G:\\LoadSMI.csv", new UnicodeEncoding());
+            var sr = new StreamReader(path, new UnicodeEncoding());
             while (!sr.EndOfStream)
             {
                 result.Add(new Smi(sr.ReadLine()));
             }
             return result;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var result = new ObservableCollection<string>();
+            var sr = new StreamReader("C:\\storage\\smi.csv");
+            while (!sr.EndOfStream)
+            {
+                result.Add(sr.ReadLine());
+            }
+            using (var conn = new SqlConnection("server=tcp:m6ufktgcjh.database.windows.net,1433;database=Effix;user id=EF_Admin@m6ufktgcjh;password=Effix1984"))
+            {
+                conn.Open();
+                foreach (var item in result)
+                {
+                    var selCommand = conn.CreateCommand();
+                    selCommand.CommandText = "select  COUNT(*) from EF_Smi where smi_descr='" + item + "'";
+                    var ct=  selCommand.ExecuteScalar();
+                    var count = (int) ct;
+                    if (count < 1)
+                    {
+                        var command = conn.CreateCommand();
+                        command.CommandText = "insert into EF_Smi (smi_name,smi_descr,smi_url,mass_media_id) VALUES ('" + item + "','" + item + "','" + item + "',101)";
+                        command.ExecuteNonQuery();
+                    }
+
+                }
+                conn.Close();
+            }
+        }
+        
     }
     public class Smi
     {

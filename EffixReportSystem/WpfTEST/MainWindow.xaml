@@ -6,5 +6,6 @@
     <Grid>
         <Button Click="ButtonBase_OnClick" Margin="287,60,83,230">ddd</Button>
         <Button Click="SMIBase_OnClick" Margin="287,151,83,139" Content="Import_SMI"/>
+        <Button Content="загрузка СМ СОчи" HorizontalAlignment="Left" Margin="45,79,0,0" VerticalAlignment="Top" Width="149" Click="Button_Click"/>
     </Grid>
 </Window>

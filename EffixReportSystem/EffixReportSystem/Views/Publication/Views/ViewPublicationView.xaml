@@ -54,6 +54,7 @@
                               IsRootLinesEnabled="True" 
                               SelectedItem="{Binding CurrentDepartment,Mode=TwoWay}"
 				              IsLoadOnDemandEnabled="True"
+                              IsSingleExpandPath="True"
                               IsLineEnabled="True" 
                               IsVirtualizing="True"
                               IsDragDropEnabled="False"

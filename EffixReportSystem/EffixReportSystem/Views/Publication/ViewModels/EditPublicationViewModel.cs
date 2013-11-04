@@ -253,7 +253,7 @@ namespace EffixReportSystem.Views.Publication.ViewModels
                     var blobClient = storageAccount.CreateCloudBlobClient();
 
                     // Retrieve reference to a previously created container.
-                    var container = blobClient.GetContainerReference(projectName);
+                    var container = blobClient.GetContainerReference(projectName.ToLower());
 
                     // Retrieve reference to a blob named "photo1.jpg".
                     var tmpStr = filePath.Remove(0, filePath.IndexOf(projectName, StringComparison.Ordinal)+projectName.Length);

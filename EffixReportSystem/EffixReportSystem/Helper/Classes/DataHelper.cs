@@ -342,7 +342,7 @@ namespace EffixReportSystem.Helper.Classes
                 var cloudStorageAccount = CloudStorageAccount.Parse(
                     "DefaultEndpointsProtocol=http;AccountName=ctx;AccountKey=rCaek5ugmLbIaL2mXk3gaqMF4mzqPrUu6CXBUsXn1yrTdWBBTBsQpA2bDuyDC6BQx1NCeUhEl6p0vWT69ZNF+Q==");
                 var blobClient = cloudStorageAccount.CreateCloudBlobClient();
-                var blobContainer = blobClient.GetContainerReference(projectNameContainer);
+                var blobContainer = blobClient.GetContainerReference(projectNameContainer.ToLower());
                 var blob = blobContainer.GetBlobReference(fileName);
 
                 var fileStream = File.OpenRead(filePath);

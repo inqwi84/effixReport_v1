@@ -515,6 +515,12 @@
     <Compile Include="Views\Report\ReportTemplates\GroupPageReport.Designer.cs">
       <DependentUpon>GroupPageReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Report\ReportTemplates\SochiClippingReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ReportTemplates\SochiClippingReport.Designer.cs">
+      <DependentUpon>SochiClippingReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Report\ReportTemplates\TonalityDiagram.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -727,6 +733,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Report\ReportTemplates\GroupPageReport.resx">
       <DependentUpon>GroupPageReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ReportTemplates\SochiClippingReport.resx">
+      <DependentUpon>SochiClippingReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Report\ReportTemplates\TonalityDiagram.resx">
       <DependentUpon>TonalityDiagram.cs</DependentUpon>
